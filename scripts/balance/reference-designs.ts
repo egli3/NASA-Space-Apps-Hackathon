@@ -14,7 +14,7 @@ const pad = (s: string, w: number) => (s.length >= w ? s : s + ' '.repeat(w - s.
 
 const cols: [string, number][] = [
   ['Design', 38], ['OK?', 5], ['Wet/cap kg', 13], ['Mass%', 7], ['Power W', 11], ['Pwr%', 7], ['Data Gb/d', 13],
-  ['Cost/cap $M', 12], ['Sci%', 6], ['Flown%', 7], ['Lost%', 6], ['Rel%', 6], ['Rad%', 7], ['Growth', 16],
+  ['Cost/cap $M', 12], ['Sci%', 6], ['Flown%', 7], ['Lost%', 6], ['MC ok%', 7], ['Rel%', 6], ['Rad%', 7], ['Growth', 16],
 ];
 const line = (cells: string[]) => cells.map((c, i) => pad(c, cols[i][1])).join(' ');
 
@@ -26,7 +26,7 @@ let pass = 0, miss = 0, pending = 0;
 const details: string[] = [];
 for (const ref of referenceDesigns(catalog)) {
   const b = computeBudgets(catalog, ref.design);
-  const review = runReview(catalog, ref.design);
+  const review = runReview(catalog, ref.design, { monteCarloRuns: 50 });
   const flights = b.feasible ? Array.from({ length: FLIGHTS }, (_, i) => runHeadless(catalog, ref.design, SEED + i)) : [];
   const survivors = flights.filter((f) => f.outcome !== 'lost').map((f) => f.sciencePct).sort((x, y) => x - y);
   const flownMedian = survivors.length ? survivors[Math.floor(survivors.length / 2)] : undefined;
@@ -43,13 +43,14 @@ for (const ref of referenceDesigns(catalog)) {
     n(b.science.expectedPct, 1),
     flownMedian !== undefined ? n(flownMedian, 1) : '—',
     flights.length ? n(((flights.length - survivors.length) / flights.length) * 100) : '—',
+    review.predictedSuccessPct !== undefined ? n(review.predictedSuccessPct) : '—',
     n(b.risk.reliabilityPct, 1),
     n(Math.min(999, b.radiation.doseMarginPct)),
     `+${n(g.massGrowthKg)}kg +$${n(g.costGrowthM)}M${g.mustDescope ? ' !' : ''}`,
   ]));
   details.push(`\n${ref.label}`);
   for (const c of ref.checks) {
-    const ok = c.pass?.(b, review);
+    const ok = c.pass(b, review);
     if (ok === undefined) pending++; else if (ok) pass++; else miss++;
     details.push(`  [${ok === undefined ? ' ?? ' : ok ? 'PASS' : 'MISS'}] ${c.target} → ${c.actual(b, review)}`);
   }
@@ -58,8 +59,8 @@ for (const ref of referenceDesigns(catalog)) {
   if (flagged.length) details.push(`         review: ${flagged.join(', ')}`);
 }
 
-console.log(`\nColumns: Sci% = expected at design time; Flown% = median science of the flights that survived, Lost% = share lost, over ${FLIGHTS} seeds with default decisions; Growth = Reality Check (! = must descope).`);
+console.log(`\nColumns: Sci% = expected at design time; Flown% = median science of the flights that survived, Lost% = share lost, over ${FLIGHTS} seeds with default decisions; MC ok% = Review Board prediction (threshold mission or better in 50 universes); Growth = Reality Check (! = must descope).`);
 console.log('\nTargets (GAME_DESIGN §7)');
 console.log(details.join('\n'));
-console.log(`\n${pass} pass, ${miss} miss, ${pending} need Monte Carlo (M3).`);
+console.log(`\n${pass} pass, ${miss} miss, ${pending} not judged.`);
 if (miss > 0 && process.argv.includes('--strict')) process.exit(1);

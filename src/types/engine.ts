@@ -149,6 +149,7 @@ export interface ReviewResult {
   findings: ReviewFinding[];
   predictedSuccessPct?: number; // P1: Monte Carlo of N headless runs
   predictedSciencePct?: { p10: number; p50: number; p90: number };
+  predictedSurvivalPct?: number; // share of those runs in which the spacecraft was not lost (whatever the science)
 }
 
 /** Pre-launch "reality check": parts come in heavier / costlier than estimated (seeded by TRL). */
@@ -273,7 +274,10 @@ export interface Debrief {
   hindsight: HindsightItem[]; // sorted, biggest improvement first (top 3 shown)
   bestDecision?: HindsightItem; // the choice whose alternatives all would have scored worse
   comparison: { mission: HistoricalMission; rows: ComparisonRow[] };
-  monteCarlo?: { runs: number; successRatePct: number; scienceP10: number; scienceP50: number; scienceP90: number };
+  monteCarlo?: { runs: number; successRatePct: number; scienceP10: number; scienceP50: number; scienceP90: number; sciencePcts?: number[]; lostPct?: number };
+  /** Every alternative Hindsight looked at, best first (infeasible ones last) — for a "what if" explorer. */
+  explored?: HindsightItem[];
+  replays?: number; // how many alternate missions were flown to build `hindsight`
 }
 
 /** The engine's public API (implemented in src/engine/index.ts). UI imports ONLY these. */
@@ -292,4 +296,15 @@ export interface EngineApi {
     result: MissionResult,
     opts?: { monteCarloRuns?: number },
   ): Debrief;
+  /** Same results as buildDebrief / runReview, computed in a Web Worker so the page stays responsive
+   *  (Hindsight flies ~50 alternate missions). Falls back to the synchronous call where Workers are unavailable. */
+  buildDebriefAsync?(
+    catalog: Catalog,
+    design: MissionDesign,
+    seed: number,
+    decisions: DecisionLog,
+    result: MissionResult,
+    opts?: { monteCarloRuns?: number },
+  ): Promise<Debrief>;
+  runReviewAsync?(catalog: Catalog, design: MissionDesign, opts?: { monteCarloRuns?: number }): Promise<ReviewResult>;
 }

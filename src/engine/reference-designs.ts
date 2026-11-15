@@ -13,8 +13,8 @@ export interface BalanceCheck {
   target: string;
   /** The number(s) the target is judged on, for the report. */
   actual: (b: BudgetReport, review: ReviewResult) => string;
-  /** undefined = cannot be judged from design-time budgets (needs Monte Carlo, which lands at M3). */
-  pass?: (b: BudgetReport, review: ReviewResult) => boolean;
+  /** Returns undefined when it cannot be judged (a Monte Carlo target and the review was run without `monteCarloRuns`). */
+  pass: (b: BudgetReport, review: ReviewResult) => boolean | undefined;
 }
 
 export interface ReferenceDesign {
@@ -110,7 +110,11 @@ export function referenceDesigns(catalog: Catalog): ReferenceDesign[] {
     id: 'juno-no-vault', label: 'Juno-like, no radiation vault', design: make('jupiter-interior', { ...junoParts, shielding: 'shd-none' }, junoRest),
     checks: [
       { target: 'Radiation margin red', actual: (b) => pct(b.radiation.doseMarginPct), pass: (_b, r) => r.findings.some((f) => f.ruleId === 'rr-radiation' && f.severity === 'red') },
-      { target: 'Monte Carlo success < 40%', actual: (b) => `design-time reliability ${pct(b.risk.reliabilityPct)}` },
+      {
+        target: 'Monte Carlo success < 40%',
+        actual: (b, r) => (r.predictedSuccessPct === undefined ? `design-time reliability ${pct(b.risk.reliabilityPct)}` : `${pct(r.predictedSuccessPct)} of universes`),
+        pass: (_b, r) => (r.predictedSuccessPct === undefined ? undefined : r.predictedSuccessPct < 40),
+      },
     ],
   });
 

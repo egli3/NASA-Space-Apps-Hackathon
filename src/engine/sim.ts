@@ -152,7 +152,17 @@ export function createSimulation(catalog: Catalog, design: MissionDesign, seed: 
   };
   for (const ob of objs) { state.objectivePct![ob.o.id] = 0; state.downlinkedGbByObjective[ob.o.id] = 0; }
 
+  // Formatting a calendar date is the single most expensive thing in a simulated day, so `state.date` is only
+  // refreshed when somebody can see it: on every log line and whenever advance() / decide() hand the state back.
+  const launchMs = Date.parse(launchDate);
+  let dateDay = 0;
+  const syncDate = () => {
+    if (dateDay === state.day) return;
+    dateDay = state.day;
+    state.date = new Date(launchMs + state.day * 86400000).toISOString().slice(0, 10);
+  };
   const push = (kind: LogEntry['kind'], text: string, extra: Partial<LogEntry> = {}) => {
+    syncDate();
     log.push({ day: state.day, date: state.date, kind, text, ...extra });
   };
 
@@ -182,11 +192,16 @@ export function createSimulation(catalog: Catalog, design: MissionDesign, seed: 
   const updateScience = () => {
     let total = 0;
     for (const ob of objs) {
-      const credits = ob.meas.map((me) => Math.min(me.qv / me.m.requiredGb, me.qMax));
-      const credit = ob.o.combine === 'any' ? Math.max(...credits) : Math.min(...credits);
+      const any = ob.o.combine === 'any';
+      let credit = any ? 0 : Infinity, volume = 0;
+      for (const me of ob.meas) {
+        const c = Math.min(me.qv / me.m.requiredGb, me.qMax);
+        credit = any ? Math.max(credit, c) : Math.min(credit, c);
+        volume += me.vol;
+      }
       const pct = Math.min(100, credit * 100 + (credit > 0 ? ob.bonusPct : 0));
       state.objectivePct![ob.o.id] = pct;
-      state.downlinkedGbByObjective[ob.o.id] = ob.meas.reduce((a, me) => a + me.vol, 0);
+      state.downlinkedGbByObjective[ob.o.id] = volume;
       total += (ob.o.weight * pct) / 100; // weights sum to 100
     }
     state.sciencePct = total;
@@ -428,7 +443,6 @@ export function createSimulation(catalog: Catalog, design: MissionDesign, seed: 
   const stepDay = () => {
     state.day += 1;
     const day = state.day;
-    state.date = addDays(launchDate, day);
 
     // ---- phase clock ----
     if (day > primaryEndDay && !extendedDecided) decideExtended();
@@ -586,6 +600,7 @@ export function createSimulation(catalog: Catalog, design: MissionDesign, seed: 
         if (rng.next('launch') >= r.lv.reliability) lose(`${r.lv.name} failed during launch`);
       }
       for (let i = 0; i < days && !state.ended && !state.pending; i++) stepDay();
+      syncDate();
       return { state, newLog: log.slice(start), pending: state.pending };
     },
     decide(optionId: string): AdvanceResult {

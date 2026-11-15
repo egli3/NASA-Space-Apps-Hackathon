@@ -1,12 +1,13 @@
 /**
- * Debrief — "what happened and which choices mattered". Owner: Track A.
- * v0: headline + You-vs-History rows. Hindsight (counterfactual replays) and Monte Carlo are TODO — they are
- * the signature feature; see docs/GAME_DESIGN.md §6 for the exact algorithm.
+ * Debrief — "what happened and which choices mattered" (GAME_DESIGN §6). Owner: Track A.
+ * Headline, Hindsight (hindsight.ts), You vs History, and optionally Monte Carlo (montecarlo.ts).
  */
 import { getHistory, getScenario } from '../data';
 import type { DecisionLog, MissionDesign } from '../types/design';
 import type { Catalog, ComparisonRow, Debrief, MissionResult } from '../types/engine';
 import { computeBudgets } from './budgets';
+import { buildHindsight } from './hindsight';
+import { monteCarlo } from './montecarlo';
 
 const OUTCOME_TEXT: Record<MissionResult['outcome'], string> = {
   exceeded: 'Mission exceeded expectations',
@@ -19,30 +20,43 @@ const OUTCOME_TEXT: Record<MissionResult['outcome'], string> = {
 export function buildDebrief(
   catalog: Catalog,
   design: MissionDesign,
-  _seed: number,
-  _decisions: DecisionLog,
+  seed: number,
+  decisions: DecisionLog,
   result: MissionResult,
-  _opts?: { monteCarloRuns?: number },
+  opts?: { monteCarloRuns?: number },
 ): Debrief {
   const scenario = getScenario(catalog, design.scenarioId);
   const mission = getHistory(catalog, scenario.historicalMissionId);
   const b = computeBudgets(catalog, design);
   const fmt = (n: number | undefined, unit: string) => (n === undefined ? '—' : `${Math.round(n).toLocaleString('en-US')} ${unit}`);
+  const sci = Math.round(result.sciencePct);
+
+  // You vs History (§6.4). Our cost model is for scale only — never claim it reproduces theirs.
   const rows: ComparisonRow[] = [
     { label: 'Launch mass', yours: fmt(b.mass.wetKg, 'kg'), theirs: fmt(mission.stats.launchMassKg, 'kg') },
     { label: 'Dry mass', yours: fmt(b.mass.dryKg, 'kg'), theirs: fmt(mission.stats.dryMassKg, 'kg') },
     { label: 'Power at target', yours: fmt(b.power.generatedBolW, 'W'), theirs: fmt(mission.stats.powerAtTargetW, 'W'), note: mission.stats.powerSource },
-    { label: 'Cost', yours: `$${Math.round(b.cost.totalM)}M (2026)`, theirs: mission.stats.costM ? `$${mission.stats.costM}M (${mission.stats.costYear})` : '—' },
+    {
+      label: 'Cost',
+      yours: `$${Math.round(result.totalCostM).toLocaleString('en-US')}M (2026)`,
+      theirs: mission.stats.costM ? `$${mission.stats.costM.toLocaleString('en-US')}M (${mission.stats.costYear})` : '—',
+      note: 'For scale only: different years, different accounting.',
+    },
     { label: 'Instruments', yours: String(design.instrumentIds.length), theirs: String(mission.stats.instruments ?? '—') },
     { label: 'Launch vehicle', yours: catalog.launchVehicles.find((l) => l.id === design.launchVehicleId)?.name ?? '', theirs: mission.stats.launchVehicle ?? '—' },
+    {
+      label: 'Outcome',
+      yours: result.outcome === 'lost' ? `Lost on day ${result.daysFlown}: ${result.lossCause}` : `${OUTCOME_TEXT[result.outcome]} (${sci}% science)`,
+      theirs: mission.outcome,
+    },
+    { label: 'Fun fact', yours: '', theirs: mission.funFact },
   ];
-  // TODO(Track A, P0): hindsight — for each design dimension × alternative option, runHeadless with the same seed &
-  // decisions, rank by Δscience; fill `hindsight` (top 3 shown) and `bestDecision`.
-  // TODO(Track A, P1): monteCarlo — N seeds with the auto-policy.
-  return {
-    result,
-    headline: `${OUTCOME_TEXT[result.outcome]} — ${Math.round(result.sciencePct)}% of baseline science returned`,
-    hindsight: [],
-    comparison: { mission, rows },
-  };
+
+  const { hindsight, bestDecision, explored, replays } = buildHindsight(catalog, design, seed, decisions, result);
+  const headline = result.outcome === 'lost'
+    ? `Mission lost on day ${result.daysFlown} — ${sci}% of baseline science returned before the end`
+    : `${OUTCOME_TEXT[result.outcome]} — ${sci}% of baseline science returned`;
+  const debrief: Debrief = { result, headline, hindsight, bestDecision, comparison: { mission, rows }, explored, replays };
+  if (opts?.monteCarloRuns) debrief.monteCarlo = monteCarlo(catalog, design, opts.monteCarloRuns, seed, decisions);
+  return debrief;
 }

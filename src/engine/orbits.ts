@@ -37,8 +37,9 @@ export function planetPositionAU(el: PlanetaryElements, iso: string): Vec2 & { z
 /** Same as planetPositionAU but from a Julian day number (no date parsing — the flight sim calls this every day). */
 export function planetPositionAtJd(el: PlanetaryElements, jd: number): Vec2 & { z: number } {
   const T = (jd - 2451545.0) / 36525;
-  const v = (pair: [number, number]) => pair[0] + pair[1] * T;
-  const a = v(el.a), e = v(el.e), I = v(el.I) * DEG, L = v(el.L), varpi = v(el.longPeri), Omega = v(el.longNode);
+  // element = value + rate × centuries since J2000 (written out: this runs twice per simulated day)
+  const a = el.a[0] + el.a[1] * T, e = el.e[0] + el.e[1] * T, I = (el.I[0] + el.I[1] * T) * DEG;
+  const L = el.L[0] + el.L[1] * T, varpi = el.longPeri[0] + el.longPeri[1] * T, Omega = el.longNode[0] + el.longNode[1] * T;
   const omega = (varpi - Omega) * DEG;
   let M = ((L - varpi) % 360 + 540) % 360 - 180; // normalise to [-180, 180)
   M *= DEG;

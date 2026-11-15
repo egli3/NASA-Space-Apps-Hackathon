@@ -242,9 +242,20 @@ Rank feasible alternatives by Δscience (tie-break by −Δcost). Return the top
 `explanation` = template per dimension, e.g. *"A 2.5 m dish instead of 1.5 m would have downlinked 2.8× more data at
 Jupiter (+18 pts)."* Budget: ≤ 60 headless runs; each ≤ 5 ms → ≤ 300 ms. If slower, run in a Web Worker.
 
+As built (`src/engine/hindsight.ts`): `hindsight` holds at most 3 items, **one per decision** (the best alternative of
+each), and only gains of ≥ 0.5 points. Instruments and redundancy count as one decision each ("carry the radar",
+"back up the computer"); *not* adding something is never praised as a best call. Also varied: the DSN dish size.
+`Debrief.explored` lists every alternative looked at (infeasible ones last, with the blocker as the reason) and
+`Debrief.replays` says how many missions were re-flown. Measured in Chrome: a Jupiter debrief with 42 replays plus a
+50-run Monte Carlo takes about 250 ms; `engine.buildDebriefAsync` / `engine.runReviewAsync` run the same code in a
+Web Worker (`worker.ts`), so the page never freezes on a slower laptop.
+
 ### 6.3 Monte Carlo (P1)
 N = 50 seeds with the auto-policy. Report success rate (outcome ≠ lost and ≥ threshold), science P10/P50/P90.
 Same function powers Review Board `predictedSuccessPct`.
+As built (`src/engine/montecarlo.ts`): the debrief derives its 50 seeds from the flight seed and replays the player's own
+decisions; the Review Board has no flight seed yet, so it always uses the same fixed set of universes (stable number while
+the player tweaks). Both are opt-in via `opts.monteCarloRuns` and skipped for infeasible designs.
 
 ### 6.4 You vs History
 Rows: launch mass, dry mass, power at target, cost (theirs in then-year $), instruments, launch vehicle, plus one

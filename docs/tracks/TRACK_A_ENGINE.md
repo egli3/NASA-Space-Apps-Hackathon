@@ -45,7 +45,11 @@ beyond the spec are written into GAME_DESIGN §5.1–§5.4.
 9. **Space-weather replay** (§5.6) from `catalog.spaceWeather` with a context line naming the real flare.
 10. **Tests:** determinism (same seed + decisions → identical result); a lost-mission path; redundancy absorbs a failure; every event card in data can fire in some setup (table-driven).
 
-### By M3 (Sun 13:00): the signature features
+### By M3 (Sun 13:00): the signature features — ✅ tasks 11–14 and 17 done (Sat 21:30)
+Notes: `hindsight.ts` (alternatives, replays, sentences), `montecarlo.ts`, `async.ts` + `worker.ts` (Web Worker wrappers,
+checked in Chrome: same result, page never blocked). `computeBudgets().explain` has one entry per gauge keyed by the
+review-rule metric. Tests: `debrief.test.ts`. Track B is welcome to rewrite the sentence templates in `hindsight.ts`.
+
 11. **Hindsight** (§6.2), including `bestDecision` and the plain-English `explanation` templates. ≤ 300 ms total; if slower, give C a `buildDebriefAsync` that runs in a Web Worker (`src/engine/worker.ts`, Vite worker import).
 12. **Outcome/stars** exactly per §6.1. `MissionResult.objectives[].pct` must use the same credit formula as `sciencePct`; fix the v0 approximation in `summarize()`.
 13. **Monte Carlo** (§6.3) behind `opts.monteCarloRuns`; wire into `runReview` (`predictedSuccessPct`, `predictedSciencePct`).

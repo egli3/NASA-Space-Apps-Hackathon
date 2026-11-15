@@ -270,7 +270,7 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign, opts: Bu
     if (atEarth < prop.powerW + busLoad) blockers.push(`The ion engine needs ${prop.powerW} W — your arrays make only ${Math.round(atEarth)} W near Earth`);
   }
   if (thermal && (1 / (d * d)) < (thermal.specs.minSolarFluxFraction ?? 0))
-    blockers.push(`${thermal.name} can't keep the spacecraft warm at ${d} AU`);
+    blockers.push(`${thermal.name} can't keep the spacecraft warm at ${round(d)} AU`);
   explain.push({
     metric: 'power.generatedEolW',
     text: isSolar
@@ -395,6 +395,71 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign, opts: Bu
     'radiation.doseMarginPct': doseMargin,
     'science.expectedPct': expectedPct,
     'risk.reliabilityPct': pSurvive * 100,
+    'deltaV.totalMs': totalDv,
   };
+
+  // ---------------- "Why?": one plain-English explanation per gauge, keyed like the review rules ----------------
+  const peakMode = loadScience >= loadDownlink ? 'taking science data' : 'transmitting to Earth';
+  const biggestDv = dvItems.filter((i) => i.id !== 'margin').reduce((a, i) => (i.value > a.value ? i : a));
+  const weakest = objectives.reduce((a, o) => (o.expectedPct < a.expectedPct ? o : a));
+  const weakestName = scenario.objectives.find((o) => o.id === weakest.objectiveId)?.name ?? weakest.objectiveId;
+  explain.push(
+    {
+      metric: 'mass.marginPct',
+      text: `Fuelled, your spacecraft weighs ${Math.round(wet)} kg. ${lv.name} can send ${Math.round(lvCap)} kg onto this trajectory (launch energy C3 = ${round(c3)} km²/s²).`,
+      formula: 'mass margin = (rocket capacity − launch mass) ÷ rocket capacity',
+      sourceIds: ['nasa-lsp-perf', 'nasa-se-handbook'],
+    },
+    {
+      metric: 'power.marginPct',
+      text: `At the end of the mission you make ${Math.round(eol)} W. The hungriest mode (${peakMode}) needs ${Math.round(loadPeak)} W.`,
+      formula: 'power margin = (power made − power needed) ÷ power needed',
+      sourceIds: isSolar ? ['nasa-sst-soa', 'nssdca-factsheet'] : ['nasa-rps'],
+    },
+    {
+      metric: 'power.batteryMarginPct',
+      text: eclMin > 0
+        ? `Each orbit spends up to ${Math.round(eclMin)} minutes in the shadow of ${dest.name}. The battery must supply ${Math.round(batRequired)} Wh and holds ${Math.round(batWh)} Wh.`
+        : 'This orbit never passes through shadow, so the battery is only a safety net.',
+      formula: 'battery needed = load × eclipse hours ÷ maximum depth of discharge',
+      sourceIds: ['nasa-sst-soa'],
+    },
+    {
+      metric: 'deltaV.totalMs',
+      text: `Your engine must change the speed of the spacecraft by ${Math.round(totalDv)} m/s in total. The biggest item is ${biggestDv.label.toLowerCase()} (${Math.round(biggestDv.value)} m/s).`,
+      formula: 'insertion Δv = √(v∞² + 2μ/rp) − √(μ(2/rp − 1/a))',
+      sourceIds: [...new Set([...traj.sources, ...dest.sources])],
+    },
+    {
+      metric: 'comms.dataMarginPct',
+      text: `Your instruments make ${round(genGbPerDay, 2)} Gb of data a day. ${design.dsnHoursPerDay} h of DSN time can bring home ${round(downlinkGbPerDay, 2)} Gb a day.`,
+      formula: 'data margin = (downlinked − generated) ÷ generated',
+      sourceIds: ['nasa-dsn-810-005'],
+    },
+    {
+      metric: 'cost.marginPct',
+      text: `Total $${Math.round(total)}M against a $${mclass.costCapM}M cap: $${Math.round(development)}M to build, $${Math.round(lv.costM)}M to launch, $${Math.round(ops)}M to operate and $${Math.round(reserve)}M held in reserve.`,
+      formula: 'total = development + launch + operations + reserve',
+      sourceIds: ['game-balance'],
+    },
+    {
+      metric: 'radiation.doseMarginPct',
+      text: `Over the mission the electronics soak up about ${round(primaryDose)} krad of radiation. Your computer is built to take ${tolerance} krad.`,
+      formula: 'radiation margin = tolerance ÷ dose − 1 (NASA practice: design for 2×, i.e. 100%)',
+      sourceIds: [...new Set([...dest.sources, 'nasa-se-handbook'])],
+    },
+    {
+      metric: 'risk.reliabilityPct',
+      text: `There is about a ${Math.round(pSurvive * 100)}% chance that nothing mission-ending breaks. The biggest single risk is the ${risks[0].label} (${round(risks[0].pFail * 100)}%).`,
+      formula: 'P(survive) = rocket reliability × Π(1 − P(fail)), with P(fail) = 1 − e^(−failure rate × years)',
+      sourceIds: ['game-balance'],
+    },
+    {
+      metric: 'science.expectedPct',
+      text: `If nothing goes wrong you return ${Math.round(expectedPct)}% of the baseline science. The weakest objective is "${weakestName}" at ${Math.round(weakest.expectedPct)}%.`,
+      formula: 'science = Σ objective weight × quality × min(1, data returned ÷ data required)',
+      sourceIds: ['game-balance'],
+    },
+  );
   return report;
 }

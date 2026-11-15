@@ -5,8 +5,12 @@
 import type { MissionDesign } from '../types/design';
 import type { Catalog, ReviewFinding, ReviewResult, Severity } from '../types/engine';
 import { computeBudgets } from './budgets';
+import { monteCarlo } from './montecarlo';
 
-export function runReview(catalog: Catalog, design: MissionDesign, _opts?: { monteCarloRuns?: number }): ReviewResult {
+/** The Review Board has no flight seed yet, so its prediction always uses the same set of alternate universes. */
+const REVIEW_SEED = 0x4d415247; // "MARG"
+
+export function runReview(catalog: Catalog, design: MissionDesign, opts?: { monteCarloRuns?: number }): ReviewResult {
   const budgets = computeBudgets(catalog, design);
   const findings: ReviewFinding[] = catalog.reviewRules.map((rule) => {
     const value = budgets.metrics[rule.metric] ?? NaN;
@@ -28,6 +32,12 @@ export function runReview(catalog: Catalog, design: MissionDesign, _opts?: { mon
   });
   for (const b of budgets.blockers)
     findings.unshift({ ruleId: 'blocker', severity: 'red', title: 'Design is not feasible', message: b, value: 0, threshold: 0, fixHint: 'Fix this before the review can pass.', sourceIds: [] });
-  // TODO(Track A, P1): if opts.monteCarloRuns, run N headless sims with the auto-policy → predictedSuccessPct / predictedSciencePct.
-  return { go: budgets.feasible && !findings.some((f) => f.severity === 'red'), findings };
+  const result: ReviewResult = { go: budgets.feasible && !findings.some((f) => f.severity === 'red'), findings };
+  if (opts?.monteCarloRuns && budgets.feasible) {
+    const mc = monteCarlo(catalog, design, opts.monteCarloRuns, REVIEW_SEED);
+    result.predictedSuccessPct = mc.successRatePct;
+    result.predictedSurvivalPct = 100 - mc.lostPct;
+    result.predictedSciencePct = { p10: mc.scienceP10, p50: mc.scienceP50, p90: mc.scienceP90 };
+  }
+  return result;
 }
