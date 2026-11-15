@@ -5,12 +5,13 @@
 > the numbers mean. The UI **never computes physics**: it calls `engine.*` and renders the results.
 
 ## Status (updated Sun 15 Nov)
-- **Done:** tasks 1–17 except the social preview image. All ten screens are real and wired to the engine: live budgets with
+- **Done:** tasks 1–17, including the social preview image (`public/social-preview.png`, 1200×630, wired as `og:image` /
+  `twitter:card` in `index.html`) and the phone reflow (`666264d`). All ten screens are real and wired to the engine: live budgets with
   "Why?" popovers, ripple chips, spacecraft schematic, launch, review board (with the 50-run prediction via `runReviewAsync`),
   reality check with descope picker, flight (map, telemetry, real event cards, "what really happened"), debrief (Hindsight
   cards, "everything we tried" table, Monte Carlo histogram, You vs History), credits, first-visit coach marks, favicon.
   Deployed and loading at the Pages URL.
-- **Not done:** sound (18, optional), social preview image (17), mobile layout below 1024 px.
+- **Not done:** sound (18, optional). The main JS bundle is 810 kB (Vite warns); code-splitting is optional polish.
 - **For other tracks:** `?mockEvents` in the URL deals placeholder cards for UI testing only; it is never on by default.
   Destination `imageUrl` is not used: planets are drawn as vector globes, so Track B does not need to ship planet photos.
   The debrief shows `Debrief.explored` and `monteCarlo.sciencePcts` when present.
