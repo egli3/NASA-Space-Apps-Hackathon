@@ -78,7 +78,7 @@ interface ActionBarProps {
 /** Bottom strip of a sheet: where you came from on the left, the single next step on the right. */
 export function ActionBar({ back, primary, note }: ActionBarProps) {
   return (
-    <footer className="flex h-16 shrink-0 items-center gap-4 border-t border-line bg-panel px-5">
+    <footer data-coach="next" className="flex h-16 shrink-0 items-center gap-4 border-t border-line bg-panel px-5">
       {back && (
         <Button variant="secondary" onClick={back.onClick}>
           {back.label}

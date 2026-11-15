@@ -106,7 +106,8 @@ function GaugeRow({ title, severity, headline, headlineLabel, summary, why, chil
 
 const N = ({ children }: { children: ReactNode }) => <span className="num text-ink">{children}</span>;
 
-const explainFor = (b: BudgetReport, prefix: string) => b.explain.filter((e) => e.metric.startsWith(prefix));
+/** The engine explains every gauge (keyed by the review-rule metric) plus a few cause-and-effect lines; pick them by exact key, in order. */
+const explainFor = (b: BudgetReport, ...metrics: string[]) => metrics.flatMap((m) => b.explain.filter((e) => e.metric === m));
 const lines = (items: LineItem[], fmt: (n: number) => string) => items.filter((i) => Math.abs(i.value) > 1e-9).map((i) => ({ label: i.label, value: fmt(i.value) }));
 
 interface Props {
@@ -166,6 +167,7 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
               <Why
                 title="Science return"
                 what="Each objective earns credit when an instrument on board can make the measurement well enough, and enough of its data reaches Earth."
+                explain={explainFor(b, 'science.expectedPct').map((e) => e.text)}
                 formula="science = Σ weight × quality × min(1, data returned ÷ data required)"
                 ruleMetric="science.expectedPct"
                 sourceIds={scenario.sources}
@@ -212,11 +214,11 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
               <Why
                 title="Launch mass"
                 what={`Wet mass is the spacecraft plus all the propellant it carries. The rocket can only throw so much toward ${dest.name}.`}
-                explain={explainFor(b, 'mass.').map((e) => e.text)}
-                formula={explainFor(b, 'mass.')[0]?.formula ?? 'margin = (rocket capacity − wet mass) ÷ rocket capacity'}
+                explain={explainFor(b, 'mass.marginPct', 'mass.propellantKg').map((e) => e.text)}
+                formula={explainFor(b, 'mass.marginPct', 'mass.propellantKg')[0]?.formula ?? 'margin = (rocket capacity − wet mass) ÷ rocket capacity'}
                 items={[...lines(b.mass.items, kg), { label: 'Propellant', value: kg(b.mass.propellantKg) }]}
                 ruleMetric="mass.marginPct"
-                sourceIds={[...explainFor(b, 'mass.').flatMap((e) => e.sourceIds ?? []), 'nasa-lsp-perf']}
+                sourceIds={[...explainFor(b, 'mass.marginPct', 'mass.propellantKg').flatMap((e) => e.sourceIds ?? []), 'nasa-lsp-perf']}
               />
             }
           >
@@ -248,8 +250,8 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
               <Why
                 title="Power"
                 what="Power made at the end of the mission, when the source is most worn, against the hungriest operating mode."
-                explain={explainFor(b, 'power.').map((e) => e.text)}
-                formula={explainFor(b, 'power.')[0]?.formula ?? 'margin = (power at end of life − peak load) ÷ peak load'}
+                explain={explainFor(b, 'power.marginPct', 'power.generatedEolW').map((e) => e.text)}
+                formula={explainFor(b, 'power.marginPct', 'power.generatedEolW')[0]?.formula ?? 'margin = (power at end of life − peak load) ÷ peak load'}
                 items={[
                   { label: 'Made at arrival', value: watts(b.power.generatedBolW) },
                   { label: 'Made at end of mission', value: watts(b.power.generatedEolW) },
@@ -258,7 +260,7 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
                   { label: 'Load in safe mode', value: watts(b.power.loadSafeW) },
                 ]}
                 ruleMetric="power.marginPct"
-                sourceIds={explainFor(b, 'power.').flatMap((e) => e.sourceIds ?? [])}
+                sourceIds={explainFor(b, 'power.marginPct', 'power.generatedEolW').flatMap((e) => e.sourceIds ?? [])}
               />
             }
           >
@@ -285,6 +287,7 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
               <Why
                 title="Battery through eclipse"
                 what="On every orbit the planet blocks the Sun for a while. The battery must run the science load through the longest shadow without draining too deep."
+                explain={explainFor(b, 'power.batteryMarginPct').map((e) => e.text)}
                 formula="battery needed = science load × eclipse hours ÷ usable depth of discharge"
                 ruleMetric="power.batteryMarginPct"
                 sourceIds={['nasa-sst-soa']}
@@ -313,6 +316,7 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
               <Why
                 title="Δv budget"
                 what="Δv (delta-v) is the total change in speed the engine must deliver over the mission. It decides how much propellant you carry, and propellant is most of your mass."
+                explain={explainFor(b, 'deltaV.totalMs').map((e) => e.text)}
                 formula="orbit insertion Δv = √(v∞² + 2μ/rp) − √(μ(2/rp − 1/a))"
                 items={lines(b.deltaV.items, deltaV)}
                 sourceIds={['nasa-trajbrowser', 'jpl-phys-par']}
@@ -349,8 +353,8 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
               <Why
                 title="Data return"
                 what="Instruments make data every day. The radio link to the Deep Space Network decides how much of it reaches Earth; the rest is lost once the recorder fills."
-                explain={explainFor(b, 'comms.').map((e) => e.text)}
-                formula={explainFor(b, 'comms.')[0]?.formula}
+                explain={explainFor(b, 'comms.dataMarginPct', 'comms.rateKbpsAtMean').map((e) => e.text)}
+                formula={explainFor(b, 'comms.dataMarginPct', 'comms.rateKbpsAtMean')[0]?.formula}
                 items={[
                   { label: `Link rate at average distance (${b.comms.band}-band)`, value: `${num(b.comms.rateKbpsAtMean, 1)} kbps` },
                   { label: 'Link rate at the farthest point', value: `${num(b.comms.rateKbpsAtMax, 1)} kbps` },
@@ -358,7 +362,7 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
                   { label: 'Onboard recorder', value: gigabits(b.comms.storageGb) },
                 ]}
                 ruleMetric="comms.dataMarginPct"
-                sourceIds={explainFor(b, 'comms.').flatMap((e) => e.sourceIds ?? [])}
+                sourceIds={explainFor(b, 'comms.dataMarginPct', 'comms.rateKbpsAtMean').flatMap((e) => e.sourceIds ?? [])}
               />
             }
           >
@@ -384,6 +388,7 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
               <Why
                 title="Cost"
                 what="Everything from the first drawing to the last day of operations, in millions of 2026 dollars. Reserves are money held back to pay for surprises."
+                explain={explainFor(b, 'cost.marginPct').map((e) => e.text)}
                 formula="total = development + launch + operations + reserves"
                 items={[
                   { label: 'Development', value: money(b.cost.developmentM) },
@@ -429,6 +434,7 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
               <Why
                 title="Radiation"
                 what="Radiation slowly damages electronics. This is the total dose over the mission against what your flight computer can absorb. A krad is a unit of absorbed dose."
+                explain={explainFor(b, 'radiation.doseMarginPct').map((e) => e.text)}
                 formula="margin = tolerance ÷ dose − 1     dose = rate × orbit factor × shielding factor × years"
                 ruleMetric="radiation.doseMarginPct"
                 sourceIds={dest.sources}
@@ -458,6 +464,7 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
               <Why
                 title="Reliability"
                 what="The chance that the launch works and no critical part fails before the primary mission ends. A backup unit turns one failure into a non-event."
+                explain={explainFor(b, 'risk.reliabilityPct').map((e) => e.text)}
                 formula="P = rocket reliability × Π (1 − chance each critical part fails)"
                 items={b.risk.topRisks.map((r) => ({ label: r.label, value: `${num(r.pFail * 100, 1)}% chance of failure` }))}
                 ruleMetric="risk.reliabilityPct"

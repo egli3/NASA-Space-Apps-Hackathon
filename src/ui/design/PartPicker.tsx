@@ -409,7 +409,7 @@ export function OptionsPanel({ design }: { design: MissionDesign }) {
 
   return (
     <div role="tabpanel" aria-label={TAB_LABEL[tab]} className="scroll-quiet h-full overflow-y-auto px-5 py-4">
-      <div className="mb-3 flex items-baseline gap-4">
+      <div className="mb-3 flex flex-col gap-x-4 gap-y-1 xl:flex-row xl:items-baseline">
         <h2 className="shrink-0 text-xl font-bold">{TAB_LABEL[tab]}</h2>
         <p className="text-sm text-dim">{TAB_HELP[tab]}</p>
       </div>

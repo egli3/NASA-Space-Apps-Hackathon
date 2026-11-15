@@ -4,6 +4,7 @@ import { engine } from '../../engine';
 import { useGame } from '../../store/game';
 import { ActionBar, Sheet } from '../common/Sheet';
 import { BudgetPanel } from '../design/BudgetPanel';
+import { CoachMarks } from '../design/CoachMarks';
 import { OptionsPanel, SlotRail } from '../design/PartPicker';
 import { RippleChips } from '../design/RippleChips';
 import { SpacecraftSchematic } from '../design/SpacecraftSchematic';
@@ -26,7 +27,7 @@ export function DesignStudio() {
     >
       <div className="grid h-full grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[minmax(0,1fr)_400px]">
         <div className="grid min-h-0 grid-rows-[minmax(200px,38%)_minmax(0,1fr)]">
-          <div className="relative min-h-0 border-b border-line">
+          <div data-coach="schematic" className="relative min-h-0 border-b border-line">
             <div className="absolute inset-0 px-3 pt-2 pb-11">
               <SpacecraftSchematic design={design} budgets={budgets} />
             </div>
@@ -34,15 +35,16 @@ export function DesignStudio() {
               <RippleChips design={design} budgets={budgets} />
             </div>
           </div>
-          <div className="grid min-h-0 grid-cols-[190px_minmax(0,1fr)] xl:grid-cols-[220px_minmax(0,1fr)]">
+          <div data-coach="parts" className="grid min-h-0 grid-cols-[190px_minmax(0,1fr)] xl:grid-cols-[220px_minmax(0,1fr)]">
             <SlotRail design={design} />
             <OptionsPanel design={design} />
           </div>
         </div>
-        <aside aria-label="Budgets" className="scroll-quiet min-h-0 overflow-y-auto border-l border-line bg-panel/85">
+        <aside data-coach="budgets" aria-label="Budgets" className="scroll-quiet min-h-0 overflow-y-auto border-l border-line bg-panel/85">
           <BudgetPanel design={design} budgets={budgets} />
         </aside>
       </div>
+      <CoachMarks />
     </Sheet>
   );
 }

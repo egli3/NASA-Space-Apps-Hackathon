@@ -4,6 +4,19 @@
 > `docs/MASTER_PLAN.md`, and GAME_DESIGN §2, §3, §8 carefully (they are your spec), then skim §4–§6 so you know what
 > the numbers mean. The UI **never computes physics**: it calls `engine.*` and renders the results.
 
+## Status (updated Sun 15 Nov)
+- **Done:** tasks 1–17 except the social preview image. All ten screens are real and wired to the engine: live budgets with
+  "Why?" popovers, ripple chips, spacecraft schematic, launch, review board (with the 50-run prediction via `runReviewAsync`),
+  reality check with descope picker, flight (map, telemetry, real event cards, "what really happened"), debrief (Hindsight
+  cards, "everything we tried" table, Monte Carlo histogram, You vs History), credits, first-visit coach marks, favicon.
+  Deployed and loading at the Pages URL.
+- **Not done:** sound (18, optional), social preview image (17), mobile layout below 1024 px.
+- **For other tracks:** `?mockEvents` in the URL deals placeholder cards for UI testing only; it is never on by default.
+  Destination `imageUrl` is not used: planets are drawn as vector globes, so Track B does not need to ship planet photos.
+  The debrief shows `Debrief.explored` and `monteCarlo.sciencePcts` when present.
+- **Design system:** tokens and the three moods live in `src/index.css`; shared pieces in `src/ui/common/`. The hatched
+  `MarginBar` is the signature mark: use it wherever something is "need versus have".
+
 ## You own
 `src/ui/**`, `src/store/**`, `src/App.tsx`, `src/main.tsx`, `src/index.css`, `index.html`, `public/**` (except `public/img`),
 `vite.config.ts`, `.github/**`, `package.json` dependencies (tell others when you add one).

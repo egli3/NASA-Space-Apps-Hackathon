@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { catalog } from '../../data';
 import { engine } from '../../engine';
-import { useGame, type DesignTab, type Screen } from '../../store/game';
-import type { ReviewFinding, Severity } from '../../types/engine';
+import { MONTE_CARLO_RUNS, useGame, type DesignTab, type Screen } from '../../store/game';
+import type { ReviewFinding, ReviewResult, Severity } from '../../types/engine';
 import { Button } from '../common/Button';
 import { num, pct } from '../common/format';
 import { Popover } from '../common/Popover';
@@ -85,7 +85,23 @@ function Finding({ f, index }: { f: ReviewFinding; index: number }) {
 export function ReviewBoard() {
   const design = useGame((s) => s.design)!;
   const go = useGame((s) => s.go);
+  // Findings are instant. The prediction flies the design through many alternate universes in a Web Worker.
   const review = useMemo(() => engine.runReview(catalog, design), [design]);
+  const feasible = review.findings.every((f) => f.ruleId !== 'blocker');
+  const [prediction, setPrediction] = useState<ReviewResult | null>(null);
+  useEffect(() => {
+    let live = true;
+    setPrediction(null);
+    engine
+      .runReviewAsync(catalog, design, { monteCarloRuns: MONTE_CARLO_RUNS })
+      .then((r) => {
+        if (live) setPrediction(r);
+      })
+      .catch(() => undefined);
+    return () => {
+      live = false;
+    };
+  }, [design]);
   const findings = [...review.findings].sort((a, b) => ORDER[a.severity] - ORDER[b.severity]);
   const red = findings.filter((f) => f.severity === 'red');
   const yellow = findings.filter((f) => f.severity === 'yellow');
@@ -136,18 +152,37 @@ export function ReviewBoard() {
               ))}
             </dl>
 
-            {review.predictedSuccessPct !== undefined && (
-              <div className="mt-6 border border-line px-4 py-3">
-                <p className="text-sm text-dim">Flown in many alternate universes, this design succeeds in</p>
-                <p className="num mt-1 text-4xl">{pct(review.predictedSuccessPct)}</p>
-                {review.predictedSciencePct && (
-                  <p className="mt-1 text-sm text-dim">
-                    Science return usually lands between <span className="num text-ink">{num(review.predictedSciencePct.p10)}%</span> and{' '}
-                    <span className="num text-ink">{num(review.predictedSciencePct.p90)}%</span>.
-                  </p>
-                )}
-              </div>
-            )}
+            <div className="mt-6 border border-line px-4 py-3" aria-live="polite">
+              <p className="text-sm text-dim">
+                Flown <span className="num">{MONTE_CARLO_RUNS}</span> times, each with different luck
+              </p>
+              {!feasible ? (
+                <p className="mt-1">A design that cannot fly has no flights to predict.</p>
+              ) : prediction?.predictedSuccessPct === undefined ? (
+                <p className="mt-1 text-dim">Flying the simulations…</p>
+              ) : (
+                <>
+                  <dl className="mt-2 grid grid-cols-2 gap-4">
+                    <div>
+                      <dd className="num text-4xl leading-none">{num((prediction.predictedSuccessPct / 100) * MONTE_CARLO_RUNS)}</dd>
+                      <dt className="mt-1 text-sm text-dim">return the science team’s minimum</dt>
+                    </div>
+                    {prediction.predictedSurvivalPct !== undefined && (
+                      <div>
+                        <dd className="num text-4xl leading-none">{num((prediction.predictedSurvivalPct / 100) * MONTE_CARLO_RUNS)}</dd>
+                        <dt className="mt-1 text-sm text-dim">survive the primary mission</dt>
+                      </div>
+                    )}
+                  </dl>
+                  {prediction.predictedSciencePct && (
+                    <p className="mt-3 text-sm text-dim">
+                      Science return usually lands between <span className="num text-ink">{num(prediction.predictedSciencePct.p10)}%</span> and{' '}
+                      <span className="num text-ink">{num(prediction.predictedSciencePct.p90)}%</span>.
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
 
             <p className="mt-6 text-sm text-dim">
               Real missions pass a string of reviews like this one before any metal is cut. The thresholds here follow NASA systems engineering practice, simplified and tuned

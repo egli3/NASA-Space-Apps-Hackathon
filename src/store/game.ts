@@ -25,6 +25,9 @@ export type DesignTab =
   | 'orbit'
   | 'operations';
 
+/** Alternate universes flown for the Review Board prediction and the Debrief (GAME_DESIGN §6.3). */
+export const MONTE_CARLO_RUNS = 50;
+
 const newSeed = () => Math.floor(Math.random() * 2 ** 31); // the UI may use Math.random; the ENGINE never does
 
 interface GameState {
@@ -70,7 +73,17 @@ export const useGame = create<GameState>((set, get) => ({
   finishFlight: (result, decisions) => {
     const { design, seed } = get();
     if (!design) return;
-    set({ result, decisions, debrief: engine.buildDebrief(catalog, design, seed, decisions, result), screen: 'debrief' });
+    // Show the outcome at once; Hindsight and Monte Carlo re-fly the mission ~100 times in a Web Worker and
+    // arrive a moment later (the Debrief screen shows a "replaying" state until `debrief` is set).
+    set({ result, decisions, debrief: undefined, screen: 'debrief' });
+    const opts = { monteCarloRuns: MONTE_CARLO_RUNS };
+    const keep = (debrief: Debrief) => {
+      if (get().result === result) set({ debrief });
+    };
+    engine
+      .buildDebriefAsync(catalog, design, seed, decisions, result, opts)
+      .then(keep)
+      .catch(() => keep(engine.buildDebrief(catalog, design, seed, decisions, result, opts)));
   },
   retry: () => set({ seed: newSeed(), decisions: {}, result: undefined, debrief: undefined, screen: 'design' }),
 }));

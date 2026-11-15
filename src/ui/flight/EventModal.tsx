@@ -6,14 +6,16 @@ import { Button } from '../common/Button';
 import { num, pct } from '../common/format';
 import { SourceLinks } from '../common/SourceLink';
 
-function Overlay({ children, label }: { children: ReactNode; label: string }) {
+function Overlay({ children, label, focusButton = false }: { children: ReactNode; label: string; focusButton?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    ref.current?.querySelector<HTMLElement>('button')?.focus();
-  }, []);
+    // A decision card takes focus on the panel, not on an option: the player may be mid-keypress on Space
+    // (pause) when it appears, and that must never pick an option for them.
+    (focusButton ? ref.current?.querySelector<HTMLElement>('button') : ref.current)?.focus();
+  }, [focusButton]);
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-40 grid place-items-center overflow-y-auto bg-black/70 p-6" role="dialog" aria-modal="true" aria-label={label}>
-      <motion.div ref={ref} initial={{ y: 16, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.25 }} className="w-full max-w-3xl border border-caution bg-panel shadow-[0_24px_80px_rgb(0_0_0/0.6)]">
+      <motion.div ref={ref} tabIndex={-1} initial={{ y: 16, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.25 }} className="w-full max-w-3xl border border-caution bg-panel shadow-[0_24px_80px_rgb(0_0_0/0.6)] outline-none">
         {children}
       </motion.div>
     </motion.div>
@@ -69,7 +71,7 @@ export function RealStoryCard({ card, optionId, outcome, onResume }: { card: Eve
   const option = card.options.find((o) => o.id === optionId);
   const results = outcome.filter((l) => l.kind !== 'decision');
   return (
-    <Overlay label="What really happened">
+    <Overlay label="What really happened" focusButton>
       <div className="px-6 py-5">
         <p className="text-dim">
           You chose to <span className="font-bold text-ink">{option?.label.toLowerCase() ?? optionId}</span>.

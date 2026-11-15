@@ -31,7 +31,7 @@ function Readout({ label, value, bar, tone = 'green' }: { label: string; value: 
   const color = tone === 'red' ? 'bg-nogo' : tone === 'yellow' ? 'bg-caution' : 'bg-go';
   return (
     <div className="border-b border-line px-4 py-2">
-      <div className="flex items-baseline justify-between gap-3">
+      <div className="flex flex-col">
         <span className="text-sm text-dim">{label}</span>
         <span className={`num ${tone === 'red' ? 'text-nogo' : tone === 'yellow' ? 'text-caution' : 'text-ink'}`}>{value}</span>
       </div>
@@ -147,10 +147,10 @@ export function Flight() {
   const propFrac = budgets.mass.propellantKg > 0 ? state.propellantKg / budgets.mass.propellantKg : 0;
   const troubled = Object.entries(state.health).filter(([, v]) => v && v !== 'ok');
   const partName = (id: string) => catalog.instruments.find((i) => i.id === id)?.name ?? (id in TAB_LABEL ? TAB_LABEL[id as keyof typeof TAB_LABEL] : id);
-  const linkUp = (state.phase === 'science' || state.phase === 'extended') && state.safeModeDaysLeft === 0 && !lost;
+  const linkUp = (state.phase === 'science' || state.phase === 'extended') && state.safeModeDaysLeft === 0 && !state.inConjunction && !lost;
   const log = [...sim.log].reverse();
 
-  const finish = () => finishFlight(engine.runHeadless(catalog, design, seed, sim.decisions), { ...sim.decisions });
+  const finish = () => finishFlight(sim.result(), { ...sim.decisions });
 
   return (
     <div className="sheet-grid flex h-full flex-col">
@@ -217,11 +217,14 @@ export function Flight() {
               </p>
             </div>
           )}
-          {state.safeModeDaysLeft > 0 && (
-            <div className="absolute right-5 bottom-5 border border-caution bg-panel px-3 py-2 text-caution">
-              Safe mode, <span className="num">{num(state.safeModeDaysLeft)}</span> days left
-            </div>
-          )}
+          <div className="absolute right-5 bottom-5 space-y-2 text-right" aria-live="polite">
+            {state.inConjunction && !lost && <div className="border border-caution bg-panel px-3 py-2 text-caution">The Sun is in the way. No contact with Earth.</div>}
+            {state.safeModeDaysLeft > 0 && (
+              <div className="border border-caution bg-panel px-3 py-2 text-caution">
+                Safe mode, <span className="num">{num(state.safeModeDaysLeft)}</span> days left
+              </div>
+            )}
+          </div>
         </div>
 
         <aside className="flex min-h-0 flex-col border-l border-line bg-panel/90">
@@ -241,9 +244,24 @@ export function Flight() {
                 </span>
               </div>
             </div>
+            <ul className="mt-1 space-y-1.5">
+              {scenario.objectives.map((o) => {
+                const v = Math.max(0, Math.min(100, state.objectivePct?.[o.id] ?? 0));
+                return (
+                  <li key={o.id} className="grid grid-cols-[minmax(0,1fr)_5rem_2.75rem] items-center gap-2 text-sm">
+                    <span className={`truncate ${v > 0 ? '' : 'text-dim'}`}>{o.name}</span>
+                    <span className="relative h-1.5 bg-line">
+                      <span className="absolute inset-y-0 left-0 bg-go" style={{ width: `${v}%` }} />
+                      <span className="absolute -inset-y-0.5 w-px bg-caution" style={{ left: `${o.thresholdPct}%` }} />
+                    </span>
+                    <span className="num text-right">{num(v)}%</span>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
 
-          <div aria-label="Telemetry">
+          <div aria-label="Telemetry" className="grid grid-cols-2 [&>*:nth-child(odd)]:border-r">
             <Readout label="Power being made" value={watts(state.powerW)} />
             <Readout label="Battery" value={pct(state.batterySoc * 100)} bar={state.batterySoc} tone={state.batterySoc < 0.2 ? 'red' : state.batterySoc < 0.4 ? 'yellow' : 'green'} />
             <Readout
@@ -252,7 +270,7 @@ export function Flight() {
               bar={storageFrac}
               tone={storageFrac > 0.98 ? 'red' : storageFrac > 0.8 ? 'yellow' : 'green'}
             />
-            <Readout label="Data lost, recorder full" value={gigabits(state.dataLostGb)} tone={state.dataLostGb > 0 ? 'red' : 'green'} />
+            <Readout label="Data lost" value={gigabits(state.dataLostGb)} tone={state.dataLostGb > 0 ? 'red' : 'green'} />
             <Readout label="Propellant" value={kg(state.propellantKg)} bar={propFrac} tone={propFrac < 0.05 ? 'red' : propFrac < 0.15 ? 'yellow' : 'green'} />
             <Readout
               label="Radiation dose"
