@@ -6,6 +6,7 @@
  */
 import type { MissionDesign } from '../types/design';
 import type { BudgetReport, Catalog, ReviewResult } from '../types/engine';
+import { computeBudgets } from './budgets';
 import { defaultDesign } from './design';
 
 export interface BalanceCheck {
@@ -104,7 +105,13 @@ export function referenceDesigns(catalog: Catalog): ReferenceDesign[] {
   });
   out.push({
     id: 'juno-direct-fh', label: 'Juno-like, direct, Falcon Heavy', design: { ...juno, trajectoryId: 'jupiter-direct-2029', launchVehicleId: 'lv-falcon-heavy' },
-    checks: [{ target: 'Feasible only with cuts (infeasible as-is)', actual: (b) => (b.feasible ? `feasible, mass margin ${pct(b.mass.marginPct)}` : `mass margin ${pct(b.mass.marginPct)}`), pass: (b) => !b.feasible }],
+    // The verified Falcon Heavy curve lifts this ~1.6 t spacecraft to C3 77.5 with room to spare, so the lesson here is
+    // "a bigger rocket buys back the 19 months of the gravity assist, at a price", not "you must cut".
+    checks: [{
+      target: 'Feasible, but costs more than ΔV-EGA on Vulcan',
+      actual: (b) => (b.feasible ? `feasible, $${b.cost.totalM.toFixed(0)}M vs $${computeBudgets(catalog, juno).cost.totalM.toFixed(0)}M` : `infeasible, mass margin ${pct(b.mass.marginPct)}`),
+      pass: (b) => b.feasible && b.cost.totalM > computeBudgets(catalog, juno).cost.totalM,
+    }],
   });
   out.push({
     id: 'juno-no-vault', label: 'Juno-like, no radiation vault', design: make('jupiter-interior', { ...junoParts, shielding: 'shd-none' }, junoRest),

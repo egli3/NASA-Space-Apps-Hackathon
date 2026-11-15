@@ -282,10 +282,7 @@ describe('balance harness', () => {
 
   // GAME_DESIGN §7: targets that hold today are locked in, so data tuning cannot quietly break them.
   // The known misses are listed as todo; when a data change fixes one, delete its line here and it becomes a test.
-  const KNOWN_MISSES = new Set([
-    'juno-like: Power margin 10–40%',
-    'juno-direct-fh: Feasible only with cuts (infeasible as-is)',
-  ]);
+  const KNOWN_MISSES = new Set<string>([]);
   describe('balance targets (GAME_DESIGN §7)', () => {
     for (const r of refs)
       for (const c of r.checks) {
