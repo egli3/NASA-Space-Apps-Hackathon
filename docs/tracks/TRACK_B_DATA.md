@@ -22,6 +22,7 @@ the NASA-data / other-data / SI sections of `README.md`.
 - **M2 done:** 14 event cards (5), Jupiter trajectories and Juno stats (6), Horizons validation data (7).
 - **M3:** audited instrument and part heritage, documented modeled fields, checked the Lunar Prospector comparison and lunar transfer analogues, and added 13 sourced glossary entries. Six credited WebPs cover the three destinations and science calls. Added regression tests against the raw Ames and LSP snapshots and the image manifest.
 - **M4–M5:** the balance harness reports 17 passes and five existing misses. The MAVEN-like design reaches 64.4% escape and 19.3% total science. The balanced Mars reference reaches 36.0% science. The Juno-like design has 52.8% power margin, and direct flight on Falcon Heavy is feasible without cuts. The seven-slide demo and submission copy are in [SUBMISSION.md](../SUBMISSION.md). Public link testing and form submission are team actions after integration.
+- **Judge walkthrough:** all 14 incident cards now link to their own NASA report or mission article. The submission kit walks through the verified Juno-inspired design, and showcase tests exercise review through debrief for all three destinations.
 - **UI contract:** `catalog.glossary` is optional. Scenario and destination `imageUrl` values are relative to the Vite base URL. Credit records are in `public/img/credits.json`.
 - New scripts: `fetch-lsp.ts` and `fetch-trajbrowser.ts` re-create `data/raw/lsp/performance-query.json` and `data/raw/trajbrowser/windows.json`.
 

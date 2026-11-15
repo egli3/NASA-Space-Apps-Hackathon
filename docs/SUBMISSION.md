@@ -14,19 +14,35 @@ MARGIN — The Space Mission Design Game
 
 ## Project demonstration
 
-**Use the [seven-slide mission walkthrough](submission/MARGIN_Demo.pdf) as the public demo.** Its Jupiter example uses the checked-in reference design and seed 2026. The optional 30-second video can follow the same path if the team records one.
+**Use the [seven-slide mission walkthrough](submission/MARGIN_Demo.pdf) as the public demo.** Its Jupiter comparison uses the checked-in reference designs and seed 2026 for the balance report. The optional 30-second video can follow the same path if the team records one.
 
 | Time | Show |
 |---|---|
 | 0–4 s | Open **Giant’s Heart**. Ask whether the spacecraft can reach Jupiter and return science. |
 | 4–12 s | On **Launch**, compare direct with the Earth gravity assist. On Vulcan VC4, the Juno-like reference design has −60% mass margin on the direct route and +61% on the assist. |
 | 12–20 s | Compare the same assisted design with and without its titanium vault. The simulation estimates 76% versus 6% success across 50 runs. |
-| 20–27 s | Fly the mission and show the real debrief. Open **Hindsight** and **You vs History** using the result on screen. |
+| 20–27 s | Fly the mission and show the real debrief. Open **Hindsight** and **You and the real thing** using the result on screen. |
 | 27–30 s | Show the play URL and Team Torpid credit. |
 
 **Play:** https://egli3.github.io/NASA-Space-Apps-Hackathon/
 
 **Repository:** https://github.com/egli3/NASA-Space-Apps-Hackathon
+
+## Judge walkthrough
+
+Open **Giant’s Heart** and follow this setup for a Juno-inspired spacecraft. Leave all other settings at their defaults.
+
+| Screen | Selection |
+|---|---|
+| Design studio | Add **Magnetometer on a boom**, **Plasma & energetic particle suite**, **Ultraviolet imaging spectrograph** and **Ka-band radio science package** to the default camera and microwave radiometer. |
+| Design studio | Set solar array area to **60 m²**, select the **Titanium radiation vault** and set **Ka-band** on the **Antenna** tab. Keep **Polar orbit, 53-day period**. |
+| Launch | Choose **Vulcan VC4**. Compare **Direct to Jupiter** with **Earth gravity assist (ΔV-EGA)** and fly the assist. The capacity display changes from about **978 kg** to **5,158 kg**. |
+| Review and flight | Build the craft, roll out to the launch pad, then select **Launch** and **100×**. Respond to each incident and resume flight. |
+| Debrief | Scroll to **Hindsight** to compare single changes and **You and the real thing** to compare with Juno. |
+
+In a repeatable engine run (seed **2030**), following the default event choices returned **80.0%** of baseline science and **three stars**. Six incidents required decisions, including the valve fault. Hindsight found that the 14-day orbit would have returned **7.1 percentage points** more science in that replay. The public game chooses a fresh seed per run, so it can surface different incidents and outcomes.
+
+The [showcase tests](../src/data/judge-flight.test.ts) step through review, build, flight decisions and debrief for the Jupiter, Mars and Moon reference designs. From a local checkout, run `npm test -- src/data/judge-flight.test.ts` to verify them.
 
 ## Project details
 
@@ -80,6 +96,21 @@ Fourteen decision cards link to mission histories or reports, including Juno’s
 - Valles Marineris Hemisphere (PIA00003) — https://science.nasa.gov/photojournal/valles-marineris-hemisphere/
 - Cassini Jupiter Portrait (PIA04866) — https://science.nasa.gov/photojournal/cassini-jupiter-portrait/
 - Juno telecommunications design and antenna specifications — https://descanso.jpl.nasa.gov/DPSummary/Descanso16_Juno_RevA.pdf
+
+### In-flight mission reports
+
+- [Kepler’s K2 pointing strategy](https://science.nasa.gov/resource/keplers-second-light-how-k2-will-work/)
+- [September 2017 solar storm at Mars](https://www.jpl.nasa.gov/news/large-solar-storm-sparks-global-aurora-and-doubles-radiation-levels-on-the-martian-surface/)
+- [Juno’s orbit decision](https://www.jpl.nasa.gov/news/nasas-juno-to-remain-in-current-orbit-at-jupiter/)
+- [Mars Global Surveyor’s solar-panel investigation](https://www.jpl.nasa.gov/news/global-surveyors-orbit-raised-while-solar-panel-is-analyzed/)
+- [Mars Reconnaissance Orbiter photographs avalanches](https://www.jpl.nasa.gov/news/nasa-spacecraft-photographs-avalanches-on-mars/)
+- [Galileo antenna failure, Lessons Learned 492](https://llis.nasa.gov/lesson/492)
+- [Mars Observer loss investigation](https://www.jpl.nasa.gov/news/potential-causes-of-the-loss-of-mars-observer-identified/)
+- [Spirit rover recovery](https://www.jpl.nasa.gov/news/mars-rover-spirit-restored-to-health/)
+- [Voyager 2 communications recovery](https://www.nasa.gov/missions/voyager-program/voyager-2/nasa-mission-update-voyager-2-communications-pause/)
+- [Mars Reconnaissance Orbiter resumes observations](https://www.jpl.nasa.gov/news/nasas-mars-reconnaissance-orbiter-resumes-observations/)
+- [Lunar Trailblazer end of mission](https://www.nasa.gov/missions/small-satellite-missions/lunar-trailblazer/nasas-lunar-trailblazer-moon-mission-ends/)
+- [CRISM instrument retirement](https://www.jpl.nasa.gov/news/nasa-retires-mineral-mapping-instrument-on-mars-orbiter/)
 
 ## Other resources
 

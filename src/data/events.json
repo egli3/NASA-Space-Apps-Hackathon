@@ -7,11 +7,11 @@
     "trigger": { "kind": "hazard", "subsystem": "adcs", "phase": "any" },
     "conditions": [ { "fact": "redundant.adcs", "op": "eq", "value": false } ],
     "options": [
-      { "id": "thrusters", "label": "Point with thrusters", "description": "Use the RCS thrusters to hold attitude. Pointing gets sloppier and every day costs propellant.", "effects": [ { "kind": "subsystem_degrade", "target": "adcs", "value": 0.5 }, { "kind": "propellant_use_kg", "value": 15 } ] },
+      { "id": "thrusters", "label": "Point with thrusters", "description": "Use the RCS thrusters to hold attitude. You lose pointing precision and spend 15 kg of propellant.", "effects": [ { "kind": "subsystem_degrade", "target": "adcs", "value": 0.5 }, { "kind": "propellant_use_kg", "value": 15 } ] },
       { "id": "relaxed", "label": "Relax science pointing", "description": "Accept blurrier observations to save fuel.", "effects": [ { "kind": "instrument_degrade", "target": "random", "value": 0.6 } ] }
     ],
     "defaultOptionId": "thrusters",
-    "sources": ["nasa-science-missions"],
+    "sources": ["nasa-kepler-k2"],
     "confidence": "verified",
     "notes": "Real story: NASA Kepler & K2 mission pages (keplerscience.arc.nasa.gov). Effects and odds are game values."
   },
@@ -27,7 +27,7 @@
       { "id": "observe", "label": "Observe the storm", "description": "Keep everything on — a storm is great science, if your electronics survive it.", "successProbability": 0.7, "effects": [ { "kind": "science_bonus_pct", "target": "all", "value": 2 }, { "kind": "dose_krad", "value": 2 } ], "failureEffects": [ { "kind": "instrument_degrade", "target": "random", "value": 0.5 }, { "kind": "dose_krad", "value": 2 } ] }
     ],
     "defaultOptionId": "safe",
-    "sources": ["nasa-donki", "jpl-news"],
+    "sources": ["jpl-mars-solar-storm", "nasa-donki"],
     "confidence": "verified",
     "notes": "Real story: JPL release 'Large Solar Storm Sparks Global Aurora and Doubles Radiation Levels on the Martian Surface' (29 Sep 2017). In flight the card is triggered by a real flare or SEP event from the DONKI snapshot. Effects are game values."
   },
@@ -51,7 +51,7 @@
     "id": "ev-valve-stuck",
     "title": "Engine valves acting up",
     "narrative": "Before the burn that would tighten your orbit, two helium check valves take minutes to open instead of seconds. Firing the main engine now is a gamble.",
-    "realStory": { "mission": "Juno", "year": 2016, "summary": "In October 2016, two helium check valves in Juno's engine system took minutes instead of seconds to open. NASA cancelled the burn into a 14-day orbit and kept Juno in its 53-day orbit for the rest of the mission.", "lesson": "When the downside is losing everything, the conservative choice is often the right one." },
+    "realStory": { "mission": "Juno", "year": 2016, "summary": "In October 2016, two helium check valves in Juno's engine system took minutes instead of seconds to open. In February 2017 NASA cancelled the planned burn to a 14-day orbit and continued the primary science mission in the existing 53-day orbit.", "lesson": "When the downside is losing everything, the conservative choice is often the right one." },
     "trigger": { "kind": "hazard", "subsystem": "propulsion", "phase": "arrival" },
     "conditions": [],
     "options": [
@@ -59,7 +59,7 @@
       { "id": "fire", "label": "Fire the engine anyway", "description": "If it works, nothing changes. If it doesn't…", "successProbability": 0.8, "effects": [], "failureEffects": [ { "kind": "mission_loss", "target": "Main engine failure during orbit adjustment" } ] }
     ],
     "defaultOptionId": "stay",
-    "sources": ["jpl-news", "nssdca-nmc"],
+    "sources": ["jpl-juno-orbit-decision"],
     "confidence": "verified",
     "notes": "Real story: JPL releases 'Mission Prepares for Next Jupiter Pass' (Oct 2016) and 'NASA's Juno to Remain in Current Orbit at Jupiter' (Feb 2017). Effects and odds are game values."
   },
@@ -91,7 +91,7 @@
       { "id": "push", "label": "Keep the pace", "description": "Stay on schedule and hope the hinge holds.", "successProbability": 0.8, "effects": [], "failureEffects": [ { "kind": "subsystem_degrade", "target": "power", "value": 0.6 } ] }
     ],
     "defaultOptionId": "gentle",
-    "sources": ["jpl-news"],
+    "sources": ["jpl-mgs-aerobraking"],
     "confidence": "verified",
     "notes": "Real story: JPL releases 'Global Surveyor's Orbit Raised While Solar Panel is Analyzed' (1997) and 'Mars Global Surveyor Successfully Completes Aerobraking' (1999); DESCANSO MGS summary. Effects and odds are game values."
   },
@@ -107,7 +107,7 @@
       { "id": "plan", "label": "Stick to the plan", "description": "The baseline plan comes first.", "effects": [] }
     ],
     "defaultOptionId": "chase",
-    "sources": ["jpl-news"],
+    "sources": ["jpl-mars-avalanches"],
     "confidence": "verified",
     "notes": "Real story: JPL release 'NASA Spacecraft Photographs Avalanches on Mars' (3 Mar 2008) and Photojournal PIA10245. Effects and odds are game values."
   },
@@ -123,7 +123,7 @@
       { "id": "retry", "label": "Keep trying to free it", "description": "Heat it, cool it, shake it. If it frees, you are back to normal. If not, you have lost a month and gained nothing.", "effects": [], "successProbability": 0.25, "failureEffects": [ { "kind": "subsystem_degrade", "target": "antenna", "value": 0.05 }, { "kind": "science_pause_days", "value": 30 } ] }
     ],
     "defaultOptionId": "workaround",
-    "sources": ["nasa-llis", "jpl-news"],
+    "sources": ["nasa-llis-galileo-hga"],
     "confidence": "verified",
     "notes": "Real story: NASA Lessons Learned entry 492, 'Galileo High Gain Antenna (HGA) Failure (1991)'; NASA history feature '30 Years Ago: Galileo off to Orbit Jupiter'. The 70 percent figure is the projection in the lessons-learned entry. Effects and odds are game values."
   },
@@ -139,7 +139,7 @@
       { "id": "proceed", "label": "Pressurise on schedule", "description": "The sequence was tested on the ground. It will almost certainly be fine.", "effects": [], "successProbability": 0.9, "failureEffects": [ { "kind": "mission_loss", "target": "Propulsion system ruptured during tank pressurisation, three days before orbit insertion", "value": 0 } ] }
     ],
     "defaultOptionId": "checkout",
-    "sources": ["nssdca-nmc", "nasa-llis"],
+    "sources": ["jpl-mars-observer-investigation"],
     "confidence": "verified",
     "notes": "Real story: NSSDCA 'Reports on the loss of Mars Observer' and NASA APPEL 'This Month in NASA History: Mars Observer Lost'. The card only appears with a bipropellant engine (as Mars Observer had) and without rigorous assurance. Effects and odds are game values."
   },
@@ -155,7 +155,7 @@
       { "id": "debug", "label": "Debug it carefully", "description": "Keep the data and work through the file system by hand. Twelve days in safe mode and $2M of engineering time.", "effects": [ { "kind": "safe_mode_days", "value": 12 }, { "kind": "cost_m", "value": 2 } ] }
     ],
     "defaultOptionId": "wipe",
-    "sources": ["jpl-news"],
+    "sources": ["jpl-spirit-recovery"],
     "confidence": "verified",
     "notes": "Real story: JPL releases 'Mars Rover Spirit Restored to Health' and 'Healthy Spirit Cleans a Mars Rock; Opportunity Rolls' (Feb 2004). Effects and odds are game values."
   },
@@ -171,7 +171,7 @@
       { "id": "wait", "label": "Wait for the automatic reset", "description": "The spacecraft re-points itself at Earth on a timer. Free, but that is a month of silence while the recorder fills.", "effects": [ { "kind": "data_rate_factor", "target": "days:30", "value": 0 } ] }
     ],
     "defaultOptionId": "shout",
-    "sources": ["nasa-science-missions", "jpl-news"],
+    "sources": ["nasa-voyager-2-communications"],
     "confidence": "verified",
     "notes": "Real story: NASA 'Mission Update: Voyager 2 Communications Pause' (28 July 2023, updated 4 Aug 2023). Effects and odds are game values."
   },
@@ -187,7 +187,7 @@
       { "id": "resume", "label": "Resume science now", "description": "It recovered fine the last three times. If the double reset happens, you will be relying on your backup computer, if you have one.", "effects": [ { "kind": "safe_mode_days", "value": 3 } ], "successProbability": 0.75, "failureEffects": [ { "kind": "safe_mode_days", "value": 10 }, { "kind": "subsystem_fail", "target": "avionics", "value": 0 } ] }
     ],
     "defaultOptionId": "standdown",
-    "sources": ["jpl-news"],
+    "sources": ["jpl-mro-resets"],
     "confidence": "verified",
     "notes": "Real story: JPL releases 'Orbiter Puts Itself into Precautionary Mode' (Aug 2009) and 'NASA's Mars Reconnaissance Orbiter Resumes Observations' (Dec 2009). Effects and odds are game values."
   },
@@ -203,7 +203,7 @@
       { "id": "wait", "label": "Wait for sunlight", "description": "As the spacecraft turns, the panels may catch enough Sun to wake it up. It costs nothing to wait.", "effects": [], "successProbability": 0.35, "failureEffects": [ { "kind": "mission_loss", "target": "Lost contact the day after launch: batteries drained with the solar arrays off the Sun", "value": 0 } ] }
     ],
     "defaultOptionId": "emergency",
-    "sources": ["nasa-science-missions", "jpl-news"],
+    "sources": ["nasa-lunar-trailblazer-end"],
     "confidence": "verified",
     "notes": "Real story: NASA/JPL release 'NASA's Lunar Trailblazer Moon Mission Ends' (Aug 2025). The card only appears for Small-class missions with lean assurance. Effects and odds are game values."
   },
@@ -219,7 +219,7 @@
       { "id": "push", "label": "Run it until it dies", "description": "Keep taking full-quality data while you can. The cooler may last the mission, or it may take the whole instrument with it.", "effects": [ { "kind": "science_bonus_pct", "target": "all", "value": 2 } ], "successProbability": 0.5, "failureEffects": [ { "kind": "instrument_disable", "target": "ins-visir", "value": 0 } ] }
     ],
     "defaultOptionId": "warm",
-    "sources": ["jpl-news"],
+    "sources": ["jpl-crism-retirement"],
     "confidence": "verified",
     "notes": "Real story: NASA release 'NASA Retires Mineral Mapping Instrument on Mars Orbiter' and JPL image release PIA25363 'One of CRISM's Final Maps of Mars'. Effects and odds are game values."
   }
