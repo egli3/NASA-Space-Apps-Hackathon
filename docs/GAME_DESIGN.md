@@ -268,8 +268,8 @@ Rows: launch mass, dry mass, power at target, cost (theirs in then-year $), inst
 |---|---|
 | **Default design**, any scenario | Opens with ≥ 1 yellow or red finding (it's a first draft) but no crash. |
 | **MRO-like** Mars (HiRISE, CTX, CRISM-class, radar, WAC; 3 m dish, 100 W, precision ADCS, aerobraking, Vulcan) | Cost within 0–10% under the cap; science 55–75% (escape objective is uncovered). |
-| **MAVEN-like** Mars (NGIMS, particles, mag, UVS, WAC; elliptical dip orbit) | Escape objective ≥ 80%; total science 35–60%. |
-| **Balanced** Mars design (escape + radar + CTX, 1.5–3 m dish, 12 h DSN) | Science ≥ 80%, cost under cap. That is, a thoughtful player can get ★★★. |
+| **MAVEN-like** Mars (NGIMS, particles, mag, UVS, WAC; elliptical dip orbit) | Escape objective ≥ 80%; specialist total science 25–35%, because atmospheric escape accounts for 30% of this science call. |
+| **Balanced** Mars design (remote UV escape + radar, context, high-resolution and mineral mapping, 2.5 m Ka-band dish, 12 h DSN) | Science ≥ 80%, cost under cap. That is, a thoughtful player can get ★★★. |
 | **Juno-like** Jupiter (60 m² TJ solar, vault, 2.5 m Ka, ΔV-EGA, Vulcan) | Feasible; power margin 10–40%; science ≥ 75%; reliability ≥ 70%. |
 | **Direct-to-Jupiter** with Juno-like spacecraft | Infeasible on Vulcan (teaches gravity assists); feasible only on Falcon Heavy with cuts. |
 | **No vault at Jupiter** | Radiation margin red; Monte Carlo success < 40%. |

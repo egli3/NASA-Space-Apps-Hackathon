@@ -39,6 +39,17 @@ describe('showcase missions', () => {
     }
   });
 
+  it('a low-orbit Mars survey can measure atmospheric escape remotely and earn three stars', () => {
+    const design = reference.find((item) => item.id === 'balanced-mars')!.design;
+    const budget = engine.computeBudgets(catalog, design);
+    expect(budget.science.expectedPct).toBeGreaterThanOrEqual(80);
+    expect(budget.science.objectives.find((item) => item.objectiveId === 'mars-escape')?.coveredBy).toEqual(['ins-uvs']);
+    expect(engine.runReview(catalog, design).go).toBe(true);
+    const flight = engine.runHeadless(catalog, design, 2026);
+    expect(flight.stars).toBe(3);
+    expect(flight.underBudget).toBe(true);
+  });
+
   it('links every incident story directly to a NASA report or mission article', () => {
     const generic = new Set(['jpl-news', 'nssdca-nmc', 'nasa-science-missions', 'nasa-llis', 'nasa-donki']);
     for (const card of catalog.events) {

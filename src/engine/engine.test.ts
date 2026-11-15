@@ -283,9 +283,6 @@ describe('balance harness', () => {
   // GAME_DESIGN §7: targets that hold today are locked in, so data tuning cannot quietly break them.
   // The known misses are listed as todo; when a data change fixes one, delete its line here and it becomes a test.
   const KNOWN_MISSES = new Set([
-    'maven-like: Escape objective ≥ 80%',
-    'maven-like: Total science 35–60%',
-    'balanced-mars: Science ≥ 80% (a thoughtful player can get ★★★)',
     'juno-like: Power margin 10–40%',
     'juno-direct-fh: Feasible only with cuts (infeasible as-is)',
   ]);

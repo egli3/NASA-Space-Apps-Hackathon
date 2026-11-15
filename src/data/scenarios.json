@@ -4,7 +4,7 @@
     "imageUrl": "img/mars-climate.webp",
     "title": "Red Planet Detective",
     "tagline": "Where did Mars's water — and its air — go?",
-    "briefing": "Ancient rivers left their traces on Mars. Your job is to find where the water went and measure the atmosphere still escaping into space. A low orbit brings buried ice into focus, but a high, stretched orbit lets your instruments sample the upper atmosphere. You have $800 million and one launch window. Which measurements are worth the trade?",
+    "briefing": "Ancient rivers left their traces on Mars. Your job is to find where the water went and measure the atmosphere still escaping into space. A low orbit lets radar and cameras map the surface. Add an ultraviolet spectrograph to observe escaping hydrogen from a distance, or pick an elliptical orbit to sample the upper atmosphere directly. You have $800 million to cover the science, spacecraft and launch.",
     "destinationId": "mars",
     "missionClassId": "medium",
     "difficulty": 2,
@@ -12,7 +12,7 @@
     "extendedMissionYears": 2,
     "objectives": [
       { "id": "mars-weather", "name": "Monitor global dust & clouds", "blurb": "Daily weather maps to track dust storms.", "weight": 15, "combine": "any", "measurements": [ { "type": "imaging_context", "minQuality": 0.5, "requiredGb": 1500 } ], "thresholdPct": 30 },
-      { "id": "mars-escape", "name": "Measure atmospheric escape", "blurb": "How fast is the solar wind stripping away the air?", "weight": 30, "combine": "all", "measurements": [ { "type": "mass_spectrometry", "minQuality": 0.6, "requiredGb": 80 }, { "type": "particles_fields", "minQuality": 0.6, "requiredGb": 400 } ], "thresholdPct": 40 },
+      { "id": "mars-escape", "name": "Measure atmospheric escape", "blurb": "Sample escaping gases directly or track the hydrogen corona in ultraviolet.", "weight": 30, "combine": "any", "measurements": [ { "type": "mass_spectrometry", "minQuality": 0.6, "requiredGb": 80 }, { "type": "uv_spectroscopy", "minQuality": 0.6, "requiredGb": 500 } ], "thresholdPct": 40 },
       { "id": "mars-ice", "name": "Map buried ice", "blurb": "Find water ice under the surface — future astronauts will need it.", "weight": 25, "combine": "any", "measurements": [ { "type": "radar_sounding", "minQuality": 0.6, "requiredGb": 2000 }, { "type": "gamma_neutron", "minQuality": 0.6, "requiredGb": 150 } ], "thresholdPct": 40 },
       { "id": "mars-hires", "name": "Image landing sites in high resolution", "blurb": "Metre-scale images to certify safe landing zones.", "weight": 15, "combine": "any", "measurements": [ { "type": "imaging_hires", "minQuality": 0.7, "requiredGb": 6000 } ], "thresholdPct": 25, "maxGsdM": 1.0 },
       { "id": "mars-minerals", "name": "Find water-altered minerals", "blurb": "Clays and salts that only form in liquid water.", "weight": 15, "combine": "any", "measurements": [ { "type": "vis_ir_spectroscopy", "minQuality": 0.6, "requiredGb": 3000 } ], "thresholdPct": 25 }
@@ -23,8 +23,9 @@
     "eventIds": ["ev-rwa-failure", "ev-sep-storm", "ev-units-bug", "ev-dsn-conflict", "ev-aerobraking-panel", "ev-bonus-discovery", "ev-antenna-stuck", "ev-pressurization", "ev-computer-reboot", "ev-antenna-mispoint", "ev-unexplained-resets", "ev-cooler-wearout"],
     "historicalMissionId": "hist-mro",
     "priority": "P0",
-    "sources": ["game-balance"],
-    "confidence": "game"
+    "sources": ["game-balance", "nasa-maven-hydrogen-escape"],
+    "confidence": "game",
+    "notes": "NASA MAVEN demonstrated UV imaging of escaping hydrogen. For this objective, UV observations and direct atmospheric sampling are alternate ways to earn credit. The volume requirements and low-orbit science yield are gameplay assumptions."
   },
   {
     "id": "jupiter-interior",
@@ -58,7 +59,7 @@
     "imageUrl": "img/moon-ice.webp",
     "title": "Lunar Ice Prospector",
     "tagline": "Is there water in the Moon's eternal shadows?",
-    "briefing": "Sunlight never reaches the floor of some craters near the Moon’s poles. Lunar Prospector found extra hydrogen there, evidence that ice could be present. Your mission is to check where cold traps and hydrogen-rich areas overlap. You have a rideshare slot and a year to map the poles. A lower orbit sees finer detail and costs more propellant to maintain.",
+    "briefing": "Sunlight never reaches the floor of some craters near the Moon’s poles. Lunar Prospector found extra hydrogen there, evidence that ice could be present. Your mission is to check where cold traps and hydrogen-rich areas overlap. Your starter spacecraft already carries a neutron detector and a thermal instrument. For a short first flight, keep those instruments and take the direct lunar rideshare. At the debrief, look for the two measurements you returned and the objectives that would need extra instruments.",
     "destinationId": "moon",
     "missionClassId": "small",
     "difficulty": 1,

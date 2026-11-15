@@ -67,15 +67,15 @@ export function referenceDesigns(catalog: Catalog): ReferenceDesign[] {
     id: 'maven-like', label: 'MAVEN-like (Mars)', design: maven,
     checks: [
       { target: 'Escape objective ≥ 80%', actual: (b) => pct(objective(b, 'mars-escape')), pass: (b) => objective(b, 'mars-escape') >= 80 },
-      { target: 'Total science 35–60%', actual: (b) => pct(b.science.expectedPct), pass: (b) => b.science.expectedPct >= 35 && b.science.expectedPct <= 60 },
+      { target: 'Specialist total science 25–35% (escape is 30% of the call)', actual: (b) => pct(b.science.expectedPct), pass: (b) => b.science.expectedPct >= 25 && b.science.expectedPct <= 35 },
     ],
   });
 
   const balanced = make('mars-climate',
-    { antenna: 'ant-hga-25', transmitter: 'tx-twta-35' },
-    { missionName: 'Balanced Mars', instrumentIds: ['ins-ngims', 'ins-particles', 'ins-radar', 'ins-ctx'], orbitId: 'mars-low-aerobrake', launchVehicleId: 'lv-vulcan-vc4', dsnHoursPerDay: 12 });
+    { antenna: 'ant-hga-25', transmitter: 'tx-twta-35', adcs: 'adcs-precision', propulsion: 'prop-mono' },
+    { missionName: 'Balanced Mars', instrumentIds: ['ins-ctx', 'ins-radar', 'ins-hires', 'ins-visir', 'ins-uvs'], orbitId: 'mars-low-aerobrake', launchVehicleId: 'lv-vulcan-vc4', commsBand: 'Ka', dsnHoursPerDay: 12 });
   out.push({
-    id: 'balanced-mars', label: 'Balanced Mars (escape + radar + CTX)', design: balanced,
+    id: 'balanced-mars', label: 'Balanced Mars (UV escape + surface survey)', design: balanced,
     checks: [
       { target: 'Science ≥ 80% (a thoughtful player can get ★★★)', actual: (b) => pct(b.science.expectedPct), pass: (b) => b.science.expectedPct >= 80 },
       { target: 'Cost under the cap', actual: (b) => `$${b.cost.totalM.toFixed(0)}M of $${b.cost.capM}M`, pass: underCap },
