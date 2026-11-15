@@ -52,9 +52,14 @@ All scripts: Node 22 `fetch`, generic User-Agent (`margin-game-data-script`), wr
    `https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND='499'&OBJ_DATA='NO'&MAKE_EPHEM='YES'&EPHEM_TYPE='VECTORS'&CENTER='500@10'&START_TIME='2028-01-01'&STOP_TIME='2028-01-02'&STEP_SIZE='1%20d'&VEC_TABLE='2'&OUT_UNITS='KM-S'&CSV_FORMAT='YES'`.
    Parse between `$$SOE` and `$$EOE`. Output `data/raw/horizons/validation.json` → Track A turns it into a table-driven test.
 3. **`fetch-sbdb.ts`** (P2): `https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=101955&phys-par=1` → elements, GM, diameter.
-4. **`sources-to-markdown.ts`**: prints the NASA list and the other-resources list in submission-form format (already stubbed).
+4. **`fetch-lsp.ts`**: posts the LSP Performance Query form (High Energy) for C3 = -3 … 100 and writes every listed vehicle's
+   separated mass to `data/raw/lsp/performance-query.json`. The curves in `launch-vehicles.json` are copied from that file.
+5. **`fetch-trajbrowser.ts`**: posts the Trajectory Browser search for the Mars 2028 and 2030 windows and Jupiter 2028-29
+   (two-year launch ranges; Jupiter needs the limits raised to 6 years and 10 km/s) and writes `data/raw/trajbrowser/windows.json`
+   with launch, arrival, C3, burns and the derived arrival v∞. `trajectories.json` is copied from that file.
+6. **`sources-to-markdown.ts`**: prints the NASA list and the other-resources list in submission-form format (already stubbed).
 
-Manual transcription (no API): LSP Performance Query, Trajectory Browser, SoA report, 810-005, NSSDCA pages.
+Manual transcription (no API): SoA report, 810-005, NSSDCA pages.
 For each, put the exact page/table/figure in the record's `notes`.
 
 ## 4. Verification priority (Track B work queue)

@@ -1,0 +1,3034 @@
+{
+ "source": "NASA Ames Trajectory Browser (one-way, custom target list, minimise ΔV, show all trajectories)",
+ "url": "https://trajbrowser.arc.nasa.gov/traj_browser.php",
+ "retrieved": "2026-11-15",
+ "notes": "Sorted by total ΔV, lowest first. C3 is derived from the injection ΔV out of a 200 km circular orbit (radius 6,571 km). arrivalVinfKms is derived from the arrival burn, which the site defines as slowing to escape speed at the listed radius.",
+ "results": [
+  {
+   "query": {
+    "id": "mars-2028",
+    "target": "Mars",
+    "type": "rendezvous",
+    "from": 2028,
+    "to": 2030,
+    "maxYears": 2,
+    "maxDvKms": 7
+   },
+   "message": "Query took 0.02s, returned 14 trajectories.",
+   "trajectories": [
+    {
+     "trajId": 20632,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-11-29",
+     "arrival": "2029-09-29",
+     "durationDays": 304,
+     "events": 4,
+     "injectionC3Km2s2": 8.19,
+     "injectionDvKms": 3.592,
+     "postInjectionDvKms": 0.854,
+     "arrivalBurnDvKms": 0.854,
+     "eventDays": [
+      0,
+      3,
+      302,
+      304
+     ],
+     "eventDvMs": [
+      3592,
+      1,
+      0,
+      854
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 3
+    },
+    {
+     "trajId": 20631,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-11-29",
+     "arrival": "2029-09-13",
+     "durationDays": 288,
+     "events": 4,
+     "injectionC3Km2s2": 8.85,
+     "injectionDvKms": 3.621,
+     "postInjectionDvKms": 0.852,
+     "arrivalBurnDvKms": 0.851,
+     "eventDays": [
+      0,
+      3,
+      286,
+      288
+     ],
+     "eventDvMs": [
+      3621,
+      0,
+      0,
+      851
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 3
+    },
+    {
+     "trajId": 20630,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-11-29",
+     "arrival": "2029-08-28",
+     "durationDays": 272,
+     "events": 4,
+     "injectionC3Km2s2": 10.9,
+     "injectionDvKms": 3.71,
+     "postInjectionDvKms": 1.009,
+     "arrivalBurnDvKms": 1.008,
+     "eventDays": [
+      0,
+      3,
+      270,
+      272
+     ],
+     "eventDvMs": [
+      3710,
+      1,
+      0,
+      1008
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 3.29
+    },
+    {
+     "trajId": 20635,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-12-31",
+     "arrival": "2029-08-28",
+     "durationDays": 240,
+     "events": 4,
+     "injectionC3Km2s2": 14.98,
+     "injectionDvKms": 3.886,
+     "postInjectionDvKms": 1.285,
+     "arrivalBurnDvKms": 1.285,
+     "eventDays": [
+      0,
+      3,
+      238,
+      240
+     ],
+     "eventDvMs": [
+      3886,
+      0,
+      0,
+      1285
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 3.76
+    },
+    {
+     "trajId": 20634,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-12-31",
+     "arrival": "2029-08-12",
+     "durationDays": 224,
+     "events": 4,
+     "injectionC3Km2s2": 13.16,
+     "injectionDvKms": 3.808,
+     "postInjectionDvKms": 1.39,
+     "arrivalBurnDvKms": 1.389,
+     "eventDays": [
+      0,
+      3,
+      222,
+      224
+     ],
+     "eventDvMs": [
+      3808,
+      0,
+      0,
+      1389
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 3.93
+    },
+    {
+     "trajId": 20617,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-03-18",
+     "arrival": "2030-03-08",
+     "durationDays": 720,
+     "events": 4,
+     "injectionC3Km2s2": 18.93,
+     "injectionDvKms": 4.054,
+     "postInjectionDvKms": 1.237,
+     "arrivalBurnDvKms": 1.237,
+     "eventDays": [
+      0,
+      2,
+      718,
+      720
+     ],
+     "eventDvMs": [
+      4054,
+      0,
+      0,
+      1237
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 3.68
+    },
+    {
+     "trajId": 20622,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-06-22",
+     "arrival": "2030-03-08",
+     "durationDays": 624,
+     "events": 4,
+     "injectionC3Km2s2": 26.13,
+     "injectionDvKms": 4.355,
+     "postInjectionDvKms": 1.149,
+     "arrivalBurnDvKms": 1.149,
+     "eventDays": [
+      0,
+      2,
+      622,
+      624
+     ],
+     "eventDvMs": [
+      4355,
+      0,
+      0,
+      1149
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 3.53
+    },
+    {
+     "trajId": 20621,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-06-06",
+     "arrival": "2030-02-04",
+     "durationDays": 608,
+     "events": 4,
+     "injectionC3Km2s2": 24.78,
+     "injectionDvKms": 4.299,
+     "postInjectionDvKms": 1.268,
+     "arrivalBurnDvKms": 1.267,
+     "eventDays": [
+      0,
+      2,
+      606,
+      608
+     ],
+     "eventDvMs": [
+      4299,
+      1,
+      0,
+      1267
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 3.73
+    },
+    {
+     "trajId": 20633,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-12-31",
+     "arrival": "2029-07-27",
+     "durationDays": 208,
+     "events": 4,
+     "injectionC3Km2s2": 12.87,
+     "injectionDvKms": 3.796,
+     "postInjectionDvKms": 1.783,
+     "arrivalBurnDvKms": 1.782,
+     "eventDays": [
+      0,
+      3,
+      207,
+      208
+     ],
+     "eventDvMs": [
+      3796,
+      1,
+      0,
+      1782
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 4.52
+    },
+    {
+     "trajId": 20616,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-01-30",
+     "arrival": "2030-01-03",
+     "durationDays": 704,
+     "events": 4,
+     "injectionC3Km2s2": 20.91,
+     "injectionDvKms": 4.138,
+     "postInjectionDvKms": 1.493,
+     "arrivalBurnDvKms": 1.493,
+     "eventDays": [
+      0,
+      2,
+      702,
+      704
+     ],
+     "eventDvMs": [
+      4138,
+      0,
+      0,
+      1493
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 4.09
+    },
+    {
+     "trajId": 20620,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-05-21",
+     "arrival": "2030-01-03",
+     "durationDays": 592,
+     "events": 4,
+     "injectionC3Km2s2": 28.16,
+     "injectionDvKms": 4.438,
+     "postInjectionDvKms": 1.524,
+     "arrivalBurnDvKms": 1.524,
+     "eventDays": [
+      0,
+      2,
+      590,
+      592
+     ],
+     "eventDvMs": [
+      4438,
+      0,
+      0,
+      1524
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 4.14
+    },
+    {
+     "trajId": 20637,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2029-01-16",
+     "arrival": "2029-07-27",
+     "durationDays": 192,
+     "events": 4,
+     "injectionC3Km2s2": 23.88,
+     "injectionDvKms": 4.261,
+     "postInjectionDvKms": 1.794,
+     "arrivalBurnDvKms": 1.794,
+     "eventDays": [
+      0,
+      2,
+      191,
+      192
+     ],
+     "eventDvMs": [
+      4261,
+      0,
+      0,
+      1794
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 4.54
+    },
+    {
+     "trajId": 20619,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2028-05-21",
+     "arrival": "2029-12-18",
+     "durationDays": 576,
+     "events": 4,
+     "injectionC3Km2s2": 34.49,
+     "injectionDvKms": 4.694,
+     "postInjectionDvKms": 1.941,
+     "arrivalBurnDvKms": 1.94,
+     "eventDays": [
+      0,
+      2,
+      575,
+      576
+     ],
+     "eventDvMs": [
+      4694,
+      1,
+      0,
+      1940
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 4.75
+    },
+    {
+     "trajId": 20636,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2029-01-16",
+     "arrival": "2029-07-11",
+     "durationDays": 176,
+     "events": 4,
+     "injectionC3Km2s2": 24.28,
+     "injectionDvKms": 4.278,
+     "postInjectionDvKms": 2.453,
+     "arrivalBurnDvKms": 2.453,
+     "eventDays": [
+      0,
+      2,
+      175,
+      176
+     ],
+     "eventDvMs": [
+      4278,
+      0,
+      0,
+      2453
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 5.46
+    }
+   ]
+  },
+  {
+   "query": {
+    "id": "mars-2030",
+    "target": "Mars",
+    "type": "rendezvous",
+    "from": 2030,
+    "to": 2032,
+    "maxYears": 2,
+    "maxDvKms": 7
+   },
+   "message": "Query took 0.02s, returned 11 trajectories.",
+   "trajectories": [
+    {
+     "trajId": 20662,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2030-12-21",
+     "arrival": "2031-10-05",
+     "durationDays": 288,
+     "events": 4,
+     "injectionC3Km2s2": 10.23,
+     "injectionDvKms": 3.681,
+     "postInjectionDvKms": 1.107,
+     "arrivalBurnDvKms": 1.107,
+     "eventDays": [
+      0,
+      3,
+      286,
+      288
+     ],
+     "eventDvMs": [
+      3681,
+      0,
+      0,
+      1107
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 3.46
+    },
+    {
+     "trajId": 20661,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2030-12-21",
+     "arrival": "2031-09-19",
+     "durationDays": 272,
+     "events": 4,
+     "injectionC3Km2s2": 10.87,
+     "injectionDvKms": 3.709,
+     "postInjectionDvKms": 1.135,
+     "arrivalBurnDvKms": 1.134,
+     "eventDays": [
+      0,
+      3,
+      270,
+      272
+     ],
+     "eventDvMs": [
+      3709,
+      0,
+      0,
+      1134
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 3.51
+    },
+    {
+     "trajId": 20665,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2031-02-23",
+     "arrival": "2031-09-19",
+     "durationDays": 208,
+     "events": 4,
+     "injectionC3Km2s2": 14.77,
+     "injectionDvKms": 3.877,
+     "postInjectionDvKms": 1.31,
+     "arrivalBurnDvKms": 1.309,
+     "eventDays": [
+      0,
+      3,
+      206,
+      208
+     ],
+     "eventDvMs": [
+      3877,
+      1,
+      0,
+      1309
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 3.8
+    },
+    {
+     "trajId": 20664,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2031-02-23",
+     "arrival": "2031-09-03",
+     "durationDays": 192,
+     "events": 4,
+     "injectionC3Km2s2": 14.51,
+     "injectionDvKms": 3.866,
+     "postInjectionDvKms": 1.501,
+     "arrivalBurnDvKms": 1.501,
+     "eventDays": [
+      0,
+      3,
+      190,
+      192
+     ],
+     "eventDvMs": [
+      3866,
+      0,
+      0,
+      1501
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 4.1
+    },
+    {
+     "trajId": 20663,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2031-02-23",
+     "arrival": "2031-08-18",
+     "durationDays": 176,
+     "events": 4,
+     "injectionC3Km2s2": 14.67,
+     "injectionDvKms": 3.873,
+     "postInjectionDvKms": 1.963,
+     "arrivalBurnDvKms": 1.963,
+     "eventDays": [
+      0,
+      3,
+      175,
+      176
+     ],
+     "eventDvMs": [
+      3873,
+      0,
+      0,
+      1963
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 4.78
+    },
+    {
+     "trajId": 21259,
+     "route": "399 → 10 → 299 → 299 → 10 → 499 → 499",
+     "launch": "2030-02-04",
+     "arrival": "2031-02-23",
+     "durationDays": 384,
+     "events": 7,
+     "injectionC3Km2s2": 25.3,
+     "injectionDvKms": 4.32,
+     "postInjectionDvKms": 2.044,
+     "arrivalBurnDvKms": 1.957,
+     "eventDays": [
+      0,
+      2,
+      159,
+      160,
+      161,
+      383,
+      384
+     ],
+     "eventDvMs": [
+      4320,
+      0,
+      0,
+      87,
+      0,
+      0,
+      1957
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 4.78
+    },
+    {
+     "trajId": 20667,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2031-03-11",
+     "arrival": "2031-08-18",
+     "durationDays": 160,
+     "events": 4,
+     "injectionC3Km2s2": 27.05,
+     "injectionDvKms": 4.392,
+     "postInjectionDvKms": 2.025,
+     "arrivalBurnDvKms": 2.024,
+     "eventDays": [
+      0,
+      2,
+      159,
+      160
+     ],
+     "eventDvMs": [
+      4392,
+      0,
+      0,
+      2024
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 4.87
+    },
+    {
+     "trajId": 20647,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2030-02-04",
+     "arrival": "2032-01-09",
+     "durationDays": 704,
+     "events": 4,
+     "injectionC3Km2s2": 40.38,
+     "injectionDvKms": 4.928,
+     "postInjectionDvKms": 1.5,
+     "arrivalBurnDvKms": 1.5,
+     "eventDays": [
+      0,
+      2,
+      702,
+      704
+     ],
+     "eventDvMs": [
+      4928,
+      0,
+      0,
+      1500
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 4.1
+    },
+    {
+     "trajId": 21258,
+     "route": "399 → 10 → 299 → 299 → 10 → 499 → 499",
+     "launch": "2030-02-04",
+     "arrival": "2031-02-07",
+     "durationDays": 368,
+     "events": 7,
+     "injectionC3Km2s2": 25.31,
+     "injectionDvKms": 4.32,
+     "postInjectionDvKms": 2.278,
+     "arrivalBurnDvKms": 1.979,
+     "eventDays": [
+      0,
+      2,
+      159,
+      160,
+      161,
+      367,
+      368
+     ],
+     "eventDvMs": [
+      4320,
+      0,
+      0,
+      300,
+      0,
+      0,
+      1979
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 4.81
+    },
+    {
+     "trajId": 20646,
+     "route": "399 → 10 → 499 → 499",
+     "launch": "2030-01-19",
+     "arrival": "2031-12-08",
+     "durationDays": 688,
+     "events": 4,
+     "injectionC3Km2s2": 41.01,
+     "injectionDvKms": 4.952,
+     "postInjectionDvKms": 1.697,
+     "arrivalBurnDvKms": 1.696,
+     "eventDays": [
+      0,
+      2,
+      687,
+      688
+     ],
+     "eventDvMs": [
+      4952,
+      0,
+      0,
+      1696
+     ],
+     "arrivalRadiusKm": 3639,
+     "arrivalVinfKms": 4.4
+    },
+    {
+     "trajId": 21263,
+     "route": "399 → 10 → 299 → 299 → 10 → 499 → 499",
+     "launch": "2030-02-20",
+     "arrival": "2031-02-07",
+     "durationDays": 352,
+     "events": 7,
+     "injectionC3Km2s2": 37.38,
+     "injectionDvKms": 4.809,
+     "postInjectionDvKms": 2.012,
+     "arrivalBurnDvKms": 1.979,
+     "eventDays": [
+      0,
+      2,
+      143,
+      144,
+      145,
+      351,
+      352
+     ],
+     "eventDvMs": [
+      4809,
+      0,
+      0,
+      33,
+      0,
+      0,
+      1979
+     ],
+     "arrivalRadiusKm": 3640,
+     "arrivalVinfKms": 4.81
+    }
+   ]
+  },
+  {
+   "query": {
+    "id": "jupiter-flyby-2028",
+    "target": "Jupiter",
+    "type": "flyby",
+    "from": 2028,
+    "to": 2030,
+    "maxYears": 4,
+    "maxDvKms": 7
+   },
+   "message": "Query took 0.02s, returned 22 trajectories.",
+   "trajectories": [
+    {
+     "trajId": 5889,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2032-05-16",
+     "durationDays": 1232,
+     "events": 4,
+     "injectionC3Km2s2": 76.6,
+     "injectionDvKms": 6.28,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      1152,
+      1232
+     ],
+     "eventDvMs": [
+      6280,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5888,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-11-22",
+     "durationDays": 1056,
+     "events": 4,
+     "injectionC3Km2s2": 77.53,
+     "injectionDvKms": 6.313,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      970,
+      1056
+     ],
+     "eventDvMs": [
+      6313,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5887,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-11-06",
+     "durationDays": 1040,
+     "events": 4,
+     "injectionC3Km2s2": 77.84,
+     "injectionDvKms": 6.324,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      954,
+      1040
+     ],
+     "eventDvMs": [
+      6324,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5886,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-10-21",
+     "durationDays": 1024,
+     "events": 4,
+     "injectionC3Km2s2": 78.25,
+     "injectionDvKms": 6.338,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      938,
+      1024
+     ],
+     "eventDvMs": [
+      6338,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5885,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-10-05",
+     "durationDays": 1008,
+     "events": 4,
+     "injectionC3Km2s2": 78.73,
+     "injectionDvKms": 6.355,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      922,
+      1008
+     ],
+     "eventDvMs": [
+      6355,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5884,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-09-19",
+     "durationDays": 992,
+     "events": 4,
+     "injectionC3Km2s2": 79.25,
+     "injectionDvKms": 6.374,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      906,
+      992
+     ],
+     "eventDvMs": [
+      6374,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5883,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-09-03",
+     "durationDays": 976,
+     "events": 4,
+     "injectionC3Km2s2": 79.82,
+     "injectionDvKms": 6.394,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      890,
+      976
+     ],
+     "eventDvMs": [
+      6394,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5882,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-08-18",
+     "durationDays": 960,
+     "events": 4,
+     "injectionC3Km2s2": 80.43,
+     "injectionDvKms": 6.415,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      875,
+      960
+     ],
+     "eventDvMs": [
+      6415,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5881,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-08-02",
+     "durationDays": 944,
+     "events": 4,
+     "injectionC3Km2s2": 81.07,
+     "injectionDvKms": 6.438,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      859,
+      944
+     ],
+     "eventDvMs": [
+      6438,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5880,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-07-17",
+     "durationDays": 928,
+     "events": 4,
+     "injectionC3Km2s2": 81.74,
+     "injectionDvKms": 6.462,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      844,
+      928
+     ],
+     "eventDvMs": [
+      6462,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5879,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-07-01",
+     "durationDays": 912,
+     "events": 4,
+     "injectionC3Km2s2": 82.44,
+     "injectionDvKms": 6.486,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      829,
+      912
+     ],
+     "eventDvMs": [
+      6486,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5874,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2031-01-22",
+     "durationDays": 768,
+     "events": 4,
+     "injectionC3Km2s2": 83.06,
+     "injectionDvKms": 6.508,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      698,
+      768
+     ],
+     "eventDvMs": [
+      6508,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5873,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2031-01-06",
+     "durationDays": 752,
+     "events": 4,
+     "injectionC3Km2s2": 83.33,
+     "injectionDvKms": 6.517,
+     "postInjectionDvKms": 0.001,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      684,
+      752
+     ],
+     "eventDvMs": [
+      6517,
+      1,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5872,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-12-21",
+     "durationDays": 736,
+     "events": 4,
+     "injectionC3Km2s2": 83.83,
+     "injectionDvKms": 6.535,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      670,
+      736
+     ],
+     "eventDvMs": [
+      6535,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5871,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-12-05",
+     "durationDays": 720,
+     "events": 4,
+     "injectionC3Km2s2": 84.54,
+     "injectionDvKms": 6.559,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      655,
+      720
+     ],
+     "eventDvMs": [
+      6559,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5870,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-11-19",
+     "durationDays": 704,
+     "events": 4,
+     "injectionC3Km2s2": 85.43,
+     "injectionDvKms": 6.59,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      641,
+      704
+     ],
+     "eventDvMs": [
+      6590,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5869,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-11-03",
+     "durationDays": 688,
+     "events": 4,
+     "injectionC3Km2s2": 86.52,
+     "injectionDvKms": 6.628,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      627,
+      688
+     ],
+     "eventDvMs": [
+      6628,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5868,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-10-18",
+     "durationDays": 672,
+     "events": 4,
+     "injectionC3Km2s2": 87.8,
+     "injectionDvKms": 6.673,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      613,
+      672
+     ],
+     "eventDvMs": [
+      6673,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5867,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-10-02",
+     "durationDays": 656,
+     "events": 4,
+     "injectionC3Km2s2": 89.31,
+     "injectionDvKms": 6.725,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      599,
+      656
+     ],
+     "eventDvMs": [
+      6725,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5866,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-09-16",
+     "durationDays": 640,
+     "events": 4,
+     "injectionC3Km2s2": 91.06,
+     "injectionDvKms": 6.785,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      585,
+      640
+     ],
+     "eventDvMs": [
+      6785,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5865,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-08-31",
+     "durationDays": 624,
+     "events": 4,
+     "injectionC3Km2s2": 93.08,
+     "injectionDvKms": 6.854,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      571,
+      624
+     ],
+     "eventDvMs": [
+      6854,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    },
+    {
+     "trajId": 5864,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-08-15",
+     "durationDays": 608,
+     "events": 4,
+     "injectionC3Km2s2": 95.4,
+     "injectionDvKms": 6.933,
+     "postInjectionDvKms": 0,
+     "arrivalBurnDvKms": 0,
+     "eventDays": [
+      0,
+      1,
+      557,
+      608
+     ],
+     "eventDvMs": [
+      6933,
+      0,
+      0,
+      0
+     ],
+     "arrivalRadiusKm": 70911
+    }
+   ]
+  },
+  {
+   "query": {
+    "id": "jupiter-rendezvous-2028",
+    "target": "Jupiter",
+    "type": "rendezvous",
+    "from": 2028,
+    "to": 2030,
+    "maxYears": 6,
+    "maxDvKms": 10
+   },
+   "message": "Query took 0.02s, returned 60 trajectories.",
+   "trajectories": [
+    {
+     "trajId": 1304,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2028-03-02",
+     "arrival": "2033-01-27",
+     "durationDays": 1792,
+     "events": 8,
+     "injectionC3Km2s2": 25.65,
+     "injectionDvKms": 4.335,
+     "postInjectionDvKms": 0.891,
+     "arrivalBurnDvKms": 0.251,
+     "eventDays": [
+      0,
+      2,
+      371,
+      687,
+      688,
+      689,
+      1710,
+      1792
+     ],
+     "eventDvMs": [
+      4335,
+      0,
+      541,
+      0,
+      99,
+      1,
+      0,
+      251
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.48
+    },
+    {
+     "trajId": 1327,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-07-06",
+     "durationDays": 1632,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 0.887,
+     "arrivalBurnDvKms": 0.269,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1552,
+      1632
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      6,
+      1,
+      0,
+      269
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.68
+    },
+    {
+     "trajId": 1326,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-06-20",
+     "durationDays": 1616,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 0.91,
+     "arrivalBurnDvKms": 0.277,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1537,
+      1616
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      21,
+      1,
+      0,
+      277
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.76
+    },
+    {
+     "trajId": 1325,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-06-04",
+     "durationDays": 1600,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 0.95,
+     "arrivalBurnDvKms": 0.287,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1522,
+      1600
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      52,
+      1,
+      0,
+      287
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.86
+    },
+    {
+     "trajId": 1324,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-05-19",
+     "durationDays": 1584,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 0.994,
+     "arrivalBurnDvKms": 0.298,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1507,
+      1584
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      85,
+      1,
+      0,
+      298
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.97
+    },
+    {
+     "trajId": 1305,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2028-03-18",
+     "arrival": "2033-10-26",
+     "durationDays": 2048,
+     "events": 8,
+     "injectionC3Km2s2": 25.91,
+     "injectionDvKms": 4.345,
+     "postInjectionDvKms": 1.061,
+     "arrivalBurnDvKms": 0.366,
+     "eventDays": [
+      0,
+      2,
+      371,
+      687,
+      688,
+      689,
+      1977,
+      2048
+     ],
+     "eventDvMs": [
+      4345,
+      0,
+      545,
+      0,
+      149,
+      0,
+      0,
+      366
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.63
+    },
+    {
+     "trajId": 1323,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-05-03",
+     "durationDays": 1568,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 1.043,
+     "arrivalBurnDvKms": 0.311,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1492,
+      1568
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      121,
+      1,
+      0,
+      311
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.11
+    },
+    {
+     "trajId": 1322,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-04-17",
+     "durationDays": 1552,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 1.096,
+     "arrivalBurnDvKms": 0.327,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1478,
+      1552
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      158,
+      1,
+      0,
+      327
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.26
+    },
+    {
+     "trajId": 1331,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-04-22",
+     "arrival": "2034-10-29",
+     "durationDays": 2016,
+     "events": 8,
+     "injectionC3Km2s2": 26.4,
+     "injectionDvKms": 4.366,
+     "postInjectionDvKms": 1.143,
+     "arrivalBurnDvKms": 0.385,
+     "eventDays": [
+      0,
+      2,
+      370,
+      687,
+      688,
+      689,
+      1946,
+      2016
+     ],
+     "eventDvMs": [
+      4366,
+      0,
+      536,
+      0,
+      222,
+      0,
+      0,
+      385
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.8
+    },
+    {
+     "trajId": 1321,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-04-01",
+     "durationDays": 1536,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 1.153,
+     "arrivalBurnDvKms": 0.345,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1463,
+      1536
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      197,
+      0,
+      0,
+      345
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.43
+    },
+    {
+     "trajId": 1320,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-03-16",
+     "durationDays": 1520,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 1.213,
+     "arrivalBurnDvKms": 0.365,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1449,
+      1520
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      237,
+      0,
+      0,
+      365
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.62
+    },
+    {
+     "trajId": 1319,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-02-28",
+     "durationDays": 1504,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 1.278,
+     "arrivalBurnDvKms": 0.389,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1434,
+      1504
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      278,
+      0,
+      0,
+      389
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.83
+    },
+    {
+     "trajId": 1318,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-02-12",
+     "durationDays": 1488,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 1.346,
+     "arrivalBurnDvKms": 0.416,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1420,
+      1488
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      319,
+      0,
+      0,
+      416
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.06
+    },
+    {
+     "trajId": 1303,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2028-02-15",
+     "arrival": "2032-01-09",
+     "durationDays": 1424,
+     "events": 8,
+     "injectionC3Km2s2": 25.36,
+     "injectionDvKms": 4.323,
+     "postInjectionDvKms": 1.461,
+     "arrivalBurnDvKms": 0.437,
+     "eventDays": [
+      0,
+      2,
+      370,
+      687,
+      688,
+      689,
+      1357,
+      1424
+     ],
+     "eventDvMs": [
+      4323,
+      0,
+      530,
+      0,
+      493,
+      1,
+      0,
+      437
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.24
+    },
+    {
+     "trajId": 1317,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-01-27",
+     "durationDays": 1472,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 1.419,
+     "arrivalBurnDvKms": 0.446,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1406,
+      1472
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      362,
+      0,
+      0,
+      446
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.32
+    },
+    {
+     "trajId": 1302,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2028-02-15",
+     "arrival": "2031-12-24",
+     "durationDays": 1408,
+     "events": 8,
+     "injectionC3Km2s2": 25.36,
+     "injectionDvKms": 4.323,
+     "postInjectionDvKms": 1.525,
+     "arrivalBurnDvKms": 0.47,
+     "eventDays": [
+      0,
+      2,
+      370,
+      687,
+      688,
+      689,
+      1343,
+      1408
+     ],
+     "eventDvMs": [
+      4323,
+      0,
+      530,
+      0,
+      525,
+      1,
+      0,
+      470
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.51
+    },
+    {
+     "trajId": 1316,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2033-01-11",
+     "durationDays": 1456,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 1.496,
+     "arrivalBurnDvKms": 0.48,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1392,
+      1456
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      405,
+      0,
+      0,
+      480
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.59
+    },
+    {
+     "trajId": 1315,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-01-16",
+     "arrival": "2032-12-26",
+     "durationDays": 1440,
+     "events": 8,
+     "injectionC3Km2s2": 26.52,
+     "injectionDvKms": 4.371,
+     "postInjectionDvKms": 1.579,
+     "arrivalBurnDvKms": 0.519,
+     "eventDays": [
+      0,
+      2,
+      383,
+      783,
+      784,
+      785,
+      1378,
+      1440
+     ],
+     "eventDvMs": [
+      4371,
+      0,
+      611,
+      0,
+      449,
+      0,
+      0,
+      519
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.89
+    },
+    {
+     "trajId": 1300,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2028-02-15",
+     "arrival": "2031-12-08",
+     "durationDays": 1392,
+     "events": 8,
+     "injectionC3Km2s2": 25.78,
+     "injectionDvKms": 4.34,
+     "postInjectionDvKms": 1.612,
+     "arrivalBurnDvKms": 0.495,
+     "eventDays": [
+      0,
+      2,
+      373,
+      671,
+      672,
+      673,
+      1329,
+      1392
+     ],
+     "eventDvMs": [
+      4340,
+      0,
+      1003,
+      0,
+      114,
+      1,
+      0,
+      495
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.71
+    },
+    {
+     "trajId": 1330,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-03-21",
+     "arrival": "2032-12-10",
+     "durationDays": 1360,
+     "events": 8,
+     "injectionC3Km2s2": 25.99,
+     "injectionDvKms": 4.349,
+     "postInjectionDvKms": 1.678,
+     "arrivalBurnDvKms": 0.548,
+     "eventDays": [
+      0,
+      2,
+      371,
+      687,
+      688,
+      689,
+      1299,
+      1360
+     ],
+     "eventDvMs": [
+      4349,
+      0,
+      546,
+      0,
+      584,
+      0,
+      0,
+      548
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 8.11
+    },
+    {
+     "trajId": 1299,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2028-02-15",
+     "arrival": "2031-11-22",
+     "durationDays": 1376,
+     "events": 8,
+     "injectionC3Km2s2": 25.78,
+     "injectionDvKms": 4.34,
+     "postInjectionDvKms": 1.71,
+     "arrivalBurnDvKms": 0.534,
+     "eventDays": [
+      0,
+      2,
+      373,
+      671,
+      672,
+      673,
+      1315,
+      1376
+     ],
+     "eventDvMs": [
+      4340,
+      0,
+      1003,
+      0,
+      172,
+      1,
+      0,
+      534
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 8.01
+    },
+    {
+     "trajId": 1329,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-03-21",
+     "arrival": "2032-11-24",
+     "durationDays": 1344,
+     "events": 8,
+     "injectionC3Km2s2": 25.99,
+     "injectionDvKms": 4.349,
+     "postInjectionDvKms": 1.707,
+     "arrivalBurnDvKms": 0.592,
+     "eventDays": [
+      0,
+      2,
+      371,
+      687,
+      688,
+      689,
+      1285,
+      1344
+     ],
+     "eventDvMs": [
+      4349,
+      0,
+      546,
+      0,
+      568,
+      1,
+      0,
+      592
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 8.44
+    },
+    {
+     "trajId": 1301,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2028-02-15",
+     "arrival": "2031-11-06",
+     "durationDays": 1360,
+     "events": 8,
+     "injectionC3Km2s2": 25.36,
+     "injectionDvKms": 4.323,
+     "postInjectionDvKms": 1.819,
+     "arrivalBurnDvKms": 0.595,
+     "eventDays": [
+      0,
+      2,
+      370,
+      687,
+      688,
+      689,
+      1301,
+      1360
+     ],
+     "eventDvMs": [
+      4323,
+      0,
+      530,
+      0,
+      694,
+      1,
+      0,
+      595
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 8.45
+    },
+    {
+     "trajId": 1328,
+     "route": "399 → 10 → 10 → 399 → 399 → 10 → 5 → 5",
+     "launch": "2029-03-21",
+     "arrival": "2032-10-07",
+     "durationDays": 1296,
+     "events": 8,
+     "injectionC3Km2s2": 25.99,
+     "injectionDvKms": 4.349,
+     "postInjectionDvKms": 2.02,
+     "arrivalBurnDvKms": 0.766,
+     "eventDays": [
+      0,
+      2,
+      371,
+      687,
+      688,
+      689,
+      1243,
+      1296
+     ],
+     "eventDvMs": [
+      4349,
+      0,
+      546,
+      0,
+      708,
+      0,
+      0,
+      766
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 9.6
+    },
+    {
+     "trajId": 515,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-11-22",
+     "durationDays": 1056,
+     "events": 4,
+     "injectionC3Km2s2": 77.53,
+     "injectionDvKms": 6.313,
+     "postInjectionDvKms": 0.221,
+     "arrivalBurnDvKms": 0.22,
+     "eventDays": [
+      0,
+      1,
+      970,
+      1056
+     ],
+     "eventDvMs": [
+      6313,
+      1,
+      0,
+      220
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.14
+    },
+    {
+     "trajId": 514,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-11-06",
+     "durationDays": 1040,
+     "events": 4,
+     "injectionC3Km2s2": 77.84,
+     "injectionDvKms": 6.324,
+     "postInjectionDvKms": 0.22,
+     "arrivalBurnDvKms": 0.219,
+     "eventDays": [
+      0,
+      1,
+      954,
+      1040
+     ],
+     "eventDvMs": [
+      6324,
+      1,
+      0,
+      219
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.13
+    },
+    {
+     "trajId": 516,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2032-05-16",
+     "durationDays": 1232,
+     "events": 4,
+     "injectionC3Km2s2": 76.6,
+     "injectionDvKms": 6.28,
+     "postInjectionDvKms": 0.265,
+     "arrivalBurnDvKms": 0.264,
+     "eventDays": [
+      0,
+      1,
+      1152,
+      1232
+     ],
+     "eventDvMs": [
+      6280,
+      1,
+      0,
+      264
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.63
+    },
+    {
+     "trajId": 513,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-10-21",
+     "durationDays": 1024,
+     "events": 4,
+     "injectionC3Km2s2": 78.25,
+     "injectionDvKms": 6.338,
+     "postInjectionDvKms": 0.22,
+     "arrivalBurnDvKms": 0.219,
+     "eventDays": [
+      0,
+      1,
+      938,
+      1024
+     ],
+     "eventDvMs": [
+      6338,
+      1,
+      0,
+      219
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.12
+    },
+    {
+     "trajId": 512,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-10-05",
+     "durationDays": 1008,
+     "events": 4,
+     "injectionC3Km2s2": 78.73,
+     "injectionDvKms": 6.355,
+     "postInjectionDvKms": 0.22,
+     "arrivalBurnDvKms": 0.219,
+     "eventDays": [
+      0,
+      1,
+      922,
+      1008
+     ],
+     "eventDvMs": [
+      6355,
+      1,
+      0,
+      219
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.12
+    },
+    {
+     "trajId": 511,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-09-19",
+     "durationDays": 992,
+     "events": 4,
+     "injectionC3Km2s2": 79.25,
+     "injectionDvKms": 6.374,
+     "postInjectionDvKms": 0.221,
+     "arrivalBurnDvKms": 0.22,
+     "eventDays": [
+      0,
+      1,
+      906,
+      992
+     ],
+     "eventDvMs": [
+      6374,
+      1,
+      0,
+      220
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.13
+    },
+    {
+     "trajId": 510,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-09-03",
+     "durationDays": 976,
+     "events": 4,
+     "injectionC3Km2s2": 79.82,
+     "injectionDvKms": 6.394,
+     "postInjectionDvKms": 0.223,
+     "arrivalBurnDvKms": 0.222,
+     "eventDays": [
+      0,
+      1,
+      890,
+      976
+     ],
+     "eventDvMs": [
+      6394,
+      1,
+      0,
+      222
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.16
+    },
+    {
+     "trajId": 509,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-08-18",
+     "durationDays": 960,
+     "events": 4,
+     "injectionC3Km2s2": 80.43,
+     "injectionDvKms": 6.415,
+     "postInjectionDvKms": 0.225,
+     "arrivalBurnDvKms": 0.225,
+     "eventDays": [
+      0,
+      1,
+      875,
+      960
+     ],
+     "eventDvMs": [
+      6415,
+      1,
+      0,
+      225
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.19
+    },
+    {
+     "trajId": 508,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-08-02",
+     "durationDays": 944,
+     "events": 4,
+     "injectionC3Km2s2": 81.07,
+     "injectionDvKms": 6.438,
+     "postInjectionDvKms": 0.229,
+     "arrivalBurnDvKms": 0.228,
+     "eventDays": [
+      0,
+      1,
+      859,
+      944
+     ],
+     "eventDvMs": [
+      6438,
+      1,
+      0,
+      228
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.23
+    },
+    {
+     "trajId": 507,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-07-17",
+     "durationDays": 928,
+     "events": 4,
+     "injectionC3Km2s2": 81.74,
+     "injectionDvKms": 6.462,
+     "postInjectionDvKms": 0.234,
+     "arrivalBurnDvKms": 0.233,
+     "eventDays": [
+      0,
+      1,
+      844,
+      928
+     ],
+     "eventDvMs": [
+      6462,
+      1,
+      0,
+      233
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.28
+    },
+    {
+     "trajId": 506,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-07-01",
+     "durationDays": 912,
+     "events": 4,
+     "injectionC3Km2s2": 82.44,
+     "injectionDvKms": 6.486,
+     "postInjectionDvKms": 0.239,
+     "arrivalBurnDvKms": 0.239,
+     "eventDays": [
+      0,
+      1,
+      829,
+      912
+     ],
+     "eventDvMs": [
+      6486,
+      1,
+      0,
+      239
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.35
+    },
+    {
+     "trajId": 505,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-06-15",
+     "durationDays": 896,
+     "events": 4,
+     "injectionC3Km2s2": 83.17,
+     "injectionDvKms": 6.512,
+     "postInjectionDvKms": 0.247,
+     "arrivalBurnDvKms": 0.246,
+     "eventDays": [
+      0,
+      1,
+      813,
+      896
+     ],
+     "eventDvMs": [
+      6512,
+      1,
+      0,
+      246
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.43
+    },
+    {
+     "trajId": 504,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-05-30",
+     "durationDays": 880,
+     "events": 4,
+     "injectionC3Km2s2": 83.92,
+     "injectionDvKms": 6.538,
+     "postInjectionDvKms": 0.255,
+     "arrivalBurnDvKms": 0.254,
+     "eventDays": [
+      0,
+      1,
+      798,
+      880
+     ],
+     "eventDvMs": [
+      6538,
+      1,
+      0,
+      254
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.52
+    },
+    {
+     "trajId": 503,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2031-05-14",
+     "durationDays": 864,
+     "events": 4,
+     "injectionC3Km2s2": 84.69,
+     "injectionDvKms": 6.565,
+     "postInjectionDvKms": 0.265,
+     "arrivalBurnDvKms": 0.264,
+     "eventDays": [
+      0,
+      1,
+      784,
+      864
+     ],
+     "eventDvMs": [
+      6565,
+      1,
+      0,
+      264
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 5.63
+    },
+    {
+     "trajId": 496,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2031-02-23",
+     "durationDays": 800,
+     "events": 4,
+     "injectionC3Km2s2": 83.44,
+     "injectionDvKms": 6.521,
+     "postInjectionDvKms": 0.337,
+     "arrivalBurnDvKms": 0.337,
+     "eventDays": [
+      0,
+      1,
+      726,
+      800
+     ],
+     "eventDvMs": [
+      6521,
+      1,
+      0,
+      337
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.35
+    },
+    {
+     "trajId": 495,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2031-02-07",
+     "durationDays": 784,
+     "events": 4,
+     "injectionC3Km2s2": 83.06,
+     "injectionDvKms": 6.508,
+     "postInjectionDvKms": 0.358,
+     "arrivalBurnDvKms": 0.358,
+     "eventDays": [
+      0,
+      1,
+      712,
+      784
+     ],
+     "eventDvMs": [
+      6508,
+      1,
+      0,
+      358
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.55
+    },
+    {
+     "trajId": 494,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2031-01-22",
+     "durationDays": 768,
+     "events": 4,
+     "injectionC3Km2s2": 83.06,
+     "injectionDvKms": 6.508,
+     "postInjectionDvKms": 0.382,
+     "arrivalBurnDvKms": 0.381,
+     "eventDays": [
+      0,
+      1,
+      698,
+      768
+     ],
+     "eventDvMs": [
+      6508,
+      0,
+      0,
+      381
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 6.76
+    },
+    {
+     "trajId": 493,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2031-01-06",
+     "durationDays": 752,
+     "events": 4,
+     "injectionC3Km2s2": 83.33,
+     "injectionDvKms": 6.517,
+     "postInjectionDvKms": 0.409,
+     "arrivalBurnDvKms": 0.408,
+     "eventDays": [
+      0,
+      1,
+      684,
+      752
+     ],
+     "eventDvMs": [
+      6517,
+      1,
+      0,
+      408
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7
+    },
+    {
+     "trajId": 492,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-12-21",
+     "durationDays": 736,
+     "events": 4,
+     "injectionC3Km2s2": 83.83,
+     "injectionDvKms": 6.535,
+     "postInjectionDvKms": 0.439,
+     "arrivalBurnDvKms": 0.438,
+     "eventDays": [
+      0,
+      1,
+      670,
+      736
+     ],
+     "eventDvMs": [
+      6535,
+      0,
+      0,
+      438
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.25
+    },
+    {
+     "trajId": 491,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-12-05",
+     "durationDays": 720,
+     "events": 4,
+     "injectionC3Km2s2": 84.54,
+     "injectionDvKms": 6.559,
+     "postInjectionDvKms": 0.472,
+     "arrivalBurnDvKms": 0.472,
+     "eventDays": [
+      0,
+      1,
+      655,
+      720
+     ],
+     "eventDvMs": [
+      6559,
+      0,
+      0,
+      472
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.52
+    },
+    {
+     "trajId": 490,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-11-19",
+     "durationDays": 704,
+     "events": 4,
+     "injectionC3Km2s2": 85.43,
+     "injectionDvKms": 6.59,
+     "postInjectionDvKms": 0.509,
+     "arrivalBurnDvKms": 0.509,
+     "eventDays": [
+      0,
+      1,
+      641,
+      704
+     ],
+     "eventDvMs": [
+      6590,
+      0,
+      0,
+      509
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 7.82
+    },
+    {
+     "trajId": 489,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-11-03",
+     "durationDays": 688,
+     "events": 4,
+     "injectionC3Km2s2": 86.52,
+     "injectionDvKms": 6.628,
+     "postInjectionDvKms": 0.551,
+     "arrivalBurnDvKms": 0.551,
+     "eventDays": [
+      0,
+      1,
+      627,
+      688
+     ],
+     "eventDvMs": [
+      6628,
+      0,
+      0,
+      551
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 8.13
+    },
+    {
+     "trajId": 488,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-10-18",
+     "durationDays": 672,
+     "events": 4,
+     "injectionC3Km2s2": 87.8,
+     "injectionDvKms": 6.673,
+     "postInjectionDvKms": 0.598,
+     "arrivalBurnDvKms": 0.597,
+     "eventDays": [
+      0,
+      1,
+      613,
+      672
+     ],
+     "eventDvMs": [
+      6673,
+      0,
+      0,
+      597
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 8.47
+    },
+    {
+     "trajId": 487,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-10-02",
+     "durationDays": 656,
+     "events": 4,
+     "injectionC3Km2s2": 89.31,
+     "injectionDvKms": 6.725,
+     "postInjectionDvKms": 0.649,
+     "arrivalBurnDvKms": 0.649,
+     "eventDays": [
+      0,
+      1,
+      599,
+      656
+     ],
+     "eventDvMs": [
+      6725,
+      0,
+      0,
+      649
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 8.83
+    },
+    {
+     "trajId": 486,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-09-16",
+     "durationDays": 640,
+     "events": 4,
+     "injectionC3Km2s2": 91.06,
+     "injectionDvKms": 6.785,
+     "postInjectionDvKms": 0.707,
+     "arrivalBurnDvKms": 0.707,
+     "eventDays": [
+      0,
+      1,
+      585,
+      640
+     ],
+     "eventDvMs": [
+      6785,
+      0,
+      0,
+      707
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 9.22
+    },
+    {
+     "trajId": 485,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-08-31",
+     "durationDays": 624,
+     "events": 4,
+     "injectionC3Km2s2": 93.08,
+     "injectionDvKms": 6.854,
+     "postInjectionDvKms": 0.771,
+     "arrivalBurnDvKms": 0.771,
+     "eventDays": [
+      0,
+      1,
+      571,
+      624
+     ],
+     "eventDvMs": [
+      6854,
+      0,
+      0,
+      771
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 9.63
+    },
+    {
+     "trajId": 484,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-08-15",
+     "durationDays": 608,
+     "events": 4,
+     "injectionC3Km2s2": 95.4,
+     "injectionDvKms": 6.933,
+     "postInjectionDvKms": 0.842,
+     "arrivalBurnDvKms": 0.842,
+     "eventDays": [
+      0,
+      1,
+      557,
+      608
+     ],
+     "eventDvMs": [
+      6933,
+      0,
+      0,
+      842
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 10.07
+    },
+    {
+     "trajId": 483,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-07-30",
+     "durationDays": 592,
+     "events": 4,
+     "injectionC3Km2s2": 98.08,
+     "injectionDvKms": 7.024,
+     "postInjectionDvKms": 0.921,
+     "arrivalBurnDvKms": 0.921,
+     "eventDays": [
+      0,
+      1,
+      543,
+      592
+     ],
+     "eventDvMs": [
+      7024,
+      0,
+      0,
+      921
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 10.53
+    },
+    {
+     "trajId": 482,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-07-14",
+     "durationDays": 576,
+     "events": 4,
+     "injectionC3Km2s2": 101.16,
+     "injectionDvKms": 7.127,
+     "postInjectionDvKms": 1.01,
+     "arrivalBurnDvKms": 1.01,
+     "eventDays": [
+      0,
+      1,
+      529,
+      576
+     ],
+     "eventDvMs": [
+      7127,
+      0,
+      0,
+      1010
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 11.03
+    },
+    {
+     "trajId": 481,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-15",
+     "arrival": "2030-06-28",
+     "durationDays": 560,
+     "events": 4,
+     "injectionC3Km2s2": 104.71,
+     "injectionDvKms": 7.246,
+     "postInjectionDvKms": 1.109,
+     "arrivalBurnDvKms": 1.108,
+     "eventDays": [
+      0,
+      1,
+      515,
+      560
+     ],
+     "eventDvMs": [
+      7246,
+      0,
+      0,
+      1108
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 11.56
+    },
+    {
+     "trajId": 502,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2030-06-28",
+     "durationDays": 544,
+     "events": 4,
+     "injectionC3Km2s2": 109.71,
+     "injectionDvKms": 7.411,
+     "postInjectionDvKms": 1.135,
+     "arrivalBurnDvKms": 1.135,
+     "eventDays": [
+      0,
+      1,
+      500,
+      544
+     ],
+     "eventDvMs": [
+      7411,
+      0,
+      0,
+      1135
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 11.7
+    },
+    {
+     "trajId": 501,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2030-06-12",
+     "durationDays": 528,
+     "events": 4,
+     "injectionC3Km2s2": 112.62,
+     "injectionDvKms": 7.507,
+     "postInjectionDvKms": 1.249,
+     "arrivalBurnDvKms": 1.249,
+     "eventDays": [
+      0,
+      1,
+      485,
+      528
+     ],
+     "eventDvMs": [
+      7507,
+      0,
+      0,
+      1249
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 12.28
+    },
+    {
+     "trajId": 500,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2030-05-27",
+     "durationDays": 512,
+     "events": 4,
+     "injectionC3Km2s2": 116,
+     "injectionDvKms": 7.617,
+     "postInjectionDvKms": 1.376,
+     "arrivalBurnDvKms": 1.376,
+     "eventDays": [
+      0,
+      1,
+      471,
+      512
+     ],
+     "eventDvMs": [
+      7617,
+      0,
+      0,
+      1376
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 12.9
+    },
+    {
+     "trajId": 499,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2030-05-11",
+     "durationDays": 496,
+     "events": 4,
+     "injectionC3Km2s2": 119.94,
+     "injectionDvKms": 7.744,
+     "postInjectionDvKms": 1.519,
+     "arrivalBurnDvKms": 1.519,
+     "eventDays": [
+      0,
+      1,
+      457,
+      496
+     ],
+     "eventDvMs": [
+      7744,
+      0,
+      0,
+      1519
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 13.56
+    },
+    {
+     "trajId": 498,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2030-04-25",
+     "durationDays": 480,
+     "events": 4,
+     "injectionC3Km2s2": 124.57,
+     "injectionDvKms": 7.892,
+     "postInjectionDvKms": 1.68,
+     "arrivalBurnDvKms": 1.68,
+     "eventDays": [
+      0,
+      1,
+      443,
+      480
+     ],
+     "eventDvMs": [
+      7892,
+      0,
+      0,
+      1680
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 14.27
+    },
+    {
+     "trajId": 497,
+     "route": "399 → 10 → 5 → 5",
+     "launch": "2028-12-31",
+     "arrival": "2030-04-09",
+     "durationDays": 464,
+     "events": 4,
+     "injectionC3Km2s2": 130.03,
+     "injectionDvKms": 8.066,
+     "postInjectionDvKms": 1.861,
+     "arrivalBurnDvKms": 1.861,
+     "eventDays": [
+      0,
+      1,
+      429,
+      464
+     ],
+     "eventDvMs": [
+      8066,
+      0,
+      0,
+      1861
+     ],
+     "arrivalRadiusKm": 70911,
+     "arrivalVinfKms": 15.03
+    }
+   ]
+  }
+ ]
+}

@@ -50,7 +50,7 @@ describe('orbital mechanics', () => {
 
   it('interpolates launch vehicle curves and returns 0 beyond the curve', () => {
     const fh = catalog.launchVehicles.find((l) => l.id === 'lv-falcon-heavy')!;
-    expect(lvCapacityKg(fh, 25)).toBeCloseTo(8800, -2);
+    expect(lvCapacityKg(fh, 22.5)).toBeCloseTo(9622.5, 1); // halfway between the NASA LSP points at C3 20 (10,115 kg) and 25 (9,130 kg)
     expect(lvCapacityKg(fh, 500)).toBe(0);
   });
 });
@@ -160,7 +160,10 @@ describe('comms calibration (DSN link budget)', () => {
     const link34 = linkModel(catalog, d);
     expect(link34.rateBps(1) / link34.rateBps(2)).toBeCloseTo(4, 6);
     const link70 = linkModel(catalog, { ...d, dsnAperture: '70m' });
-    expect(link70.rateBps(2) / link34.rateBps(2)).toBeCloseTo(10 ** 0.6, 6); // +6 dB
+    const x = catalog.constants.bands.X; // 810-005 gains: 74.6 − 68.3 = +6.3 dB, i.e. (70 / 34)² within a few percent
+    expect(link70.rateBps(2) / link34.rateBps(2)).toBeCloseTo(10 ** ((x.dsn70GainDbi - x.dsn34GainDbi) / 10), 6);
+    expect(link70.rateBps(2) / link34.rateBps(2)).toBeGreaterThan(3.8);
+    expect(link70.rateBps(2) / link34.rateBps(2)).toBeLessThan(4.6);
   });
 
   it('Ka-band on a 70 m dish is treated as 34 m (the 70 m antennas have no Ka downlink)', () => {

@@ -181,7 +181,7 @@ describe('losing the mission', () => {
     const res = runHeadless(c, mro, 5);
     expect(res.outcome).toBe('lost');
     expect(res.lossCause).toContain('Orbit insertion burn failed');
-    expect(res.daysFlown).toBe(220);
+    expect(res.daysFlown).toBe(c.trajectories.find((t) => t.id === mro.trajectoryId)!.tofDays); // lost on arrival day
   });
 
   it('a mission lost mid-science keeps the science already returned', () => {

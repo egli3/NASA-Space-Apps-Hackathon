@@ -1,0 +1,580 @@
+{
+  "source": "NASA Launch Services Program Launch Vehicle Performance Website, Performance Query, Orbit Class = High Energy",
+  "url": "https://elvperf.ksc.nasa.gov/Pages/Query.aspx",
+  "retrieved": "2026-11-15",
+  "units": "separated spacecraft mass in kg at each C3 (km2/s2). A C3 missing for a vehicle means the site did not list that vehicle at that C3.",
+  "c3Queried": [
+    -3,
+    -2,
+    -1.5,
+    -1,
+    0,
+    5,
+    8,
+    10,
+    12,
+    15,
+    20,
+    25,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    85,
+    90,
+    95,
+    100
+  ],
+  "details": {
+    "Vulcan (VC0)": {
+      "launchSite": "CCSFS",
+      "fairing": "5.4m"
+    },
+    "Vulcan (VC2)": {
+      "launchSite": "CCSFS",
+      "fairing": "5.4m"
+    },
+    "New Glenn (New Glenn)": {
+      "launchSite": "CCSFS",
+      "fairing": "7m"
+    },
+    "Vulcan (VC4)": {
+      "launchSite": "CCSFS",
+      "fairing": "5.4m"
+    },
+    "Vulcan (VC6)": {
+      "launchSite": "CCSFS",
+      "fairing": "5.4m"
+    },
+    "Falcon 9 (Full Thrust, RTLS)": {
+      "launchSite": "CCSFS",
+      "fairing": "5.2m"
+    },
+    "Falcon 9 (Full Thrust, ASDS)": {
+      "launchSite": "CCSFS",
+      "fairing": "5.2m"
+    },
+    "Falcon Heavy (Recovery)": {
+      "launchSite": "KSC",
+      "fairing": "5.2m"
+    },
+    "Falcon Heavy (Expendable)": {
+      "launchSite": "KSC",
+      "fairing": "5.2m"
+    }
+  },
+  "vehicles": {
+    "Vulcan (VC0)": [
+      {
+        "c3Km2s2": -3,
+        "massKg": 2370
+      },
+      {
+        "c3Km2s2": -2,
+        "massKg": 2280
+      },
+      {
+        "c3Km2s2": -1.5,
+        "massKg": 2235
+      },
+      {
+        "c3Km2s2": -1,
+        "massKg": 2190
+      },
+      {
+        "c3Km2s2": 0,
+        "massKg": 2100
+      },
+      {
+        "c3Km2s2": 5,
+        "massKg": 1710
+      }
+    ],
+    "Vulcan (VC2)": [
+      {
+        "c3Km2s2": -3,
+        "massKg": 6320
+      },
+      {
+        "c3Km2s2": -2,
+        "massKg": 6185
+      },
+      {
+        "c3Km2s2": -1.5,
+        "massKg": 6120
+      },
+      {
+        "c3Km2s2": -1,
+        "massKg": 6050
+      },
+      {
+        "c3Km2s2": 0,
+        "massKg": 5920
+      },
+      {
+        "c3Km2s2": 5,
+        "massKg": 5330
+      },
+      {
+        "c3Km2s2": 8,
+        "massKg": 4980
+      },
+      {
+        "c3Km2s2": 10,
+        "massKg": 4750
+      },
+      {
+        "c3Km2s2": 12,
+        "massKg": 4530
+      },
+      {
+        "c3Km2s2": 15,
+        "massKg": 4210
+      },
+      {
+        "c3Km2s2": 20,
+        "massKg": 3710
+      },
+      {
+        "c3Km2s2": 25,
+        "massKg": 3230
+      },
+      {
+        "c3Km2s2": 30,
+        "massKg": 2790
+      },
+      {
+        "c3Km2s2": 40,
+        "massKg": 1970
+      },
+      {
+        "c3Km2s2": 50,
+        "massKg": 1260
+      },
+      {
+        "c3Km2s2": 60,
+        "massKg": 630
+      }
+    ],
+    "New Glenn (New Glenn)": [
+      {
+        "c3Km2s2": -3,
+        "massKg": 7035
+      },
+      {
+        "c3Km2s2": -2,
+        "massKg": 7085
+      },
+      {
+        "c3Km2s2": -1.5,
+        "massKg": 7110
+      },
+      {
+        "c3Km2s2": -1,
+        "massKg": 7130
+      },
+      {
+        "c3Km2s2": 0,
+        "massKg": 7180
+      },
+      {
+        "c3Km2s2": 5,
+        "massKg": 6360
+      },
+      {
+        "c3Km2s2": 8,
+        "massKg": 5500
+      },
+      {
+        "c3Km2s2": 10,
+        "massKg": 4930
+      },
+      {
+        "c3Km2s2": 12,
+        "massKg": 4400
+      },
+      {
+        "c3Km2s2": 15,
+        "massKg": 3605
+      },
+      {
+        "c3Km2s2": 20,
+        "massKg": 2365
+      },
+      {
+        "c3Km2s2": 25,
+        "massKg": 1205
+      },
+      {
+        "c3Km2s2": 30,
+        "massKg": 120
+      }
+    ],
+    "Vulcan (VC4)": [
+      {
+        "c3Km2s2": -3,
+        "massKg": 9010
+      },
+      {
+        "c3Km2s2": -2,
+        "massKg": 8855
+      },
+      {
+        "c3Km2s2": -1.5,
+        "massKg": 8780
+      },
+      {
+        "c3Km2s2": -1,
+        "massKg": 8700
+      },
+      {
+        "c3Km2s2": 0,
+        "massKg": 8550
+      },
+      {
+        "c3Km2s2": 5,
+        "massKg": 7820
+      },
+      {
+        "c3Km2s2": 8,
+        "massKg": 7410
+      },
+      {
+        "c3Km2s2": 10,
+        "massKg": 7140
+      },
+      {
+        "c3Km2s2": 12,
+        "massKg": 6880
+      },
+      {
+        "c3Km2s2": 15,
+        "massKg": 6490
+      },
+      {
+        "c3Km2s2": 20,
+        "massKg": 5880
+      },
+      {
+        "c3Km2s2": 25,
+        "massKg": 5320
+      },
+      {
+        "c3Km2s2": 30,
+        "massKg": 4780
+      },
+      {
+        "c3Km2s2": 40,
+        "massKg": 3800
+      },
+      {
+        "c3Km2s2": 50,
+        "massKg": 2940
+      },
+      {
+        "c3Km2s2": 60,
+        "massKg": 2170
+      },
+      {
+        "c3Km2s2": 70,
+        "massKg": 1420
+      },
+      {
+        "c3Km2s2": 80,
+        "massKg": 830
+      },
+      {
+        "c3Km2s2": 85,
+        "massKg": 570
+      },
+      {
+        "c3Km2s2": 90,
+        "massKg": 310
+      }
+    ],
+    "Vulcan (VC6)": [
+      {
+        "c3Km2s2": -3,
+        "massKg": 11400
+      },
+      {
+        "c3Km2s2": -2,
+        "massKg": 11215
+      },
+      {
+        "c3Km2s2": -1.5,
+        "massKg": 11125
+      },
+      {
+        "c3Km2s2": -1,
+        "massKg": 11030
+      },
+      {
+        "c3Km2s2": 0,
+        "massKg": 10850
+      },
+      {
+        "c3Km2s2": 5,
+        "massKg": 9960
+      },
+      {
+        "c3Km2s2": 8,
+        "massKg": 9460
+      },
+      {
+        "c3Km2s2": 10,
+        "massKg": 9130
+      },
+      {
+        "c3Km2s2": 12,
+        "massKg": 8810
+      },
+      {
+        "c3Km2s2": 15,
+        "massKg": 8340
+      },
+      {
+        "c3Km2s2": 20,
+        "massKg": 7630
+      },
+      {
+        "c3Km2s2": 25,
+        "massKg": 6950
+      },
+      {
+        "c3Km2s2": 30,
+        "massKg": 6310
+      },
+      {
+        "c3Km2s2": 40,
+        "massKg": 5150
+      },
+      {
+        "c3Km2s2": 50,
+        "massKg": 4120
+      },
+      {
+        "c3Km2s2": 60,
+        "massKg": 3250
+      },
+      {
+        "c3Km2s2": 70,
+        "massKg": 2420
+      },
+      {
+        "c3Km2s2": 80,
+        "massKg": 1780
+      },
+      {
+        "c3Km2s2": 85,
+        "massKg": 1575
+      },
+      {
+        "c3Km2s2": 90,
+        "massKg": 1370
+      },
+      {
+        "c3Km2s2": 95,
+        "massKg": 1070
+      },
+      {
+        "c3Km2s2": 100,
+        "massKg": 770
+      }
+    ],
+    "Falcon 9 (Full Thrust, RTLS)": [
+      {
+        "c3Km2s2": -1.5,
+        "massKg": 1900
+      },
+      {
+        "c3Km2s2": -1,
+        "massKg": 1855
+      },
+      {
+        "c3Km2s2": 0,
+        "massKg": 1770
+      },
+      {
+        "c3Km2s2": 5,
+        "massKg": 1330
+      },
+      {
+        "c3Km2s2": 8,
+        "massKg": 1060
+      },
+      {
+        "c3Km2s2": 10,
+        "massKg": 875
+      }
+    ],
+    "Falcon 9 (Full Thrust, ASDS)": [
+      {
+        "c3Km2s2": -1.5,
+        "massKg": 3485
+      },
+      {
+        "c3Km2s2": -1,
+        "massKg": 3425
+      },
+      {
+        "c3Km2s2": 0,
+        "massKg": 3310
+      },
+      {
+        "c3Km2s2": 5,
+        "massKg": 2745
+      },
+      {
+        "c3Km2s2": 8,
+        "massKg": 2430
+      },
+      {
+        "c3Km2s2": 10,
+        "massKg": 2220
+      }
+    ],
+    "Falcon Heavy (Recovery)": [
+      {
+        "c3Km2s2": -1.5,
+        "massKg": 6975
+      },
+      {
+        "c3Km2s2": -1,
+        "massKg": 6880
+      },
+      {
+        "c3Km2s2": 0,
+        "massKg": 6690
+      },
+      {
+        "c3Km2s2": 5,
+        "massKg": 5855
+      },
+      {
+        "c3Km2s2": 8,
+        "massKg": 5420
+      },
+      {
+        "c3Km2s2": 10,
+        "massKg": 5130
+      },
+      {
+        "c3Km2s2": 12,
+        "massKg": 4865
+      },
+      {
+        "c3Km2s2": 15,
+        "massKg": 4465
+      },
+      {
+        "c3Km2s2": 20,
+        "massKg": 3845
+      },
+      {
+        "c3Km2s2": 25,
+        "massKg": 3270
+      },
+      {
+        "c3Km2s2": 30,
+        "massKg": 2740
+      },
+      {
+        "c3Km2s2": 40,
+        "massKg": 1805
+      },
+      {
+        "c3Km2s2": 50,
+        "massKg": 1005
+      },
+      {
+        "c3Km2s2": 60,
+        "massKg": 320
+      }
+    ],
+    "Falcon Heavy (Expendable)": [
+      {
+        "c3Km2s2": -1.5,
+        "massKg": 15460
+      },
+      {
+        "c3Km2s2": -1,
+        "massKg": 15310
+      },
+      {
+        "c3Km2s2": 0,
+        "massKg": 15010
+      },
+      {
+        "c3Km2s2": 5,
+        "massKg": 13615
+      },
+      {
+        "c3Km2s2": 8,
+        "massKg": 12850
+      },
+      {
+        "c3Km2s2": 10,
+        "massKg": 12345
+      },
+      {
+        "c3Km2s2": 12,
+        "massKg": 11880
+      },
+      {
+        "c3Km2s2": 15,
+        "massKg": 11190
+      },
+      {
+        "c3Km2s2": 20,
+        "massKg": 10115
+      },
+      {
+        "c3Km2s2": 25,
+        "massKg": 9130
+      },
+      {
+        "c3Km2s2": 30,
+        "massKg": 8225
+      },
+      {
+        "c3Km2s2": 40,
+        "massKg": 6640
+      },
+      {
+        "c3Km2s2": 50,
+        "massKg": 5280
+      },
+      {
+        "c3Km2s2": 60,
+        "massKg": 4100
+      },
+      {
+        "c3Km2s2": 70,
+        "massKg": 3080
+      },
+      {
+        "c3Km2s2": 80,
+        "massKg": 2195
+      },
+      {
+        "c3Km2s2": 85,
+        "massKg": 1795
+      },
+      {
+        "c3Km2s2": 90,
+        "massKg": 1425
+      },
+      {
+        "c3Km2s2": 95,
+        "massKg": 1080
+      },
+      {
+        "c3Km2s2": 100,
+        "massKg": 755
+      }
+    ]
+  }
+}

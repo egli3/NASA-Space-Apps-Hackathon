@@ -1,5 +1,5 @@
 {
-  "note": "Transcribed on 2026-11-15 from two NASA tools. NOT yet applied to src/data/launch-vehicles.json or trajectories.json: applying them changes the balance, so do both together and re-run `npm run balance`.",
+  "note": "Hand transcription made on 2026-11-15 from two NASA tools. Since applied to src/data/launch-vehicles.json and trajectories.json; the scripted snapshots in performance-query.json and ../trajbrowser/windows.json (same numbers) are now the reference.",
   "launchVehicles": {
     "source": "NASA Launch Services Program Launch Vehicle Performance Website, Performance Query, Orbit = High Energy, https://elvperf.ksc.nasa.gov/Pages/Query.aspx",
     "units": "separated spacecraft mass in kg at the given C3 (km2/s2); a vehicle missing at a C3 was not listed by the site at that C3",

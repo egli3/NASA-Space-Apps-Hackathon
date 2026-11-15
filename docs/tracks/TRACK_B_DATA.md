@@ -16,6 +16,13 @@ the NASA-data / other-data / SI sections of `README.md`.
 - 2 real DONKI flare records (seed). `data.test.ts` checks schemas and references.
 - Most numbers are `confidence: "approx"`. **Your first job is to verify the Mars path.**
 
+## Status (updated Sun 01:40 EST)
+- **M1 done:** launch-vehicle curves (item 1), Mars trajectories (2), Mars destination and DSN gains (3), DONKI snapshot (4).
+  Falcon 9 is listed by NASA LSP only up to C3 10, so it cannot fly the late-2030 Mars window (C3 10.2). System noise temperatures stay representative (see `constants.json` notes).
+- **M2 done:** 14 event cards (5), Jupiter trajectories and Juno stats (6), Horizons validation data (7).
+- **Next (M3):** items 8-12. Still `approx`: all parts and instruments, the two Moon trajectories, the orbit records inside destinations. Launch-vehicle `costM` and `reliability` are still game-scale estimates.
+- New scripts: `fetch-lsp.ts` and `fetch-trajbrowser.ts` re-create `data/raw/lsp/performance-query.json` and `data/raw/trajbrowser/windows.json`.
+
 ## Tasks
 
 ### By M1 (Sat 23:30): Mars numbers verified

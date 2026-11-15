@@ -7,15 +7,15 @@
   "bands": {
     "X": {
       "freqGHz": 8.42,
-      "dsn34GainDbi": 68.2,
-      "dsn70GainDbi": 74.2,
+      "dsn34GainDbi": 68.3,
+      "dsn70GainDbi": 74.6,
       "systemNoiseTempK": 25,
       "extraLossDb": 0.3
     },
     "Ka": {
       "freqGHz": 32.0,
-      "dsn34GainDbi": 78.5,
-      "dsn70GainDbi": 78.5,
+      "dsn34GainDbi": 79.0,
+      "dsn70GainDbi": 79.0,
       "systemNoiseTempK": 35,
       "extraLossDb": 1.5
     }
@@ -89,5 +89,5 @@
     "game-balance"
   ],
   "confidence": "approx",
-  "notes": "Physical constants verified; DSN gains/noise temps approximate from 810-005 (Track B to verify module 101/104); cost & reliability factors are game-balance (confidence=game). 70 m antennas do NOT support Ka downlink — engine must treat Ka+70m as 34m."
+  "notes": "Verified: solar constant, g0, AU, Sun GM. Verified DSN receive gains from the DSN Telecommunications Link Design Handbook 810-005: 34 m BWG, module 104 Rev. N, Table 7 (X-band 8425 MHz 68.32 dBi, Ka-band 32050 MHz 79.0 dBi, X/Ka operation); 70 m, module 101 Rev. G, Table 2 (X-band 8420 MHz, X-only: 74.55, 74.63 and 74.66 dBi at DSS-14, -43 and -63; the game uses 74.6). The 70 m antennas have no Ka-band downlink, so the Ka 70 m gain repeats the 34 m value and the engine treats Ka + 70 m as 34 m. Representative, not transcribed: systemNoiseTempK. The handbook gives zenith, average clear weather values of about 18-24 K at X-band on the 34 m antennas (module 104 Table 9), about 17 K on the 70 m antennas (module 101 Table 4) and 31-37 K at Ka-band (module 104 Table 9); the game uses one rounded figure per band, 25 K and 35 K, slightly conservative at X-band to allow for lower elevations and weather. Game values (confidence = game): link margin and losses, DSN cost per hour, structure and harness fractions, growth by TRL, cost wraps, bus base mass and cost, operations cost, assurance and redundancy factors, off-optimal C3 per day."
 }
