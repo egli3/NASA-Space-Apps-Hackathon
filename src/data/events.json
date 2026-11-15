@@ -1,0 +1,107 @@
+[
+  {
+    "id": "ev-rwa-failure",
+    "title": "Reaction wheel failure",
+    "narrative": "Telemetry shows rising friction in reaction wheel 2, then nothing. The spacecraft can no longer point precisely with wheels alone.",
+    "realStory": { "mission": "Kepler & Dawn", "year": 2013, "summary": "Kepler lost its second reaction wheel in 2013 and was reborn as K2 by balancing on sunlight pressure. Dawn lost two wheels and flew on using thrusters until its fuel ran out in 2018.", "lesson": "Wheels wear out — carry a spare, or have a plan B for pointing." },
+    "trigger": { "kind": "hazard", "subsystem": "adcs", "phase": "any" },
+    "conditions": [ { "fact": "redundant.adcs", "op": "eq", "value": false } ],
+    "options": [
+      { "id": "thrusters", "label": "Point with thrusters", "description": "Use the RCS thrusters to hold attitude. Pointing gets sloppier and every day costs propellant.", "effects": [ { "kind": "subsystem_degrade", "target": "adcs", "value": 0.5 }, { "kind": "propellant_use_kg", "value": 15 } ] },
+      { "id": "relaxed", "label": "Relax science pointing", "description": "Accept blurrier observations to save fuel.", "effects": [ { "kind": "instrument_degrade", "target": "random", "value": 0.6 } ] }
+    ],
+    "defaultOptionId": "thrusters",
+    "sources": ["nasa-llis", "nssdca-nmc"],
+    "confidence": "approx"
+  },
+  {
+    "id": "ev-sep-storm",
+    "title": "Solar storm incoming",
+    "narrative": "Space-weather forecasters report a major flare and a wave of energetic protons heading your way. Single-event upsets are likely in the next 48 hours.",
+    "realStory": { "mission": "MAVEN & Curiosity", "year": 2017, "summary": "In September 2017 a burst of X-class flares hit Mars: MAVEN saw a global aurora and Curiosity measured surface radiation doubling.", "lesson": "Space weather is real weather — plan for it with shielding, safe modes and radiation-tolerant parts." },
+    "trigger": { "kind": "space_weather", "phase": "any", "minSeverity": "0.6" },
+    "conditions": [],
+    "options": [
+      { "id": "safe", "label": "Safe the instruments", "description": "Power down sensitive instruments until the storm passes. Lose 3 days of science.", "effects": [ { "kind": "science_pause_days", "value": 3 }, { "kind": "dose_krad", "value": 0.5 } ] },
+      { "id": "observe", "label": "Observe the storm", "description": "Keep everything on — a storm is great science, if your electronics survive it.", "successProbability": 0.7, "effects": [ { "kind": "science_bonus_pct", "target": "all", "value": 2 }, { "kind": "dose_krad", "value": 2 } ], "failureEffects": [ { "kind": "instrument_degrade", "target": "random", "value": 0.5 }, { "kind": "dose_krad", "value": 2 } ] }
+    ],
+    "defaultOptionId": "safe",
+    "sources": ["nasa-donki", "nssdca-nmc"],
+    "confidence": "approx"
+  },
+  {
+    "id": "ev-units-bug",
+    "title": "Suspicious navigation numbers",
+    "narrative": "A junior navigator notices that small thruster firings keep pushing the trajectory slightly off prediction. The ground software has been running for months.",
+    "realStory": { "mission": "Mars Climate Orbiter", "year": 1999, "summary": "One team's software reported thruster impulse in pound-force seconds; another expected newton-seconds. The orbiter dipped far too deep into Mars's atmosphere and was lost.", "lesson": "Independent verification catches the errors everyone is too close to see." },
+    "trigger": { "kind": "random", "phase": "cruise", "probabilityPerYear": 0.6 },
+    "conditions": [ { "fact": "design.assurance", "op": "eq", "value": "lean" } ],
+    "options": [
+      { "id": "audit", "label": "Order an independent audit", "description": "Spend $5M on a tiger team to check every interface. Slow, boring — and it finds the bug.", "effects": [ { "kind": "cost_m", "value": 5 } ] },
+      { "id": "trust", "label": "Trust the software", "description": "It's probably noise. Probably.", "successProbability": 0.5, "effects": [], "failureEffects": [ { "kind": "mission_loss", "target": "Navigation units mismatch — spacecraft lost during orbit insertion" } ] }
+    ],
+    "defaultOptionId": "audit",
+    "sources": ["nasa-llis"],
+    "confidence": "approx"
+  },
+  {
+    "id": "ev-valve-stuck",
+    "title": "Engine valves acting up",
+    "narrative": "Before the burn that would tighten your orbit, two helium check valves take minutes to open instead of seconds. Firing the main engine now is a gamble.",
+    "realStory": { "mission": "Juno", "year": 2016, "summary": "Juno's engine valves misbehaved before its planned move to a 14-day orbit. NASA chose to stay in the 53-day orbit for the rest of the mission — and Juno still made major discoveries.", "lesson": "When the downside is losing everything, the conservative choice is often the right one." },
+    "trigger": { "kind": "hazard", "subsystem": "propulsion", "phase": "arrival" },
+    "conditions": [],
+    "options": [
+      { "id": "stay", "label": "Stay in the longer orbit", "description": "Skip the burn. Fewer close passes means less science per year, but the spacecraft is safe.", "effects": [ { "kind": "science_rate_factor", "value": 0.6 } ] },
+      { "id": "fire", "label": "Fire the engine anyway", "description": "If it works, nothing changes. If it doesn't…", "successProbability": 0.8, "effects": [], "failureEffects": [ { "kind": "mission_loss", "target": "Main engine failure during orbit adjustment" } ] }
+    ],
+    "defaultOptionId": "stay",
+    "sources": ["nssdca-nmc"],
+    "confidence": "approx"
+  },
+  {
+    "id": "ev-dsn-conflict",
+    "title": "Deep Space Network crunch",
+    "narrative": "Another spacecraft has declared an emergency and the big dishes are reassigned to it. Your tracking passes for the next few days are cancelled.",
+    "realStory": { "mission": "Deep Space Network", "year": 2023, "summary": "NASA's three DSN complexes serve dozens of missions; a 2023 Inspector General audit found the network over-subscribed, with missions regularly getting less tracking time than requested.", "lesson": "Onboard storage is your buffer when the network is busy." },
+    "trigger": { "kind": "random", "phase": "science", "probabilityPerYear": 0.8 },
+    "conditions": [],
+    "options": [
+      { "id": "yield", "label": "Yield the antennas", "description": "Store data onboard and wait. If the recorder fills up, the oldest data is lost.", "effects": [ { "kind": "data_rate_factor", "target": "days:4", "value": 0 } ] },
+      { "id": "buy", "label": "Pay for extra passes", "description": "Spend $2M on extra tracking time afterwards to catch up.", "effects": [ { "kind": "data_rate_factor", "target": "days:4", "value": 0 }, { "kind": "cost_m", "value": 2 }, { "kind": "data_rate_factor", "target": "days:10", "value": 1.5 } ] }
+    ],
+    "defaultOptionId": "yield",
+    "sources": ["nasa-dsn-810-005"],
+    "confidence": "approx"
+  },
+  {
+    "id": "ev-aerobraking-panel",
+    "title": "Solar panel flexing during aerobraking",
+    "narrative": "On each pass through the upper atmosphere, one solar array is bending more than predicted. A cracked hinge is suspected.",
+    "realStory": { "mission": "Mars Global Surveyor", "year": 1997, "summary": "A solar panel damaged at launch flexed dangerously during aerobraking. Controllers raised the orbit and slowed aerobraking down, reaching the mapping orbit over a year late — but safely.", "lesson": "Aerobraking trades fuel for risk and time; go gently when hardware complains." },
+    "trigger": { "kind": "scheduled", "phase": "arrival", "dayOffset": 30 },
+    "conditions": [ { "fact": "orbit.aerobraking", "op": "eq", "value": true } ],
+    "options": [
+      { "id": "gentle", "label": "Slow down aerobraking", "description": "Take smaller bites of atmosphere. Science starts ~4 months later.", "effects": [ { "kind": "science_pause_days", "value": 120 }, { "kind": "cost_m", "value": 4 } ] },
+      { "id": "push", "label": "Keep the pace", "description": "Stay on schedule and hope the hinge holds.", "successProbability": 0.8, "effects": [], "failureEffects": [ { "kind": "subsystem_degrade", "target": "power", "value": 0.6 } ] }
+    ],
+    "defaultOptionId": "gentle",
+    "sources": ["nssdca-nmc", "nasa-llis"],
+    "confidence": "approx"
+  },
+  {
+    "id": "ev-bonus-discovery",
+    "title": "Something is moving down there",
+    "narrative": "A routine image shows a fresh change on the surface that wasn't there last month. Scientists are begging for follow-up observations.",
+    "realStory": { "mission": "Mars Reconnaissance Orbiter", "year": 2008, "summary": "HiRISE caught avalanches of ice and dust tumbling down Mars's polar cliffs in the act — the first ever seen on another planet.", "lesson": "Margins aren't just for emergencies: spare capacity lets you chase surprises." },
+    "trigger": { "kind": "random", "phase": "science", "probabilityPerYear": 0.4 },
+    "conditions": [],
+    "options": [
+      { "id": "chase", "label": "Re-target observations", "description": "Spend a little propellant and data volume to follow it up.", "effects": [ { "kind": "propellant_use_kg", "value": 3 }, { "kind": "science_bonus_pct", "target": "all", "value": 4 } ] },
+      { "id": "plan", "label": "Stick to the plan", "description": "The baseline plan comes first.", "effects": [] }
+    ],
+    "defaultOptionId": "chase",
+    "sources": ["nssdca-nmc"],
+    "confidence": "approx"
+  }
+]

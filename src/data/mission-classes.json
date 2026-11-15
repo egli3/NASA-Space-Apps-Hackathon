@@ -1,0 +1,41 @@
+[
+  {
+    "id": "small",
+    "name": "Small",
+    "blurb": "A lean, fast mission. Tight budget, tiny mass — every kilogram is a fight.",
+    "inspiredBy": "NASA small planetary missions such as SIMPLEx (e.g. Lunar Trailblazer) and Lunar Prospector",
+    "costCapM": 175,
+    "minReservePct": 25,
+    "rtgAllowed": false,
+    "sources": [
+      "game-balance"
+    ],
+    "confidence": "game"
+  },
+  {
+    "id": "medium",
+    "name": "Medium",
+    "blurb": "A cost-capped, PI-led science mission. Room for a real payload, but not for everything.",
+    "inspiredBy": "NASA Discovery Program cost-capped missions",
+    "costCapM": 800,
+    "minReservePct": 25,
+    "rtgAllowed": false,
+    "sources": [
+      "game-balance"
+    ],
+    "confidence": "game"
+  },
+  {
+    "id": "large",
+    "name": "Large",
+    "blurb": "An ambitious outer-solar-system mission. Big budget, brutal physics.",
+    "inspiredBy": "NASA New Frontiers Program (e.g. Juno)",
+    "costCapM": 1300,
+    "minReservePct": 25,
+    "rtgAllowed": true,
+    "sources": [
+      "game-balance"
+    ],
+    "confidence": "game"
+  }
+]

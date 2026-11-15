@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+/* Design tokens — Track C owns. Three moods: blueprint (design), mission control (flight), report (debrief). */
+@theme {
+  --color-space-950: #05070d;
+  --color-space-900: #0a0f1c;
+  --color-space-800: #121a2e;
+  --color-blueprint: #0b2a4a;
+  --color-grid: #1d4f7a;
+  --color-ink: #e6edf7;
+  --color-dim: #8ba0bd;
+  --color-go: #34d399;
+  --color-caution: #fbbf24;
+  --color-nogo: #f87171;
+  --color-accent: #60a5fa;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-space-950);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+}

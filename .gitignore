@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+coverage/
+.DS_Store
+Thumbs.db
+.env
+.env.*
+# local scratch for data pulls that should NOT be committed (committed snapshots live in data/raw/)
+data/tmp/

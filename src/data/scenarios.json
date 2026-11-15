@@ -1,0 +1,79 @@
+[
+  {
+    "id": "mars-climate",
+    "title": "Red Planet Detective",
+    "tagline": "Where did Mars's water — and its air — go?",
+    "briefing": "Mars was once warm and wet. Today it is a frozen desert with an atmosphere 1% as thick as Earth's. You have been selected to lead a Medium-class orbiter that will find out where the water hid and how the air escaped to space. Your budget is capped, and the launch window will not wait. Choose wisely: you cannot carry every instrument.",
+    "destinationId": "mars",
+    "missionClassId": "medium",
+    "difficulty": 2,
+    "primaryMissionYears": 2,
+    "extendedMissionYears": 2,
+    "objectives": [
+      { "id": "mars-weather", "name": "Monitor global dust & clouds", "blurb": "Daily weather maps to track dust storms.", "weight": 15, "combine": "any", "measurements": [ { "type": "imaging_context", "minQuality": 0.5, "requiredGb": 1500 } ], "thresholdPct": 30 },
+      { "id": "mars-escape", "name": "Measure atmospheric escape", "blurb": "How fast is the solar wind stripping away the air?", "weight": 30, "combine": "all", "measurements": [ { "type": "mass_spectrometry", "minQuality": 0.6, "requiredGb": 80 }, { "type": "particles_fields", "minQuality": 0.6, "requiredGb": 400 } ], "thresholdPct": 40 },
+      { "id": "mars-ice", "name": "Map buried ice", "blurb": "Find water ice under the surface — future astronauts will need it.", "weight": 25, "combine": "any", "measurements": [ { "type": "radar_sounding", "minQuality": 0.6, "requiredGb": 2000 }, { "type": "gamma_neutron", "minQuality": 0.6, "requiredGb": 150 } ], "thresholdPct": 40 },
+      { "id": "mars-hires", "name": "Image landing sites in high resolution", "blurb": "Metre-scale images to certify safe landing zones.", "weight": 15, "combine": "any", "measurements": [ { "type": "imaging_hires", "minQuality": 0.7, "requiredGb": 6000 } ], "thresholdPct": 25, "maxGsdM": 1.0 },
+      { "id": "mars-minerals", "name": "Find water-altered minerals", "blurb": "Clays and salts that only form in liquid water.", "weight": 15, "combine": "any", "measurements": [ { "type": "vis_ir_spectroscopy", "minQuality": 0.6, "requiredGb": 3000 } ], "thresholdPct": 25 }
+    ],
+    "trajectoryIds": ["mars-2028", "mars-2031"],
+    "launchVehicleIds": ["lv-falcon9", "lv-vulcan-vc4", "lv-falcon-heavy"],
+    "instrumentIds": ["ins-wac", "ins-ctx", "ins-hires", "ins-visir", "ins-grns", "ins-radar", "ins-mag", "ins-particles", "ins-ngims", "ins-uvs"],
+    "eventIds": ["ev-rwa-failure", "ev-sep-storm", "ev-units-bug", "ev-dsn-conflict", "ev-aerobraking-panel", "ev-bonus-discovery"],
+    "historicalMissionId": "hist-mro",
+    "priority": "P0",
+    "sources": ["game-balance"],
+    "confidence": "game"
+  },
+  {
+    "id": "jupiter-interior",
+    "title": "Giant's Heart",
+    "tagline": "What lies beneath Jupiter's clouds?",
+    "briefing": "Jupiter holds the recipe of the early solar system. You lead a Large-class orbiter that must survive the most intense radiation around any planet, at five times Earth's distance from the Sun. Sunlight there is 27 times weaker, and every bit of data crawls home across 800 million kilometres. Measure the water deep in the atmosphere, weigh the core and map the magnetic field before the radiation wins.",
+    "destinationId": "jupiter",
+    "missionClassId": "large",
+    "difficulty": 3,
+    "primaryMissionYears": 2,
+    "extendedMissionYears": 3,
+    "objectives": [
+      { "id": "jup-water", "name": "Measure deep-atmosphere water", "blurb": "How much water formed Jupiter? The answer tells us how the solar system was built.", "weight": 30, "combine": "any", "measurements": [ { "type": "microwave_radiometry", "minQuality": 0.7, "requiredGb": 20 } ], "thresholdPct": 40 },
+      { "id": "jup-gravity", "name": "Weigh the core", "blurb": "Map the gravity field to find out whether Jupiter has a solid core.", "weight": 20, "combine": "any", "measurements": [ { "type": "gravity_science", "minQuality": 0.7, "requiredGb": 0.1 } ], "thresholdPct": 50 },
+      { "id": "jup-magfield", "name": "Map the magnetic dynamo", "blurb": "The strongest planetary magnetic field — where is it generated?", "weight": 20, "combine": "any", "measurements": [ { "type": "magnetometry", "minQuality": 0.7, "requiredGb": 10 } ], "thresholdPct": 40 },
+      { "id": "jup-aurora", "name": "Explore the polar auroras", "blurb": "Auroras bigger than Earth, powered by the magnetosphere.", "weight": 20, "combine": "all", "measurements": [ { "type": "uv_spectroscopy", "minQuality": 0.6, "requiredGb": 120 }, { "type": "particles_fields", "minQuality": 0.6, "requiredGb": 50 } ], "thresholdPct": 30 },
+      { "id": "jup-images", "name": "Share the view", "blurb": "Colour images of the poles for scientists and the public.", "weight": 10, "combine": "any", "measurements": [ { "type": "imaging_context", "minQuality": 0.5, "requiredGb": 150 } ], "thresholdPct": 20 }
+    ],
+    "trajectoryIds": ["jupiter-direct-2029", "jupiter-dveega-2029"],
+    "launchVehicleIds": ["lv-vulcan-vc4", "lv-falcon-heavy"],
+    "instrumentIds": ["ins-wac", "ins-mwr", "ins-gravity", "ins-mag", "ins-particles", "ins-uvs", "ins-thermal"],
+    "eventIds": ["ev-rwa-failure", "ev-sep-storm", "ev-valve-stuck", "ev-dsn-conflict", "ev-units-bug", "ev-bonus-discovery"],
+    "historicalMissionId": "hist-juno",
+    "priority": "P0",
+    "sources": ["game-balance"],
+    "confidence": "game"
+  },
+  {
+    "id": "moon-ice",
+    "title": "Lunar Ice Prospector",
+    "tagline": "Is there water in the Moon's eternal shadows?",
+    "briefing": "Craters near the lunar poles have not seen sunlight for billions of years. They may hold water ice — drinking water, air and rocket fuel for future explorers. You lead a Small-class mission: a tiny budget, a rideshare-sized spacecraft, one year to map the poles. This is the place to learn the ropes.",
+    "destinationId": "moon",
+    "missionClassId": "small",
+    "difficulty": 1,
+    "primaryMissionYears": 1,
+    "extendedMissionYears": 1,
+    "objectives": [
+      { "id": "moon-hydrogen", "name": "Map polar hydrogen", "blurb": "Hydrogen in the soil is the fingerprint of buried ice.", "weight": 40, "combine": "any", "measurements": [ { "type": "gamma_neutron", "minQuality": 0.6, "requiredGb": 30 } ], "thresholdPct": 50 },
+      { "id": "moon-coldtraps", "name": "Take the temperature of cold traps", "blurb": "Is it cold enough in the shadows for ice to survive?", "weight": 25, "combine": "any", "measurements": [ { "type": "thermal_ir", "minQuality": 0.6, "requiredGb": 60 } ], "thresholdPct": 30 },
+      { "id": "moon-topo", "name": "Map polar topography", "blurb": "3-D maps to find where shadows are permanent.", "weight": 20, "combine": "any", "measurements": [ { "type": "laser_altimetry", "minQuality": 0.6, "requiredGb": 80 } ], "thresholdPct": 30 },
+      { "id": "moon-surface-ice", "name": "Spot surface frost", "blurb": "Look for the spectral signature of exposed ice.", "weight": 15, "combine": "any", "measurements": [ { "type": "vis_ir_spectroscopy", "minQuality": 0.6, "requiredGb": 500 } ], "thresholdPct": 20 }
+    ],
+    "trajectoryIds": ["moon-direct-2028", "moon-low-energy-2028"],
+    "launchVehicleIds": ["lv-rideshare-lunar", "lv-falcon9"],
+    "instrumentIds": ["ins-grns", "ins-thermal", "ins-lola", "ins-visir", "ins-wac"],
+    "eventIds": ["ev-rwa-failure", "ev-sep-storm", "ev-units-bug", "ev-bonus-discovery"],
+    "historicalMissionId": "hist-lunar-prospector",
+    "priority": "P1",
+    "sources": ["game-balance"],
+    "confidence": "game"
+  }
+]

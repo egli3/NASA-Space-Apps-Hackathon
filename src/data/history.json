@@ -1,0 +1,26 @@
+[
+  {
+    "id": "hist-mro", "name": "Mars Reconnaissance Orbiter (MRO)", "launchYear": 2005, "destinationId": "mars",
+    "summary": "A heavyweight Mars orbiter carrying the HiRISE telescope, CTX, CRISM and SHARAD, built to return enormous volumes of data.",
+    "outcome": "Reached Mars in 2006, aerobraked into a low orbit, and has been operating for well over a decade.",
+    "funFact": "MRO has sent back more data than all other Mars missions combined.",
+    "stats": { "launchMassKg": 2180, "dryMassKg": 1031, "powerAtTargetW": 2000, "powerSource": "Solar (≈20 m²)", "costM": 720, "costYear": 2005, "downlinkKbps": 6000, "instruments": 6, "launchVehicle": "Atlas V 401", "primaryMissionYears": 2 },
+    "sources": ["nssdca-nmc"], "confidence": "approx"
+  },
+  {
+    "id": "hist-juno", "name": "Juno", "launchYear": 2011, "destinationId": "jupiter",
+    "summary": "A spinning, solar-powered Jupiter orbiter that dives beneath the radiation belts every perijove, with its electronics inside a titanium vault.",
+    "outcome": "Arrived in 2016 after an Earth gravity assist; stayed in a 53-day orbit after an engine-valve issue and went on to an extended mission visiting Ganymede, Europa and Io.",
+    "funFact": "Juno's three solar arrays span about 20 m and produce ~14 kW at Earth, but only ~500 W at Jupiter.",
+    "stats": { "launchMassKg": 3625, "dryMassKg": 1593, "powerAtTargetW": 500, "powerSource": "Solar (≈60 m²)", "costM": 1100, "costYear": 2011, "instruments": 9, "launchVehicle": "Atlas V 551", "primaryMissionYears": 2 },
+    "sources": ["nssdca-nmc"], "confidence": "approx"
+  },
+  {
+    "id": "hist-lunar-prospector", "name": "Lunar Prospector", "launchYear": 1998, "destinationId": "moon",
+    "summary": "A small, low-cost spin-stabilised orbiter that mapped the Moon's composition, gravity and magnetic fields from a low polar orbit.",
+    "outcome": "Found evidence of hydrogen concentrated at the lunar poles, consistent with water ice; ended in July 1999.",
+    "funFact": "Its last act was a deliberate crash into a permanently shadowed crater to look for a puff of water vapour.",
+    "stats": { "launchMassKg": 296, "dryMassKg": 126, "powerAtTargetW": 202, "powerSource": "Body-mounted solar cells", "costM": 63, "costYear": 1998, "instruments": 6, "launchVehicle": "Athena II", "primaryMissionYears": 1, "actualOperationsYears": 1.5 },
+    "sources": ["nssdca-nmc"], "confidence": "approx"
+  }
+]

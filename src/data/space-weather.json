@@ -1,0 +1,9 @@
+{
+  "sources": ["nasa-donki"],
+  "confidence": "verified",
+  "notes": "Seed sample pulled live from https://ccmc.gsfc.nasa.gov/DONKI/WS/get/FLR on 2026-11-14. Track B: replace with the full scripts/data/fetch-donki.ts snapshot (FLR + SEP, 2014-2019). Severity mapping in docs/DATA_PLAN.md.",
+  "events": [
+    { "id": "2017-09-06T08:57:00-FLR-001", "kind": "FLR", "time": "2017-09-06T09:10Z", "classType": "X2.2", "severity": 0.69 },
+    { "id": "2017-09-06T11:53:00-FLR-001", "kind": "FLR", "time": "2017-09-06T12:02Z", "classType": "X9.3", "severity": 0.97 }
+  ]
+}

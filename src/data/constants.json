@@ -1,0 +1,93 @@
+{
+  "solarConstantWm2": 1361,
+  "g0Ms2": 9.80665,
+  "auKm": 149597870.7,
+  "muSunKm3s2": 132712440018,
+  "boltzmannDbW": -228.6,
+  "bands": {
+    "X": {
+      "freqGHz": 8.42,
+      "dsn34GainDbi": 68.2,
+      "dsn70GainDbi": 74.2,
+      "systemNoiseTempK": 25,
+      "extraLossDb": 0.3
+    },
+    "Ka": {
+      "freqGHz": 32.0,
+      "dsn34GainDbi": 78.5,
+      "dsn70GainDbi": 78.5,
+      "systemNoiseTempK": 35,
+      "extraLossDb": 1.5
+    }
+  },
+  "linkRequiredEbN0Db": 1.0,
+  "linkMarginDb": 3.0,
+  "linkMiscLossDb": 3.0,
+  "dsnCostPerHourM": {
+    "34m": 0.002,
+    "70m": 0.006
+  },
+  "structureFraction": 0.25,
+  "harnessFraction": 0.08,
+  "massGrowthByTrl": {
+    "9": 0.03,
+    "8": 0.05,
+    "7": 0.08,
+    "6": 0.15,
+    "5": 0.2,
+    "4": 0.25,
+    "3": 0.3,
+    "2": 0.3,
+    "1": 0.3
+  },
+  "costWrapFraction": {
+    "small": 0.35,
+    "medium": 0.6,
+    "large": 0.6
+  },
+  "busBaseMassKg": {
+    "small": 40,
+    "medium": 250,
+    "large": 400
+  },
+  "busBaseCostM": {
+    "small": 10,
+    "medium": 25,
+    "large": 60
+  },
+  "disposalDvMs": 20,
+  "dvMarginPct": 5,
+  "opsCostPerYearM": {
+    "small": 6,
+    "medium": 18,
+    "large": 30
+  },
+  "assurance": {
+    "lean": {
+      "hazardMultiplier": 1.8,
+      "costFraction": 0.0
+    },
+    "standard": {
+      "hazardMultiplier": 1.0,
+      "costFraction": 0.08
+    },
+    "rigorous": {
+      "hazardMultiplier": 0.6,
+      "costFraction": 0.16
+    }
+  },
+  "redundancy": {
+    "massMultiplier": 1.8,
+    "costMultiplier": 1.6,
+    "commonCauseBeta": 0.1
+  },
+  "offOptimalC3PerDay": 0.08,
+  "sources": [
+    "nssdca-factsheet",
+    "nasa-dsn-810-005",
+    "nasa-se-handbook",
+    "game-balance"
+  ],
+  "confidence": "approx",
+  "notes": "Physical constants verified; DSN gains/noise temps approximate from 810-005 (Track B to verify module 101/104); cost & reliability factors are game-balance (confidence=game). 70 m antennas do NOT support Ka downlink — engine must treat Ka+70m as 34m."
+}
