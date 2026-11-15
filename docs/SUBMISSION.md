@@ -107,7 +107,7 @@ After players choose a route and before they see Hindsight, ask **Why would a te
 - Dawn ion propulsion — https://science.nasa.gov/mission/dawn/technology/ion-propulsion/
 - Multi-Mission Radioisotope Thermoelectric Generator fact sheet — https://science.nasa.gov/wp-content/uploads/2024/02/mmrtg-factsheet-updated-5-18-20-1.pdf
 - Small Spacecraft Technology State of the Art — Avionics — https://www.nasa.gov/smallsat-institute/sst-soa/small-spacecraft-avionics/
-- Moon Mosaic — Lunar Reconnaissance Orbiter imagery — https://svs.gsfc.nasa.gov/5001/
+- Nearside Spectacular (PIA14011) — Lunar Reconnaissance Orbiter imagery — https://science.nasa.gov/photojournal/nearside-spectacular/
 - Valles Marineris Hemisphere (PIA00003) — https://science.nasa.gov/photojournal/valles-marineris-hemisphere/
 - Cassini Jupiter Portrait (PIA04866) — https://science.nasa.gov/photojournal/cassini-jupiter-portrait/
 - Juno telecommunications design and antenna specifications — https://descanso.jpl.nasa.gov/DPSummary/Descanso16_Juno_RevA.pdf
