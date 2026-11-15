@@ -259,6 +259,34 @@ describe('balance harness', () => {
       for (const c of r.checks) expect(typeof c.actual(b, runReview(catalog, r.design))).toBe('string');
     });
 
+  // GAME_DESIGN §7: targets that hold today are locked in, so data tuning cannot quietly break them.
+  // The known misses are listed as todo; when a data change fixes one, delete its line here and it becomes a test.
+  const KNOWN_MISSES = new Set([
+    'maven-like: Escape objective ≥ 80%',
+    'maven-like: Total science 35–60%',
+    'balanced-mars: Science ≥ 80% (a thoughtful player can get ★★★)',
+    'juno-like: Power margin 10–40%',
+    'juno-direct-fh: Feasible only with cuts (infeasible as-is)',
+  ]);
+  describe('balance targets (GAME_DESIGN §7)', () => {
+    for (const r of refs)
+      for (const c of r.checks) {
+        const name = `${r.id}: ${c.target}`;
+        if (KNOWN_MISSES.has(name)) it.todo(`${name} (needs data tuning with Track B)`);
+        else
+          it(name, () => {
+            const b = computeBudgets(catalog, r.design);
+            const review = runReview(catalog, r.design, c.target.includes('Monte Carlo') ? { monteCarloRuns: 50 } : undefined);
+            expect(c.pass(b, review), c.actual(b, review)).toBe(true);
+          });
+      }
+
+    it('the list of known misses has no stale entries', () => {
+      const all = new Set(refs.flatMap((r) => r.checks.map((c) => `${r.id}: ${c.target}`)));
+      for (const miss of KNOWN_MISSES) expect(all.has(miss), miss).toBe(true);
+    });
+  });
+
   it('computeBudgets stays well under 1 ms per call', () => {
     const d = ref('juno-like');
     computeBudgets(catalog, d);
