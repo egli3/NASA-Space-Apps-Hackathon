@@ -33,12 +33,16 @@ export class Rng {
   constructor(readonly seed: number) {}
   /** Uniform [0,1) from the named stream, e.g. rng.next('hazard:adcs'), rng.next('event:ev-sep-storm'). */
   next(stream: string): number {
+    return this.stream(stream)();
+  }
+  /** The generator behind a named stream — grab it once when a hot loop draws from the same stream repeatedly. */
+  stream(stream: string): () => number {
     let s = this.streams.get(stream);
     if (!s) {
       s = mulberry32(this.seed ^ hashString(stream));
       this.streams.set(stream, s);
     }
-    return s();
+    return s;
   }
   chance(stream: string, p: number): boolean {
     return this.next(stream) < p;

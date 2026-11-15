@@ -13,7 +13,7 @@
 - `budgets.ts`: full `computeBudgets` (Δv, mass spiral, power, battery, comms link budget, science expectation, radiation, reliability, cost, blockers, metrics, explain). Matches GAME_DESIGN §4.
 - `orbits.ts`: Kepler solver, planet positions from JPL elements, insertion Δv, eclipse.
 - `review.ts`: data-driven review findings. `design.ts`: `defaultDesign`.
-- `sim.ts`: **nominal-only** daily sim (phases, positions, downlink, storage, science). `TODO(Track A)` marks every gap.
+- `sim.ts`: the full daily sim (phases, burns, dose, power, hazards, event cards, effects, downlink, science). `events.ts`: facts, conditions, DONKI replay.
 - `debrief.ts`: headline + You-vs-History rows; hindsight/monte carlo TODO.
 - `rng.ts`: seeded named streams. `engine.test.ts`: Juno JOI, Horizons position, LV interpolation, trade-off tests.
 
@@ -33,7 +33,11 @@ Juno power margin, direct-on-Falcon-Heavy), all of which need data tuning with T
 3. **Calibration tests** (`engine.test.ts`): comms (MRO-like and Juno-like targets in §4.4), power (Juno-like 60 m² TJ at Jupiter ≈ 400–550 W EOL), insertion Δv (already in for Juno), Mars aerobraking saves > 1 km/s (already in).
 4. **Balance harness** `scripts/balance/reference-designs.ts` + `npm run balance` (add the script to package.json, telling C since it's in a shared file): prints the table of reference designs from GAME_DESIGN §7 with mass/power/data/cost/science/reliability. Share the output in chat at every milestone.
 
-### By M2 (Sun 03:00): the flight sim comes alive
+### By M2 (Sun 03:00): the flight sim comes alive — ✅ tasks 5–10 done (Sat 21:00), plus 12 (outcome/stars, objective pct) and the P1 conjunction blackout
+Notes: `sim.ts` is the state machine, `events.ts` holds facts/conditions/space-weather. `Simulation.result()` returns the
+`MissionResult` (UI: call it when `state.ended`). `npm run balance` now also flies each design. Model choices that go
+beyond the spec are written into GAME_DESIGN §5.1–§5.4.
+
 5. **Hazards** (§5.3): daily per-slot/instrument draws on `hazard:<id>` streams; redundancy absorbs the first failure; default consequences.
 6. **Events** (§5.4): the four trigger kinds, conditions over the **Facts** list (implement `facts(state, design)` exactly as listed), at most once per card, one pending at a time; `advance()` stops when pending.
 7. **Effects interpreter**: every `EffectKind`; `successProbability` gambles on `gamble:<cardId>`; `cost_m` from reserves; `mission_loss`.

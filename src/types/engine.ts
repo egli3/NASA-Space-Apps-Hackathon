@@ -209,6 +209,8 @@ export interface SimState {
   downlinkedGbByObjective: Record<string, number>;
   dataLostGb: number;
   sciencePct: number; // running total, 0..100
+  objectivePct?: Record<string, number>; // per objective id, 0..100 — same credit formula as sciencePct
+  inConjunction?: boolean; // the Sun is between the spacecraft and Earth: no downlink today
   pending?: PendingEvent;
   ended: boolean;
   lossCause?: string;
@@ -229,6 +231,8 @@ export interface Simulation {
   advance(days: number): AdvanceResult;
   /** Resolve the pending event with an option id; returns the outcome log lines. */
   decide(optionId: string): AdvanceResult;
+  /** The mission so far as a MissionResult (call when `state.ended` to get the final result for the debrief). */
+  result(): MissionResult;
 }
 
 export type Outcome = 'exceeded' | 'full' | 'threshold' | 'partial' | 'lost';

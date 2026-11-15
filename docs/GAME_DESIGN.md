@@ -156,9 +156,16 @@ Daily step. Deterministic given (design, seed, decisions). All randomness throug
 
 ### 5.1 Phases
 `launch` (day 0, roll LV reliability on stream `launch`) → `cruise` (until TOF) → `arrival` (insertion burn: roll
-propulsion reliability for the burn on stream `insertion`; failure → mission lost unless redundant engine… we don't model
-that, so failure = lost) → `aerobraking` (if orbit has it) → `science` (primaryYears) → `extended` (only if not lost,
-propellant ≥ maintenance for extended years, and reserve ≥ 0) → `ended`.
+propulsion reliability for the burn on stream `insertion`, p_fail = 1 − e^(−λ·hazardMult·4): the burn stresses the engine
+like 4 years of cruise; a propulsion hazard during cruise is *latent* and also surfaces here. Failure → a `hazard`/`propulsion`
+card for the `arrival` phase if the deck has one, else mission lost) → `aerobraking` (if orbit has it) → `science` →
+`extended` (only if not lost, propellant ≥ maintenance for extended years, propulsion working, and reserve ≥ 0) → `ended`.
+- The primary mission clock starts at arrival and runs `primaryYears`: aerobraking (and any delay to it) **eats science
+  days**, it does not push the end date out (matches §4.5).
+- Burns use propellant by the rocket equation on the current mass: DSM mid-cruise, TCM 10 days before arrival,
+  insertion (+ aerobraking walk) at arrival, maintenance daily. What is left afterwards (the 5% margin + disposal) is
+  what event cards and the extended mission draw on.
+- A loss before the end of the primary mission is outcome `lost`; a fatal failure after it just ends the mission.
 
 ### 5.2 Daily bookkeeping (science/extended)
 - Distance to Earth from JPL-element positions; rate scales with (meanDist/d)².
@@ -167,21 +174,33 @@ propellant ≥ maintenance for extended years, and reserve ≥ 0) → `ended`.
 - Downlinked volume is attributed to measurement types in proportion to generation → objective credit (as §4.5).
 - Solar conjunction (P1): when the Sun–Earth–spacecraft angle < 3°, downlink = 0 (real phenomenon; Mars every ~26 months).
 - Propellant: maintenance Δv/365 per day via the rocket equation; at 0 propellant the extended mission ends.
-- Dose accumulates daily; past tolerance the avionics hazard ×10.
+- Dose accumulates daily; past tolerance the avionics hazard is ×10·(dose/tolerance)² (so no vault at Jupiter is near-certain loss).
+- Power is recomputed daily from the real Sun distance and array ageing. If it cannot cover bus + instruments, science
+  scales down; if it cannot cover bus + transmitter, downlink scales down. A battery too small for the eclipse scales
+  science by capacity/required. (This is where thin margins bite: Mars at aphelion gets 16% less sunlight than on average.)
+- Credit uses the quality at the time of downlink: `credit = min(Σ(q·Gb)/requiredGb, best q seen)`, which equals §4.5 when nothing degrades.
 
 ### 5.3 Hazards (random failures)
-Each day, for each slot/instrument with λ > 0: p_day = 1 − e^(−λ·hazardMult/365) on stream `hazard:<slot|insId>`.
-On failure:
+Each day, for each slot/instrument with λ > 0: p_day = 1 − e^(−λ·hazardMult/365) on stream `hazard:<slot|insId>`
+(implemented as the equivalent time-to-failure draw: one Exp(1) draw per failure, so replays stay aligned). Instruments
+can only fail after arrival. On failure:
 - If redundant and the spare is unused → log "Backup <x> engaged: redundancy paid off" (no card). Mark spare used.
 - Else, if an event card has `trigger.kind = hazard` and `subsystem` = slot (or 'instrument') and its conditions hold → pending event.
 - Else apply the default consequence: instrument → disabled; adcs → degrade 0.5; transmitter/avionics/power/battery → mission lost
-  (cause text "Single-string <part> failure").
+  (cause text "Single-string <part> failure"); antenna → downlink ×0.05 (low-gain fallback); thermal → science ×0.7;
+  propulsion → latent until arrival (see §5.1), after arrival no orbit maintenance and no extended mission.
+- `subsystem_degrade` meaning per slot: adcs → pointing error ÷ value (hits the link and instrument quality); power → generated W;
+  transmitter/antenna → data rate; battery → capacity; avionics → recorder size; propulsion → Isp; thermal → science rate.
 
 ### 5.4 Events (data-driven)
 - `scheduled`: fires on `phase start + dayOffset` if conditions hold.
 - `random`: p_day = probabilityPerYear/365 during its phase (stream `event:<id>`).
 - `space_weather`: map the mission timeline onto the DONKI snapshot (§5.6). When a mapped event's severity ≥ `minSeverity`, fire.
-- Each card fires **at most once per mission** (keeps games readable). At most 1 pending event at a time.
+- Each card fires **at most once per mission** (keeps games readable). At most 1 pending event at a time (others queue).
+  Only cards in the scenario's `eventIds` deck can fire. Card phase `arrival` covers aerobraking; `cruise` covers launch day.
+- Timed `data_rate_factor` effects (`days:N`) run **one after another**, not on top of each other ("4 days dark, then 10 days at 1.5×").
+- `science_pause_days` during arrival/aerobraking delays the start of science instead. `science_bonus_pct` only adds to
+  objectives that already have some credit. `instrument_*` with target `random` picks a working instrument on stream `pick:<cardId>:<n>`.
 - **Facts** for conditions (engine must provide all of these): `design.assurance`, `design.commsBand`, `design.dsnAperture`,
   `redundant.<slot>` (bool), `parts.<slot>` (part id), `power.kind` ('solar'|'rtg'), `orbit.id`, `orbit.aerobraking` (bool),
   `destination.id`, `mission.class`, `phase`, `state.batterySoc`, `state.storageFrac`, `state.propellantKg`, `instrument.<id>` (bool on board).

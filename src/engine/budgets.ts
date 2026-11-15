@@ -27,7 +27,7 @@ const LILT_BEYOND_AU = 3;
 /** Ground-system / modem ceiling on the downlink rate (§4.4). */
 const MAX_DOWNLINK_BPS = 300e6;
 /** Interplanetary cruise dose behind nominal shielding, krad per year (§4.6). */
-const CRUISE_DOSE_KRAD_PER_YEAR = 1.0;
+export const CRUISE_DOSE_KRAD_PER_YEAR = 1.0;
 
 /** Options for what-if budgets. Used by the Reality Check (growth.ts) — the UI never passes these. */
 export interface BudgetOptions {
@@ -123,6 +123,25 @@ export function hardwareItems(catalog: Catalog, design: MissionDesign, r: Resolv
 /** Fractional mass growth expected for a technology readiness level (§4.2). */
 export function growthFractionForTrl(catalog: Catalog, trl: number): number {
   return catalog.constants.massGrowthByTrl[String(trl)] ?? 0.1;
+}
+
+/** Power generation (§4.3). `generatedW(sunDistanceAU, yearsSinceLaunch)` is shared by the budget and the flight sim. */
+export function powerModel(catalog: Catalog, design: MissionDesign, r: Resolved = resolveDesign(catalog, design)) {
+  const K = catalog.constants;
+  const power = r.parts.power;
+  const isSolar = power?.specs.solarEfficiency !== undefined;
+  const areaM2 = isSolar ? design.solarArrayAreaM2 : 0;
+  const lossPerYear = isSolar
+    ? (power?.specs.solarDegradationPerYear ?? 0.02) + r.dest.solarArrayExtraDegradationPerYear
+    : power?.specs.rtgDecayPerYear ?? 0.04;
+  const generatedW = (sunDistanceAU: number, years: number): number => {
+    if (!power) return 0;
+    const aging = Math.pow(1 - lossPerYear, years);
+    if (!isSolar) return (power.specs.rtgBolW ?? 0) * aging;
+    const lilt = sunDistanceAU > LILT_BEYOND_AU ? LILT_FACTOR : 1;
+    return (K.solarConstantWm2 / (sunDistanceAU * sunDistanceAU)) * areaM2 * (power.specs.solarEfficiency ?? 0.2) * ARRAY_PACKING_FACTOR * lilt * aging;
+  };
+  return { isSolar, areaM2, generatedW };
 }
 
 /** DSN link budget (§4.4). Returns the pieces plus `rateBps(distanceAU)`. */
@@ -228,16 +247,10 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign, opts: Bu
   // ---------------- power ----------------
   const d = dest.solarDistanceAU;
   const lifeYears = cruiseYears + primaryYears;
-  let bol = 0, eol = 0;
+  const pm = powerModel(catalog, design, r);
   const lilt = d > LILT_BEYOND_AU ? LILT_FACTOR : 1;
-  if (power && isSolar) {
-    bol = (K.solarConstantWm2 / (d * d)) * area * (power.specs.solarEfficiency ?? 0.2) * ARRAY_PACKING_FACTOR * lilt;
-    const deg = (power.specs.solarDegradationPerYear ?? 0.02) + dest.solarArrayExtraDegradationPerYear;
-    eol = bol * Math.pow(1 - deg, lifeYears);
-  } else if (power) {
-    bol = (power.specs.rtgBolW ?? 0) * Math.pow(1 - (power.specs.rtgDecayPerYear ?? 0.04), cruiseYears);
-    eol = (power.specs.rtgBolW ?? 0) * Math.pow(1 - (power.specs.rtgDecayPerYear ?? 0.04), lifeYears);
-  }
+  const bol = pm.generatedW(d, isSolar ? 0 : cruiseYears); // at the destination, on arrival
+  const eol = pm.generatedW(d, lifeYears);
   const heater = (thermal?.specs.heaterWPerAU ?? 0) * Math.max(0, d - 1);
   const busLoad = [adcs, avi, thermal, prop?.specs.propulsionKind === 'electric' ? undefined : prop]
     .reduce((a, p) => a + (p?.powerW ?? 0), 0) + heater;
