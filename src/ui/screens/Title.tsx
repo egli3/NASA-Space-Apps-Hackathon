@@ -87,6 +87,7 @@ const STEPS = [
 
 export function Title() {
   const go = useGame((s) => s.go);
+  const startJupiterDemo = useGame((s) => s.startJupiterDemo);
   const how = useRef<HTMLElement>(null);
 
   return (
@@ -97,7 +98,10 @@ export function Title() {
           <p className="mt-5 text-2xl font-medium">Design it. Fly it. Find out what mattered.</p>
           <MarginHero />
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-            <Button variant="primary" size="lg" onClick={() => go('scenario')}>
+            <Button variant="primary" size="lg" onClick={startJupiterDemo}>
+              Try the Jupiter demo
+            </Button>
+            <Button variant="secondary" onClick={() => go('scenario')}>
               New mission
             </Button>
             <Button variant="quiet" onClick={() => how.current?.scrollIntoView({ behavior: 'smooth' })}>

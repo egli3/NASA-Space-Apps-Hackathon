@@ -3,7 +3,7 @@
  * Screens read from here; all numbers come from the engine. The store never computes physics itself.
  */
 import { create } from 'zustand';
-import { catalog } from '../data';
+import { catalog, createJupiterDemo, JUPITER_DEMO_SEED, JUPITER_SCENARIO_ID } from '../data';
 import { engine } from '../engine';
 import type { DecisionLog, MissionDesign } from '../types/design';
 import type { Debrief, MissionResult } from '../types/engine';
@@ -35,6 +35,7 @@ interface GameState {
   /** Where "back" from the Credits screen returns to. */
   creditsReturn: Screen;
   seed: number;
+  guidedFlight: boolean;
   design?: MissionDesign;
   designTab: DesignTab;
   decisions: DecisionLog;
@@ -42,6 +43,7 @@ interface GameState {
   debrief?: Debrief;
   go: (screen: Screen) => void;
   setDesignTab: (tab: DesignTab) => void;
+  startJupiterDemo: () => void;
   startScenario: (scenarioId: string) => void;
   updateDesign: (patch: Partial<MissionDesign>) => void;
   finishFlight: (result: MissionResult, decisions: DecisionLog) => void;
@@ -52,16 +54,37 @@ export const useGame = create<GameState>((set, get) => ({
   screen: 'title',
   creditsReturn: 'title',
   seed: newSeed(),
+  guidedFlight: false,
   designTab: 'instruments',
   decisions: {},
-  go: (screen) => set(screen === 'credits' ? { screen, creditsReturn: get().screen === 'credits' ? get().creditsReturn : get().screen } : { screen }),
+  go: (screen) => {
+    if (screen === 'credits') {
+      set({ screen, creditsReturn: get().screen === 'credits' ? get().creditsReturn : get().screen });
+    } else if (screen === 'title' || screen === 'scenario' || screen === 'design' || screen === 'briefing') {
+      set({ screen, guidedFlight: false });
+    } else {
+      set({ screen });
+    }
+  },
   setDesignTab: (designTab) => set({ designTab }),
+  startJupiterDemo: () =>
+    set({
+      design: createJupiterDemo(engine.defaultDesign(catalog, JUPITER_SCENARIO_ID)),
+      screen: 'launch',
+      designTab: 'instruments',
+      seed: JUPITER_DEMO_SEED,
+      guidedFlight: true,
+      decisions: {},
+      result: undefined,
+      debrief: undefined,
+    }),
   startScenario: (scenarioId) =>
     set({
       design: engine.defaultDesign(catalog, scenarioId),
       screen: 'briefing',
       designTab: 'instruments',
       seed: newSeed(),
+      guidedFlight: false,
       decisions: {},
       result: undefined,
       debrief: undefined,
@@ -85,8 +108,8 @@ export const useGame = create<GameState>((set, get) => ({
       .then(keep)
       .catch(() => keep(engine.buildDebrief(catalog, design, seed, decisions, result, opts)));
   },
-  retry: () => set({ seed: newSeed(), decisions: {}, result: undefined, debrief: undefined, screen: 'design' }),
+  retry: () => set({ seed: newSeed(), guidedFlight: false, decisions: {}, result: undefined, debrief: undefined, screen: 'design' }),
 }));
 
 // Dev-only handle for jumping between screens from the browser console: __game.getState().go('flight')
-if (import.meta.env.DEV) (window as unknown as { __game: typeof useGame }).__game = useGame;
+if (import.meta.env.DEV && typeof window !== 'undefined') (window as unknown as { __game: typeof useGame }).__game = useGame;

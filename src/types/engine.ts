@@ -261,6 +261,12 @@ export interface HindsightItem {
   deltaCostM: number;
   feasible: boolean;
   explanation: string; // one sentence, e.g. "A 3 m dish would have doubled downlink at Jupiter"
+  replay?: {
+    sciencePct: number;
+    totalCostM: number;
+    outcome: Outcome;
+    firstLogDifference?: { actual?: LogEntry; replay?: LogEntry };
+  };
 }
 
 export interface ComparisonRow {

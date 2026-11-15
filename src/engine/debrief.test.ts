@@ -68,6 +68,9 @@ describe('hindsight: replays', () => {
       const replay = runHeadless(catalog, alt.design, seed);
       expect(item.deltaSciencePct).toBeCloseTo(replay.sciencePct - actual.sciencePct, 9);
       expect(item.deltaCostM).toBeCloseTo(replay.totalCostM - actual.totalCostM, 9);
+      expect(item.replay).toMatchObject({
+        sciencePct: replay.sciencePct, totalCostM: replay.totalCostM, outcome: replay.outcome,
+      });
     }
   });
 
@@ -88,7 +91,7 @@ describe('hindsight: replays', () => {
   });
 
   it('a missing instrument is the lesson when an objective is uncovered', () => {
-    const d: MissionDesign = { ...mro, instrumentIds: ['ins-hires', 'ins-ctx', 'ins-visir'] }; // nothing on board can see buried ice
+    const d: MissionDesign = { ...mro, instrumentIds: ['ins-hires', 'ins-ctx', 'ins-visir', 'ins-uvs'] }; // isolate the missing buried-ice measurement
     const actual = runHeadless(q, d, 5);
     const { hindsight } = buildHindsight(q, d, 5, {}, actual);
     expect(hindsight[0].dimension).toBe('Instrument');
@@ -114,7 +117,10 @@ describe('hindsight: replays', () => {
     const { explored, replays } = buildHindsight(q, mro, 5, {}, actual);
     const impossible = explored.filter((x) => !x.feasible);
     expect(impossible.length).toBeGreaterThan(0);
-    for (const x of impossible) expect(x.explanation).toMatch(/^Not possible with the rest of your design: /);
+    for (const x of impossible) {
+      expect(x.explanation).toMatch(/^Not possible with the rest of your design: /);
+      expect(x.replay).toBeUndefined();
+    }
     expect(replays).toBe(explored.length - impossible.length);
     expect(explored.findIndex((x) => !x.feasible)).toBe(explored.length - impossible.length); // listed last
   });

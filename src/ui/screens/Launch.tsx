@@ -89,6 +89,7 @@ const C3_HELP =
 
 export function Launch() {
   const design = useGame((s) => s.design)!;
+  const guided = useGame((s) => s.guidedFlight);
   const update = useGame((s) => s.updateDesign);
   const go = useGame((s) => s.go);
   const scenario = catalog.scenarios.find((s) => s.id === design.scenarioId)!;
@@ -107,24 +108,35 @@ export function Launch() {
     .filter((l) => !l.classes || l.classes.includes(scenario.missionClassId));
   // What each rocket could lift for this exact design and route: ask the engine, once per rocket.
   const perRocket = useMemo(
-    () => Object.fromEntries(rockets.map((l) => [l.id, engine.computeBudgets(catalog, { ...design, launchVehicleId: l.id })])),
+    () => guided ? {} : Object.fromEntries(rockets.map((l) => [l.id, engine.computeBudgets(catalog, { ...design, launchVehicleId: l.id })])),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [design],
+    [design, guided],
   );
 
   return (
     <Sheet
       actions={
         <ActionBar
-          back={{ label: 'Design studio', onClick: () => go('design') }}
-          primary={{ label: 'Face the review board', onClick: () => go('review') }}
+          back={{ label: guided ? 'Customize spacecraft' : 'Design studio', onClick: () => go('design') }}
+          primary={{ label: 'Face the review board', onClick: () => go('review'), disabled: guided && !budgets.feasible }}
           note={budgets.mass.marginPct < 0 ? 'The spacecraft is too heavy for this rocket on this route.' : undefined}
         />
       }
     >
-      <div className="grid h-full grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[minmax(0,1fr)_400px]">
+      <div className={`grid h-full ${guided ? "grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px]" : "grid-cols-[minmax(0,1fr)_360px]"} xl:grid-cols-[minmax(0,1fr)_400px]`}>
         <div className="scroll-quiet min-h-0 overflow-y-auto px-6 py-5">
           <div className="mx-auto max-w-5xl space-y-8">
+            {guided && (
+              <section aria-labelledby="jupiter-demo-heading" className="border-l-4 border-accent bg-raised px-4 py-3">
+                <h1 id="jupiter-demo-heading" className="text-xl font-bold">Can Vulcan carry your spacecraft to Jupiter?</h1>
+                <p className="mt-1 text-sm text-dim">
+                  Your Juno-inspired spacecraft is ready. Compare the routes on the same rocket, then fly the one that fits.
+                </p>
+                <p className="mt-2 text-sm font-medium" aria-live="polite">
+                  {traj.name} · {kg(budgets.mass.lvCapacityKg)} capacity for a {kg(budgets.mass.wetKg)} spacecraft
+                </p>
+              </section>
+            )}
             <Section title="Route" aside={`to ${dest.name}`}>
               <div role="radiogroup" aria-label="Route" className="grid gap-3 xl:grid-cols-2">
                 {trajectories.map((t) => {
@@ -149,6 +161,11 @@ export function Launch() {
                         <span className="mt-1 block text-sm">{t.blurb}</span>
                         <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2">
                           <Fact label="Travel time" value={duration(t.tofDays)} />
+                          {guided && (
+                            <Fact label="Rocket capacity" value={kg(
+                              engine.computeBudgets(catalog, { ...design, trajectoryId: t.id, launchOffsetDays: 0 }).mass.lvCapacityKg,
+                            )} />
+                          )}
                           <Fact label="Launch energy, C3" value={`${num(t.c3Km2s2, 1)} km²/s²`} />
                           <Fact label="Burn on the way" value={t.dsmDvMs > 0 ? deltaV(t.dsmDvMs) : 'none'} />
                           <Fact label="Arrival speed" value={`${num(t.arrivalVinfKms, 1)} km/s`} />
@@ -160,7 +177,7 @@ export function Launch() {
                 })}
               </div>
 
-              <div className="mt-3 border border-line bg-panel/70 px-4 py-3.5">
+              {!guided && <div className="mt-3 border border-line bg-panel/70 px-4 py-3.5">
                 <Slider
                   label="Launch date"
                   value={design.launchOffsetDays}
@@ -174,10 +191,10 @@ export function Launch() {
                   {design.launchOffsetDays === 0 ? 'Launching on the best day of the window.' : `${Math.abs(design.launchOffsetDays)} days ${design.launchOffsetDays < 0 ? 'early' : 'late'}.`} Every day off the best
                   date raises the <Term word="C3">{C3_HELP}</Term> the rocket must reach, now <span className="num text-ink">{num(c3, 1)} km²/s²</span>. A real programme slips; a wide window is margin too.
                 </p>
-              </div>
+              </div>}
             </Section>
 
-            <Section title="Rocket" aside={`what each can lift at C3 ${num(c3, 1)}`}>
+            {!guided && <Section title="Rocket" aside={`what each can lift at C3 ${num(c3, 1)}`}>
               <div role="radiogroup" aria-label="Rocket" className="space-y-3">
                 {rockets.map((l) => {
                   const on = l.id === design.launchVehicleId;
@@ -227,12 +244,12 @@ export function Launch() {
                   );
                 })}
               </div>
-            </Section>
+            </Section>}
 
             <RippleChips design={design} budgets={budgets} />
           </div>
         </div>
-        <aside aria-label="Budgets" className="scroll-quiet min-h-0 overflow-y-auto border-l border-line bg-panel/85">
+        <aside aria-label="Budgets" className={`scroll-quiet min-h-0 overflow-y-auto border-l border-line bg-panel/85 ${guided ? "hidden lg:block" : ""}`}>
           <BudgetPanel design={design} budgets={budgets} only={['mass', 'deltaV', 'cost', 'reliability', 'science']} />
         </aside>
       </div>

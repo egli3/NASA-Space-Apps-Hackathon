@@ -47,6 +47,7 @@ function Readout({ label, value, bar, tone = 'green' }: { label: string; value: 
 export function Flight() {
   const design = useGame((s) => s.design)!;
   const seed = useGame((s) => s.seed);
+  const guided = useGame((s) => s.guidedFlight);
   const finishFlight = useGame((s) => s.finishFlight);
 
   const scenario = catalog.scenarios.find((s) => s.id === design.scenarioId)!;
@@ -65,7 +66,7 @@ export function Flight() {
   const [, redraw] = useReducer((n: number) => n + 1, 0);
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
-  const [speed, setSpeed] = useState<Speed>('10');
+  const [speed, setSpeed] = useState<Speed>(guided ? '100' : '10');
   const [story, setStory] = useState<{ card: EventCard; optionId: string; outcome: LogEntry[] } | null>(null);
   const speedRef = useRef(speed);
   speedRef.current = speed;

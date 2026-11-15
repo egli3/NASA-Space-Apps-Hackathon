@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { catalog } from '../../data';
 import { MONTE_CARLO_RUNS, useGame } from '../../store/game';
-import type { Debrief as DebriefData, HindsightItem, Outcome } from '../../types/engine';
+import type { Debrief as DebriefData, HindsightItem, LogEntry, MissionResult, Outcome } from '../../types/engine';
 import { Button } from '../common/Button';
 import { date, duration, money, num, pct, signed } from '../common/format';
 import { Wordmark } from '../common/Sheet';
@@ -49,7 +49,60 @@ function phrase(item: HindsightItem): { lead: string; choice: string; instead?: 
 
 const costDelta = (m: number) => (Math.abs(m) < 0.5 ? 'no change' : `${m >= 0 ? '+' : '−'}${money(Math.abs(m))}`);
 
-function HindsightCard({ item, index, total }: { item: HindsightItem; index: number; total: number }) {
+function ReplayComparison({ item, actual, open }: { item: HindsightItem; actual: MissionResult; open?: boolean }) {
+  const replay = item.replay;
+  if (!replay) return null;
+  const difference = replay.firstLogDifference;
+  const describe = (entry?: LogEntry) => entry ? `Day ${num(entry.day)} · ${date(entry.date)} · ${entry.text}` : 'Log ended';
+  return (
+    <details open={open} className="border-t border-line">
+      <summary className="cursor-pointer px-5 py-3 font-medium hover:bg-ink/5">Compare with your flight</summary>
+      <div className="px-4 pb-4">
+        <p className="mb-3 text-sm text-dim">Same seed and applicable flight decisions. One design choice changes.</p>
+        <table className="w-full table-fixed text-left text-sm">
+          <thead className="border-b border-line">
+            <tr>
+              <th scope="col" className="w-1/4 pb-2 font-medium">Measure</th>
+              <th scope="col" className="px-1.5 pb-2 font-medium">Your flight</th>
+              <th scope="col" className="px-1.5 pb-2 font-medium">Replay</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b border-line align-top">
+              <th scope="row" className="py-2 pr-1 font-medium">Choice</th>
+              <td className="break-words px-1.5 py-2">{item.fromLabel}</td>
+              <td className="break-words px-1.5 py-2">{item.toLabel}</td>
+            </tr>
+            <tr className="border-b border-line">
+              <th scope="row" className="py-2 pr-1 font-medium">Science</th>
+              <td className="num px-1.5 py-2">{pct(actual.sciencePct, 1)}</td>
+              <td className="num px-1.5 py-2">{pct(replay.sciencePct, 1)}</td>
+            </tr>
+            <tr className="border-b border-line">
+              <th scope="row" className="py-2 pr-1 font-medium">Cost</th>
+              <td className="num px-1.5 py-2">{money(actual.totalCostM)}</td>
+              <td className="num px-1.5 py-2">{money(replay.totalCostM)}</td>
+            </tr>
+            <tr className="border-b border-line align-top">
+              <th scope="row" className="py-2 pr-1 font-medium">Outcome</th>
+              <td className="px-1.5 py-2">{OUTCOME_WORD[actual.outcome]}</td>
+              <td className="px-1.5 py-2">{OUTCOME_WORD[replay.outcome]}</td>
+            </tr>
+            {difference && (
+              <tr className="align-top">
+                <th scope="row" className="py-2 pr-1 font-medium">First log difference</th>
+                <td className="break-words px-1.5 py-2">{describe(difference.actual)}</td>
+                <td className="break-words px-1.5 py-2">{describe(difference.replay)}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </details>
+  );
+}
+
+function HindsightCard({ item, index, total, actual, openReplay }: { item: HindsightItem; index: number; total: number; actual: MissionResult; openReplay?: boolean }) {
   const p = phrase(item);
   return (
     <motion.li
@@ -84,6 +137,7 @@ function HindsightCard({ item, index, total }: { item: HindsightItem; index: num
           <dd className="num text-3xl">{costDelta(item.deltaCostM)}</dd>
         </div>
       </dl>
+      <ReplayComparison item={item} actual={actual} open={openReplay} />
     </motion.li>
   );
 }
@@ -156,10 +210,12 @@ export function Debrief() {
     { earned: result.underBudget, label: 'Under the cost cap', detail: `${money(result.totalCostM)} of ${money(cap)}` },
     { earned: survived, label: 'Survived the primary mission', detail: survived ? `${duration(result.daysFlown)} in flight` : (result.lossCause ?? 'Lost in flight') },
   ];
+  const guided = useGame((s) => s.guidedFlight);
   const top = (debrief?.hindsight ?? []).filter((h) => h.feasible && h.deltaSciencePct > 0).slice(0, 3);
   const best = debrief?.bestDecision;
   const mc = debrief?.monteCarlo;
   const explored = debrief?.explored ?? [];
+  const fallbackReplay = top.length === 0 ? explored.find((item) => item.replay) : undefined;
   const milestones = result.log.filter((l) => l.kind !== 'info');
 
   return (
@@ -251,14 +307,18 @@ export function Debrief() {
           ) : top.length > 0 ? (
             <ol className="grid gap-5 lg:grid-cols-3">
               {top.map((h, i) => (
-                <HindsightCard key={`${h.dimension}-${h.toLabel}`} item={h} index={i} total={top.length} />
+                <HindsightCard key={`${h.dimension}-${h.toLabel}`} item={h} index={i} total={top.length} actual={result} openReplay={guided && i === 0} />
               ))}
             </ol>
           ) : (
             <p className="max-w-[62ch] border border-go px-5 py-4 text-lg">
-              We re-flew this mission with every decision changed, one at a time. No single change would have returned more science
-              {result.sciencePct >= 75 ? '. You flew the best version of this design.' : ', so doing better takes more than one change at once. The table below shows what each would have done.'}
+              None of the single changes we replayed returned more science. Expand the alternatives to see each result.
             </p>
+          )}
+          {fallbackReplay && (
+            <div className="mt-4 max-w-[58rem] border border-line bg-raised">
+              <ReplayComparison item={fallbackReplay} actual={result} open={guided} />
+            </div>
           )}
           {best && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="mt-5 border-l-4 border-go bg-panel px-5 py-4">

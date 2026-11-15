@@ -89,3 +89,5 @@ export const getMissionClass = (c: Catalog, id: string) => {
   if (!found) throw new Error(`[data] unknown mission class "${id}"`);
   return found;
 };
+
+export { createJupiterDemo, JUPITER_DEMO_SEED, JUPITER_SCENARIO_ID } from './jupiter-demo';

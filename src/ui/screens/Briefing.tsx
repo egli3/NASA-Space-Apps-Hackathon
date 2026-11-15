@@ -39,6 +39,24 @@ export function Briefing() {
             <p className="mt-6 text-2xl font-medium">{scenario.tagline}</p>
             <p className="mt-4 max-w-[62ch] text-lg text-dim">{scenario.briefing}</p>
 
+            {scenario.imageUrl && (
+              <figure className="mt-6 max-w-xl">
+                <img
+                  src={`${import.meta.env.BASE_URL}${scenario.imageUrl}`}
+                  alt={`NASA mission imagery of ${dest.name}`}
+                  width={900}
+                  height={510}
+                  decoding="async"
+                  className="max-h-48 w-full border border-rule bg-black object-cover"
+                />
+                <figcaption className="mt-1 text-sm text-dim">
+                  <a href={`${import.meta.env.BASE_URL}img/credits.json`} target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                    NASA image credits
+                  </a>
+                </figcaption>
+              </figure>
+            )}
+
             <label className="mt-8 block max-w-md">
               <span className="font-medium">Name your mission</span>
               <input

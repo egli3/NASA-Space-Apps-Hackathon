@@ -193,6 +193,20 @@ export interface HindsightReport {
   replays: number;
 }
 
+/** Compare operational log entries in recorded order. A missing entry means that flight's log has ended. */
+function firstLogDifference(actual: MissionResult, replay: MissionResult) {
+  const operational = (flight: MissionResult) => flight.log.filter((entry) => entry.kind !== 'info');
+  const left = operational(actual);
+  const right = operational(replay);
+  for (let i = 0; i < Math.max(left.length, right.length); i++) {
+    const a = left[i];
+    const b = right[i];
+    if (!a || !b || a.date !== b.date || a.day !== b.day || a.kind !== b.kind || a.text !== b.text || a.eventId !== b.eventId || a.optionId !== b.optionId) {
+      return { actual: a, replay: b };
+    }
+  }
+}
+
 export function buildHindsight(catalog: Catalog, design: MissionDesign, seed: number, decisions: DecisionLog, actual: MissionResult): HindsightReport {
   const base = computeBudgets(catalog, design);
   const destName = resolveDesign(catalog, design).dest.name;
@@ -213,6 +227,12 @@ export function buildHindsight(catalog: Catalog, design: MissionDesign, seed: nu
       dimension: alt.dimension, fromLabel: alt.fromLabel, toLabel: alt.toLabel, feasible: true,
       deltaSciencePct: replay.sciencePct - actual.sciencePct, deltaCostM: replay.totalCostM - actual.totalCostM,
       explanation: sentence(catalog, alt, base, b, actual, replay, destName),
+      replay: {
+        sciencePct: replay.sciencePct,
+        totalCostM: replay.totalCostM,
+        outcome: replay.outcome,
+        firstLogDifference: firstLogDifference(actual, replay),
+      },
     } });
   }
 

@@ -4,6 +4,7 @@ import type { Source } from '../../types/catalog';
 import { Button } from '../common/Button';
 import { date } from '../common/format';
 import { Section, Wordmark } from '../common/Sheet';
+import { SourceLinks } from '../common/SourceLink';
 
 const LIBRARIES = ['React', 'Vite', 'Tailwind CSS', 'Zustand', 'zod', 'Motion', 'Vitest'];
 
@@ -38,6 +39,7 @@ export function Credits() {
   const back = useGame((s) => s.creditsReturn);
   const nasa = catalog.sources.filter((s) => s.isNasa);
   const other = catalog.sources.filter((s) => !s.isNasa);
+  const glossary = catalog.glossary ?? [];
 
   return (
     <div className="sheet-grid scroll-quiet h-full overflow-y-auto">
@@ -50,10 +52,25 @@ export function Credits() {
         </div>
         <h1 className="mt-10 text-5xl font-bold">Credits and sources</h1>
         <p className="mt-3 max-w-[62ch] text-lg text-dim">
-          Every number in MARGIN traces back to one of the sources below. All data is baked into the game: nothing is fetched while you play.
+          MARGIN ships with NASA data, engineering estimates and game parameters. Mission data is bundled with the app.
         </p>
 
         <div className="mt-10 space-y-10">
+          {glossary.length > 0 && (
+            <Section title="Mission glossary">
+              <div className="grid items-start gap-x-8 md:grid-cols-2">
+                {glossary.map((entry) => (
+                  <details key={entry.term} className="border-b border-line py-2">
+                    <summary className="cursor-pointer font-medium">{entry.term}</summary>
+                    <p className="mt-2 text-sm font-medium">{entry.short}</p>
+                    <p className="my-2 text-sm text-dim">{entry.long}</p>
+                    <SourceLinks ids={[entry.sourceId]} />
+                  </details>
+                ))}
+              </div>
+            </Section>
+          )}
+
           <Section title="NASA data" aside={`${nasa.length} sources`}>
             <SourceList sources={nasa} />
           </Section>
@@ -66,7 +83,7 @@ export function Credits() {
             <dl className="grid gap-x-8 gap-y-4 md:grid-cols-3">
               <div>
                 <dt className="font-bold">Verified</dt>
-                <dd className="text-dim">Copied from the cited source.</dd>
+                <dd className="text-dim">Reported by or calculated directly from the cited source.</dd>
               </div>
               <div>
                 <dt className="font-bold">Approximate</dt>
@@ -74,7 +91,7 @@ export function Credits() {
               </div>
               <div>
                 <dt className="font-bold">Game</dt>
-                <dd className="text-dim">Tuned for play. Review thresholds, cost caps and failure rates are ours, not NASA’s.</dd>
+                <dd className="text-dim">The team tuned review thresholds, cost caps and failure rates for gameplay.</dd>
               </div>
             </dl>
             <p className="mt-4 max-w-[70ch] text-dim">Each part, instrument and rule carries one of these labels; open “Source” on any card to see it. The physics is simplified: patched conics, a daily time step, no attitude or thermal modelling.</p>
@@ -84,14 +101,13 @@ export function Credits() {
             <p className="max-w-[70ch]">Super Intelligence (SI) tools were used in this project, as the Space Apps rules require us to disclose.</p>
             <ul className="mt-3 max-w-[70ch] list-disc space-y-2 pl-5">
               <li>
-                <span className="font-bold">Code and documents.</span> Portions of the source code, tests and documentation were generated with Claude (Anthropic) through Claude Code, then reviewed and edited
-                by the team.
+                <span className="font-bold">Code and documents.</span> Portions of the source code, tests and documentation were developed with assistance from Claude Code (Anthropic) and OpenAI Codex.
               </li>
               <li>
                 <span className="font-bold">Data.</span> SI helped draft initial approximate values. These are labelled approximate until verified against the cited NASA source.
               </li>
               <li>
-                <span className="font-bold">Images, video and audio.</span> None are SI-generated. The planet and spacecraft drawings are vector graphics drawn in code.
+                <span className="font-bold">Images, video and audio.</span> The briefings use credited NASA mission imagery. The planet and spacecraft diagrams are vector graphics drawn in code.
               </li>
             </ul>
           </Section>
