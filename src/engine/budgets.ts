@@ -12,6 +12,29 @@ import { eclipseMinutes, insertionDvMs } from './orbits';
 const C_KM_S = 299792.458;
 const round = (x: number, d = 1) => Math.round(x * 10 ** d) / 10 ** d;
 
+// ---- Model constants (GAME_DESIGN §4). Physical/tunable data lives in constants.json; these are fixed model rules. ----
+/** Extra Δv for walking into and out of the atmosphere when aerobraking (§4.1). */
+const AEROBRAKE_WALK_DV_MS = 30;
+/** An ion engine's thrust is far too low to capture from a fast hyperbolic arrival (§4.1). */
+const ION_MAX_CAPTURE_VINF_KMS = 1;
+/** Beyond this the mass spiral counts as diverged: "the rocket equation wins" (§4.2). */
+const MAX_PROPELLANT_KG = 1e6;
+/** Solar array packing factor × pointing/cosine losses (§4.3). */
+const ARRAY_PACKING_FACTOR = 0.85;
+/** Low-intensity, low-temperature (LILT) cell loss far from the Sun (§4.3). */
+const LILT_FACTOR = 0.8;
+const LILT_BEYOND_AU = 3;
+/** Ground-system / modem ceiling on the downlink rate (§4.4). */
+const MAX_DOWNLINK_BPS = 300e6;
+/** Interplanetary cruise dose behind nominal shielding, krad per year (§4.6). */
+const CRUISE_DOSE_KRAD_PER_YEAR = 1.0;
+
+/** Options for what-if budgets. Used by the Reality Check (growth.ts) — the UI never passes these. */
+export interface BudgetOptions {
+  /** Replace the TRL growth *allowance* with this *actual* mass growth (kg). */
+  massGrowthKg?: number;
+}
+
 /** Launch vehicle capacity (kg) at a C3, linear interpolation over the LSP-sampled curve. */
 export function lvCapacityKg(lv: LaunchVehicle, c3: number): number {
   const p = lv.performance;
@@ -66,7 +89,68 @@ export function instrumentQuality(
   return q;
 }
 
-export function computeBudgets(catalog: Catalog, design: MissionDesign): BudgetReport {
+type Resolved = ReturnType<typeof resolveDesign>;
+
+/** One piece of flight hardware as built: a part (incl. redundancy and solar area) or an instrument. */
+export interface HardwareItem {
+  id: string;
+  label: string;
+  slot?: SlotId; // undefined for instruments
+  massKg: number;
+  costM: number;
+  trl: number;
+}
+
+/** Every part and instrument with its as-designed mass and cost (§4.2, §4.8). Shared by the mass budget, the cost
+ *  budget and the Reality Check so that they can never disagree. */
+export function hardwareItems(catalog: Catalog, design: MissionDesign, r: Resolved = resolveDesign(catalog, design)): HardwareItem[] {
+  const K = catalog.constants;
+  const items: HardwareItem[] = [];
+  for (const [slot, p] of Object.entries(r.parts) as [SlotId, Part][]) {
+    const dual = (design.redundant as string[]).includes(slot);
+    let massKg = p.massKg * (dual ? K.redundancy.massMultiplier : 1);
+    let costM = p.costM * (dual ? K.redundancy.costMultiplier : 1);
+    if (slot === 'power' && p.specs.solarEfficiency !== undefined) {
+      massKg += design.solarArrayAreaM2 * (p.specs.solarKgPerM2 ?? 0);
+      costM += design.solarArrayAreaM2 * (p.specs.solarCostMPerM2 ?? 0);
+    }
+    items.push({ id: p.id, label: p.name + (dual ? ' (dual)' : ''), slot, massKg, costM, trl: p.trl });
+  }
+  for (const ins of r.instruments) items.push({ id: ins.id, label: ins.name, massKg: ins.massKg, costM: ins.costM, trl: ins.trl });
+  return items;
+}
+
+/** Fractional mass growth expected for a technology readiness level (§4.2). */
+export function growthFractionForTrl(catalog: Catalog, trl: number): number {
+  return catalog.constants.massGrowthByTrl[String(trl)] ?? 0.1;
+}
+
+/** DSN link budget (§4.4). Returns the pieces plus `rateBps(distanceAU)`. */
+export function linkModel(catalog: Catalog, design: MissionDesign, r: Resolved = resolveDesign(catalog, design)) {
+  const K = catalog.constants;
+  const band = K.bands[design.commsBand];
+  const ant = r.parts.antenna, tx = r.parts.transmitter;
+  const lambdaM = C_KM_S / (band.freqGHz * 1e6); // λ = c / f in metres (299 792.458 km/s ÷ (GHz·1e6) ≡ 2.998e8 m/s ÷ Hz)
+  const diameterM = ant?.specs.diameterM ?? 0;
+  const gainTxDbi = diameterM > 0
+    ? 10 * Math.log10((ant?.specs.apertureEfficiency ?? 0.55) * Math.pow((Math.PI * diameterM) / lambdaM, 2))
+    : ant?.specs.fixedGainDbi ?? 0;
+  const beamwidthDeg = diameterM > 0 ? (70 * lambdaM) / diameterM : 90;
+  const pointingErrDeg = r.parts.adcs?.specs.pointingDeg ?? 1;
+  const pointingLossDb = Math.min(30, 12 * Math.pow(pointingErrDeg / beamwidthDeg, 2));
+  const eirpDbW = 10 * Math.log10(Math.max(0.01, tx?.specs.rfPowerW ?? 0)) + gainTxDbi - pointingLossDb;
+  const use70m = design.dsnAperture === '70m' && design.commsBand === 'X'; // the 70 m dishes have no Ka downlink
+  const gainRxDbi = use70m ? band.dsn70GainDbi : band.dsn34GainDbi;
+  const n0DbWHz = K.boltzmannDbW + 10 * Math.log10(band.systemNoiseTempK);
+  const rateBps = (distAU: number) => {
+    const fslDb = 20 * Math.log10((4 * Math.PI * distAU * K.auKm * 1000) / lambdaM);
+    const rDb = eirpDbW + gainRxDbi - fslDb - K.linkMiscLossDb - band.extraLossDb - n0DbWHz - K.linkRequiredEbN0Db - K.linkMarginDb;
+    return Math.min(MAX_DOWNLINK_BPS, Math.pow(10, rDb / 10));
+  };
+  return { lambdaM, diameterM, gainTxDbi, beamwidthDeg, pointingLossDb, eirpDbW, use70m, gainRxDbi, rateBps };
+}
+
+export function computeBudgets(catalog: Catalog, design: MissionDesign, opts: BudgetOptions = {}): BudgetReport {
   const K = catalog.constants;
   const r = resolveDesign(catalog, design);
   const { scenario, dest, orbit, traj, lv, mclass, parts, instruments, c3, cruiseYears } = r;
@@ -88,29 +172,22 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign): BudgetR
     { id: 'dsm', label: 'Deep-space manoeuvres', value: traj.dsmDvMs },
     { id: 'tcm', label: 'Trajectory corrections', value: traj.tcmDvMs },
     { id: 'insertion', label: orbit.aerobraking ? 'Capture burn (then aerobrake)' : 'Orbit insertion', value: insertion },
-    ...(orbit.aerobraking ? [{ id: 'aerobrake-walk', label: 'Aerobraking walk-in/out', value: 30 }] : []),
+    ...(orbit.aerobraking ? [{ id: 'aerobrake-walk', label: 'Aerobraking walk-in/out', value: AEROBRAKE_WALK_DV_MS }] : []),
     { id: 'maintenance', label: `Orbit maintenance (${primaryYears} yr)`, value: orbit.maintenanceDvMsPerYear * primaryYears },
     { id: 'disposal', label: 'End-of-mission disposal', value: K.disposalDvMs },
   ];
   const dvSubtotal = dvItems.reduce((a, b) => a + b.value, 0);
   dvItems.push({ id: 'margin', label: `Δv margin (${K.dvMarginPct}%)`, value: (dvSubtotal * K.dvMarginPct) / 100 });
   const totalDv = dvItems.reduce((a, b) => a + b.value, 0);
-  if (prop?.specs.propulsionKind === 'electric' && traj.arrivalVinfKms > 1 && dest.kind !== 'small_body')
+  if (prop?.specs.propulsionKind === 'electric' && traj.arrivalVinfKms > ION_MAX_CAPTURE_VINF_KMS && dest.kind !== 'small_body')
     blockers.push(`An ion engine can't brake into orbit at ${dest.name} (arriving at ${traj.arrivalVinfKms} km/s) — choose a chemical engine`);
 
   // ---------------- mass ----------------
-  const massItems: LineItem[] = [];
-  let growth = 0;
-  for (const [slot, p] of Object.entries(parts) as [SlotId, Part][]) {
-    let m = p.massKg * (isRedundant(slot) ? K.redundancy.massMultiplier : 1);
-    if (slot === 'power' && isSolar) m += area * (p.specs.solarKgPerM2 ?? 0);
-    massItems.push({ id: p.id, label: p.name + (isRedundant(slot) ? ' (dual)' : ''), value: m });
-    growth += m * (K.massGrowthByTrl[String(p.trl)] ?? 0.1);
-  }
-  for (const ins of instruments) {
-    massItems.push({ id: ins.id, label: ins.name, value: ins.massKg });
-    growth += ins.massKg * (K.massGrowthByTrl[String(ins.trl)] ?? 0.1);
-  }
+  const hwItems = hardwareItems(catalog, design, r);
+  const massItems: LineItem[] = hwItems.map((it) => ({ id: it.id, label: it.label, value: it.massKg }));
+  const allowance = hwItems.reduce((a, it) => a + it.massKg * growthFractionForTrl(catalog, it.trl), 0);
+  // Design time: carry the TRL allowance. After the Reality Check: carry what the hardware actually grew by.
+  const growth = opts.massGrowthKg ?? allowance;
   const hw = massItems.reduce((a, b) => a + b.value, 0);
   const bus = K.busBaseMassKg[mclass.id];
   const structure = K.structureFraction * (hw + growth + bus);
@@ -119,20 +196,19 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign): BudgetR
     { id: 'bus', label: 'Bus core (structure, mechanisms)', value: bus },
     { id: 'structure', label: 'Secondary structure', value: structure },
     { id: 'harness', label: 'Cabling harness', value: harness },
-    { id: 'growth', label: 'Growth allowance (by TRL)', value: growth },
+    { id: 'growth', label: opts.massGrowthKg === undefined ? 'Growth allowance (by TRL)' : 'Actual mass growth', value: growth },
   );
   const dryBase = hw + growth + bus + structure + harness;
   const isp = prop?.specs.ispS ?? 220;
   const tankFrac = prop?.specs.tankFraction ?? 0.12;
   const massRatio = Math.exp(totalDv / (isp * K.g0Ms2));
-  let propellant = 0;
-  let converged = true;
-  for (let i = 0; i < 100; i++) {
-    const next = (dryBase + tankFrac * propellant) * (massRatio - 1);
-    if (!isFinite(next) || next > 1e6) { converged = false; break; }
-    if (Math.abs(next - propellant) < 0.01) { propellant = next; break; }
-    propellant = next;
-  }
+  // Rocket equation with tanks that scale with propellant: prop = (dryBase + tankFrac·prop)·(MR − 1).
+  // That fixed point has the closed form below; when tankFrac·(MR − 1) ≥ 1 every extra kg of propellant needs
+  // more than a kg of tank + propellant to push it, so no finite answer exists — the mass spiral diverges.
+  const spiral = 1 - tankFrac * (massRatio - 1);
+  let propellant = spiral > 0 ? (dryBase * (massRatio - 1)) / spiral : Infinity;
+  const converged = Number.isFinite(propellant) && propellant <= MAX_PROPELLANT_KG;
+  if (!converged) propellant = MAX_PROPELLANT_KG; // keep every output finite for the UI
   const tanks = tankFrac * propellant;
   massItems.push({ id: 'tanks', label: 'Propellant tanks', value: tanks });
   const dry = dryBase + tanks;
@@ -140,7 +216,8 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign): BudgetR
   const lvCap = lvCapacityKg(lv, c3);
   const massMargin = lvCap > 0 ? ((lvCap - wet) / lvCap) * 100 : -100;
   if (!converged) blockers.push('The rocket equation wins: the propellant needed to carry the propellant never converges. Cut Δv or mass.');
-  if (wet > lvCap) blockers.push(`Over launch capacity by ${Math.round(wet - lvCap)} kg at C3 ${round(c3)} km²/s²`);
+  else if (lvCap <= 0) blockers.push(`${lv.name} can't reach C3 ${round(c3)} km²/s² at all — pick a bigger rocket or a gentler trajectory`);
+  else if (wet > lvCap) blockers.push(`Over launch capacity by ${Math.round(wet - lvCap)} kg at C3 ${round(c3)} km²/s²`);
   explain.push({
     metric: 'mass.propellantKg',
     text: `${Math.round(dry)} kg dry needs ${Math.round(propellant)} kg propellant for ${Math.round(totalDv)} m/s at Isp ${isp} s`,
@@ -152,9 +229,9 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign): BudgetR
   const d = dest.solarDistanceAU;
   const lifeYears = cruiseYears + primaryYears;
   let bol = 0, eol = 0;
+  const lilt = d > LILT_BEYOND_AU ? LILT_FACTOR : 1;
   if (power && isSolar) {
-    const lilt = d > 3 ? 0.8 : 1; // low-intensity low-temperature losses far from the Sun
-    bol = (K.solarConstantWm2 / (d * d)) * area * (power.specs.solarEfficiency ?? 0.2) * 0.85 * lilt;
+    bol = (K.solarConstantWm2 / (d * d)) * area * (power.specs.solarEfficiency ?? 0.2) * ARRAY_PACKING_FACTOR * lilt;
     const deg = (power.specs.solarDegradationPerYear ?? 0.02) + dest.solarArrayExtraDegradationPerYear;
     eol = bol * Math.pow(1 - deg, lifeYears);
   } else if (power) {
@@ -170,11 +247,13 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign): BudgetR
   const loadPeak = Math.max(loadScience, loadDownlink);
   const powerMargin = loadPeak > 0 ? ((eol - loadPeak) / loadPeak) * 100 : 100;
   const eclMin = eclipseMinutes(dest, orbit);
-  const batRequired = (loadScience * eclMin) / 60 / (parts.battery?.specs.maxDepthOfDischarge ?? 0.6);
+  // In eclipse a solar spacecraft runs on the battery alone; an RTG keeps generating, so the battery only covers the shortfall.
+  const eclipseDrawW = isSolar ? loadScience : Math.max(0, loadScience - eol);
+  const batRequired = (eclipseDrawW * eclMin) / 60 / (parts.battery?.specs.maxDepthOfDischarge ?? 0.6);
   const batWh = (parts.battery?.specs.batteryWh ?? 0) * (isRedundant('battery') ? 2 : 1);
   const batMargin = batRequired > 0 ? (batWh / batRequired - 1) * 100 : 999;
   if (prop?.specs.propulsionKind === 'electric') {
-    const atEarth = isSolar ? bol * d * d : bol;
+    const atEarth = isSolar ? (bol / lilt) * d * d : bol; // arrays at 1 AU: no distance or LILT loss
     if (atEarth < prop.powerW + busLoad) blockers.push(`The ion engine needs ${prop.powerW} W — your arrays make only ${Math.round(atEarth)} W near Earth`);
   }
   if (thermal && (1 / (d * d)) < (thermal.specs.minSolarFluxFraction ?? 0))
@@ -190,23 +269,9 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign): BudgetR
 
   // ---------------- comms ----------------
   const bandKey = design.commsBand;
-  const band = K.bands[bandKey];
-  const lambdaM = C_KM_S / (band.freqGHz * 1e6); // λ = c / f in metres (299 792.458 km/s ÷ (GHz·1e6) ≡ 2.998e8 m/s ÷ Hz)
-  const diam = ant?.specs.diameterM ?? 0;
+  const link = linkModel(catalog, design, r);
+  const { rateBps, use70m: use70, diameterM: diam } = link;
   if (ant && bandKey === 'Ka' && !(ant.specs.bands ?? ['X']).includes('Ka')) blockers.push(`${ant.name} is not Ka-band capable`);
-  const gT = diam > 0 ? 10 * Math.log10((ant?.specs.apertureEfficiency ?? 0.55) * Math.pow((Math.PI * diam) / lambdaM, 2)) : ant?.specs.fixedGainDbi ?? 0;
-  const beamwidthDeg = diam > 0 ? (70 * lambdaM) / diam : 90;
-  const pointingErr = adcs?.specs.pointingDeg ?? 1;
-  const pointingLoss = Math.min(30, 12 * Math.pow(pointingErr / beamwidthDeg, 2));
-  const eirp = 10 * Math.log10(Math.max(0.01, tx?.specs.rfPowerW ?? 0)) + gT - pointingLoss;
-  const use70 = design.dsnAperture === '70m' && bandKey === 'X';
-  const gR = use70 ? band.dsn70GainDbi : band.dsn34GainDbi;
-  const n0 = K.boltzmannDbW + 10 * Math.log10(band.systemNoiseTempK);
-  const rateBps = (distAU: number) => {
-    const fsl = 20 * Math.log10((4 * Math.PI * distAU * K.auKm * 1000) / lambdaM);
-    const rDb = eirp + gR - fsl - K.linkMiscLossDb - band.extraLossDb - n0 - K.linkRequiredEbN0Db - K.linkMarginDb;
-    return Math.min(300e6, Math.pow(10, rDb / 10));
-  };
   const rateMean = rateBps(dest.earthDistanceAU.mean);
   const rateMax = rateBps(dest.earthDistanceAU.max);
   const downlinkGbPerDay = (rateMean * design.dsnHoursPerDay * 3600) / 1e9;
@@ -231,21 +296,25 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign): BudgetR
       const vol = candidates.reduce((a, i) => a + (i.dataRateKbps * 1000 * i.dutyCycle * dutyMult * 86400 * scienceDays) / 1e9, 0) * downlinkShare;
       const q = best?.q ?? 0;
       const credit = q >= m.minQuality ? q * Math.min(1, vol / m.requiredGb) : 0;
-      return { credit, q, ids: candidates.map((i) => i.id), vol, need: m.requiredGb, type: m.type };
+      return { credit, q, ids: candidates.map((i) => i.id), vol, need: m.requiredGb, type: m.type, minQ: m.minQuality };
     });
     const pick = o.combine === 'any' ? Math.max(...perMeasurement.map((p) => p.credit)) : Math.min(...perMeasurement.map((p) => p.credit));
     const quality = o.combine === 'any' ? Math.max(...perMeasurement.map((p) => p.q)) : Math.min(...perMeasurement.map((p) => p.q));
     const missing = perMeasurement.filter((p) => p.ids.length === 0).map((p) => p.type);
-    const reason = missing.length
-      ? `No instrument for ${missing.join(', ')}`
-      : perMeasurement.map((p) => `${p.type}: ${Math.round(p.vol)}/${p.need} Gb at quality ${round(p.q, 2)}`).join('; ');
-    return { objectiveId: o.id, quality, coveredBy: [...new Set(perMeasurement.flatMap((p) => p.ids))], expectedPct: round(pick * 100), reason };
+    // 'any' objectives need just one measurement, so only report a gap when *none* is covered; 'all' needs every one.
+    const uncovered = o.combine === 'any' ? missing.length === perMeasurement.length : missing.length > 0;
+    const describe = (p: (typeof perMeasurement)[number]) =>
+      `${p.type}: ${p.vol < 10 ? round(p.vol, 2) : Math.round(p.vol)}/${p.need} Gb at quality ${round(p.q, 2)}${p.q < p.minQ ? ` (below the ${p.minQ} needed)` : ''}`;
+    const reason = uncovered
+      ? `No instrument for ${missing.join(o.combine === 'any' ? ' or ' : ', ')}`
+      : perMeasurement.filter((p) => p.ids.length > 0).map(describe).join('; ');
+    return { objectiveId: o.id, quality, coveredBy: [...new Set(perMeasurement.flatMap((p) => p.ids))], expectedPct: pick * 100, reason };
   });
   const expectedPct = scenario.objectives.reduce((a, o, idx) => a + (o.weight * objectives[idx].expectedPct) / 100, 0);
 
   // ---------------- radiation ----------------
   const doseFactor = shield?.specs.doseFactor ?? 1;
-  const primaryDose = dest.radiationKradPerYear * (orbit.radiationMultiplier ?? 1) * doseFactor * primaryYears + 1.0 * cruiseYears * doseFactor;
+  const primaryDose = dest.radiationKradPerYear * (orbit.radiationMultiplier ?? 1) * doseFactor * primaryYears + CRUISE_DOSE_KRAD_PER_YEAR * cruiseYears * doseFactor;
   const tolerance = avi?.specs.radToleranceKrad ?? 20;
   const doseMargin = primaryDose > 0 ? (tolerance / primaryDose - 1) * 100 : 999;
 
@@ -268,13 +337,7 @@ export function computeBudgets(catalog: Catalog, design: MissionDesign): BudgetR
   risks.sort((a, b) => b.pFail - a.pFail);
 
   // ---------------- cost ----------------
-  const costItems: LineItem[] = [];
-  for (const [slot, p] of Object.entries(parts) as [SlotId, Part][]) {
-    let c = p.costM * (isRedundant(slot) ? K.redundancy.costMultiplier : 1);
-    if (slot === 'power' && isSolar) c += area * (p.specs.solarCostMPerM2 ?? 0);
-    costItems.push({ id: p.id, label: p.name, value: c });
-  }
-  for (const ins of instruments) costItems.push({ id: ins.id, label: ins.name, value: ins.costM });
+  const costItems: LineItem[] = hwItems.map((it) => ({ id: it.id, label: it.label, value: it.costM }));
   costItems.push({ id: 'bus', label: 'Bus core', value: K.busBaseCostM[mclass.id] });
   const hardware = costItems.reduce((a, b) => a + b.value, 0);
   const wrap = hardware * K.costWrapFraction[mclass.id];

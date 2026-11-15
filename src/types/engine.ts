@@ -158,7 +158,11 @@ export interface GrowthReveal {
   newMassMarginPct: number;
   reserveRemainingM: number;
   mustDescope: boolean; // true → UI asks player to drop an instrument / swap LV before launch
+  /** One line per part/instrument: how much it GREW by (kg, $M) over its catalogue estimate. */
   lines: { id: string; label: string; massKg: number; costM: number }[];
+  massAllowanceKg?: number; // the TRL growth allowance the design carried — compare with massGrowthKg
+  newWetKg?: number; // launch mass once the actual growth replaces the allowance
+  lvCapacityKg?: number; // what the rocket can lift at this design's C3
 }
 
 export type SimPhase = 'launch' | 'cruise' | 'arrival' | 'aerobraking' | 'science' | 'extended' | 'ended';

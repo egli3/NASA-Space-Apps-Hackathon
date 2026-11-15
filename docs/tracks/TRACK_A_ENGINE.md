@@ -9,6 +9,7 @@
 **Shared, additive-only:** `src/types/**` (announce `[CONTRACT]` changes). **Don't edit:** `src/ui/**`, `src/store/**`, `src/data/*.json` (ask Track B).
 
 ## What already exists (engine v0, kickoff)
+- `growth.ts`: `revealGrowth` / `realizedBudgets` (Reality Check, §4.7). `reference-designs.ts`: §7 yardsticks for `npm run balance`.
 - `budgets.ts`: full `computeBudgets` (Δv, mass spiral, power, battery, comms link budget, science expectation, radiation, reliability, cost, blockers, metrics, explain). Matches GAME_DESIGN §4.
 - `orbits.ts`: Kepler solver, planet positions from JPL elements, insertion Δv, eclipse.
 - `review.ts`: data-driven review findings. `design.ts`: `defaultDesign`.
@@ -22,7 +23,11 @@ exported from `src/engine/index.ts` as `engine`. Track C calls only these. Keep 
 
 ## Tasks
 
-### By M1 (Sat 23:30): trustworthy budgets
+### By M1 (Sat 23:30): trustworthy budgets — ✅ tasks 1–4 done (Sat 20:50)
+Notes: rocket equation is now closed-form; `hardwareItems()` / `linkModel()` are shared helpers; reference designs live in
+`src/engine/reference-designs.ts`; `npm run balance` shows 16 targets pass, 5 miss (MAVEN-like ×2, Balanced Mars science,
+Juno power margin, direct-on-Falcon-Heavy), all of which need data tuning with Track B at M4, not engine changes.
+
 1. **Read and own `budgets.ts`.** Fix anything that disagrees with GAME_DESIGN §4. Keep it < 1 ms per call (it runs on every slider move).
 2. **`revealGrowth`** (GAME_DESIGN §4.7): seeded per-part growth, `lines[]` for the UI animation, `mustDescope`.
 3. **Calibration tests** (`engine.test.ts`): comms (MRO-like and Juno-like targets in §4.4), power (Juno-like 60 m² TJ at Jupiter ≈ 400–550 W EOL), insertion Δv (already in for Juno), Mars aerobraking saves > 1 km/s (already in).

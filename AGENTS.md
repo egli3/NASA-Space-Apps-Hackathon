@@ -16,6 +16,7 @@ npm run dev          # local game at http://localhost:5173
 npm test             # vitest: data validation + engine tests
 npm run check        # typecheck + tests + build. MUST pass before every push
 npm run sources:md   # print the NASA-data list for the submission form
+npm run balance      # Track A: reference designs vs the balance targets in GAME_DESIGN §7
 ```
 
 ## Ownership (stay in your lane)

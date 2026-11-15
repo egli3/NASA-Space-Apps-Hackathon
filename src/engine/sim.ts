@@ -9,13 +9,15 @@ import { getEvent } from '../data';
 import type { DecisionLog, MissionDesign } from '../types/design';
 import type { AdvanceResult, Catalog, LogEntry, MissionResult, Outcome, SimPhase, SimState, Simulation, Vec2 } from '../types/engine';
 import { computeBudgets, instrumentQuality, resolveDesign } from './budgets';
+import { realizedBudgets } from './growth';
 import { addDays, planetPositionAU } from './orbits';
 import { Rng } from './rng';
 
 const dist = (a: Vec2, b: Vec2) => Math.hypot(a.x - b.x, a.y - b.y);
 
 export function createSimulation(catalog: Catalog, design: MissionDesign, seed: number): Simulation {
-  const budgets = computeBudgets(catalog, design);
+  // Fly the spacecraft as built: the Reality Check growth for this seed (§4.7) sets the propellant load and what is left in reserve.
+  const { reveal, actual: budgets } = realizedBudgets(catalog, design, seed);
   const r = resolveDesign(catalog, design);
   const { scenario, dest, traj } = r;
   const rng = new Rng(seed);
@@ -72,7 +74,7 @@ export function createSimulation(catalog: Catalog, design: MissionDesign, seed: 
   const state: SimState = {
     day: 0, date: launchDate, phase: 'launch', spacecraft: { x: e0.x, y: e0.y }, earth: { x: e0.x, y: e0.y }, target: targetAt(launchDate),
     sunDistanceAU: 1, earthDistanceAU: 0, powerW: budgets.power.generatedBolW, batterySoc: 1, storageUsedGb: 0,
-    propellantKg: budgets.mass.propellantKg, doseKrad: 0, reserveRemainingM: budgets.cost.reserveM, health: {},
+    propellantKg: budgets.mass.propellantKg, doseKrad: 0, reserveRemainingM: reveal.reserveRemainingM, health: {},
     safeModeDaysLeft: 0, downlinkedGbByObjective: {}, dataLostGb: 0, sciencePct: 0, ended: false,
   };
 

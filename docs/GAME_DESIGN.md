@@ -84,9 +84,11 @@ Notation: g0 = 9.80665 m/s², S0 = 1361 W/m², AU = 149 597 870.7 km. All consta
 - Hardware = Σ part masses (×1.8 if redundant) + solar area × kg/m² + Σ instrument masses.
 - Growth allowance = Σ mass × `massGrowthByTrl[TRL]` (TRL 9: 3% … TRL ≤ 4: 25–30%).
 - Bus core = `busBaseMassKg[class]`; structure = 25% × (hw + growth + bus); harness = 8% × (hw + growth).
-- **Rocket equation with tanks**: MR = e^(Δv/(Isp·g0)); iterate `prop = (dryBase + tankFraction·prop)·(MR − 1)`.
-  If it diverges (prop > 10⁶ kg or not finite) → blocker *"The rocket equation wins"*.
-- Wet = dry + prop. **Capacity** = LV curve interpolated at C3 (`traj.c3 + 0.08 × |launchOffsetDays|`). 0 beyond the curve.
+- **Rocket equation with tanks**: MR = e^(Δv/(Isp·g0)); solve `prop = (dryBase + tankFraction·prop)·(MR − 1)`,
+  i.e. `prop = dryBase·(MR − 1) / (1 − tankFraction·(MR − 1))` (the closed form of the iteration).
+  If it diverges (`tankFraction·(MR − 1) ≥ 1`, or prop > 10⁶ kg) → blocker *"The rocket equation wins"*.
+- Wet = dry + prop. **Capacity** = LV curve interpolated at C3 (`traj.c3 + 0.08 × |launchOffsetDays|`). 0 beyond the curve
+  (blocker: the rocket can't reach that C3 at all).
 - Mass margin % = (capacity − wet)/capacity × 100.
 
 ### 4.3 Power (W)
@@ -98,6 +100,7 @@ Notation: g0 = 9.80665 m/s², S0 = 1361 W/m², AU = 149 597 870.7 km. All consta
   Peak = max(science, downlink). Margin % = (EOL − peak)/peak × 100.
 - Eclipse (worst case, cylindrical shadow): fraction = asin(R/a)/π of the period (or orbit override).
   Battery required = science load × eclipse hours / maxDoD. Redundant battery doubles capacity.
+  (An RTG keeps generating in shadow, so its battery only covers `max(0, science load − EOL power)`.)
 - Ion engine: needs `powerW` + bus from the arrays near Earth, otherwise blocker.
 - Thermal blocker: if solar flux fraction 1/d² < `minSolarFluxFraction` of the thermal part.
 
@@ -110,7 +113,11 @@ Notation: g0 = 9.80665 m/s², S0 = 1361 W/m², AU = 149 597 870.7 km. All consta
   FSL = 20·log10(4πd/λ). Rate capped at 300 Mbps.
 - Daily downlink = rate(mean distance) × DSN hours × 3600. Generated/day = Σ rate × duty × orbit duty multiplier × 86 400.
 - Data margin % = (downlink − generated)/generated × 100.
-- *Calibration targets (Track A test):* MRO-like (100 W, 3 m, X, 70 m) at 0.7 AU → 1–6 Mbps; Juno-like (35 W, 2.5 m, X, 34 m) at 5.2 AU → 20–120 kbps.
+- *Calibration targets (tests in `engine.test.ts`):* MRO-like (100 W, 3 m, X, 34 m) → 1–6 Mbps at Mars's mean distance
+  (1.52 AU) and 0.3–1.5 Mbps at its farthest (2.68 AU); the real MRO returns roughly 0.5–6 Mbps (Track B: verify and cite).
+  Juno-like (35 W, 2.5 m, X, 34 m) at 5.2 AU → 20–120 kbps.
+  (The earlier "70 m at 0.7 AU → 1–6 Mbps" target was wrong: this link budget gives ~40 Mbps there, and so does the physics.
+  MRO's real ceiling of 6 Mbps is a hardware limit, not a link limit.)
 
 ### 4.5 Science (expected, nominal)
 - Instrument quality for a measurement type = base quality × orbit `scienceModifiers[type]` (default 1)
@@ -129,10 +136,13 @@ Notation: g0 = 9.80665 m/s², S0 = 1361 W/m², AU = 149 597 870.7 km. All consta
 ### 4.7 Reliability & the Reality Check
 - P(survive primary) = LV reliability × Π over critical slots (avionics, power, transmitter, propulsion, battery) of (1 − pf),
   pf = 1 − e^(−λ·hazardMult·T), T = cruise + primary years. Redundant: pf' = (1 − β)·pf² + β·pf, β = 0.1.
-- **Reality Check (`revealGrowth`, TODO Track A):** for each part/instrument draw growth g = U(0.3, 1.5) × `massGrowthByTrl[TRL]`
+- **Reality Check (`revealGrowth`, `src/engine/growth.ts`):** for each part/instrument draw growth g = U(0.3, 1.5) × `massGrowthByTrl[TRL]`
   from stream `growth:<id>`. Same for cost with `growth-cost:<id>` at 1.2× the mass factor. Total growth is paid first
-  from the TRL allowance already in the budget, and the cost from reserves. `mustDescope` = wet > capacity OR cost
-  growth > reserve. The player then removes an instrument or changes the rocket; recompute.
+  from the TRL allowance already in the budget (the actual growth *replaces* the allowance, then structure, harness,
+  tanks and propellant are recomputed, so growing by less than the allowance gives margin back), and the cost from
+  reserves. `mustDescope` = wet > capacity OR cost growth > reserve. The player then removes an instrument or changes
+  the rocket; recompute (per-id streams mean the remaining parts keep the same growth).
+  The flight sim starts from the as-built spacecraft: its propellant load and remaining reserve come from this reveal.
 
 ### 4.8 Cost ($M, FY2026)
 - Hardware = Σ part cost (×1.6 if redundant) + solar area × $/m² + Σ instruments + bus core.

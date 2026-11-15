@@ -13,6 +13,7 @@
     "test:watch": "vitest",
     "validate:data": "vitest run src/data",
     "sources:md": "tsx scripts/data/sources-to-markdown.ts",
+    "balance": "tsx scripts/balance/reference-designs.ts",
     "check": "npm run typecheck && npm run test && npm run build"
   },
   "dependencies": {
