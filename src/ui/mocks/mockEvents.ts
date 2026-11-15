@@ -26,6 +26,7 @@ export function withMockEvents(sim: Simulation, deck: EventCard[], everyDays = 2
     get decisions() {
       return sim.decisions;
     },
+    result: () => sim.result(),
     advance(days: number): AdvanceResult {
       if (pending) return { state: view(), newLog: [], pending };
       const start = sim.log.length;
