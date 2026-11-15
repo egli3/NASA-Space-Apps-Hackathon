@@ -6,6 +6,7 @@
  */
 import type { MissionDesign } from '../types/design';
 import type { BudgetReport, Catalog, ReviewResult } from '../types/engine';
+import { computeBudgets } from './budgets';
 import { defaultDesign } from './design';
 
 export interface BalanceCheck {
@@ -104,7 +105,13 @@ export function referenceDesigns(catalog: Catalog): ReferenceDesign[] {
   });
   out.push({
     id: 'juno-direct-fh', label: 'Juno-like, direct, Falcon Heavy', design: { ...juno, trajectoryId: 'jupiter-direct-2029', launchVehicleId: 'lv-falcon-heavy' },
-    checks: [{ target: 'Feasible only with cuts (infeasible as-is)', actual: (b) => (b.feasible ? `feasible, mass margin ${pct(b.mass.marginPct)}` : `mass margin ${pct(b.mass.marginPct)}`), pass: (b) => !b.feasible }],
+    // NASA's real launch-vehicle curves say an expendable Falcon Heavy can throw this spacecraft straight at Jupiter:
+    // the gravity assist is the cheaper way, not the only way.
+    checks: [{
+      target: 'Feasible, but dearer than the gravity assist on Vulcan',
+      actual: (b) => (b.feasible ? `feasible, mass margin ${pct(b.mass.marginPct)}, $${b.cost.totalM.toFixed(0)}M vs $${computeBudgets(catalog, juno).cost.totalM.toFixed(0)}M` : `mass margin ${pct(b.mass.marginPct)}`),
+      pass: (b) => b.feasible && b.cost.totalM > computeBudgets(catalog, juno).cost.totalM,
+    }],
   });
   out.push({
     id: 'juno-no-vault', label: 'Juno-like, no radiation vault', design: make('jupiter-interior', { ...junoParts, shielding: 'shd-none' }, junoRest),

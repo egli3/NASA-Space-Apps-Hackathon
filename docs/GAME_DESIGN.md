@@ -271,7 +271,7 @@ Rows: launch mass, dry mass, power at target, cost (theirs in then-year $), inst
 | **MAVEN-like** Mars (NGIMS, particles, mag, UVS, WAC; elliptical dip orbit) | Escape objective ≥ 80%; specialist total science 25–35%, because atmospheric escape accounts for 30% of this science call. |
 | **Balanced** Mars design (remote UV escape + radar, context, high-resolution and mineral mapping, 2.5 m Ka-band dish, 12 h DSN) | Science ≥ 80%, cost under cap. That is, a thoughtful player can get ★★★. |
 | **Juno-like** Jupiter (60 m² TJ solar, vault, 2.5 m Ka, ΔV-EGA, Vulcan) | Feasible; power margin 10–40%; science ≥ 75%; reliability ≥ 70%. |
-| **Direct-to-Jupiter** with Juno-like spacecraft | Infeasible on Vulcan (teaches gravity assists); feasible only on Falcon Heavy with cuts. |
+| **Direct-to-Jupiter** with Juno-like spacecraft | Infeasible on Vulcan (teaches gravity assists); feasible on an expendable Falcon Heavy, but dearer than the gravity assist (that is what NASA's real launch-vehicle curves say). |
 | **No vault at Jupiter** | Radiation margin red; Monte Carlo success < 40%. |
 | **Lunar Prospector-like** Moon (GRNS + thermal IR, 3 m² Si, rideshare) | Feasible, cost under cap, science 45–65%. |
 | Single-string inner-planet design, standard assurance | Reliability 80–90%. Adding full redundancy → ≥ 93%. |

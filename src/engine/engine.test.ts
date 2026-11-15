@@ -7,7 +7,7 @@ import { catalog } from '../data';
 import type { Catalog } from '../types/engine';
 import { computeBudgets, defaultDesign, revealGrowth, runHeadless, runReview } from './index';
 import horizons from '../../data/raw/horizons/validation.json';
-import { insertionDvMs, planetPositionAU, planetPositionAtJd } from './orbits';
+import { insertionDvMs, orbitPeriodS, planetPositionAU, planetPositionAtJd } from './orbits';
 import { linkModel, lvCapacityKg } from './budgets';
 import { referenceDesigns } from './reference-designs';
 
@@ -20,6 +20,24 @@ describe('orbital mechanics', () => {
     const orbit = jupiter.orbits.find((o) => o.id === 'jupiter-polar-53d')!;
     const dv = insertionDvMs(jupiter, orbit, 5.8);
     expect(Math.abs(dv - 542) / 542).toBeLessThan(0.05);
+  });
+
+  it('reproduces Lunar Prospector’s 118-minute orbit at 100 km above the Moon', () => {
+    // NSSDCA 1998-001A: "near-circular 100 km altitude nominal lunar polar mapping orbit ... a period of 118 minutes".
+    const moon = catalog.destinations.find((d) => d.id === 'moon')!;
+    const orbit = moon.orbits.find((o) => o.id === 'moon-polar-100')!;
+    expect(orbitPeriodS(moon, orbit) / 60).toBeCloseTo(118, 0);
+  });
+
+  it('reproduces Mars Reconnaissance Orbiter’s capture burn of about 1 km/s', () => {
+    // NSSDCA 2005-029A: the insertion burn "slowed the spacecraft by about one km/sec", leaving a 400 × 35,000 km orbit,
+    // and aerobraking did the rest. Our aerobraking orbit captures to the same 35,000 km apoapsis.
+    const mars = catalog.destinations.find((d) => d.id === 'mars')!;
+    const orbit = mars.orbits.find((o) => o.id === 'mars-low-aerobrake')!;
+    expect(orbit.aerobraking?.captureApoapsisAltKm).toBe(35000);
+    const dv = insertionDvMs(mars, { ...orbit, periapsisAltKm: 400 }, 3.0); // typical Mars arrival speed
+    expect(dv).toBeGreaterThan(900);
+    expect(dv).toBeLessThan(1150);
   });
 
   it('matches a JPL Horizons heliocentric vector for Mars (2028-01-01) within 0.01 AU', () => {
@@ -283,8 +301,9 @@ describe('balance harness', () => {
   // GAME_DESIGN §7: targets that hold today are locked in, so data tuning cannot quietly break them.
   // The known misses are listed as todo; when a data change fixes one, delete its line here and it becomes a test.
   const KNOWN_MISSES = new Set([
+    // 52.8% today. Closing it means raising the Jupiter heater load, which would change the Jupiter flight quoted
+    // in docs/SUBMISSION.md, so it stays open until after the submission.
     'juno-like: Power margin 10–40%',
-    'juno-direct-fh: Feasible only with cuts (infeasible as-is)',
   ]);
   describe('balance targets (GAME_DESIGN §7)', () => {
     for (const r of refs)
