@@ -28,12 +28,15 @@ export function DesignStudio() {
       }
     >
       <div className="scroll-quiet h-full overflow-y-auto lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:overflow-hidden xl:grid-cols-[minmax(0,1fr)_400px]">
-        <div className="min-h-0 min-w-0 lg:grid lg:grid-rows-[minmax(200px,38%)_minmax(0,1fr)]">
-          <div data-coach="schematic" className="relative min-h-0 border-b border-line">
-            <div className="h-44 px-3 pt-2 sm:h-56 lg:absolute lg:inset-0 lg:h-auto lg:pb-12">
-              <SpacecraftSchematic design={design} budgets={budgets} />
+        <div className="min-h-0 min-w-0 lg:grid lg:grid-rows-[minmax(230px,42%)_minmax(0,1fr)]">
+          <div data-coach="schematic" className="min-h-0 border-b border-line lg:flex lg:flex-col">
+            <div className="relative h-44 sm:h-56 lg:h-auto lg:min-h-0 lg:flex-1">
+              <div className="absolute inset-0 px-3 pt-2">
+                <SpacecraftSchematic design={design} budgets={budgets} />
+              </div>
             </div>
-            <div className="px-3 pb-2 lg:absolute lg:right-4 lg:bottom-2 lg:left-4 lg:p-0">
+            {/* Room for two rows of chips, so the sketch does not jump when a change ripples a long way. */}
+            <div className="px-3 pb-2 lg:flex lg:min-h-[5.25rem] lg:items-end lg:px-4 2xl:min-h-11">
               <RippleChips design={design} budgets={budgets} />
             </div>
           </div>

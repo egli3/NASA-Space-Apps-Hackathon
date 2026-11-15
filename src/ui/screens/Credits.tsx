@@ -87,7 +87,7 @@ export function Credits() {
               </div>
               <div>
                 <dt className="font-bold">Approximate</dt>
-                <dd className="text-dim">An engineering estimate, still to be checked against the source.</dd>
+                <dd className="text-dim">A representative engineering estimate based on the cited source, not a figure copied from it. SI helped draft these.</dd>
               </div>
               <div>
                 <dt className="font-bold">Game</dt>

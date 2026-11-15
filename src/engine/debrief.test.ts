@@ -199,7 +199,7 @@ describe('buildDebrief', () => {
     expect(d.monteCarlo!.runs).toBe(20);
     expect(d.comparison.mission.id).toBe('hist-mro');
     const labels = d.comparison.rows.map((r) => r.label);
-    for (const l of ['Launch mass', 'Dry mass', 'Power at target', 'Cost', 'Instruments', 'Launch vehicle', 'Outcome', 'Fun fact']) expect(labels).toContain(l);
+    for (const l of ['Launch mass', 'Dry mass', 'Power at target, before ageing', 'Cost', 'Instruments', 'Launch vehicle', 'Outcome', 'Fun fact']) expect(labels).toContain(l);
     expect(d.comparison.rows.find((r) => r.label === 'Cost')!.note).toContain('For scale only');
     expect(buildDebrief(catalog, mro, seed, {}, result).monteCarlo).toBeUndefined();
   });

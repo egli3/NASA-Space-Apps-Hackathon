@@ -105,11 +105,11 @@ export function referenceDesigns(catalog: Catalog): ReferenceDesign[] {
   });
   out.push({
     id: 'juno-direct-fh', label: 'Juno-like, direct, Falcon Heavy', design: { ...juno, trajectoryId: 'jupiter-direct-2029', launchVehicleId: 'lv-falcon-heavy' },
-    // NASA's real launch-vehicle curves say an expendable Falcon Heavy can throw this spacecraft straight at Jupiter:
-    // the gravity assist is the cheaper way, not the only way.
+    // The verified Falcon Heavy curve lifts this ~1.6 t spacecraft to C3 77.5 with room to spare, so the lesson here is
+    // "a bigger rocket buys back the 19 months of the gravity assist, at a price", not "you must cut".
     checks: [{
-      target: 'Feasible, but dearer than the gravity assist on Vulcan',
-      actual: (b) => (b.feasible ? `feasible, mass margin ${pct(b.mass.marginPct)}, $${b.cost.totalM.toFixed(0)}M vs $${computeBudgets(catalog, juno).cost.totalM.toFixed(0)}M` : `mass margin ${pct(b.mass.marginPct)}`),
+      target: 'Feasible, but costs more than ΔV-EGA on Vulcan',
+      actual: (b) => (b.feasible ? `feasible, $${b.cost.totalM.toFixed(0)}M vs $${computeBudgets(catalog, juno).cost.totalM.toFixed(0)}M` : `infeasible, mass margin ${pct(b.mass.marginPct)}`),
       pass: (b) => b.feasible && b.cost.totalM > computeBudgets(catalog, juno).cost.totalM,
     }],
   });

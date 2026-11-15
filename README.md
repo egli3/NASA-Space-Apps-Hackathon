@@ -3,7 +3,9 @@
 **Design it. Fly it. Find out what mattered.**
 NASA Space Apps Challenge 2026 · Challenge: *Space Mission Design Game* · Team **Torpid**
 
-▶ **Play:** https://egli3.github.io/NASA-Space-Apps-Hackathon/ (deploys from `main`)
+▶ **Play:** https://egli3.github.io/NASA-Space-Apps-Hackathon/ (deploys from `main`) · [Seven-slide demo](docs/submission/MARGIN_Demo.pdf)
+
+![The Design Studio: a spacecraft sketch, the parts to choose from, and live mass, power and science budgets](docs/submission/deck/shots/design-studio.jpg)
 
 MARGIN puts you in charge of a robotic science mission from proposal to final data. Pick a science goal, build a spacecraft
 part by part, choose a rocket and trajectory, defend the design at a Review Board, fly a time-compressed mission full of real
@@ -15,6 +17,12 @@ NASA history, and finish with a debrief that replays your mission with one decis
 - **Hindsight debrief:** counterfactual replays with the same random seed attribute your outcome to specific decisions.
 - **You vs History:** your spacecraft next to MRO, Juno or Lunar Prospector.
 - **Validated:** tests reproduce Juno's Jupiter Orbit Insertion Δv within 5% and match JPL Horizons planet positions.
+
+| In flight, real anomalies become your decisions | Hindsight replays the mission with one choice changed |
+|---|---|
+| ![A decision card during the flight to Jupiter](docs/submission/deck/shots/card-engine-valves-acting-up.jpg) | ![The Hindsight debrief](docs/submission/deck/shots/hindsight.jpg) |
+
+Screenshots are captured from the running game by `docs/submission/deck/capture.mjs`, which also builds the demo deck.
 
 ## Run locally
 ```bash
@@ -35,7 +43,7 @@ Generated from `src/data/sources.json` (`npm run sources:md`):
 JPL SSD Approximate Positions of the Planets · JPL Horizons · JPL Planetary Physical Parameters ·
 NSSDCA Planetary Fact Sheets · NSSDCA Master Catalog · NASA Ames Trajectory Browser · NASA LSP Launch Vehicle Performance Website ·
 NASA Small Spacecraft Technology State-of-the-Art Report · DSN Telecommunications Link Design Handbook (810-005) · NASA CCMC DONKI ·
-NASA Lessons Learned Information System · NASA Systems Engineering Handbook · NASA Radioisotope Power Systems · NASA Photojournal and Scientific Visualization Studio.
+NASA Lessons Learned Information System · NASA Systems Engineering Handbook · NASA Radioisotope Power Systems · NASA Photojournal (Viking, Cassini and Lunar Reconnaissance Orbiter imagery).
 
 All data is baked into static JSON at build time; the game makes no runtime API calls. Each record carries `sources` and a
 `confidence` flag: `verified` (transcribed from source), `approx` (engineering estimate), or `game` (tuned for gameplay, disclosed in the Credits screen).
@@ -51,3 +59,6 @@ Super Intelligence (SI) tools were used in this project, as the Space Apps rules
 - **Images, video, audio:** the destination and scenario images are credited NASA mission photography and mosaics. See [image credits](public/img/credits.json). No image, video, or audio was generatively synthesized for this submission package.
 
 The same disclosure appears in the in-game Credits screen, the `index.html` metadata and `package.json`.
+
+## License
+Code and documentation: [MIT](LICENSE). The NASA images in `public/img` are credited NASA mission imagery and are not covered by that license; see [image credits](public/img/credits.json).

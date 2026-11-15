@@ -56,10 +56,10 @@ review-rule metric. Tests: `debrief.test.ts`. Track B is welcome to rewrite the 
 14. **Richer `explain[]`**: one entry per gauge (mass, power, battery, Δv, data, cost, radiation, reliability) with `sourceIds`.
 
 ### By M4 (Sun 17:00): balance & polish
-Status (Sun 07:00): 15, 16 (conjunction) and 17 are done. Balance: every GAME_DESIGN §7 target but one holds and is a
-test in `engine.test.ts` ("balance targets"). The open one is an `it.todo`: Juno-like power margin is 52.8%, above the
-10–40% band, and is left alone so the Jupiter flight quoted in the submission does not change. Mars became winnable through
-Track B's change to the escape objective (UV spectroscopy from low orbit also counts). Porkchop (P2) not started.
+Status (Sun): 15, 16 (conjunction) and 17 are done. Balance: every GAME_DESIGN §7 target holds and is a test in
+`engine.test.ts` ("balance targets"); the list of known misses is empty. Mars became winnable through Track B's change to the
+escape objective (UV spectroscopy from low orbit also counts); the Juno-like power margin was closed by raising the active
+thermal heater load. Porkchop (P2) not started.
 
 15. Balance pass with Track B until §7 targets hold, then convert them into tests so they stay true.
 16. P1: solar conjunction blackout; P2: Lambert porkchop for Mars (`orbits.ts`), exposing `porkchop(catalog, trajectoryId) → grid`.

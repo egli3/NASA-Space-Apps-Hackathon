@@ -91,7 +91,7 @@ body {
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.5;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word; /* break a word only when it cannot fit on a line of its own */
   -webkit-font-smoothing: antialiased;
   transition:
     background-color 0.7s ease,

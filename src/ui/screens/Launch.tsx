@@ -12,6 +12,9 @@ import { severityFor, StatusIcon, TONE_TEXT } from '../common/status';
 import { BudgetPanel } from '../design/BudgetPanel';
 import { RippleChips } from '../design/RippleChips';
 
+/** Flyby bodies are stored as lower-case ids ("earth"); show them as names. */
+const bodyName = (id: string) => catalog.destinations.find((d) => d.id === id)?.name ?? id.charAt(0).toUpperCase() + id.slice(1);
+
 const addDays = (iso: string, days: number) => new Date(Date.parse(`${iso}T00:00:00Z`) + days * 86_400_000).toISOString().slice(0, 10);
 
 /** A small plan view of the route. Not to scale (the radii are compressed so Jupiter fits); it shows the shape of the trip. */
@@ -62,7 +65,8 @@ function RouteDiagram({ traj, destName, destAU }: { traj: Trajectory; destName: 
   const [tx, ty] = pt(r2, end + sweep).split(' ').map(Number);
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="h-auto w-16 shrink-0 self-start text-ink sm:w-[150px]" aria-hidden>
+    // 12 px taller than the orbits: the destination's name sits under its marker, which can be at the very bottom.
+    <svg width={size} height={size + 12} viewBox={`0 0 ${size} ${size + 12}`} className="h-auto w-16 shrink-0 self-start text-ink sm:w-[150px]" aria-hidden>
       <circle cx={c} cy={c} r={r1} {...stroke} strokeDasharray="2 4" opacity="0.6" />
       <circle cx={c} cy={c} r={r2} {...stroke} strokeDasharray="2 4" opacity="0.6" />
       <circle cx={c} cy={c} r="3" fill="currentColor" />
@@ -170,7 +174,7 @@ export function Launch() {
                           <Fact label="Burn on the way" value={t.dsmDvMs > 0 ? deltaV(t.dsmDvMs) : 'none'} />
                           <Fact label="Arrival speed" value={`${num(t.arrivalVinfKms, 1)} km/s`} />
                         </dl>
-                        {t.flybys.length > 0 && <span className="mt-2 block text-sm text-dim">Swings past {t.flybys.map((f) => f.bodyId).join(', ')} on day {num(t.flybys[0].dayOffset)} for a free boost.</span>}
+                        {t.flybys.length > 0 && <span className="mt-2 block text-sm text-dim">Swings past {t.flybys.map((f) => bodyName(f.bodyId)).join(', ')} on day {num(t.flybys[0].dayOffset)} for a free boost.</span>}
                       </span>
                     </button>
                   );
