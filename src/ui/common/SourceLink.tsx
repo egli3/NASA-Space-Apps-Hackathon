@@ -25,7 +25,7 @@ export function SourceLinks({ ids, confidence }: { ids: string[]; confidence?: C
                 <span className="text-dim">{s.title}</span>
               ) : (
                 <a href={s.url} target="_blank" rel="noreferrer" className="underline decoration-rule underline-offset-2 hover:decoration-ink">
-                  {s.org}: {shortTitle(s.title)}
+                  {s.org}: {shortTitle(s.title, s.org)}
                 </a>
               )}
             </li>
@@ -38,9 +38,10 @@ export function SourceLinks({ ids, confidence }: { ids: string[]; confidence?: C
 }
 
 /** Source titles in the data often start with the org name; don't say it twice. */
-function shortTitle(title: string) {
+function shortTitle(title: string, org: string) {
   const cut = title.split(' — ');
-  return cut.length > 1 ? cut.slice(1).join(' — ') : title;
+  if (cut.length > 1) return cut.slice(1).join(' — ');
+  return title.startsWith(`${org}: `) ? title.slice(org.length + 2) : title;
 }
 
 function InfoGlyph() {

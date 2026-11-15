@@ -142,7 +142,7 @@ export function ReviewBoard() {
                   ['green', green.length, 'passed'],
                 ] as const
               ).map(([sev, n, label], i) => (
-                <div key={sev} className={`px-4 py-3 ${i > 0 ? 'border-l border-line' : ''}`}>
+                <div key={sev} className={`px-3 py-3 lg:px-2 xl:px-4${i > 0 ? 'border-l border-line' : ''}`}>
                   <dd className="flex items-center gap-2">
                     <StatusIcon severity={sev} size={18} />
                     <span className="num text-3xl">{n}</span>
@@ -209,7 +209,7 @@ export function ReviewBoard() {
                     <li key={f.ruleId} className="flex items-center gap-3 border-b border-line/60 py-2.5">
                       <StatusIcon severity="green" />
                       <span className="flex-1">{f.title}</span>
-                      <span className="num">{f.value > 999 ? 'plenty' : pct(f.value, f.value < 100 ? 1 : 0)}</span>
+                      <span className="num">{f.value >= 999 ? 'plenty' : pct(f.value, f.value < 100 ? 1 : 0)}</span>
                       <span className="w-36 text-right text-sm text-dim">
                         board wants <span className="num">{pct(f.threshold)}</span>
                       </span>

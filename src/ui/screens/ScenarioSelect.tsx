@@ -62,7 +62,7 @@ export function ScenarioSelect() {
                   <div className="flex flex-1 flex-col px-4 py-4 sm:px-6 sm:py-5">
                     <h2 className="text-2xl font-bold">{s.title}</h2>
                     <p className="mt-2 flex-1 text-dim">{s.tagline}</p>
-                    <dl className="mt-5 grid grid-cols-3 gap-3 border-t border-line pt-4 text-sm">
+                    <dl className="mt-5 grid grid-cols-[auto_auto_minmax(0,1fr)] gap-x-5 gap-y-3 border-t border-line pt-4 text-sm">
                       <div>
                         <dt className="text-dim">Cost cap</dt>
                         <dd className="num text-lg">{money(cls.costCapM)}</dd>
@@ -73,7 +73,7 @@ export function ScenarioSelect() {
                       </div>
                       <div>
                         <dt className="text-dim">Difficulty</dt>
-                        <dd className="flex items-center gap-2 text-lg">
+                        <dd className="flex min-h-7 flex-wrap items-center gap-x-2 gap-y-0.5 text-lg">
                           <span className="flex gap-1" role="img" aria-label={`${s.difficulty} of 3`}>
                             {[1, 2, 3].map((n) => (
                               <span key={n} className={`h-3 w-3 border border-ink ${n <= s.difficulty ? 'bg-ink' : ''}`} />

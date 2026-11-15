@@ -47,6 +47,12 @@ function phrase(item: HindsightItem): { lead: string; choice: string; instead?: 
   return { lead: 'If you had chosen', choice: item.toLabel, instead: item.fromLabel };
 }
 
+/** One card reads as a column of text; two share the sheet; three need the full desktop width before they sit side by side. */
+const HINDSIGHT_COLS: Record<number, string> = { 1: 'max-w-2xl', 2: 'lg:grid-cols-2', 3: 'lg:grid-cols-2 xl:grid-cols-3' };
+
+/** Figures are set in the tabular face; a sentence (the real mission's outcome, its fun fact) reads better as text. */
+const cellFont = (value: string) => (value.length > 40 ? '' : 'num');
+
 const costDelta = (m: number) => (Math.abs(m) < 0.5 ? 'no change' : `${m >= 0 ? '+' : '−'}${money(Math.abs(m))}`);
 
 function ReplayComparison({ item, actual, open }: { item: HindsightItem; actual: MissionResult; open?: boolean }) {
@@ -55,7 +61,7 @@ function ReplayComparison({ item, actual, open }: { item: HindsightItem; actual:
   const difference = replay.firstLogDifference;
   const describe = (entry?: LogEntry) => entry ? `Day ${num(entry.day)} · ${date(entry.date)} · ${entry.text}` : 'Log ended';
   return (
-    <details open={open} className="border-t border-line">
+    <details open={open} className="self-start border-t border-line">
       <summary className="cursor-pointer px-5 py-3 font-medium hover:bg-ink/5">Compare with your flight</summary>
       <div className="px-4 pb-4">
         <p className="mb-3 text-sm text-dim">Same seed and applicable flight decisions. One design choice changes.</p>
@@ -109,7 +115,7 @@ function HindsightCard({ item, index, total, actual, openReplay }: { item: Hinds
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.15 + index * 0.2, duration: 0.45, ease: [0.2, 0.7, 0.2, 1] }}
-      className="flex flex-col border border-rule bg-raised"
+      className="row-span-4 grid grid-rows-subgrid gap-y-0 border border-rule bg-raised"
     >
       <div className="flex items-baseline justify-between border-b border-line px-5 py-2.5">
         <span className="font-bold">{item.dimension}</span>
@@ -117,7 +123,7 @@ function HindsightCard({ item, index, total, actual, openReplay }: { item: Hinds
           {index + 1} of {total}
         </span>
       </div>
-      <div className="flex-1 px-5 py-4">
+      <div className="px-5 py-4">
         <p className="text-dim">{p.lead}</p>
         <p className="mt-0.5 text-xl leading-snug font-bold">{p.choice}</p>
         {p.instead && (
@@ -130,11 +136,11 @@ function HindsightCard({ item, index, total, actual, openReplay }: { item: Hinds
       <dl className="grid grid-cols-2 border-t border-line">
         <div className="px-5 py-3">
           <dt className="text-sm text-dim">Science</dt>
-          <dd className={`num text-3xl ${item.deltaSciencePct >= 0 ? 'text-go' : 'text-nogo'}`}>{signed(item.deltaSciencePct, Math.abs(item.deltaSciencePct) < 10 ? 1 : 0)} pts</dd>
+          <dd className={`num text-2xl whitespace-nowrap sm:text-3xl xl:text-2xl ${item.deltaSciencePct >= 0 ? 'text-go' : 'text-nogo'}`}>{signed(item.deltaSciencePct, Math.abs(item.deltaSciencePct) < 10 ? 1 : 0)} pts</dd>
         </div>
         <div className="border-l border-line px-5 py-3">
           <dt className="text-sm text-dim">Cost</dt>
-          <dd className="num text-3xl">{costDelta(item.deltaCostM)}</dd>
+          <dd className="num text-2xl whitespace-nowrap sm:text-3xl xl:text-2xl">{costDelta(item.deltaCostM)}</dd>
         </div>
       </dl>
       <ReplayComparison item={item} actual={actual} open={openReplay} />
@@ -305,7 +311,7 @@ export function Debrief() {
               <p className="mt-1 max-w-[62ch] text-dim">Each replay keeps your luck and your in-flight decisions, and changes exactly one design choice. The three that would have mattered most appear here.</p>
             </div>
           ) : top.length > 0 ? (
-            <ol className="grid gap-5 lg:grid-cols-3">
+            <ol className={`grid gap-5 ${HINDSIGHT_COLS[Math.min(3, top.length)]}`}>
               {top.map((h, i) => (
                 <HindsightCard key={`${h.dimension}-${h.toLabel}`} item={h} index={i} total={top.length} actual={result} openReplay={guided && i === 0} />
               ))}
@@ -427,10 +433,10 @@ export function Debrief() {
                       <th scope="row" className="py-2.5 pr-4 text-left font-medium text-dim">
                         {r.label}
                       </th>
-                      <td className="num py-2.5 pr-4">{r.yours}</td>
-                      <td className="num py-2.5">
+                      <td className={`py-2.5 pr-4 ${cellFont(r.yours)}`}>{r.yours}</td>
+                      <td className={`py-2.5 ${cellFont(r.theirs)}`}>
                         {r.theirs}
-                        {r.note && <span className="ml-2 font-sans text-sm text-dim">{r.note}</span>}
+                        {r.note && <span className="ml-2 font-sans text-sm text-dim [word-spacing:normal]">{r.note}</span>}
                       </td>
                     </tr>
                   ))}

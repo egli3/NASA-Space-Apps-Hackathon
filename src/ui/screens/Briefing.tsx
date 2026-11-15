@@ -1,9 +1,37 @@
+import { useEffect, useState } from 'react';
 import { catalog } from '../../data';
 import { useGame } from '../../store/game';
 import { date, duration, money, years } from '../common/format';
 import { MEASUREMENT_LABEL } from '../common/labels';
 import { PlanetGlyph } from '../common/PlanetGlyph';
 import { ActionBar, Section, Sheet } from '../common/Sheet';
+
+interface ImageCredit {
+  file: string;
+  title: string;
+  credit: string;
+  url: string;
+}
+
+/** The credit list ships as a static file next to the images (Track B keeps it); read it once and reuse it. */
+let creditList: Promise<ImageCredit[]> | undefined;
+function useImageCredit(imageUrl?: string): ImageCredit | undefined {
+  const [credit, setCredit] = useState<ImageCredit>();
+  useEffect(() => {
+    if (!imageUrl) return;
+    let live = true;
+    creditList ??= fetch(`${import.meta.env.BASE_URL}img/credits.json`).then((r) => (r.ok ? (r.json() as Promise<ImageCredit[]>) : []));
+    creditList
+      .then((list) => {
+        if (live) setCredit(list.find((c) => imageUrl.endsWith(`/${c.file}`)));
+      })
+      .catch(() => undefined);
+    return () => {
+      live = false;
+    };
+  }, [imageUrl]);
+  return credit;
+}
 
 export function Briefing() {
   const design = useGame((s) => s.design)!;
@@ -15,6 +43,7 @@ export function Briefing() {
   const rival = catalog.history.find((h) => h.id === scenario.historicalMissionId);
   const windows = scenario.trajectoryIds.map((id) => catalog.trajectories.find((t) => t.id === id)!);
   const maxWeight = Math.max(...scenario.objectives.map((o) => o.weight));
+  const imageCredit = useImageCredit(scenario.imageUrl);
 
   return (
     <Sheet
@@ -50,9 +79,19 @@ export function Briefing() {
                   className="aspect-[30/17] h-auto w-full border border-rule bg-black object-cover"
                 />
                 <figcaption className="mt-1 text-sm text-dim">
-                  <a href={`${import.meta.env.BASE_URL}img/credits.json`} target="_blank" rel="noreferrer" className="underline underline-offset-2">
-                    NASA image credits
-                  </a>
+                  {imageCredit ? (
+                    <>
+                      Image:{' '}
+                      <a href={imageCredit.url} target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                        {imageCredit.title}
+                      </a>
+                      . Credit: {imageCredit.credit}.
+                    </>
+                  ) : (
+                    <a href={`${import.meta.env.BASE_URL}img/credits.json`} target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                      NASA image credits
+                    </a>
+                  )}
                 </figcaption>
               </figure>
             )}

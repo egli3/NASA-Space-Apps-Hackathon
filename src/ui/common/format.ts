@@ -1,7 +1,8 @@
 /** Number formatting for the whole UI: one place, consistent units. Owner: Track C. */
 
+/** Negative numbers get a true minus sign (U+2212), the same one `signed` and `money` use. */
 export const num = (n: number, digits = 0): string =>
-  Number.isFinite(n) ? n.toLocaleString('en-US', { maximumFractionDigits: digits, minimumFractionDigits: digits }) : 'n/a';
+  Number.isFinite(n) ? n.toLocaleString('en-US', { maximumFractionDigits: digits, minimumFractionDigits: digits }).replace('-', '−') : 'n/a';
 
 export const kg = (n: number): string => `${num(n, n < 10 && n % 1 !== 0 ? 1 : 0)} kg`;
 

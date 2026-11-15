@@ -127,7 +127,7 @@ export function RealityCheck() {
                     <p>
                       Launch mass is now <span className="num">{kg(newWet)}</span>; the rocket lifts <span className="num">{kg(capacity)}</span>
                     </p>
-                    <span className={`num text-2xl leading-none font-medium ${TONE_TEXT[massSev]}`}>{signedPct(reveal.newMassMarginPct)}</span>
+                    <span className={`num shrink-0 text-2xl leading-none font-medium whitespace-nowrap ${TONE_TEXT[massSev]}`}>{signedPct(reveal.newMassMarginPct)}</span>
                   </div>
                   <MarginBar need={newWet} have={capacity} severity={massSev} ariaLabel="Launch mass against rocket capacity" />
                   <p className="mt-1 text-sm text-dim">
@@ -140,7 +140,7 @@ export function RealityCheck() {
                     <p>
                       Cost growth of <span className="num">{money(reveal.costGrowthM)}</span> paid from <span className="num">{money(budgets.cost.reserveM)}</span> of reserves
                     </p>
-                    <span className={`num text-2xl leading-none font-medium ${reserveBroken ? 'text-nogo' : 'text-ink'}`}>{money(reveal.reserveRemainingM)}</span>
+                    <span className={`num shrink-0 text-2xl leading-none font-medium whitespace-nowrap ${reserveBroken ? 'text-nogo' : 'text-ink'}`}>{money(reveal.reserveRemainingM)}</span>
                   </div>
                   <MarginBar need={reveal.costGrowthM} have={budgets.cost.reserveM} severity={reserveBroken ? 'red' : 'green'} ariaLabel="Cost growth against reserves" />
                   <p className="mt-1 text-sm text-dim">{reserveBroken ? 'The reserve is gone and the project is over budget.' : 'What is left pays for trouble during the flight.'}</p>
