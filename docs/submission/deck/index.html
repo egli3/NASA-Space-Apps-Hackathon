@@ -94,12 +94,19 @@
   .thumbs b { display: block; margin-top: 8px; font-size: 15px; }
   .thumbs a { font-size: 11px; color: var(--dim); }
   .play .si { margin-top: 20px; font-size: 13px; color: var(--dim); }
+
+  /* AI-use disclosure (Space Apps rule): a visible mark on every slide, and on every picture made with AI-assisted work. */
+  .ai { position: absolute; top: 20px; right: 28px; z-index: 5; padding: 5px 12px; border: 1.5px solid var(--nogo); background: rgb(255 255 255 / 0.88); color: var(--nogo); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+  .title .ai { right: auto; left: 88px; top: 40px; background: rgb(9 35 64 / 0.9); color: var(--amber); border-color: var(--amber); }
+  .shotwrap { position: relative; }
+  .aimark { position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 5px 10px; background: rgb(9 35 64 / 0.86); border: 1px solid var(--amber); color: var(--amber); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
 </style>
 </head>
 <body>
 
 <!-- 1 -->
 <section class="slide dark title">
+  <p class="ai">AI-assisted slide · NASA photos are real, not AI-generated</p>
   <div class="left">
     <p class="eyebrow">NASA SPACE APPS CHALLENGE 2026</p>
     <p class="word">MARGIN</p>
@@ -117,11 +124,12 @@
 
 <!-- 2 -->
 <section class="slide">
+  <p class="ai">AI-assisted slide · NASA photos are real, not AI-generated</p>
   <h1>First, decide what you need to measure</h1>
   <p class="sub">The science gives you a reason to choose every kilogram and watt.</p>
   <div class="cols" style="grid-template-columns: 860px 1fr">
     <div>
-      <img class="shot" style="height: 500px" src="shots/design-studio.jpg" alt="The Design Studio: a spacecraft sketch, parts to choose from, and live budgets" />
+      <div class="shotwrap"><img class="shot" style="height: 500px" src="shots/design-studio.jpg" alt="The Design Studio: a spacecraft sketch, parts to choose from, and live budgets" /><span class="aimark">AI-assisted · game interface built with AI tools</span></div>
       <p class="cap">The Design Studio. Swapping in the 100 W radio ripples through power, data sent home and science.</p>
     </div>
     <div>
@@ -138,11 +146,12 @@
 
 <!-- 3 -->
 <section class="slide">
+  <p class="ai">AI-assisted slide · NASA photos are real, not AI-generated</p>
   <h1>The route changes what your rocket can carry</h1>
   <p class="sub">Both flight paths come from archived NASA Ames trajectory searches.</p>
   <div class="cols" style="grid-template-columns: 760px 1fr">
     <div>
-      <img class="shot" style="height: 475px" src="shots/launch-routes.jpg" alt="The Launch screen comparing a direct route and an Earth gravity assist to Jupiter" />
+      <div class="shotwrap"><img class="shot" style="height: 475px" src="shots/launch-routes.jpg" alt="The Launch screen comparing a direct route and an Earth gravity assist to Jupiter" /><span class="aimark">AI-assisted · game interface built with AI tools</span></div>
       <p class="cap">The Launch screen in the guided Jupiter flight: same rocket, two routes.</p>
     </div>
     <div>
@@ -164,6 +173,7 @@
 
 <!-- 4 -->
 <section class="slide">
+  <p class="ai">AI-assisted slide · NASA photos are real, not AI-generated</p>
   <h1>Now decide whether to carry the vault</h1>
   <p class="sub">The same assisted Jupiter design, flown with and without the modeled titanium vault.</p>
   <div class="cols" style="grid-template-columns: 1fr 700px">
@@ -176,7 +186,7 @@
       <p class="src" style="margin-top: 24px">Share of flights returning the science team’s minimum · 50 simulated flights per design · reference seed 2026</p>
     </div>
     <div>
-      <img class="shot" style="height: 437px" src="shots/review-board.jpg" alt="The Review Board: one caution, eight checks passed, and 38 of 50 predicted flights succeeding" />
+      <div class="shotwrap"><img class="shot" style="height: 437px" src="shots/review-board.jpg" alt="The Review Board: one caution, eight checks passed, and 38 of 50 predicted flights succeeding" /><span class="aimark">AI-assisted · game interface built with AI tools</span></div>
       <p class="cap">The Review Board flies the design 50 times before you commit: 38 of 50 with the vault.</p>
     </div>
   </div>
@@ -185,11 +195,12 @@
 
 <!-- 5 -->
 <section class="slide">
+  <p class="ai">AI-assisted slide · NASA photos are real, not AI-generated</p>
   <h1>Real missions make hard choices in flight</h1>
   <p class="sub">Juno’s main-engine valves changed the mission plan after arrival. In MARGIN the call is yours.</p>
   <div class="cols" style="grid-template-columns: 860px 1fr">
     <div>
-      <img class="shot" style="height: 500px" src="shots/card-engine-valves-acting-up.jpg" alt="A decision card during flight: engine valves acting up, stay in the longer orbit or fire the engine anyway" />
+      <div class="shotwrap"><img class="shot" style="height: 500px" src="shots/card-engine-valves-acting-up.jpg" alt="A decision card during flight: engine valves acting up, stay in the longer orbit or fire the engine anyway" /><span class="aimark">AI-assisted · game interface built with AI tools</span></div>
       <p class="cap">A decision card on arrival at Jupiter. Each card ends with what really happened and a NASA source.</p>
     </div>
     <div>
@@ -204,11 +215,12 @@
 
 <!-- 6 -->
 <section class="slide">
+  <p class="ai">AI-assisted slide · NASA photos are real, not AI-generated</p>
   <h1>Then find out which decision mattered</h1>
   <p class="sub">Hindsight re-flies your mission with the same luck and exactly one choice changed.</p>
   <div class="cols" style="grid-template-columns: 860px 1fr">
     <div>
-      <img class="shot" style="height: 500px" src="shots/hindsight.jpg" alt="The Hindsight debrief: two cards showing what a different orbit or more testing would have returned" />
+      <div class="shotwrap"><img class="shot" style="height: 500px" src="shots/hindsight.jpg" alt="The Hindsight debrief: two cards showing what a different orbit or more testing would have returned" /><span class="aimark">AI-assisted · game interface built with AI tools</span></div>
       <p class="cap">The debrief of the guided flight. Every replay can be opened and compared line by line.</p>
     </div>
     <div>
@@ -223,6 +235,7 @@
 
 <!-- 7 -->
 <section class="slide">
+  <p class="ai">AI-assisted slide · NASA photos are real, not AI-generated</p>
   <h1>Every important number has a source</h1>
   <p class="sub">The catalog marks NASA values, engineering estimates and gameplay assumptions.</p>
   <div class="cols" style="grid-template-columns: 1fr 520px">
@@ -250,7 +263,7 @@
         <div><img src="shots/nasa-jupiter-interior.jpg" alt="Jupiter" /><b>Giant’s Heart</b><a href="https://science.nasa.gov/photojournal/cassini-jupiter-portrait/">NASA/JPL/Space Science Institute</a></div>
         <div><img src="shots/nasa-moon-ice.jpg" alt="The Moon" /><b>Lunar Ice Prospector</b><a href="https://science.nasa.gov/photojournal/nearside-spectacular/">NASA/GSFC/Arizona State University</a></div>
       </div>
-      <p class="si">Team Torpid · SI-assisted code, writing and layout · screenshots are the running game</p>
+      <p class="si">Team Torpid · AI (SI) tools assisted the code, writing, layout and game interface · screenshots are the running game · no AI-generated images: all photos are NASA originals</p>
     </div>
   </div>
   <div class="foot"><span>MARGIN / TEAM TORPID</span><span class="si-tag">SI-assisted code, writing &amp; layout · images are NASA photos or game screenshots</span><span>07</span></div>
