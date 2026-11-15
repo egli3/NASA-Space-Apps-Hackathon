@@ -1,0 +1,94 @@
+[
+ {
+  "flrID": "2018-02-04T20:18:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2018-02-04T20:18Z",
+  "peakTime": "2018-02-04T20:24Z",
+  "endTime": "2018-02-04T20:46Z",
+  "classType": "C1.1",
+  "sourceLocation": "S08E80",
+  "activeRegionNum": null,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/13645/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2018-02-04T21:09Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2018-02-12T00:15:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2018-02-12T00:15Z",
+  "peakTime": "2018-02-12T01:35Z",
+  "endTime": "2018-02-12T03:21Z",
+  "classType": "C1.5",
+  "sourceLocation": "S05W10",
+  "activeRegionNum": 12699,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/13663/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2018-02-12T01:25:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2018-02-12T15:35Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2018-03-30T07:57:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2018-03-30T07:57Z",
+  "peakTime": "2018-03-30T08:04Z",
+  "endTime": "2018-03-30T08:08Z",
+  "classType": "C4.6",
+  "sourceLocation": "S10E70",
+  "activeRegionNum": 12703,
+  "note": "This flare had an associated eruption characterized by opening field lines around 8:06Z that was best seen in SDO AIA 193.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/13791/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2018-03-30T08:48:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2018-03-30T13:36Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2018-05-28T17:06:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2018-05-28T17:06Z",
+  "peakTime": "2018-05-28T17:14Z",
+  "endTime": "2018-05-28T17:40Z",
+  "classType": "C3.3",
+  "sourceLocation": "N15E18",
+  "activeRegionNum": 12712,
+  "note": "Double-peaked flare in a series of minor flares from AR2712",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/13928/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2018-05-28T18:56Z",
+  "versionId": 1
+ }
+]

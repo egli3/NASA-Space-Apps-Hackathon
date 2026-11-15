@@ -6,7 +6,8 @@ import { describe, expect, it } from 'vitest';
 import { catalog } from '../data';
 import type { Catalog } from '../types/engine';
 import { computeBudgets, defaultDesign, revealGrowth, runHeadless, runReview } from './index';
-import { insertionDvMs, planetPositionAU } from './orbits';
+import horizons from '../../data/raw/horizons/validation.json';
+import { insertionDvMs, planetPositionAU, planetPositionAtJd } from './orbits';
 import { linkModel, lvCapacityKg } from './budgets';
 import { referenceDesigns } from './reference-designs';
 
@@ -29,6 +30,23 @@ describe('orbital mechanics', () => {
     expect(Math.abs(p.x - 1.339705312808529e8 / au)).toBeLessThan(0.01);
     expect(Math.abs(p.y - -1.595613505529681e8 / au)).toBeLessThan(0.01);
   });
+
+  // 108 reference vectors from the JPL Horizons API (scripts/data/fetch-horizons.ts): Earth, Mars and Jupiter every
+  // three months over the years our missions fly. The engine uses JPL's approximate Keplerian elements instead.
+  for (const body of ['earth', 'mars', 'jupiter']) {
+    it(`matches JPL Horizons for ${body} on 36 dates from 2026 to 2034`, () => {
+      const el = catalog.planetaryElements.find((p) => p.bodyId === body)!;
+      const rows = horizons.rows.filter((r) => r.bodyId === body);
+      expect(rows.length).toBe(36);
+      let worstAU = 0;
+      for (const r of rows) {
+        const p = planetPositionAtJd(el, r.jdTdb);
+        worstAU = Math.max(worstAU, Math.hypot(p.x - r.xAU, p.y - r.yAU, p.z - r.zAU));
+      }
+      // Measured: Earth 0.00013 AU, Mars 0.00044 AU, Jupiter 0.0050 AU at worst (Jupiter is perturbed by Saturn).
+      expect(worstAU).toBeLessThan(body === 'jupiter' ? 0.01 : 0.001);
+    });
+  }
 
   it('interpolates launch vehicle curves and returns 0 beyond the curve', () => {
     const fh = catalog.launchVehicles.find((l) => l.id === 'lv-falcon-heavy')!;

@@ -1,0 +1,732 @@
+[
+ {
+  "sepID": "2014-01-06T08:30:00-SEP-001",
+  "eventTime": "2014-01-06T08:30Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4332/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-01-06T08:09:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140106-AL-001",
+    "messageIssueTime": "2014-01-06T13:32Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/4335/1"
+   }
+  ],
+  "submissionTime": "2014-01-06T13:07Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-01-06T09:15:00-SEP-001",
+  "eventTime": "2014-01-06T09:15Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >10 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4333/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-01-06T08:09:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2014-01-06T13:07Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-01-06T10:00:00-SEP-001",
+  "eventTime": "2014-01-06T10:00Z",
+  "instruments": [
+   {
+    "displayName": "SOHO: COSTEP 15.8-39.8 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4334/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-01-06T08:09:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2014-01-06T13:09Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-01-07T19:45:00-SEP-001",
+  "eventTime": "2014-01-07T19:45Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >10 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4362/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-01-07T18:02:00-FLR-001"
+   },
+   {
+    "activityID": "2014-01-07T18:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2014-01-07T23:13Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-01-07T20:30:00-SEP-001",
+  "eventTime": "2014-01-07T20:30Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4356/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-01-07T18:02:00-FLR-001"
+   },
+   {
+    "activityID": "2014-01-07T18:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140107-AL-004",
+    "messageIssueTime": "2014-01-07T20:45Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/4357/1"
+   },
+   {
+    "messageID": "20140108-AL-002",
+    "messageIssueTime": "2014-01-08T03:42Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/4366/1"
+   }
+  ],
+  "submissionTime": "2014-01-07T20:44Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-01-07T20:30:00-SEP-002",
+  "eventTime": "2014-01-07T20:30Z",
+  "instruments": [
+   {
+    "displayName": "SOHO: COSTEP 15.8-39.8 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4361/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-01-07T18:02:00-FLR-001"
+   },
+   {
+    "activityID": "2014-01-07T18:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2014-01-07T23:08Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-01-08T21:31:00-SEP-001",
+  "eventTime": "2014-01-08T21:31Z",
+  "instruments": [
+   {
+    "displayName": "STEREO A: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4381/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-01-06T08:09:00-CME-001"
+   },
+   {
+    "activityID": "2014-01-07T18:24:00-CME-001"
+   },
+   {
+    "activityID": "2014-01-08T17:00:00-IPS-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140108-AL-004",
+    "messageIssueTime": "2014-01-08T22:55Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/4382/1"
+   }
+  ],
+  "submissionTime": "2014-11-28T19:11Z",
+  "versionId": 2
+ },
+ {
+  "sepID": "2014-02-20T08:55:00-SEP-001",
+  "eventTime": "2014-02-20T08:55Z",
+  "instruments": [
+   {
+    "displayName": "SOHO: COSTEP 15.8-39.8 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4634/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-02-20T08:00:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140220-AL-002",
+    "messageIssueTime": "2014-02-20T14:49Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/4676/1"
+   }
+  ],
+  "submissionTime": "2014-04-16T14:05Z",
+  "versionId": 2
+ },
+ {
+  "sepID": "2014-02-25T06:05:00-SEP-001",
+  "eventTime": "2014-02-25T06:05Z",
+  "instruments": [
+   {
+    "displayName": "STEREO A: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4637/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-02-25T00:41:00-FLR-001"
+   },
+   {
+    "activityID": "2014-02-25T01:25:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140225-AL-003",
+    "messageIssueTime": "2014-02-25T13:31Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/4677/1"
+   }
+  ],
+  "submissionTime": "2014-03-19T22:23Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-02-25T13:55:00-SEP-001",
+  "eventTime": "2014-02-25T13:55Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >10 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4638/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-02-25T00:41:00-FLR-001"
+   },
+   {
+    "activityID": "2014-02-25T01:25:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140225-AL-005",
+    "messageIssueTime": "2014-02-25T14:23Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/4678/1"
+   }
+  ],
+  "submissionTime": "2014-03-19T22:24Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-03-05T21:05:00-SEP-001",
+  "eventTime": "2014-03-05T21:05Z",
+  "instruments": [
+   {
+    "displayName": "STEREO A: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4641/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-03-04T18:48:00-CME-001"
+   },
+   {
+    "activityID": "2014-03-05T13:54:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140315-AL-002",
+    "messageIssueTime": "2014-03-05T21:45Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/4675/1"
+   }
+  ],
+  "submissionTime": "2014-03-19T22:42Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-03-12T20:47:00-SEP-001",
+  "eventTime": "2014-03-12T20:47Z",
+  "instruments": [
+   {
+    "displayName": "STEREO A: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/4642/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-03-12T14:39:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140312-AL-002",
+    "messageIssueTime": "2014-03-12T21:27Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/4674/1"
+   }
+  ],
+  "submissionTime": "2014-03-19T22:44Z",
+  "versionId": 2
+ },
+ {
+  "sepID": "2014-04-02T15:55:00-SEP-001",
+  "eventTime": "2014-04-02T15:55Z",
+  "instruments": [
+   {
+    "displayName": "STEREO B: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/5079/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-04-02T13:18:00-FLR-001"
+   },
+   {
+    "activityID": "2014-04-02T13:55:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140402-AL-002",
+    "messageIssueTime": "2014-04-02T16:27Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/5081/1"
+   }
+  ],
+  "submissionTime": "2014-04-02T16:20Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-04-18T15:25:00-SEP-001",
+  "eventTime": "2014-04-18T15:25Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >10 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/5251/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-04-18T12:31:00-FLR-001"
+   },
+   {
+    "activityID": "2014-04-18T13:09:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140418-AL-002",
+    "messageIssueTime": "2014-04-18T15:43Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/5252/1"
+   }
+  ],
+  "submissionTime": "2014-04-18T15:41Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-04-18T21:51:00-SEP-001",
+  "eventTime": "2014-04-18T21:51Z",
+  "instruments": [
+   {
+    "displayName": "SOHO: COSTEP 15.8-39.8 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/5259/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-04-18T12:31:00-FLR-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140418-AL-006",
+    "messageIssueTime": "2014-04-18T22:39Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/5260/1"
+   }
+  ],
+  "submissionTime": "2014-04-18T22:38Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-08-28T20:58:00-SEP-001",
+  "eventTime": "2014-08-28T20:58Z",
+  "instruments": [
+   {
+    "displayName": "STEREO A: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/6497/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-08-28T17:54:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140828-AL-001",
+    "messageIssueTime": "2014-08-28T21:22Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6498/1"
+   },
+   {
+    "messageID": "20140828-AL-002",
+    "messageIssueTime": "2014-08-28T21:43Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6499/1"
+   }
+  ],
+  "submissionTime": "2014-08-28T21:39Z",
+  "versionId": 2
+ },
+ {
+  "sepID": "2014-09-01T12:14:00-SEP-001",
+  "eventTime": "2014-09-01T12:14Z",
+  "instruments": [
+   {
+    "displayName": "STEREO B: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/6514/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-09-01T11:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140901-AL-001",
+    "messageIssueTime": "2014-09-01T12:41Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6515/1"
+   },
+   {
+    "messageID": "20140901-AL-002",
+    "messageIssueTime": "2014-09-01T12:58Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6516/1"
+   }
+  ],
+  "submissionTime": "2014-09-01T12:41Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-09-02T07:05:00-SEP-001",
+  "eventTime": "2014-09-02T07:05Z",
+  "instruments": [
+   {
+    "displayName": "STEREO A: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/6531/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-09-01T11:24:00-CME-001"
+   },
+   {
+    "activityID": "2014-09-01T16:00:00-CME-001"
+   },
+   {
+    "activityID": "2014-09-01T22:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140902-AL-001",
+    "messageIssueTime": "2014-09-02T07:25Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6532/1"
+   },
+   {
+    "messageID": "20140902-AL-002",
+    "messageIssueTime": "2014-09-02T12:30Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6534/1"
+   }
+  ],
+  "submissionTime": "2014-09-02T12:16Z",
+  "versionId": 2
+ },
+ {
+  "sepID": "2014-09-04T22:45:00-SEP-001",
+  "eventTime": "2014-09-04T22:45Z",
+  "instruments": [
+   {
+    "displayName": "STEREO B: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/6571/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-09-01T11:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140905-AL-001",
+    "messageIssueTime": "2014-09-05T02:10Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6572/1"
+   }
+  ],
+  "submissionTime": "2014-09-05T02:07Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-09-11T02:40:00-SEP-001",
+  "eventTime": "2014-09-11T02:40Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >10 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/6620/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-09-10T17:21:00-FLR-001"
+   },
+   {
+    "activityID": "2014-09-10T18:18:00-CME-001"
+   },
+   {
+    "activityID": "2014-09-12T15:26:00-IPS-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140911-AL-003",
+    "messageIssueTime": "2014-09-11T02:50Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6621/1"
+   },
+   {
+    "messageID": "20140911-AL-004",
+    "messageIssueTime": "2014-09-11T02:55Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6622/1"
+   }
+  ],
+  "submissionTime": "2014-09-11T02:50Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-09-11T04:25:00-SEP-001",
+  "eventTime": "2014-09-11T04:25Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/6624/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-09-10T17:21:00-FLR-001"
+   },
+   {
+    "activityID": "2014-09-10T18:18:00-CME-001"
+   },
+   {
+    "activityID": "2014-09-12T15:26:00-IPS-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140911-AL-006",
+    "messageIssueTime": "2014-09-11T04:34Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6625/1"
+   },
+   {
+    "messageID": "20140911-AL-007",
+    "messageIssueTime": "2014-09-11T12:23Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6626/1"
+   },
+   {
+    "messageID": "20140912-AL-002",
+    "messageIssueTime": "2014-09-12T17:00Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6638/1"
+   }
+  ],
+  "submissionTime": "2014-09-11T04:34Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-09-25T02:25:00-SEP-001",
+  "eventTime": "2014-09-25T02:25Z",
+  "instruments": [
+   {
+    "displayName": "STEREO B: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/6780/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-09-24T21:54:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140925-AL-002",
+    "messageIssueTime": "2014-09-25T02:59Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6781/1"
+   }
+  ],
+  "submissionTime": "2014-09-25T02:54Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-09-25T19:51:00-SEP-001",
+  "eventTime": "2014-09-25T19:51Z",
+  "instruments": [
+   {
+    "displayName": "STEREO A: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/6784/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-09-24T21:54:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20140925-AL-003",
+    "messageIssueTime": "2014-09-25T20:53Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6785/1"
+   },
+   {
+    "messageID": "20140925-AL-004",
+    "messageIssueTime": "2014-09-25T21:03Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6786/1"
+   }
+  ],
+  "submissionTime": "2014-09-25T20:53Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-10-15T06:57:00-SEP-001",
+  "eventTime": "2014-10-15T06:57Z",
+  "instruments": [
+   {
+    "displayName": "STEREO A: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/6934/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-10-14T19:00:00-CME-001"
+   },
+   {
+    "activityID": "2014-10-14T19:07:00-FLR-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20141015-AL-002",
+    "messageIssueTime": "2014-10-15T07:17Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6935/1"
+   },
+   {
+    "messageID": "20141015-AL-004",
+    "messageIssueTime": "2014-10-15T16:08Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/6941/1"
+   }
+  ],
+  "submissionTime": "2014-10-15T07:17Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-11-02T21:10:00-SEP-001",
+  "eventTime": "2014-11-02T21:10Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >10 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/7109/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-11-02T10:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20141102-AL-001",
+    "messageIssueTime": "2014-11-02T21:33Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/7110/1"
+   },
+   {
+    "messageID": "20141102-AL-002",
+    "messageIssueTime": "2014-11-02T23:14Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/7112/1"
+   }
+  ],
+  "submissionTime": "2014-11-02T21:33Z",
+  "versionId": 1
+ },
+ {
+  "sepID": "2014-12-13T19:16:00-SEP-001",
+  "eventTime": "2014-12-13T19:16Z",
+  "instruments": [
+   {
+    "displayName": "STEREO A: IMPACT 13-100 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/7369/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-12-13T14:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20141213-AL-001",
+    "messageIssueTime": "2014-12-13T19:39Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/7370/1"
+   },
+   {
+    "messageID": "20141213-AL-002",
+    "messageIssueTime": "2014-12-13T20:32Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/7371/1"
+   }
+  ],
+  "submissionTime": "2014-12-14T18:42Z",
+  "versionId": 2
+ },
+ {
+  "sepID": "2014-12-23T11:15:00-SEP-001",
+  "eventTime": "2014-12-23T11:15Z",
+  "instruments": [
+   {
+    "displayName": "GOES13: SEM/EPS >10 MeV"
+   }
+  ],
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/SEP/7456/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2014-12-21T13:30:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20141223-AL-001",
+    "messageIssueTime": "2014-12-23T11:33Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/7457/1"
+   }
+  ],
+  "submissionTime": "2014-12-23T11:33Z",
+  "versionId": 1
+ }
+]

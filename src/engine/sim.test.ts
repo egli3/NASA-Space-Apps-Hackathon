@@ -442,16 +442,21 @@ describe('space-weather replay (NASA DONKI)', () => {
   });
 
   it('a real storm triggers the storm card with its source line as context', () => {
-    const real = catalog.spaceWeather.reduce((a, b) => (b.severity > a.severity ? b : a));
-    const snapshotDay = Math.floor((Date.parse(real.time) - Date.UTC(2014, 0, 1)) / 86400000);
     const c: Catalog = quiet();
     for (const s of c.scenarios) s.eventIds = ['ev-sep-storm'];
-    const seed = 300; // storm lands on mission day snapshotDay − 300
+    const seed = 300;
+    // the first mission day on which the replayed record holds a storm strong enough for the card
+    const card = c.events.find((e) => e.id === 'ev-sep-storm')!;
+    const cal = spaceWeatherCalendar(c.spaceWeather, seed);
+    let day = 1;
+    while ((cal.eventOn(day)?.severity ?? 0) < severityFromString(card.trigger.minSeverity)) day++;
+    const real = cal.eventOn(day)!;
     const sim = createSimulation(c, mro, seed);
     const res = sim.advance(100000);
     expect(res.pending?.card.id).toBe('ev-sep-storm');
-    expect(res.pending?.day).toBe(snapshotDay - seed);
-    expect(res.pending?.context.some((line) => line.includes('NASA DONKI') && line.includes(real.classType ?? ''))).toBe(true);
+    expect(res.pending?.day).toBe(day);
+    expect(res.pending?.context).toContain(spaceWeatherContext(real));
+    expect(res.pending?.context.some((line) => line.includes('NASA DONKI'))).toBe(true);
     const decisions: DecisionLog = { 'ev-sep-storm': 'safe' };
     expect(runHeadless(c, mro, seed, decisions).finalState.doseKrad).toBeGreaterThan(runHeadless(quiet(), mro, seed).finalState.doseKrad);
   });

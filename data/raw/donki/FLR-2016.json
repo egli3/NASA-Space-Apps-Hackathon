@@ -1,0 +1,648 @@
+[
+ {
+  "flrID": "2016-01-01T23:10:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES-P: EXIS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-01-01T23:10Z",
+  "peakTime": "2016-01-02T00:11Z",
+  "endTime": "2016-01-02T01:01Z",
+  "classType": "M2.3",
+  "sourceLocation": "S21W73",
+  "activeRegionNum": 12473,
+  "note": "Associated eruption visible in SDO AIA 171. 193, and 304 with opening field lines and filament liftoff.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/9963/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-01-01T23:12:00-CME-001"
+   },
+   {
+    "activityID": "2016-01-02T02:48:00-SEP-001"
+   },
+   {
+    "activityID": "2016-01-02T04:30:00-SEP-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2025-09-09T19:05Z",
+  "versionId": 5
+ },
+ {
+  "flrID": "2016-01-28T11:48:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-01-28T11:48Z",
+  "peakTime": "2016-01-28T12:02Z",
+  "endTime": "2016-01-28T12:56Z",
+  "classType": "C9.6",
+  "sourceLocation": "N03W47",
+  "activeRegionNum": 12488,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10122/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-01-28T12:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2016-01-28T22:31Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-02-04T18:15:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-02-04T18:15Z",
+  "peakTime": "2016-02-04T18:22Z",
+  "endTime": "2016-02-04T18:28Z",
+  "classType": "C5.1",
+  "sourceLocation": "S11E13",
+  "activeRegionNum": 12494,
+  "note": "New emerging active region, no apparent CME.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10153/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-02-05T01:49Z",
+  "versionId": 2
+ },
+ {
+  "flrID": "2016-02-11T20:18:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-02-11T20:18Z",
+  "peakTime": "2016-02-11T21:03Z",
+  "endTime": "2016-02-11T22:27Z",
+  "classType": "C8.9",
+  "sourceLocation": "N11W11",
+  "activeRegionNum": 12497,
+  "note": "Flare location is between AR 12497 and AR 12496",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10194/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-02-11T21:28:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2016-02-12T00:15Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-02-12T10:37:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-02-12T10:37Z",
+  "peakTime": "2016-02-12T10:47Z",
+  "endTime": "2016-02-12T10:53Z",
+  "classType": "M1.0",
+  "sourceLocation": "N11W14",
+  "activeRegionNum": 12497,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10200/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-02-17T18:18Z",
+  "versionId": 4
+ },
+ {
+  "flrID": "2016-02-13T15:18:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-02-13T15:18Z",
+  "peakTime": "2016-02-13T15:24Z",
+  "endTime": "2016-02-13T15:26Z",
+  "classType": "M1.8",
+  "sourceLocation": "N14W28",
+  "activeRegionNum": 12497,
+  "note": "Flare can be seen well in SDO 193 and 171.  Produced significant movement of material that could produce a CME.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10204/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-02-13T16:59Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-02-14T19:20:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-02-14T19:20Z",
+  "peakTime": "2016-02-14T19:26Z",
+  "endTime": "2016-02-14T19:29Z",
+  "classType": "M1.0",
+  "sourceLocation": "N12W47",
+  "activeRegionNum": 12497,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10212/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-02-17T18:19Z",
+  "versionId": 2
+ },
+ {
+  "flrID": "2016-02-15T10:41:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-02-15T10:41Z",
+  "peakTime": "2016-02-15T11:00Z",
+  "endTime": "2016-02-15T11:06Z",
+  "classType": "M1.1",
+  "sourceLocation": "N11W54",
+  "activeRegionNum": 12497,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10213/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-02-17T18:19Z",
+  "versionId": 2
+ },
+ {
+  "flrID": "2016-02-17T04:54:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-02-17T04:54Z",
+  "peakTime": "2016-02-17T05:01Z",
+  "endTime": "2016-02-17T05:07Z",
+  "classType": "C9.4",
+  "sourceLocation": "N17W82",
+  "activeRegionNum": 12497,
+  "note": "Mostly a compact flare. Some small outflow with eruption but no major CME.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10222/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-02-17T17:06Z",
+  "versionId": 2
+ },
+ {
+  "flrID": "2016-03-16T06:34:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-03-16T06:34Z",
+  "peakTime": "2016-03-16T06:45Z",
+  "endTime": "2016-03-16T06:57Z",
+  "classType": "C2.2",
+  "sourceLocation": "N12W88",
+  "activeRegionNum": 12522,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10362/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-03-16T07:00:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2016-03-16T15:34Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-04-09T12:08:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-04-09T12:08Z",
+  "peakTime": "2016-04-09T13:42Z",
+  "endTime": "2016-04-09T16:00Z",
+  "classType": "C2.8",
+  "sourceLocation": "N11E60",
+  "activeRegionNum": 12529,
+  "note": "Long duration flare that can be seen coming from the AR 2529.  The flare corresponds to large amounts of opening and moving field lines that can be seen clearly on the western limb STA EUVI 195 at the same time as the eruption.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10460/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-04-09T13:36:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2016-04-09T16:40Z",
+  "versionId": 4
+ },
+ {
+  "flrID": "2016-04-18T00:14:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-04-18T00:14Z",
+  "peakTime": "2016-04-18T00:29Z",
+  "endTime": "2016-04-18T00:39Z",
+  "classType": "M6.7",
+  "sourceLocation": "N10W51",
+  "activeRegionNum": 12529,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10506/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-04-18T00:36:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20160418-AL-001",
+    "messageIssueTime": "2016-04-18T01:02Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/10507/1"
+   }
+  ],
+  "submissionTime": "2016-04-18T13:27Z",
+  "versionId": 2
+ },
+ {
+  "flrID": "2016-06-27T09:42:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-06-27T09:42Z",
+  "peakTime": "2016-06-27T09:58Z",
+  "endTime": "2016-06-27T10:24Z",
+  "classType": "B5.8",
+  "sourceLocation": "N14E42",
+  "activeRegionNum": null,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10837/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-06-27T10:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2016-06-27T18:46Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-07-07T07:49:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-07-07T07:49Z",
+  "peakTime": "2016-07-07T07:56Z",
+  "endTime": null,
+  "classType": "C5.1",
+  "sourceLocation": "S16W35",
+  "activeRegionNum": null,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10959/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-07-08T00:07Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-07-10T00:53:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-07-10T00:53Z",
+  "peakTime": "2016-07-10T00:59Z",
+  "endTime": null,
+  "classType": "C8.6",
+  "sourceLocation": "N12E67",
+  "activeRegionNum": 12564,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/10964/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-07-10T00:53:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2016-07-10T12:06Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-07-21T00:41:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-07-21T00:41Z",
+  "peakTime": "2016-07-21T00:46Z",
+  "endTime": "2016-07-21T01:15Z",
+  "classType": "M1.2",
+  "sourceLocation": "N5W38",
+  "activeRegionNum": 12567,
+  "note": "Active region appear to be magnetically linked with region 2565.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11017/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-07-21T15:03Z",
+  "versionId": 2
+ },
+ {
+  "flrID": "2016-07-21T01:34:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-07-21T01:34Z",
+  "peakTime": "2016-07-21T01:48Z",
+  "endTime": "2016-07-21T03:15Z",
+  "classType": "M1.0",
+  "sourceLocation": "N5W40",
+  "activeRegionNum": 12567,
+  "note": "Active region appears to be linked to 2565.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11018/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-07-21T15:03Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-07-23T01:46:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-07-23T01:46Z",
+  "peakTime": "2016-07-23T02:11Z",
+  "endTime": "2016-07-23T02:23Z",
+  "classType": "M5.0",
+  "sourceLocation": "N05W73",
+  "activeRegionNum": 12565,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11050/-1",
+  "linkedEvents": null,
+  "sentNotifications": [
+   {
+    "messageID": "20160723-AL-001",
+    "messageIssueTime": "2016-07-23T02:16Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/11051/1"
+   }
+  ],
+  "submissionTime": "2016-07-23T14:29Z",
+  "versionId": 5
+ },
+ {
+  "flrID": "2016-07-23T05:00:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-07-23T05:00Z",
+  "peakTime": "2016-07-23T05:16Z",
+  "endTime": "2016-07-23T05:24Z",
+  "classType": "M7.6",
+  "sourceLocation": "N05W73",
+  "activeRegionNum": 12565,
+  "note": "double peaked flare M7.6, M5.5",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11052/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-07-23T05:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20160723-AL-002",
+    "messageIssueTime": "2016-07-23T05:18Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/11053/1"
+   }
+  ],
+  "submissionTime": "2016-07-23T14:30Z",
+  "versionId": 3
+ },
+ {
+  "flrID": "2016-07-23T05:27:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-07-23T05:27Z",
+  "peakTime": "2016-07-23T05:31Z",
+  "endTime": "2016-07-23T05:33Z",
+  "classType": "M5.5",
+  "sourceLocation": "N05W75",
+  "activeRegionNum": 12565,
+  "note": "double peaked flare M7.6, M5.5",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11054/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-07-23T05:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": [
+   {
+    "messageID": "20160723-AL-003",
+    "messageIssueTime": "2016-07-23T05:34Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/11055/1"
+   },
+   {
+    "messageID": "20160723-AL-004",
+    "messageIssueTime": "2016-07-23T14:52Z",
+    "messageURL": "https://ccmc.gsfc.nasa.gov/DONKI/view/Alert/11058/1"
+   }
+  ],
+  "submissionTime": "2016-07-23T14:31Z",
+  "versionId": 3
+ },
+ {
+  "flrID": "2016-07-24T06:09:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-07-24T06:09Z",
+  "peakTime": "2016-07-24T06:20Z",
+  "endTime": "2016-07-24T06:32Z",
+  "classType": "M2.0",
+  "sourceLocation": "N06W89",
+  "activeRegionNum": 12567,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11069/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-07-24T11:39Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-07-24T17:30:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-07-24T17:30Z",
+  "peakTime": "2016-07-24T17:43Z",
+  "endTime": "2016-07-24T18:12Z",
+  "classType": "M1.9",
+  "sourceLocation": "N07W89",
+  "activeRegionNum": 12567,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11070/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-07-24T19:06Z",
+  "versionId": 1
+ },
+ {
+  "flrID": "2016-08-07T14:37:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-08-07T14:37Z",
+  "peakTime": "2016-08-07T14:44Z",
+  "endTime": "2016-08-07T14:48Z",
+  "classType": "M1.3",
+  "sourceLocation": "S10W90",
+  "activeRegionNum": null,
+  "note": "An M1.3 class solar flare was detected at GOES at 14:44Z. Source location is difficult to determine because SDO is down, solarsoft is not updating data and there is a data gap in SOHO EIT.  But GOES P SX shows a bright flash near the equatorial line on the far western limb.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11118/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-08-10T20:17Z",
+  "versionId": 7
+ },
+ {
+  "flrID": "2016-08-09T00:34:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-08-09T00:34Z",
+  "peakTime": "2016-08-09T00:42Z",
+  "endTime": "2016-08-09T00:52Z",
+  "classType": "C8.9",
+  "sourceLocation": "S1E73",
+  "activeRegionNum": 12574,
+  "note": "",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11130/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-08-10T00:44Z",
+  "versionId": 2
+ },
+ {
+  "flrID": "2016-11-29T17:19:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-11-29T17:19Z",
+  "peakTime": "2016-11-29T17:23Z",
+  "endTime": "2016-11-29T17:26Z",
+  "classType": "M1.0",
+  "sourceLocation": "S08E54",
+  "activeRegionNum": 12615,
+  "note": "No associated CME observed, but SOHO data has yet to come in. Source is an unlabeled active region around S08E54. Source has been updated.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11742/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-12-01T02:41Z",
+  "versionId": 2
+ },
+ {
+  "flrID": "2016-11-29T23:29:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-11-29T23:29Z",
+  "peakTime": "2016-11-29T23:38Z",
+  "endTime": "2016-11-30T23:40Z",
+  "classType": "M1.2",
+  "sourceLocation": "S08E54",
+  "activeRegionNum": 12615,
+  "note": "No associated CME observed, but SOHO data has yet to come in. Source is an unlabeled active region around S08E54.  Source was updated.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11743/-1",
+  "linkedEvents": null,
+  "sentNotifications": null,
+  "submissionTime": "2016-12-01T02:43Z",
+  "versionId": 2
+ },
+ {
+  "flrID": "2016-12-10T16:48:00-FLR-001",
+  "catalog": "M2M_CATALOG",
+  "instruments": [
+   {
+    "displayName": "GOES15: SEM/XRS 1.0-8.0"
+   }
+  ],
+  "beginTime": "2016-12-10T16:48Z",
+  "peakTime": "2016-12-10T17:15Z",
+  "endTime": "2016-12-10T17:35Z",
+  "classType": "C4.0",
+  "sourceLocation": "S07W89",
+  "activeRegionNum": null,
+  "note": "This solar flare occurred on the western limb and can be seen very clearly in both SDO 171 and 193.  The eruption is characterized by significant moving and opening field lines.",
+  "link": "https://ccmc.gsfc.nasa.gov/DONKI/view/FLR/11977/-1",
+  "linkedEvents": [
+   {
+    "activityID": "2016-12-10T17:24:00-CME-001"
+   }
+  ],
+  "sentNotifications": null,
+  "submissionTime": "2016-12-10T18:45Z",
+  "versionId": 1
+ }
+]
