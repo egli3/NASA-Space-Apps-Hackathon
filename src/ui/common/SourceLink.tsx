@@ -3,7 +3,7 @@ import type { Confidence } from '../../types/catalog';
 
 const CONFIDENCE_NOTE: Record<Confidence, string> = {
   verified: 'Copied from the cited source',
-  approx: 'Engineering estimate, pending a check against the source',
+  approx: 'Representative engineering estimate based on the cited source, not a figure copied from it',
   game: 'Tuned for play, not a real-world value',
 };
 

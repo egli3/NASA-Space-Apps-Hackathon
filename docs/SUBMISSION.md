@@ -66,13 +66,13 @@ Fourteen decision cards link to mission histories or reports, including Juno’s
 | Mars escape science | MAVEN demonstrated ultraviolet observations of escaping hydrogen. The game now supports remote UV or direct atmospheric sampling. Its data-volume thresholds and science yields are game parameters. |
 | Mars balanced reference | A five-instrument payload covers all five objectives and projects 88% science at $749M against the $800M cap. It earned three stars at seed 2026. |
 
-After players choose a route and before they see Hindsight, ask **Why would a team accept a longer trip?** Have them point to the capacity and cruise time on each route. After the debrief, ask **Which design change helped, and what did it cost?** A first pilot can record elapsed time, completions without help, and how many participants explain each trade-off correctly. Report the participant count and results once the pilot has run.
+After players choose a route and before they see Hindsight, ask **Why would a team accept a longer trip?** Have them point to the capacity and cruise time on each route. After the debrief, ask **Which design change helped, and what did it cost?** A pilot would record elapsed time, completions without help, and how many participants explain each trade-off correctly. We have not run one yet, so this submission reports no participant results.
 
 ## Super Intelligence disclosure
 
 - Code, tests, documentation, and presentation layout were assisted by Claude Code and OpenAI Codex.
 - SI helped draft approximate seed data. The catalog retains confidence flags and notes identifying verified figures and modeling assumptions.
-- Planet imagery is credited NASA mission imagery. The presentation uses that photography and charts drawn from repository data. No generative imagery, video, or audio was used for this package.
+- Planet imagery is credited NASA mission imagery. The presentation uses that photography, charts drawn from repository data, and screenshots of the running game (captured by `docs/submission/deck/capture.mjs`). No generative imagery, video, or audio was used for this package.
 
 ## NASA data and references
 

@@ -98,7 +98,7 @@
   {
     "id": "ev-bonus-discovery",
     "title": "Something is moving down there",
-    "narrative": "A routine image shows a fresh change on the surface that wasn't there last month. Scientists are begging for follow-up observations.",
+    "narrative": "A routine observation shows a fresh change that wasn't there last month. Scientists are begging for follow-up observations.",
     "realStory": { "mission": "Mars Reconnaissance Orbiter", "year": 2008, "summary": "On 19 February 2008 the HiRISE camera, taking a routine image to watch spring frost, caught at least four avalanches of ice and dust tumbling down a 700-metre cliff near Mars's north pole.", "lesson": "Margins aren't just for emergencies: spare capacity lets you chase surprises." },
     "trigger": { "kind": "random", "phase": "science", "probabilityPerYear": 0.4 },
     "conditions": [],

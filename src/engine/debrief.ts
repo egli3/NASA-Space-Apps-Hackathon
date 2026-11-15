@@ -35,7 +35,7 @@ export function buildDebrief(
   const rows: ComparisonRow[] = [
     { label: 'Launch mass', yours: fmt(b.mass.wetKg, 'kg'), theirs: fmt(mission.stats.launchMassKg, 'kg') },
     { label: 'Dry mass', yours: fmt(b.mass.dryKg, 'kg'), theirs: fmt(mission.stats.dryMassKg, 'kg') },
-    { label: 'Power at target', yours: fmt(b.power.generatedBolW, 'W'), theirs: fmt(mission.stats.powerAtTargetW, 'W'), note: mission.stats.powerSource },
+    { label: 'Power at target, before ageing', yours: fmt(b.power.generatedBolW, 'W'), theirs: fmt(mission.stats.powerAtTargetW, 'W'), note: mission.stats.powerSource },
     {
       label: 'Cost',
       yours: `$${Math.round(result.totalCostM).toLocaleString('en-US')}M (2026)`,

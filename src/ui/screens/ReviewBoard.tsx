@@ -176,7 +176,7 @@ export function ReviewBoard() {
                   </dl>
                   {prediction.predictedSciencePct && (
                     <p className="mt-3 text-sm text-dim">
-                      Science return usually lands between <span className="num text-ink">{num(prediction.predictedSciencePct.p10)}%</span> and{' '}
+                      Counting any extended mission, science return usually lands between <span className="num text-ink">{num(prediction.predictedSciencePct.p10)}%</span> and{' '}
                       <span className="num text-ink">{num(prediction.predictedSciencePct.p90)}%</span>.
                     </p>
                   )}

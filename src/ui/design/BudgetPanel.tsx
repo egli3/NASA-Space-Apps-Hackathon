@@ -162,7 +162,7 @@ export function BudgetPanel({ design, budgets: b, only }: Props) {
             severity={sev.science}
             headline={pct(b.science.expectedPct)}
             headlineLabel="Expected share of the baseline science"
-            summary="of the science team’s wish list, if nothing goes wrong"
+            summary="of the science team’s wish list in the primary mission, if nothing goes wrong"
             why={
               <Why
                 title="Science return"
