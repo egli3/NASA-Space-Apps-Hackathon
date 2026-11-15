@@ -6,7 +6,7 @@ export function PlanetGlyph({ id, size = 160 }: { id: string; size?: number }) {
   const r = 70;
   const c = 80;
   return (
-    <svg width={size} height={size} viewBox="0 0 160 160" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden>
+    <svg width={size} height={size} viewBox="0 0 160 160" fill="none" stroke="currentColor" strokeWidth="1" className="h-auto max-w-full" aria-hidden>
       <defs>
         <clipPath id={`disc-${id}`}>
           <circle cx={c} cy={c} r={r} />

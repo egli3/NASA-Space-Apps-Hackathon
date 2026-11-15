@@ -158,19 +158,19 @@ export function Flight() {
       <SheetHeader />
 
       {/* clock and mission timeline */}
-      <div className="grid shrink-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-8 border-b border-line bg-panel px-5 py-3">
-        <div className="flex items-baseline gap-6">
+      <div className="grid shrink-0 items-center gap-2 border-b border-line bg-panel px-3 py-2 sm:px-5 sm:py-3 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-8">
+        <div className="grid min-w-0 grid-cols-3 items-baseline gap-2 sm:flex sm:gap-6">
           <div>
             <div className="text-sm text-dim">Date</div>
-            <div className="num text-2xl leading-tight">{date(state.date)}</div>
+            <div className="num text-sm leading-tight sm:text-2xl">{date(state.date)}</div>
           </div>
           <div>
             <div className="text-sm text-dim">Mission day</div>
-            <div className="num text-2xl leading-tight">{num(state.day)}</div>
+            <div className="num text-sm leading-tight sm:text-2xl">{num(state.day)}</div>
           </div>
           <div>
             <div className="text-sm text-dim">Phase</div>
-            <div className={`text-2xl leading-tight font-bold ${lost ? 'text-nogo' : 'text-go'}`}>{lost ? 'Mission lost' : PHASE_LABEL[state.phase]}</div>
+            <div className={`text-sm leading-tight font-bold sm:text-2xl ${lost ? 'text-nogo' : 'text-go'}`}>{lost ? 'Mission lost' : PHASE_LABEL[state.phase]}</div>
           </div>
         </div>
         <div aria-hidden>
@@ -191,34 +191,34 @@ export function Flight() {
         </div>
       </div>
 
-      <main className="grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_400px]">
-        <div className="relative min-h-0">
-          <div className="absolute inset-0 p-3">
+      <main className="scroll-quiet min-h-0 min-w-0 flex-1 overflow-y-auto lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:overflow-hidden xl:grid-cols-[minmax(0,1fr)_400px]">
+        <div className="relative h-64 min-h-0 sm:h-80 lg:h-auto">
+          <div className="absolute inset-x-0 top-14 bottom-0 p-2 sm:inset-0 sm:p-3">
             <SolarSystemView state={state} trail={trail.current} tail={tail.current} destName={dest.name} destAU={dest.solarDistanceAU} targetIsMoon={dest.kind === 'moon'} linkUp={linkUp} />
           </div>
-          <dl className="absolute top-4 left-5 space-y-2">
+          <dl className="absolute inset-x-3 top-2 grid grid-cols-3 gap-2 sm:inset-x-auto sm:top-4 sm:left-5 sm:block sm:space-y-2">
             <div>
               <dt className="text-sm text-dim">From the Sun</dt>
-              <dd className="num text-lg">{au(state.sunDistanceAU)}</dd>
+              <dd className="num text-sm sm:text-lg">{au(state.sunDistanceAU)}</dd>
             </div>
             <div>
               <dt className="text-sm text-dim">From Earth</dt>
-              <dd className="num text-lg">{dest.kind === 'moon' ? `${num(state.earthDistanceAU * catalog.constants.auKm, 0)} km` : au(state.earthDistanceAU)}</dd>
+              <dd className="num text-sm sm:text-lg">{dest.kind === 'moon' ? `${num(state.earthDistanceAU * catalog.constants.auKm, 0)} km` : au(state.earthDistanceAU)}</dd>
             </div>
             <div>
               <dt className="text-sm text-dim">Radio signal takes</dt>
               {/* light-time is a unit conversion of the engine's distance: 1 AU ≈ 499 light-seconds */}
-              <dd className="num text-lg">{state.earthDistanceAU * 499 < 90 ? `${num(state.earthDistanceAU * 499, 1)} s` : `${num((state.earthDistanceAU * 499) / 60, 1)} min`}</dd>
+              <dd className="num text-sm sm:text-lg">{state.earthDistanceAU * 499 < 90 ? `${num(state.earthDistanceAU * 499, 1)} s` : `${num((state.earthDistanceAU * 499) / 60, 1)} min`}</dd>
             </div>
           </dl>
           {!started && (
-            <div className="absolute inset-x-0 bottom-8 text-center">
-              <p className="mx-auto max-w-md text-lg">
+            <div className="absolute inset-x-3 bottom-3 text-center sm:inset-x-0 sm:bottom-8">
+              <p className="mx-auto max-w-md bg-panel/80 px-2 py-1 text-sm sm:bg-transparent sm:text-lg">
                 {design.missionName} is on the pad at day zero. Once it leaves, you cannot change the design. You can only decide.
               </p>
             </div>
           )}
-          <div className="absolute right-5 bottom-5 space-y-2 text-right" aria-live="polite">
+          <div className="absolute inset-x-3 bottom-3 space-y-2 text-right sm:inset-x-auto sm:right-5 sm:bottom-5" aria-live="polite">
             {state.inConjunction && !lost && <div className="border border-caution bg-panel px-3 py-2 text-caution">The Sun is in the way. No contact with Earth.</div>}
             {state.safeModeDaysLeft > 0 && (
               <div className="border border-caution bg-panel px-3 py-2 text-caution">
@@ -228,7 +228,7 @@ export function Flight() {
           </div>
         </div>
 
-        <aside className="flex min-h-0 flex-col border-l border-line bg-panel/90">
+        <aside className="flex min-h-0 min-w-0 flex-col border-t border-line bg-panel/90 lg:border-t-0 lg:border-l">
           <div className="border-b border-line px-4 py-3.5">
             <div className="flex items-end justify-between gap-3">
               <span className="text-dim">Science returned</span>
@@ -249,8 +249,8 @@ export function Flight() {
               {scenario.objectives.map((o) => {
                 const v = Math.max(0, Math.min(100, state.objectivePct?.[o.id] ?? 0));
                 return (
-                  <li key={o.id} className="grid grid-cols-[minmax(0,1fr)_5rem_2.75rem] items-center gap-2 text-sm">
-                    <span className={`truncate ${v > 0 ? '' : 'text-dim'}`}>{o.name}</span>
+                  <li key={o.id} className="grid grid-cols-[minmax(0,1fr)_3.5rem_2.75rem] sm:grid-cols-[minmax(0,1fr)_5rem_2.75rem] items-center gap-2 text-sm">
+                    <span className={`min-w-0 ${v > 0 ? '' : 'text-dim'}`}>{o.name}</span>
                     <span className="relative h-1.5 bg-line">
                       <span className="absolute inset-y-0 left-0 bg-go" style={{ width: `${v}%` }} />
                       <span className="absolute -inset-y-0.5 w-px bg-caution" style={{ left: `${o.thresholdPct}%` }} />
@@ -290,7 +290,7 @@ export function Flight() {
             <ol className="scroll-quiet min-h-0 flex-1 overflow-y-auto" aria-live="polite">
               {log.length === 0 && <li className="px-4 py-3 text-sm text-dim">Nothing yet. The log fills as the mission flies.</li>}
               {log.map((l, i) => (
-                <li key={log.length - i} className="grid grid-cols-[6.75rem_1fr] gap-3 border-b border-line/60 px-4 py-1.5 text-sm">
+                <li key={log.length - i} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-2 sm:grid-cols-[6.75rem_minmax(0,1fr)] sm:gap-3 border-b border-line/60 px-4 py-1.5 text-sm">
                   <span className="num text-dim">{date(l.date)}</span>
                   <span className={LOG_TONE[l.kind]}>{l.text}</span>
                 </li>
@@ -300,10 +300,10 @@ export function Flight() {
         </aside>
       </main>
 
-      <footer className="flex h-16 shrink-0 items-center gap-4 border-t border-line bg-panel px-5">
+      <footer className="flex shrink-0 flex-wrap items-center gap-2 border-t border-line bg-panel px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:min-h-16 sm:gap-4 sm:px-5">
         {started && !state.ended && (
           <>
-            <Button variant="secondary" onClick={() => setPaused((p) => !p)} className="w-28">
+            <Button variant="secondary" onClick={() => setPaused((p) => !p)} className="min-h-11 min-w-20 sm:w-28">
               {paused ? 'Resume' : 'Pause'}
             </Button>
             <Segmented<Speed>
@@ -316,22 +316,24 @@ export function Flight() {
                 { value: '100', label: '100×', hint: '120 days a second' },
               ]}
             />
-            <span className="text-sm text-dim">
+            <span className="hidden text-sm text-dim sm:inline">
               <span className="num">{SPEEDS[speed]}</span> days a second. Space pauses.
             </span>
           </>
         )}
-        <div className="ml-auto min-w-0 text-right text-sm text-dim">
-          {state.ended && (lost ? state.lossCause : `Mission complete after ${num(state.day)} days.`)}
-          {!started && `${scenario.title}, launching on ${catalog.launchVehicles.find((l) => l.id === design.launchVehicleId)?.name ?? 'your rocket'}`}
-        </div>
+        {(!started || state.ended) && (
+          <div className="ml-auto min-w-0 text-sm text-dim sm:text-right">
+            {state.ended ? (lost ? state.lossCause : `Mission complete after ${num(state.day)} days.`)
+              : `${scenario.title}, launching on ${catalog.launchVehicles.find((l) => l.id === design.launchVehicleId)?.name ?? 'your rocket'}`}
+          </div>
+        )}
         {!started && (
-          <Button variant="primary" size="lg" onClick={() => setStarted(true)}>
+          <Button variant="primary" size="lg" className="min-h-11 w-full sm:w-auto" onClick={() => setStarted(true)}>
             Launch
           </Button>
         )}
         {state.ended && (
-          <Button variant="primary" onClick={finish}>
+          <Button variant="primary" className="min-h-11 w-full sm:w-auto" onClick={finish}>
             Read the debrief
           </Button>
         )}

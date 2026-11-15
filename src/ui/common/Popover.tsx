@@ -103,7 +103,7 @@ export function Popover({ label, trigger, triggerClassName, width = 340, childre
             aria-label={label}
             onPointerEnter={(e) => e.pointerType === 'mouse' && hover(true)}
             onPointerLeave={(e) => e.pointerType === 'mouse' && hover(false)}
-            className="scroll-quiet fixed z-50 max-h-[80vh] overflow-y-auto rounded-xs border border-rule bg-panel p-4 text-ink shadow-[0_12px_40px_rgb(0_0_0/0.45)]"
+            className="scroll-quiet fixed z-50 max-h-[80dvh] max-w-[calc(100vw-1.5rem)] overflow-y-auto rounded-xs border border-rule bg-panel p-4 text-ink shadow-[0_12px_40px_rgb(0_0_0/0.45)]"
             style={{ width, left: pos?.left ?? 0, top: pos?.top ?? 0, visibility: pos ? 'visible' : 'hidden' }}
           >
             {children}

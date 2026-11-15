@@ -27,13 +27,13 @@ export function Briefing() {
       }
     >
       <div className="scroll-quiet h-full overflow-y-auto">
-        <div className="mx-auto grid max-w-7xl gap-x-14 gap-y-10 px-8 py-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-x-14 gap-y-10 px-4 py-6 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:px-12">
           <div>
-            <div className="flex items-start gap-6">
-              <PlanetGlyph id={dest.id} size={112} />
+            <div className="flex items-start gap-3 sm:gap-6">
+              <div className="w-16 shrink-0 sm:w-28"><PlanetGlyph id={dest.id} size={112} /></div>
               <div>
                 <p className="text-dim">Announcement of opportunity, {cls.name.toLowerCase()} class</p>
-                <h1 className="mt-1 text-5xl leading-tight font-bold">{scenario.title}</h1>
+                <h1 className="mt-1 text-3xl sm:text-5xl leading-tight font-bold">{scenario.title}</h1>
               </div>
             </div>
             <p className="mt-6 text-2xl font-medium">{scenario.tagline}</p>
@@ -47,7 +47,7 @@ export function Briefing() {
                   width={900}
                   height={510}
                   decoding="async"
-                  className="max-h-48 w-full border border-rule bg-black object-cover"
+                  className="aspect-[30/17] h-auto w-full border border-rule bg-black object-cover"
                 />
                 <figcaption className="mt-1 text-sm text-dim">
                   <a href={`${import.meta.env.BASE_URL}img/credits.json`} target="_blank" rel="noreferrer" className="underline underline-offset-2">
@@ -99,7 +99,7 @@ export function Briefing() {
             <Section title="What the science team wants" aside="share of the mission’s science value">
               <ul className="space-y-4">
                 {scenario.objectives.map((o) => (
-                  <li key={o.id} className="grid grid-cols-[3.5rem_1fr] items-start gap-x-4">
+                  <li key={o.id} className="grid grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-x-3 sm:grid-cols-[3.5rem_minmax(0,1fr)] sm:gap-x-4">
                     <div className="num pt-0.5 text-right text-2xl">{o.weight}%</div>
                     <div>
                       <div className="h-2.5 border border-rule">

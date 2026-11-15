@@ -43,14 +43,14 @@ export function Credits() {
 
   return (
     <div className="sheet-grid scroll-quiet h-full overflow-y-auto">
-      <div className="mx-auto max-w-5xl px-8 py-8 lg:px-12">
+      <div className="mx-auto max-w-5xl px-4 py-5 sm:px-8 sm:py-8 lg:px-12">
         <div className="flex items-center justify-between">
           <Wordmark />
           <Button variant="primary" onClick={() => go(back)}>
             Back
           </Button>
         </div>
-        <h1 className="mt-10 text-5xl font-bold">Credits and sources</h1>
+        <h1 className="mt-10 text-3xl sm:text-5xl font-bold">Credits and sources</h1>
         <p className="mt-3 max-w-[62ch] text-lg text-dim">
           MARGIN ships with NASA data, engineering estimates and game parameters. Mission data is bundled with the app.
         </p>

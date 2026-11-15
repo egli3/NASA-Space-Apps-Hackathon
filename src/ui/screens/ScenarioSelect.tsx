@@ -14,7 +14,7 @@ export function ScenarioSelect() {
 
   return (
     <div className="sheet-grid scroll-quiet h-full overflow-y-auto">
-      <div className="mx-auto max-w-7xl px-8 py-8 lg:px-12">
+      <div className="mx-auto max-w-7xl px-4 py-5 sm:px-8 sm:py-8 lg:px-12">
         <div className="flex items-center justify-between">
           <button type="button" onClick={() => go('title')} title="Back to the title screen">
             <Wordmark />
@@ -23,7 +23,7 @@ export function ScenarioSelect() {
             Back
           </Button>
         </div>
-        <h1 className="mt-10 text-5xl font-bold">Choose a science call</h1>
+        <h1 className="mt-10 text-3xl sm:text-5xl font-bold">Choose a science call</h1>
         <p className="mt-3 max-w-2xl text-lg text-dim">
           Each call is a question about another world, a cost cap, and a launch window that will not wait. Pick the one you want to answer.
         </p>
@@ -39,9 +39,9 @@ export function ScenarioSelect() {
                   onClick={() => start(s.id)}
                   className="group flex w-full flex-col border border-rule bg-panel/80 text-left transition-colors hover:border-ink hover:bg-raised"
                 >
-                  <div className="relative flex items-center gap-5 border-b border-line px-6 py-6">
+                  <div className="relative flex items-center gap-3 border-b border-line px-4 py-4 sm:gap-5 sm:px-6 sm:py-6">
                     <div className="transition-transform duration-500 group-hover:rotate-6">
-                      <PlanetGlyph id={dest.id} size={132} />
+                      <div className="w-24 sm:w-[132px]"><PlanetGlyph id={dest.id} size={132} /></div>
                     </div>
                     <dl className="space-y-2 text-sm">
                       <div>
@@ -59,7 +59,7 @@ export function ScenarioSelect() {
                     </dl>
                     {s.priority === 'P1' && <span className="absolute top-0 right-0 bg-caution px-2.5 py-1 text-sm font-bold text-[#0b2a4a]">Tutorial</span>}
                   </div>
-                  <div className="flex flex-1 flex-col px-6 py-5">
+                  <div className="flex flex-1 flex-col px-4 py-4 sm:px-6 sm:py-5">
                     <h2 className="text-2xl font-bold">{s.title}</h2>
                     <p className="mt-2 flex-1 text-dim">{s.tagline}</p>
                     <dl className="mt-5 grid grid-cols-3 gap-3 border-t border-line pt-4 text-sm">

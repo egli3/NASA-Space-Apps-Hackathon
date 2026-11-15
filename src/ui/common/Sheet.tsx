@@ -29,14 +29,14 @@ export function SheetHeader() {
   const canRevisit = REVISITABLE.includes(screen);
 
   return (
-    <header className="flex h-12 shrink-0 items-stretch border-b border-line bg-panel text-sm">
-      <button type="button" onClick={() => go('title')} className="flex items-center border-r border-line px-5 hover:bg-ink/8" title="Back to the title screen">
+    <header className="flex min-h-12 shrink-0 items-stretch border-b border-line bg-panel text-sm">
+      <button type="button" onClick={() => go('title')} className="flex shrink-0 items-center border-r border-line px-3 hover:bg-ink/8 md:px-5" title="Back to the title screen">
         <Wordmark />
       </button>
-      <div className="flex min-w-0 items-center border-r border-line px-5">
+      <div className="flex min-w-0 flex-1 items-center px-3 md:border-r md:border-line md:px-5">
         <span className="truncate font-medium">{design?.missionName || 'Unnamed mission'}</span>
       </div>
-      <nav aria-label="Mission sheets" className="ml-auto flex items-stretch">
+      <nav aria-label="Mission sheets" className="ml-auto flex shrink-0 items-stretch">
         <ol className="flex items-stretch">
           {SHEETS.map((s, i) => {
             const current = i === index;
@@ -51,13 +51,13 @@ export function SheetHeader() {
               </>
             );
             return (
-              <li key={s.screen} aria-current={current ? 'step' : undefined} className="flex border-l border-line">
+              <li key={s.screen} aria-current={current ? 'step' : undefined} className={`border-l border-line ${current ? "flex" : "hidden md:flex"}`}>
                 {clickable ? (
                   <button type="button" onClick={() => go(s.screen)} className="flex items-center gap-2 px-3 hover:bg-ink/8" title={`Back to ${s.name}`}>
                     {body}
                   </button>
                 ) : (
-                  <span className="flex items-center gap-2 px-3">{body}</span>
+                  <span className="flex items-center gap-1.5 px-2 md:gap-2 md:px-3">{body}</span>
                 )}
               </li>
             );
@@ -78,14 +78,14 @@ interface ActionBarProps {
 /** Bottom strip of a sheet: where you came from on the left, the single next step on the right. */
 export function ActionBar({ back, primary, note }: ActionBarProps) {
   return (
-    <footer data-coach="next" className="flex h-16 shrink-0 items-center gap-4 border-t border-line bg-panel px-5">
+    <footer data-coach="next" className="grid shrink-0 grid-cols-2 items-center gap-x-2 gap-y-1 border-t border-line bg-panel px-3 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] md:flex md:min-h-16 md:gap-4 md:px-5">
       {back && (
-        <Button variant="secondary" onClick={back.onClick}>
+        <Button variant="secondary" onClick={back.onClick} className="min-h-11 min-w-0 px-2! text-sm md:px-5! md:text-base">
           {back.label}
         </Button>
       )}
-      <div className="ml-auto min-w-0 text-right text-sm text-dim">{note}</div>
-      <Button variant="primary" onClick={primary.onClick} disabled={primary.disabled}>
+      {note && <div className="col-span-2 row-start-1 min-w-0 text-xs text-dim md:ml-auto md:text-right md:text-sm">{note}</div>}
+      <Button variant="primary" onClick={primary.onClick} disabled={primary.disabled} className={`min-h-11 min-w-0 px-2! text-sm md:px-5! md:text-base ${note ? "" : "md:ml-auto"} ${back ? "" : "col-span-2"}`}>
         {primary.label}
       </Button>
     </footer>
@@ -97,7 +97,7 @@ export function Sheet({ children, actions, grid = true }: { children: ReactNode;
   return (
     <div className={`flex h-full flex-col ${grid ? 'sheet-grid' : ''}`}>
       <SheetHeader />
-      <main className="min-h-0 flex-1">{children}</main>
+      <main className="min-h-0 min-w-0 flex-1">{children}</main>
       {actions}
     </div>
   );
@@ -107,7 +107,7 @@ export function Sheet({ children, actions, grid = true }: { children: ReactNode;
 export function Section({ title, aside, children, className = '' }: { title: string; aside?: ReactNode; children: ReactNode; className?: string }) {
   return (
     <section className={className}>
-      <div className="mb-3 flex items-baseline justify-between gap-4 border-b border-line pb-2">
+      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-line pb-2">
         <h2 className="text-lg font-bold">{title}</h2>
         {aside && <div className="text-sm text-dim">{aside}</div>}
       </div>

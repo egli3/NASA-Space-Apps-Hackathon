@@ -76,7 +76,8 @@ export function CoachMarks() {
   if (!tip || !box) return null;
 
   const last = step === TIPS.length - 1;
-  const width = 340;
+  const compact = window.innerWidth < 768;
+  const width = Math.min(340, window.innerWidth - 24);
   // Sit next to the boxed region, never on top of it: under the schematic, beside the parts list and the budgets, above the action bar.
   const clampLeft = (x: number) => Math.min(window.innerWidth - width - 12, Math.max(12, x));
   const place: Record<string, CSSProperties> = {
@@ -90,10 +91,10 @@ export function CoachMarks() {
     <>
       <div
         aria-hidden
-        className="pointer-events-none fixed z-40 border-2 border-caution shadow-[0_0_0_9999px_rgb(4_18_34/0.55)]"
+        className="pointer-events-none fixed z-40 hidden border-2 border-caution shadow-[0_0_0_9999px_rgb(4_18_34/0.55)] md:block"
         style={{ left: box.left + 3, top: box.top + 3, width: box.width - 6, height: box.height - 6 }}
       />
-      <div role="dialog" aria-label={`Tip ${step + 1} of ${TIPS.length}: ${tip.title}`} className="fixed z-50 border border-caution bg-panel p-5 shadow-[0_12px_40px_rgb(0_0_0/0.5)] " style={{ width, ...place[tip.target] }}>
+      <div role="dialog" aria-label={`Tip ${step + 1} of ${TIPS.length}: ${tip.title}`} className="fixed z-50 max-h-[calc(100dvh-1.5rem)] overflow-auto border border-caution bg-panel p-4 shadow-[0_12px_40px_rgb(0_0_0/0.5)] sm:p-5" style={{ width, ...(compact ? { left: '50%', bottom: 'max(12px, env(safe-area-inset-bottom))', transform: 'translateX(-50%)' } : place[tip.target]) }}>
         <p className="num text-sm text-caution">
           {step + 1} of {TIPS.length}
         </p>

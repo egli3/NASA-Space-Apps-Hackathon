@@ -32,9 +32,9 @@ function Star({ earned }: { earned: boolean }) {
 
 function H2({ children, aside }: { children: ReactNode; aside?: ReactNode }) {
   return (
-    <div className="mb-5 flex items-baseline justify-between gap-6 border-b-2 border-rule pb-2">
+    <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-5 gap-y-1 border-b-2 border-rule pb-2">
       <h2 className="text-2xl font-bold">{children}</h2>
-      {aside && <p className="text-right text-sm text-dim">{aside}</p>}
+      {aside && <p className="text-sm text-dim sm:text-right">{aside}</p>}
     </div>
   );
 }
@@ -220,8 +220,8 @@ export function Debrief() {
 
   return (
     <div className="scroll-quiet h-full overflow-y-auto">
-      <article className="mx-auto max-w-6xl px-8 py-10 lg:px-14">
-        <header className="flex items-baseline justify-between gap-6 border-b border-line pb-3 text-sm text-dim">
+      <article className="mx-auto max-w-6xl px-4 py-6 sm:px-8 sm:py-10 lg:px-14">
+        <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 border-b border-line pb-3 text-sm text-dim">
           <span>
             <Wordmark className="text-ink" /> <span className="ml-3">Mission report</span>
           </span>
@@ -234,7 +234,7 @@ export function Debrief() {
         <section className="grid gap-x-12 gap-y-8 pt-10 pb-12 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)]">
           <div>
             <p className="text-xl font-medium">{design.missionName}</p>
-            <h1 className={`mt-2 text-[clamp(3rem,7vw,5.5rem)] leading-[0.95] font-bold ${OUTCOME_TONE[result.outcome]}`}>{OUTCOME_WORD[result.outcome]}</h1>
+            <h1 className={`mt-2 text-[clamp(2.25rem,7vw,5.5rem)] leading-[0.95] font-bold ${OUTCOME_TONE[result.outcome]}`}>{OUTCOME_WORD[result.outcome]}</h1>
             <p className="mt-5 max-w-[52ch] text-xl">
               {result.outcome === 'lost'
                 ? `${result.lossCause ?? 'The spacecraft was lost'}. It had returned ${pct(result.sciencePct)} of the baseline science by then, and that science still counts.`
@@ -271,14 +271,14 @@ export function Debrief() {
               const r = result.objectives.find((x) => x.objectiveId === o.id);
               const v = Math.max(0, Math.min(100, r?.pct ?? 0));
               return (
-                <li key={o.id} className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)_5rem] items-center gap-x-6">
+                <li key={o.id} className="grid grid-cols-[minmax(0,1fr)_3.5rem] items-center gap-x-3 gap-y-2 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)_5rem] sm:gap-x-6">
                   <div>
                     <p className="font-bold">{o.name}</p>
                     <p className="text-sm text-dim">
                       <span className="num">{o.weight}%</span> of the mission
                     </p>
                   </div>
-                  <div className="relative h-5 border border-rule" role="img" aria-label={`${o.name}: ${pct(v)}, threshold ${pct(o.thresholdPct)}`}>
+                  <div className="relative col-span-2 row-start-2 h-4 border border-rule sm:col-span-1 sm:row-start-auto sm:h-5" role="img" aria-label={`${o.name}: ${pct(v)}, threshold ${pct(o.thresholdPct)}`}>
                     <motion.div
                       className={r?.metThreshold ? 'h-full bg-ink' : 'hatch-dense h-full text-nogo'}
                       initial={{ width: '0%' }}
@@ -287,7 +287,7 @@ export function Debrief() {
                     />
                     <div className="absolute -top-1.5 -bottom-1.5 w-0.5 bg-caution" style={{ left: `${o.thresholdPct}%` }} />
                   </div>
-                  <p className={`num text-right text-2xl ${r?.metThreshold ? '' : 'text-nogo'}`}>{pct(v)}</p>
+                  <p className={`num text-right text-xl sm:text-2xl ${r?.metThreshold ? '' : 'text-nogo'}`}>{pct(v)}</p>
                 </li>
               );
             })}
@@ -332,30 +332,32 @@ export function Debrief() {
               <summary className="cursor-pointer px-5 py-3 font-medium hover:bg-ink/5">
                 Everything we tried, <span className="num">{explored.length}</span> alternatives
               </summary>
-              <table className="w-full border-t border-line text-sm">
-                <thead>
-                  <tr className="text-left text-dim">
-                    <th className="px-5 py-2 font-medium">Decision</th>
-                    <th className="py-2 font-medium">Instead of</th>
-                    <th className="py-2 font-medium">You could have had</th>
-                    <th className="py-2 text-right font-medium">Science</th>
-                    <th className="px-5 py-2 text-right font-medium">Cost</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {explored.map((h, i) => (
-                    <tr key={i} className={`border-t border-line/70 ${h.feasible ? '' : 'text-dim'}`} title={h.explanation}>
-                      <td className="px-5 py-1.5">{h.dimension}</td>
-                      <td className="py-1.5 pr-3">{h.fromLabel}</td>
-                      <td className="py-1.5 pr-3">{h.toLabel}</td>
-                      <td className={`num py-1.5 text-right ${!h.feasible ? '' : h.deltaSciencePct > 0.05 ? 'text-go' : h.deltaSciencePct < -0.05 ? 'text-nogo' : ''}`}>
-                        {h.feasible ? `${signed(h.deltaSciencePct, 1)} pts` : 'cannot fly'}
-                      </td>
-                      <td className="num px-5 py-1.5 text-right">{costDelta(h.deltaCostM)}</td>
+              <div role="region" aria-label="All replay alternatives" tabIndex={0} className="max-w-full overflow-x-auto">
+                <table className="w-full min-w-[33rem] border-t border-line text-sm">
+                  <thead>
+                    <tr className="text-left text-dim">
+                      <th className="px-5 py-2 font-medium">Decision</th>
+                      <th className="py-2 font-medium">Instead of</th>
+                      <th className="py-2 font-medium">You could have had</th>
+                      <th className="py-2 text-right font-medium">Science</th>
+                      <th className="px-5 py-2 text-right font-medium">Cost</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {explored.map((h, i) => (
+                      <tr key={i} className={`border-t border-line/70 ${h.feasible ? '' : 'text-dim'}`} title={h.explanation}>
+                        <td className="px-5 py-1.5">{h.dimension}</td>
+                        <td className="py-1.5 pr-3">{h.fromLabel}</td>
+                        <td className="py-1.5 pr-3">{h.toLabel}</td>
+                        <td className={`num py-1.5 text-right ${!h.feasible ? '' : h.deltaSciencePct > 0.05 ? 'text-go' : h.deltaSciencePct < -0.05 ? 'text-nogo' : ''}`}>
+                          {h.feasible ? `${signed(h.deltaSciencePct, 1)} pts` : 'cannot fly'}
+                        </td>
+                        <td className="num px-5 py-1.5 text-right">{costDelta(h.deltaCostM)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </details>
           )}
         </section>
@@ -409,7 +411,7 @@ export function Debrief() {
           <section className="pb-12">
             <H2 aside="for scale: our cost model is not theirs">You and the real thing</H2>
             <div className="grid gap-x-12 gap-y-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
-              <table className="w-full self-start">
+              <table className="w-full table-fixed self-start text-sm sm:text-base">
                 <thead>
                   <tr className="border-b border-rule text-left">
                     <th className="py-2 font-medium text-dim" />
@@ -452,7 +454,7 @@ export function Debrief() {
             <H2>Flight log</H2>
             <ol className="grid gap-x-12 lg:grid-cols-2">
               {milestones.map((l, i) => (
-                <li key={i} className="grid grid-cols-[7.5rem_1fr] gap-3 border-b border-line py-2">
+                <li key={i} className="grid grid-cols-[5.25rem_minmax(0,1fr)] gap-2 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:gap-3 border-b border-line py-2">
                   <span className="num text-dim">{date(l.date)}</span>
                   <span className={l.kind === 'anomaly' ? 'text-nogo' : l.kind === 'decision' ? 'font-bold' : ''}>{l.text}</span>
                 </li>
@@ -461,7 +463,7 @@ export function Debrief() {
           </section>
         )}
 
-        <footer className="flex flex-wrap items-center gap-4 border-t-2 border-rule pt-6">
+        <footer className="grid gap-3 border-t-2 border-rule pt-6 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
           <Button variant="primary" size="lg" onClick={retry}>
             Try again with this design
           </Button>

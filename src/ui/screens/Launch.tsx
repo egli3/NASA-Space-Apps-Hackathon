@@ -23,7 +23,7 @@ function RouteDiagram({ traj, destName, destAU }: { traj: Trajectory; destName: 
   if (traj.kind === 'lunar_transfer') {
     const slow = traj.tofDays > 30;
     return (
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="shrink-0 text-ink" aria-hidden>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="h-auto w-16 shrink-0 self-start text-ink sm:w-[150px]" aria-hidden>
         <circle cx={c} cy={c} r={slow ? 26 : 52} {...stroke} strokeDasharray="2 4" opacity="0.6" />
         <circle cx={c} cy={c} r="5" fill="currentColor" />
         {slow ? (
@@ -62,7 +62,7 @@ function RouteDiagram({ traj, destName, destAU }: { traj: Trajectory; destName: 
   const [tx, ty] = pt(r2, end + sweep).split(' ').map(Number);
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="shrink-0 text-ink" aria-hidden>
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="h-auto w-16 shrink-0 self-start text-ink sm:w-[150px]" aria-hidden>
       <circle cx={c} cy={c} r={r1} {...stroke} strokeDasharray="2 4" opacity="0.6" />
       <circle cx={c} cy={c} r={r2} {...stroke} strokeDasharray="2 4" opacity="0.6" />
       <circle cx={c} cy={c} r="3" fill="currentColor" />
@@ -123,8 +123,8 @@ export function Launch() {
         />
       }
     >
-      <div className={`grid h-full ${guided ? "grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px]" : "grid-cols-[minmax(0,1fr)_360px]"} xl:grid-cols-[minmax(0,1fr)_400px]`}>
-        <div className="scroll-quiet min-h-0 overflow-y-auto px-6 py-5">
+      <div className="scroll-quiet h-full overflow-y-auto lg:grid lg:grid-cols-[minmax(0,1fr)_360px] lg:overflow-hidden xl:grid-cols-[minmax(0,1fr)_400px]">
+        <div className="scroll-quiet min-h-0 min-w-0 px-4 py-4 sm:px-6 sm:py-5 lg:overflow-y-auto">
           <div className="mx-auto max-w-5xl space-y-8">
             {guided && (
               <section aria-labelledby="jupiter-demo-heading" className="border-l-4 border-accent bg-raised px-4 py-3">
@@ -148,7 +148,7 @@ export function Launch() {
                       role="radio"
                       aria-checked={on}
                       onClick={() => update({ trajectoryId: t.id, launchOffsetDays: 0 })}
-                      className={`flex gap-4 border p-4 text-left transition-colors ${on ? 'border-ink bg-raised' : 'border-line bg-panel/70 hover:border-rule'}`}
+                      className={`flex min-w-0 gap-2 border p-3 text-left sm:gap-4 sm:p-4 transition-colors ${on ? 'border-ink bg-raised' : 'border-line bg-panel/70 hover:border-rule'}`}
                     >
                       <RouteDiagram traj={t} destName={dest.name} destAU={dest.solarDistanceAU} />
                       <span className="min-w-0 flex-1">
@@ -207,7 +207,7 @@ export function Launch() {
                       role="radio"
                       aria-checked={on}
                       onClick={() => update({ launchVehicleId: l.id })}
-                      className={`grid w-full grid-cols-[minmax(0,5fr)_minmax(0,6fr)] items-center gap-6 border p-4 text-left transition-colors ${on ? 'border-ink bg-raised' : 'border-line bg-panel/70 hover:border-rule'}`}
+                      className={`grid w-full min-w-0 gap-3 border p-4 sm:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] sm:items-center sm:gap-6 text-left transition-colors ${on ? 'border-ink bg-raised' : 'border-line bg-panel/70 hover:border-rule'}`}
                     >
                       <span>
                         <span className="flex items-center gap-3">
@@ -249,7 +249,7 @@ export function Launch() {
             <RippleChips design={design} budgets={budgets} />
           </div>
         </div>
-        <aside aria-label="Budgets" className={`scroll-quiet min-h-0 overflow-y-auto border-l border-line bg-panel/85 ${guided ? "hidden lg:block" : ""}`}>
+        <aside aria-label="Budgets" className={`scroll-quiet min-h-0 min-w-0 border-t border-line bg-panel/85 lg:overflow-y-auto lg:border-t-0 lg:border-l ${guided ? "hidden lg:block" : ""}`}>
           <BudgetPanel design={design} budgets={budgets} only={['mass', 'deltaV', 'cost', 'reliability', 'science']} />
         </aside>
       </div>

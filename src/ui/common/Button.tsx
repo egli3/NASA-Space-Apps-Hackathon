@@ -50,7 +50,7 @@ export function Segmented<T extends string>({ label, value, options, onChange }:
             disabled={o.disabled}
             title={o.hint}
             onClick={() => onChange(o.value)}
-            className={`px-4 py-2 font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-35 ${i > 0 ? 'border-l border-rule' : ''} ${
+            className={`min-h-11 px-3 py-2 font-medium transition-colors sm:min-h-0 sm:px-4 disabled:cursor-not-allowed disabled:opacity-35 ${i > 0 ? 'border-l border-rule' : ''} ${
               on ? 'bg-ink text-bg' : 'text-ink hover:bg-ink/8'
             }`}
           >

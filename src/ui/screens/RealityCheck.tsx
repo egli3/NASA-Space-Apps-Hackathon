@@ -46,20 +46,20 @@ export function RealityCheck() {
       }
     >
       <div className="scroll-quiet h-full overflow-y-auto">
-        <div className="mx-auto grid max-w-7xl gap-x-12 gap-y-8 px-8 py-8 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-x-12 gap-y-8 px-4 py-5 sm:px-8 sm:py-8 lg:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] lg:px-12">
           <div>
             <p className="text-dim">Two years later, in the clean room</p>
-            <h1 className="mt-2 text-5xl leading-[1.05] font-bold">The hardware is heavier than the drawing</h1>
+            <h1 className="mt-2 text-3xl sm:text-5xl leading-[1.05] font-bold">The hardware is heavier than the drawing</h1>
             <p className="mt-4 max-w-[62ch] text-lg text-dim">
               It always is. Parts that have flown before barely move; new technology can blow straight through its estimate. This is what margin and reserves are for.
             </p>
 
-            <table className="mt-8 w-full">
+            <table className="mt-6 w-full table-fixed text-sm sm:mt-8 sm:text-base">
               <thead>
                 <tr className="border-b border-rule text-left text-sm text-dim">
                   <th className="py-2 font-medium">Part</th>
-                  <th className="w-[34%] py-2 font-medium">Mass growth</th>
-                  <th className="py-2 text-right font-medium">Cost growth</th>
+                  <th className="w-[28%] py-2 font-medium sm:w-[34%]">Mass growth</th>
+                  <th className="w-[24%] py-2 text-right font-medium">Cost growth</th>
                 </tr>
               </thead>
               <tbody>
@@ -71,11 +71,11 @@ export function RealityCheck() {
                     transition={{ delay: 0.3 + i * 0.06, duration: 0.25 }}
                     className="border-b border-line/60"
                   >
-                    <td className="py-2 pr-4">{l.label}</td>
-                    <td className="py-2 pr-4">
+                    <td className="py-2 pr-2 sm:pr-4">{l.label}</td>
+                    <td className="py-2 pr-2 sm:pr-4">
                       <div className="flex items-center gap-3">
-                        <span className="num w-20 shrink-0 text-right">+{num(l.massKg, 1)} kg</span>
-                        <span className="h-2 flex-1">
+                        <span className="num whitespace-nowrap sm:w-20 sm:shrink-0 sm:text-right">+{num(l.massKg, 1)} kg</span>
+                        <span className="hidden h-2 flex-1 sm:block">
                           <motion.span
                             className="block h-full bg-caution"
                             initial={{ width: 0 }}
@@ -100,7 +100,7 @@ export function RealityCheck() {
                 <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: revealEnd }} className="font-bold">
                   <td className="py-3">Total</td>
                   <td className="py-3">
-                    <span className="num inline-block w-20 text-right">+{num(reveal.massGrowthKg, 1)} kg</span>
+                    <span className="num inline-block whitespace-nowrap sm:w-20 sm:text-right">+{num(reveal.massGrowthKg, 1)} kg</span>
                   </td>
                   <td className="num py-3 text-right">+{money(reveal.costGrowthM)}</td>
                 </motion.tr>

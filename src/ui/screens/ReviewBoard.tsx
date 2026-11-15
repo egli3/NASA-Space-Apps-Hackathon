@@ -41,7 +41,7 @@ function Finding({ f, index }: { f: ReviewFinding; index: number }) {
       transition={{ delay: 0.15 + index * 0.07, duration: 0.3 }}
       className={`border-l-4 bg-panel/80 ${TONE_BORDER[f.severity]} border-y border-r border-y-line border-r-line`}
     >
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 px-5 py-4">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 px-3 py-3 sm:gap-x-6 sm:px-5 sm:py-4">
         <div>
           <div className="flex items-center gap-2.5">
             <StatusIcon severity={f.severity} size={18} label={f.severity === 'red' ? 'Will not pass' : 'Caution'} />
@@ -71,7 +71,7 @@ function Finding({ f, index }: { f: ReviewFinding; index: number }) {
         </div>
         {isRule && (
           <div className="text-right">
-            <div className={`num text-3xl leading-none font-medium ${TONE_TEXT[f.severity]}`}>{pct(Math.min(f.value, 999), Math.abs(f.value) < 100 ? 1 : 0)}</div>
+            <div className={`num text-lg leading-none font-medium sm:text-3xl ${TONE_TEXT[f.severity]}`}>{pct(Math.min(f.value, 999), Math.abs(f.value) < 100 ? 1 : 0)}</div>
             <div className="mt-1.5 text-sm text-dim">
               board wants <span className="num">{pct(f.threshold)}</span>
             </div>
@@ -128,10 +128,10 @@ export function ReviewBoard() {
       }
     >
       <div className="scroll-quiet h-full overflow-y-auto">
-        <div className="mx-auto grid max-w-7xl gap-x-12 gap-y-8 px-8 py-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,5fr)] lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-x-12 gap-y-8 px-4 py-5 sm:px-8 sm:py-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,5fr)] lg:px-12">
           <div className="lg:sticky lg:top-8 lg:self-start">
             <p className="text-dim">Review board verdict</p>
-            <h1 className={`mt-2 text-5xl leading-[1.05] font-bold ${TONE_TEXT[verdict]}`}>{headline}</h1>
+            <h1 className={`mt-2 text-3xl sm:text-5xl leading-[1.05] font-bold ${TONE_TEXT[verdict]}`}>{headline}</h1>
             <p className="mt-4 text-lg">{lead}</p>
 
             <dl className="mt-8 grid grid-cols-3 border border-line">

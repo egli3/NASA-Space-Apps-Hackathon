@@ -39,29 +39,37 @@ export function SlotRail({ design }: { design: MissionDesign }) {
   const tab = useGame((s) => s.designTab);
   const setTab = useGame((s) => s.setDesignTab);
   return (
-    <nav aria-label="Parts of the design" className="scroll-quiet h-full overflow-y-auto border-r border-line bg-panel/70">
-      <ul role="tablist" aria-orientation="vertical">
-        {TABS.map((t) => {
-          const on = t === tab;
-          return (
-            <li key={t}>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={on}
-                onClick={() => setTab(t)}
-                className={`block w-full border-b border-line px-4 py-2 text-left transition-colors ${on ? 'bg-ink text-bg' : 'hover:bg-ink/8'} ${
-                  t === 'instruments' || t === 'orbit' ? 'border-t border-t-rule first:border-t-0' : ''
-                }`}
-              >
-                <span className="block leading-tight font-bold">{TAB_LABEL[t]}</span>
-                <span className={`block truncate text-xs ${on ? 'text-bg/70' : 'text-dim'}`}>{tabSummary(t, design)}</span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+    <>
+      <label className="block border-b border-line bg-panel px-4 py-3 md:hidden">
+        <span className="mb-1 block text-sm font-medium">Design section</span>
+        <select value={tab} onChange={(event) => setTab(TABS[event.currentTarget.selectedIndex])} className="min-h-11 w-full rounded-xs border border-rule bg-raised px-3 text-base text-ink">
+          {TABS.map((t) => <option key={t} value={t}>{TAB_LABEL[t]}</option>)}
+        </select>
+      </label>
+      <nav aria-label="Parts of the design" className="scroll-quiet hidden h-full overflow-y-auto border-r border-line bg-panel/70 md:block">
+        <ul role="tablist" aria-orientation="vertical">
+          {TABS.map((t) => {
+            const on = t === tab;
+            return (
+              <li key={t}>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={on}
+                  onClick={() => setTab(t)}
+                  className={`block w-full border-b border-line px-4 py-2 text-left transition-colors ${on ? 'bg-ink text-bg' : 'hover:bg-ink/8'} ${
+                    t === 'instruments' || t === 'orbit' ? 'border-t border-t-rule first:border-t-0' : ''
+                  }`}
+                >
+                  <span className="block leading-tight font-bold">{TAB_LABEL[t]}</span>
+                  <span className={`block truncate text-xs ${on ? 'text-bg/70' : 'text-dim'}`}>{tabSummary(t, design)}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </>
   );
 }
 
@@ -69,7 +77,7 @@ export function SlotRail({ design }: { design: MissionDesign }) {
 
 function Stat({ label, value, help }: { label: string; value: string; help?: string }) {
   return (
-    <span className="whitespace-nowrap" title={help}>
+    <span className="sm:whitespace-nowrap" title={help}>
       <span className="text-dim">{label} </span>
       <span className="num">{value}</span>
     </span>
@@ -408,7 +416,7 @@ export function OptionsPanel({ design }: { design: MissionDesign }) {
   }
 
   return (
-    <div role="tabpanel" aria-label={TAB_LABEL[tab]} className="scroll-quiet h-full overflow-y-auto px-5 py-4">
+    <div role="tabpanel" aria-label={TAB_LABEL[tab]} className="scroll-quiet min-w-0 px-4 py-4 md:h-full md:overflow-y-auto md:px-5">
       <div className="mb-3 flex flex-col gap-x-4 gap-y-1 xl:flex-row xl:items-baseline">
         <h2 className="shrink-0 text-xl font-bold">{TAB_LABEL[tab]}</h2>
         <p className="text-sm text-dim">{TAB_HELP[tab]}</p>
