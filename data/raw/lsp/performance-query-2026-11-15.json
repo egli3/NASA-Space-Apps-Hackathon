@@ -1,0 +1,47 @@
+{
+  "note": "Transcribed on 2026-11-15 from two NASA tools. NOT yet applied to src/data/launch-vehicles.json or trajectories.json: applying them changes the balance, so do both together and re-run `npm run balance`.",
+  "launchVehicles": {
+    "source": "NASA Launch Services Program Launch Vehicle Performance Website, Performance Query, Orbit = High Energy, https://elvperf.ksc.nasa.gov/Pages/Query.aspx",
+    "units": "separated spacecraft mass in kg at the given C3 (km2/s2); a vehicle missing at a C3 was not listed by the site at that C3",
+    "Falcon 9 (Full Thrust, ASDS)": { "-1.5": 3485, "-1": 3425, "0": 3310, "5": 2745, "8": 2430, "10": 2220, "notListedAt": [-3, -2, 10.5, 11, 12] },
+    "Falcon 9 (Full Thrust, RTLS)": { "-1.5": 1900, "-1": 1855, "0": 1770, "5": 1330, "8": 1060, "10": 875 },
+    "Vulcan (VC2)": { "-3": 6320, "0": 5920, "10": 4750, "20": 3710, "30": 2790, "40": 1970, "50": 1260, "60": 630 },
+    "Vulcan (VC4)": { "-3": 9010, "-2": 8855, "-1": 8700, "0": 8550, "5": 7820, "8": 7410, "10": 7140, "12": 6880, "15": 6490, "20": 5880, "25": 5320, "30": 4780, "40": 3800, "50": 2940, "60": 2170, "70": 1420, "80": 830, "85": 570, "88": 410, "90": 310, "notListedAt": [95, 100] },
+    "Vulcan (VC6)": { "-3": 11400, "0": 10850, "10": 9130, "20": 7630, "30": 6310, "40": 5150, "50": 4120, "60": 3250, "70": 2420, "80": 1780, "90": 1370, "95": 1070, "100": 770 },
+    "Falcon Heavy (Recovery)": { "-1": 6880, "0": 6690, "10": 5130, "20": 3845, "30": 2740, "40": 1805, "50": 1005, "60": 320 },
+    "Falcon Heavy (Expendable)": { "-1.5": 15460, "-1": 15310, "0": 15010, "5": 13615, "8": 12850, "10": 12345, "12": 11880, "15": 11190, "20": 10115, "25": 9130, "30": 8225, "40": 6640, "50": 5280, "60": 4100, "70": 3080, "80": 2195, "85": 1795, "90": 1425, "95": 1080, "100": 755, "notListedAt": [-3, -2] },
+    "groundRules": "Site ground rules: 3-sigma reserves, instantaneous launch attempt, 47 in (1194 mm) adapter, launch from CCSFS (KSC for Falcon Heavy).",
+    "findings": [
+      "Our current lv-vulcan-vc4 curve is about 25-35% too low at every C3 (e.g. 5300 kg vs 7140 kg at C3 10).",
+      "Our current lv-falcon-heavy curve is within about 3% of the site.",
+      "The site lists Falcon 9 with booster recovery only up to C3 = 10, so it cannot be cited for our present mars-2028 (C3 12) trajectory."
+    ]
+  },
+  "trajectories": {
+    "source": "NASA Ames Trajectory Browser, https://trajbrowser.arc.nasa.gov/traj_browser.php (one-way, custom target list, minimise total delta-V, show all trajectories)",
+    "columns": "launch, arrival, duration, injection C3 km2/s2, post-injection delta-V km/s",
+    "postInjectionDvMeaning": "User guide: for planets, the rendezvous delta-V is the burn at a safe distance above the atmosphere that reduces the speed to escape (C3 = 0). Arrival v-infinity therefore = sqrt((v_esc + dv)^2 - v_esc^2); with v_esc at 200 km above Mars (4.885 km/s), 0.85 km/s gives about 3.0 km/s and 1.11 km/s gives about 3.5 km/s.",
+    "marsRendezvous": [
+      ["2028-11-29", "2029-09-29", "304 d", 8.2, 0.85],
+      ["2028-11-29", "2029-09-13", "288 d", 8.8, 0.85],
+      ["2028-11-29", "2029-08-28", "272 d", 10.9, 1.01],
+      ["2028-12-31", "2029-08-28", "240 d", 15.0, 1.29],
+      ["2028-12-31", "2029-08-12", "224 d", 13.2, 1.39],
+      ["2028-12-31", "2029-07-27", "208 d", 12.9, 1.78],
+      ["2030-12-21", "2031-10-05", "288 d", 10.2, 1.11],
+      ["2030-12-21", "2031-09-19", "272 d", 10.9, 1.13],
+      ["2031-02-23", "2031-09-19", "208 d", 14.8, 1.31],
+      ["2031-02-23", "2031-09-03", "192 d", 14.5, 1.50],
+      ["2031-02-23", "2031-08-18", "176 d", 14.7, 1.96]
+    ],
+    "jupiterFlybyDirect": [
+      ["2030-01-19", "2032-04-14", "2.23 yr", 76.0],
+      ["2028-12-31", "2032-05-16", "3.37 yr", 76.6],
+      ["2028-12-31", "2031-11-22", "2.89 yr", 77.5],
+      ["2028-12-31", "2031-09-19", "2.72 yr", 79.3],
+      ["2028-12-31", "2031-08-18", "2.63 yr", 80.4],
+      ["2028-12-15", "2031-01-22", "2.10 yr", 83.1]
+    ],
+    "jupiterNote": "The database returned no Jupiter rendezvous trajectories; the flyby list gives the launch energy for a direct transfer. Our jupiter-direct-2029 (C3 80, 1000 days) is consistent with the 2028-12-31 rows."
+  }
+}

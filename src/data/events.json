@@ -3,7 +3,7 @@
     "id": "ev-rwa-failure",
     "title": "Reaction wheel failure",
     "narrative": "Telemetry shows rising friction in reaction wheel 2, then nothing. The spacecraft can no longer point precisely with wheels alone.",
-    "realStory": { "mission": "Kepler & Dawn", "year": 2013, "summary": "Kepler lost its second reaction wheel in 2013 and was reborn as K2 by balancing on sunlight pressure. Dawn lost two wheels and flew on using thrusters until its fuel ran out in 2018.", "lesson": "Wheels wear out — carry a spare, or have a plan B for pointing." },
+    "realStory": { "mission": "Kepler", "year": 2013, "summary": "Kepler lost the second of its four reaction wheels in May 2013 and could no longer hold its star field steady. Engineers revived it as the K2 mission, pointing with the two remaining wheels, thrusters and the pressure of sunlight.", "lesson": "Wheels wear out. Carry a spare, or have a plan B for pointing." },
     "trigger": { "kind": "hazard", "subsystem": "adcs", "phase": "any" },
     "conditions": [ { "fact": "redundant.adcs", "op": "eq", "value": false } ],
     "options": [
@@ -11,14 +11,15 @@
       { "id": "relaxed", "label": "Relax science pointing", "description": "Accept blurrier observations to save fuel.", "effects": [ { "kind": "instrument_degrade", "target": "random", "value": 0.6 } ] }
     ],
     "defaultOptionId": "thrusters",
-    "sources": ["nasa-llis", "nssdca-nmc"],
-    "confidence": "approx"
+    "sources": ["nasa-science-missions"],
+    "confidence": "verified",
+    "notes": "Real story: NASA Kepler & K2 mission pages (keplerscience.arc.nasa.gov). Effects and odds are game values."
   },
   {
     "id": "ev-sep-storm",
     "title": "Solar storm incoming",
     "narrative": "Space-weather forecasters report a major flare and a wave of energetic protons heading your way. Single-event upsets are likely in the next 48 hours.",
-    "realStory": { "mission": "MAVEN & Curiosity", "year": 2017, "summary": "In September 2017 a burst of X-class flares hit Mars: MAVEN saw a global aurora and Curiosity measured surface radiation doubling.", "lesson": "Space weather is real weather — plan for it with shielding, safe modes and radiation-tolerant parts." },
+    "realStory": { "mission": "MAVEN & Curiosity", "year": 2017, "summary": "A large solar storm hit Mars in September 2017. MAVEN saw a planet-wide aurora more than 25 times brighter than any it had seen before, and the Curiosity rover measured surface radiation more than double any earlier reading.", "lesson": "Space weather is real weather. Plan for it with shielding, safe modes and radiation-tolerant parts." },
     "trigger": { "kind": "space_weather", "phase": "any", "minSeverity": "0.6" },
     "conditions": [],
     "options": [
@@ -26,14 +27,15 @@
       { "id": "observe", "label": "Observe the storm", "description": "Keep everything on — a storm is great science, if your electronics survive it.", "successProbability": 0.7, "effects": [ { "kind": "science_bonus_pct", "target": "all", "value": 2 }, { "kind": "dose_krad", "value": 2 } ], "failureEffects": [ { "kind": "instrument_degrade", "target": "random", "value": 0.5 }, { "kind": "dose_krad", "value": 2 } ] }
     ],
     "defaultOptionId": "safe",
-    "sources": ["nasa-donki", "nssdca-nmc"],
-    "confidence": "approx"
+    "sources": ["nasa-donki", "jpl-news"],
+    "confidence": "verified",
+    "notes": "Real story: JPL release 'Large Solar Storm Sparks Global Aurora and Doubles Radiation Levels on the Martian Surface' (29 Sep 2017). In flight the card is triggered by a real flare or SEP event from the DONKI snapshot. Effects are game values."
   },
   {
     "id": "ev-units-bug",
     "title": "Suspicious navigation numbers",
     "narrative": "A junior navigator notices that small thruster firings keep pushing the trajectory slightly off prediction. The ground software has been running for months.",
-    "realStory": { "mission": "Mars Climate Orbiter", "year": 1999, "summary": "One team's software reported thruster impulse in pound-force seconds; another expected newton-seconds. The orbiter dipped far too deep into Mars's atmosphere and was lost.", "lesson": "Independent verification catches the errors everyone is too close to see." },
+    "realStory": { "mission": "Mars Climate Orbiter", "year": 1999, "summary": "One team's software reported thruster impulse in pound-force seconds while the navigation software expected newton-seconds, a factor of 4.45. The orbiter arrived far lower than planned, dipped too deep into Mars's atmosphere and was lost.", "lesson": "Independent verification catches the errors everyone is too close to see." },
     "trigger": { "kind": "random", "phase": "cruise", "probabilityPerYear": 0.6 },
     "conditions": [ { "fact": "design.assurance", "op": "eq", "value": "lean" } ],
     "options": [
@@ -41,14 +43,15 @@
       { "id": "trust", "label": "Trust the software", "description": "It's probably noise. Probably.", "successProbability": 0.5, "effects": [], "failureEffects": [ { "kind": "mission_loss", "target": "Navigation units mismatch — spacecraft lost during orbit insertion" } ] }
     ],
     "defaultOptionId": "audit",
-    "sources": ["nasa-llis"],
-    "confidence": "approx"
+    "sources": ["nasa-mco-report"],
+    "confidence": "verified",
+    "notes": "Real story: Mars Climate Orbiter Mishap Investigation Board Phase I Report (1999). Effects and odds are game values."
   },
   {
     "id": "ev-valve-stuck",
     "title": "Engine valves acting up",
     "narrative": "Before the burn that would tighten your orbit, two helium check valves take minutes to open instead of seconds. Firing the main engine now is a gamble.",
-    "realStory": { "mission": "Juno", "year": 2016, "summary": "Juno's engine valves misbehaved before its planned move to a 14-day orbit. NASA chose to stay in the 53-day orbit for the rest of the mission — and Juno still made major discoveries.", "lesson": "When the downside is losing everything, the conservative choice is often the right one." },
+    "realStory": { "mission": "Juno", "year": 2016, "summary": "In October 2016, two helium check valves in Juno's engine system took minutes instead of seconds to open. NASA cancelled the burn into a 14-day orbit and kept Juno in its 53-day orbit for the rest of the mission.", "lesson": "When the downside is losing everything, the conservative choice is often the right one." },
     "trigger": { "kind": "hazard", "subsystem": "propulsion", "phase": "arrival" },
     "conditions": [],
     "options": [
@@ -56,14 +59,15 @@
       { "id": "fire", "label": "Fire the engine anyway", "description": "If it works, nothing changes. If it doesn't…", "successProbability": 0.8, "effects": [], "failureEffects": [ { "kind": "mission_loss", "target": "Main engine failure during orbit adjustment" } ] }
     ],
     "defaultOptionId": "stay",
-    "sources": ["nssdca-nmc"],
-    "confidence": "approx"
+    "sources": ["jpl-news", "nssdca-nmc"],
+    "confidence": "verified",
+    "notes": "Real story: JPL releases 'Mission Prepares for Next Jupiter Pass' (Oct 2016) and 'NASA's Juno to Remain in Current Orbit at Jupiter' (Feb 2017). Effects and odds are game values."
   },
   {
     "id": "ev-dsn-conflict",
     "title": "Deep Space Network crunch",
     "narrative": "Another spacecraft has declared an emergency and the big dishes are reassigned to it. Your tracking passes for the next few days are cancelled.",
-    "realStory": { "mission": "Deep Space Network", "year": 2023, "summary": "NASA's three DSN complexes serve dozens of missions; a 2023 Inspector General audit found the network over-subscribed, with missions regularly getting less tracking time than requested.", "lesson": "Onboard storage is your buffer when the network is busy." },
+    "realStory": { "mission": "Deep Space Network", "year": 2023, "summary": "A 2023 audit by NASA's Inspector General found the Deep Space Network over-subscribed, with demand exceeding capacity by up to 40 percent at times. Over five years some missions received thousands fewer tracking hours than they had asked for.", "lesson": "Onboard storage is your buffer when the network is busy." },
     "trigger": { "kind": "random", "phase": "science", "probabilityPerYear": 0.8 },
     "conditions": [],
     "options": [
@@ -71,14 +75,15 @@
       { "id": "buy", "label": "Pay for extra passes", "description": "Spend $2M on extra tracking time afterwards to catch up.", "effects": [ { "kind": "data_rate_factor", "target": "days:4", "value": 0 }, { "kind": "cost_m", "value": 2 }, { "kind": "data_rate_factor", "target": "days:10", "value": 1.5 } ] }
     ],
     "defaultOptionId": "yield",
-    "sources": ["nasa-dsn-810-005"],
-    "confidence": "approx"
+    "sources": ["nasa-oig-dsn-audit"],
+    "confidence": "verified",
+    "notes": "Real story: NASA OIG report IG-23-016, 12 July 2023. Effects and odds are game values."
   },
   {
     "id": "ev-aerobraking-panel",
     "title": "Solar panel flexing during aerobraking",
     "narrative": "On each pass through the upper atmosphere, one solar array is bending more than predicted. A cracked hinge is suspected.",
-    "realStory": { "mission": "Mars Global Surveyor", "year": 1997, "summary": "A solar panel damaged at launch flexed dangerously during aerobraking. Controllers raised the orbit and slowed aerobraking down, reaching the mapping orbit over a year late — but safely.", "lesson": "Aerobraking trades fuel for risk and time; go gently when hardware complains." },
+    "realStory": { "mission": "Mars Global Surveyor", "year": 1997, "summary": "A solar array that had failed to latch after launch flexed too far during aerobraking in 1997. Controllers paused, then continued more gently at a higher altitude, and mapping began in 1999, over a year late.", "lesson": "Aerobraking trades fuel for risk and time. Go gently when hardware complains." },
     "trigger": { "kind": "scheduled", "phase": "arrival", "dayOffset": 30 },
     "conditions": [ { "fact": "orbit.aerobraking", "op": "eq", "value": true } ],
     "options": [
@@ -86,14 +91,15 @@
       { "id": "push", "label": "Keep the pace", "description": "Stay on schedule and hope the hinge holds.", "successProbability": 0.8, "effects": [], "failureEffects": [ { "kind": "subsystem_degrade", "target": "power", "value": 0.6 } ] }
     ],
     "defaultOptionId": "gentle",
-    "sources": ["nssdca-nmc", "nasa-llis"],
-    "confidence": "approx"
+    "sources": ["jpl-news"],
+    "confidence": "verified",
+    "notes": "Real story: JPL releases 'Global Surveyor's Orbit Raised While Solar Panel is Analyzed' (1997) and 'Mars Global Surveyor Successfully Completes Aerobraking' (1999); DESCANSO MGS summary. Effects and odds are game values."
   },
   {
     "id": "ev-bonus-discovery",
     "title": "Something is moving down there",
     "narrative": "A routine image shows a fresh change on the surface that wasn't there last month. Scientists are begging for follow-up observations.",
-    "realStory": { "mission": "Mars Reconnaissance Orbiter", "year": 2008, "summary": "HiRISE caught avalanches of ice and dust tumbling down Mars's polar cliffs in the act — the first ever seen on another planet.", "lesson": "Margins aren't just for emergencies: spare capacity lets you chase surprises." },
+    "realStory": { "mission": "Mars Reconnaissance Orbiter", "year": 2008, "summary": "On 19 February 2008 the HiRISE camera, taking a routine image to watch spring frost, caught at least four avalanches of ice and dust tumbling down a 700-metre cliff near Mars's north pole.", "lesson": "Margins aren't just for emergencies: spare capacity lets you chase surprises." },
     "trigger": { "kind": "random", "phase": "science", "probabilityPerYear": 0.4 },
     "conditions": [],
     "options": [
@@ -101,7 +107,120 @@
       { "id": "plan", "label": "Stick to the plan", "description": "The baseline plan comes first.", "effects": [] }
     ],
     "defaultOptionId": "chase",
-    "sources": ["nssdca-nmc"],
-    "confidence": "approx"
+    "sources": ["jpl-news"],
+    "confidence": "verified",
+    "notes": "Real story: JPL release 'NASA Spacecraft Photographs Avalanches on Mars' (3 Mar 2008) and Photojournal PIA10245. Effects and odds are game values."
+  },
+  {
+    "id": "ev-antenna-stuck",
+    "title": "High-gain antenna fault",
+    "narrative": "The signal from your main antenna has dropped to a whisper. Telemetry suggests it is stuck out of position, and commands to move it change nothing.",
+    "realStory": { "mission": "Galileo", "year": 1991, "summary": "Galileo's umbrella-like high-gain antenna failed to open fully on 11 April 1991: a few of its 18 ribs stayed stuck. The team reprogrammed the spacecraft to compress its data, record it on tape and send it slowly over the small low-gain antenna, expecting to meet about 70 percent of the mission's objectives.", "lesson": "A clever workaround can save a mission, but only if the software and the storage are there to support it." },
+    "trigger": { "kind": "hazard", "subsystem": "antenna", "phase": "any" },
+    "conditions": [],
+    "options": [
+      { "id": "workaround", "label": "Re-plan around the low-gain", "description": "Write compression software and send everything over the small antenna. Slow, but it works.", "effects": [ { "kind": "subsystem_degrade", "target": "antenna", "value": 0.12 }, { "kind": "cost_m", "value": 6 } ] },
+      { "id": "retry", "label": "Keep trying to free it", "description": "Heat it, cool it, shake it. If it frees, you are back to normal. If not, you have lost a month and gained nothing.", "effects": [], "successProbability": 0.25, "failureEffects": [ { "kind": "subsystem_degrade", "target": "antenna", "value": 0.05 }, { "kind": "science_pause_days", "value": 30 } ] }
+    ],
+    "defaultOptionId": "workaround",
+    "sources": ["nasa-llis", "jpl-news"],
+    "confidence": "verified",
+    "notes": "Real story: NASA Lessons Learned entry 492, 'Galileo High Gain Antenna (HGA) Failure (1991)'; NASA history feature '30 Years Ago: Galileo off to Orbit Jupiter'. The 70 percent figure is the projection in the lessons-learned entry. Effects and odds are game values."
+  },
+  {
+    "id": "ev-pressurization",
+    "title": "Time to pressurise the tanks",
+    "narrative": "Orbit insertion is three days away. The propellant tanks must be pressurised now, through valves that have sat closed for the whole cruise. The standard sequence takes an hour. A full checkout of the lines first would cost time and money.",
+    "realStory": { "mission": "Mars Observer", "year": 1993, "summary": "Contact with Mars Observer was lost on 21 August 1993, shortly before it was due to enter Mars orbit, as it began pressurising its propellant tanks. The investigation board found no smoking gun, but judged the most probable cause to be a failure in the pressurisation side of the propulsion system.", "lesson": "The riskiest moments are the first use of hardware that has waited months in space. Check before you commit." },
+    "trigger": { "kind": "scheduled", "phase": "arrival", "dayOffset": -3 },
+    "conditions": [ { "fact": "parts.propulsion", "op": "eq", "value": "prop-biprop" }, { "fact": "design.assurance", "op": "neq", "value": "rigorous" } ],
+    "options": [
+      { "id": "checkout", "label": "Check the lines first", "description": "Purge and test the pressurisation lines before opening the valves. Costs $3M and a little propellant.", "effects": [ { "kind": "cost_m", "value": 3 }, { "kind": "propellant_use_kg", "value": 2 } ] },
+      { "id": "proceed", "label": "Pressurise on schedule", "description": "The sequence was tested on the ground. It will almost certainly be fine.", "effects": [], "successProbability": 0.9, "failureEffects": [ { "kind": "mission_loss", "target": "Propulsion system ruptured during tank pressurisation, three days before orbit insertion", "value": 0 } ] }
+    ],
+    "defaultOptionId": "checkout",
+    "sources": ["nssdca-nmc", "nasa-llis"],
+    "confidence": "verified",
+    "notes": "Real story: NSSDCA 'Reports on the loss of Mars Observer' and NASA APPEL 'This Month in NASA History: Mars Observer Lost'. The card only appears with a bipropellant engine (as Mars Observer had) and without rigorous assurance. Effects and odds are game values."
+  },
+  {
+    "id": "ev-computer-reboot",
+    "title": "Stuck in a reboot loop",
+    "narrative": "The spacecraft has restarted its computer dozens of times since yesterday. Each time it wakes it tries to open its data recorder, runs out of memory and crashes again.",
+    "realStory": { "mission": "Spirit (Mars Exploration Rover)", "year": 2004, "summary": "In January 2004 the Spirit rover stopped communicating properly and began rebooting its computer many times a day. The cause was its flash memory file system, clogged with too many files; engineers deleted thousands of them and later reformatted the memory.", "lesson": "Storage fills up quietly. Housekeeping is part of flying." },
+    "trigger": { "kind": "random", "phase": "science", "probabilityPerYear": 0.2 },
+    "conditions": [],
+    "options": [
+      { "id": "wipe", "label": "Wipe the recorder", "description": "Boot without the recorder, delete everything on it and start clean. You lose whatever had not been sent home.", "effects": [ { "kind": "lose_data_gb", "value": 100000 }, { "kind": "science_pause_days", "value": 4 } ] },
+      { "id": "debug", "label": "Debug it carefully", "description": "Keep the data and work through the file system by hand. Twelve days in safe mode and $2M of engineering time.", "effects": [ { "kind": "safe_mode_days", "value": 12 }, { "kind": "cost_m", "value": 2 } ] }
+    ],
+    "defaultOptionId": "wipe",
+    "sources": ["jpl-news"],
+    "confidence": "verified",
+    "notes": "Real story: JPL releases 'Mars Rover Spirit Restored to Health' and 'Healthy Spirit Cleans a Mars Rock; Opportunity Rolls' (Feb 2004). Effects and odds are game values."
+  },
+  {
+    "id": "ev-antenna-mispoint",
+    "title": "One wrong number",
+    "narrative": "A routine command sequence went up yesterday with one wrong value in it. The antenna is now pointing two degrees away from Earth and the spacecraft has gone silent.",
+    "realStory": { "mission": "Voyager 2", "year": 2023, "summary": "Commands sent to Voyager 2 on 21 July 2023 accidentally tilted its antenna 2 degrees away from Earth, cutting contact. The Deep Space Network's Canberra station sent a powerful 'shout' telling it to turn back, and full contact was restored by 4 August; an automatic pointing reset in October was the backstop.", "lesson": "Check every command before it leaves the ground, and build in an automatic way home." },
+    "trigger": { "kind": "random", "phase": "science", "probabilityPerYear": 0.2 },
+    "conditions": [ { "fact": "design.assurance", "op": "neq", "value": "rigorous" } ],
+    "options": [
+      { "id": "shout", "label": "Shout with the big dish", "description": "Book emergency time on a 70 m antenna and blast a correction at the spacecraft. $3M, and about five days without data.", "effects": [ { "kind": "cost_m", "value": 3 }, { "kind": "data_rate_factor", "target": "days:5", "value": 0 } ] },
+      { "id": "wait", "label": "Wait for the automatic reset", "description": "The spacecraft re-points itself at Earth on a timer. Free, but that is a month of silence while the recorder fills.", "effects": [ { "kind": "data_rate_factor", "target": "days:30", "value": 0 } ] }
+    ],
+    "defaultOptionId": "shout",
+    "sources": ["nasa-science-missions", "jpl-news"],
+    "confidence": "verified",
+    "notes": "Real story: NASA 'Mission Update: Voyager 2 Communications Pause' (28 July 2023, updated 4 Aug 2023). Effects and odds are game values."
+  },
+  {
+    "id": "ev-unexplained-resets",
+    "title": "Unexplained computer resets",
+    "narrative": "For the fourth time this year the flight computer has reset itself for no clear reason and dropped into safe mode. Analysis shows that two resets close together could do real damage.",
+    "realStory": { "mission": "Mars Reconnaissance Orbiter", "year": 2009, "summary": "MRO's computer reset itself four times in 2009. After the fourth, on 26 August, engineers kept the orbiter in safe mode until 8 December while they protected it against two resets happening within minutes of each other. They never found the root cause.", "lesson": "You do not need to understand a fault to protect against it. Sometimes the right move is to stop and make the system safe." },
+    "trigger": { "kind": "random", "phase": "science", "probabilityPerYear": 0.2 },
+    "conditions": [],
+    "options": [
+      { "id": "standdown", "label": "Stand down and patch", "description": "Stay in safe mode for two months while the team writes and tests a fix. No science, $4M.", "effects": [ { "kind": "safe_mode_days", "value": 60 }, { "kind": "cost_m", "value": 4 } ] },
+      { "id": "resume", "label": "Resume science now", "description": "It recovered fine the last three times. If the double reset happens, you will be relying on your backup computer, if you have one.", "effects": [ { "kind": "safe_mode_days", "value": 3 } ], "successProbability": 0.75, "failureEffects": [ { "kind": "safe_mode_days", "value": 10 }, { "kind": "subsystem_fail", "target": "avionics", "value": 0 } ] }
+    ],
+    "defaultOptionId": "standdown",
+    "sources": ["jpl-news"],
+    "confidence": "verified",
+    "notes": "Real story: JPL releases 'Orbiter Puts Itself into Precautionary Mode' (Aug 2009) and 'NASA's Mars Reconnaissance Orbiter Resumes Observations' (Dec 2009). Effects and odds are game values."
+  },
+  {
+    "id": "ev-tumbling-after-launch",
+    "title": "Silence after separation",
+    "narrative": "It is the day after launch. Your small spacecraft checked in once, then went quiet. Ground radar shows it turning slowly with its solar panels away from the Sun, and the battery will not last.",
+    "realStory": { "mission": "Lunar Trailblazer", "year": 2025, "summary": "Lunar Trailblazer, a small NASA lunar orbiter, launched on 26 February 2025 and lost contact the next day. The limited data suggested its solar arrays were not pointed at the Sun, so its batteries drained; NASA ended the mission on 31 July 2025.", "lesson": "Small and cheap still has to survive day one. Test the first hours of flight hardest of all." },
+    "trigger": { "kind": "scheduled", "phase": "cruise", "dayOffset": 1 },
+    "conditions": [ { "fact": "mission.class", "op": "eq", "value": "small" }, { "fact": "design.assurance", "op": "eq", "value": "lean" } ],
+    "options": [
+      { "id": "emergency", "label": "Call for emergency tracking", "description": "Pay for every big antenna you can get and command a recovery while there is still charge. $4M and good odds.", "effects": [ { "kind": "cost_m", "value": 4 } ], "successProbability": 0.85, "failureEffects": [ { "kind": "mission_loss", "target": "Lost contact the day after launch: batteries drained with the solar arrays off the Sun", "value": 0 } ] },
+      { "id": "wait", "label": "Wait for sunlight", "description": "As the spacecraft turns, the panels may catch enough Sun to wake it up. It costs nothing to wait.", "effects": [], "successProbability": 0.35, "failureEffects": [ { "kind": "mission_loss", "target": "Lost contact the day after launch: batteries drained with the solar arrays off the Sun", "value": 0 } ] }
+    ],
+    "defaultOptionId": "emergency",
+    "sources": ["nasa-science-missions", "jpl-news"],
+    "confidence": "verified",
+    "notes": "Real story: NASA/JPL release 'NASA's Lunar Trailblazer Moon Mission Ends' (Aug 2025). The card only appears for Small-class missions with lean assurance. Effects and odds are game values."
+  },
+  {
+    "id": "ev-cooler-wearout",
+    "title": "The cooler is wearing out",
+    "narrative": "Your imaging spectrometer's cryocooler, the tiny refrigerator that keeps its infrared detector cold, is drawing more current every week. It is near the end of its life.",
+    "realStory": { "mission": "CRISM on Mars Reconnaissance Orbiter", "year": 2017, "summary": "The CRISM mineral mapper relied on three cryocoolers, used one at a time, to keep its infrared detector cold. The last one reached the end of its life in 2017, leaving the instrument limited to visible and some near-infrared light until it was retired in 2022.", "lesson": "Moving parts have a lifetime. Plan the best science for the years when everything still works." },
+    "trigger": { "kind": "random", "phase": "science", "probabilityPerYear": 0.25 },
+    "conditions": [ { "fact": "instrument.ins-visir", "op": "eq", "value": true } ],
+    "options": [
+      { "id": "warm", "label": "Switch to warm-mode science", "description": "Stop cooling and use only the wavelengths that work warm. Lower quality, but it lasts.", "effects": [ { "kind": "instrument_degrade", "target": "ins-visir", "value": 0.65 } ] },
+      { "id": "push", "label": "Run it until it dies", "description": "Keep taking full-quality data while you can. The cooler may last the mission, or it may take the whole instrument with it.", "effects": [ { "kind": "science_bonus_pct", "target": "all", "value": 2 } ], "successProbability": 0.5, "failureEffects": [ { "kind": "instrument_disable", "target": "ins-visir", "value": 0 } ] }
+    ],
+    "defaultOptionId": "warm",
+    "sources": ["jpl-news"],
+    "confidence": "verified",
+    "notes": "Real story: NASA release 'NASA Retires Mineral Mapping Instrument on Mars Orbiter' and JPL image release PIA25363 'One of CRISM's Final Maps of Mars'. Effects and odds are game values."
   }
 ]

@@ -1,26 +1,26 @@
 [
   {
     "id": "hist-mro", "name": "Mars Reconnaissance Orbiter (MRO)", "launchYear": 2005, "destinationId": "mars",
-    "summary": "A heavyweight Mars orbiter carrying the HiRISE telescope, CTX, CRISM and SHARAD, built to return enormous volumes of data.",
-    "outcome": "Reached Mars in 2006, aerobraked into a low orbit, and has been operating for well over a decade.",
-    "funFact": "MRO has sent back more data than all other Mars missions combined.",
-    "stats": { "launchMassKg": 2180, "dryMassKg": 1031, "powerAtTargetW": 2000, "powerSource": "Solar (≈20 m²)", "costM": 720, "costYear": 2005, "downlinkKbps": 6000, "instruments": 6, "launchVehicle": "Atlas V 401", "primaryMissionYears": 2 },
-    "sources": ["nssdca-nmc"], "confidence": "approx"
+    "summary": "A heavyweight Mars orbiter with a 3 m dish and six science instruments, including a high-resolution camera, built to return huge volumes of data.",
+    "outcome": "Reached Mars on 10 March 2006, aerobraked for six months into a 255 × 320 km science orbit and kept working through multiple mission extensions.",
+    "funFact": "Its orbit-insertion burn lasted 27 minutes and slowed it by about 1 km/s. Six months of skimming the atmosphere did the rest.",
+    "stats": { "launchMassKg": 2180, "dryMassKg": 1031, "powerAtTargetW": 1000, "powerSource": "Solar (two 10 m² wings)", "costM": 720, "costYear": 2005, "downlinkKbps": 6000, "instruments": 6, "launchVehicle": "Atlas V 401", "primaryMissionYears": 2 },
+    "sources": ["nssdca-nmc"], "confidence": "verified", "notes": "NSSDCA Master Catalog 2005-029A: maximum mass 2,180 kg including 1,149 kg of propellant; two 10 m² arrays producing 1,000 W at Mars; maximum data rate 6 Mbps; six science instruments; Atlas V 401; total cost estimated at about $720 million (the page gives no cost year: costYear is the launch year). primaryMissionYears is our scenario's value."
   },
   {
     "id": "hist-juno", "name": "Juno", "launchYear": 2011, "destinationId": "jupiter",
     "summary": "A spinning, solar-powered Jupiter orbiter that dives beneath the radiation belts every perijove, with its electronics inside a titanium vault.",
-    "outcome": "Arrived in 2016 after an Earth gravity assist; stayed in a 53-day orbit after an engine-valve issue and went on to an extended mission visiting Ganymede, Europa and Io.",
-    "funFact": "Juno's three solar arrays span about 20 m and produce ~14 kW at Earth, but only ~500 W at Jupiter.",
-    "stats": { "launchMassKg": 3625, "dryMassKg": 1593, "powerAtTargetW": 500, "powerSource": "Solar (≈60 m²)", "costM": 1100, "costYear": 2011, "instruments": 9, "launchVehicle": "Atlas V 551", "primaryMissionYears": 2 },
-    "sources": ["nssdca-nmc"], "confidence": "approx"
+    "outcome": "Arrived on 5 July 2016 after an Earth flyby. Its engine valves misbehaved, so it stayed in its 53-day orbit instead of moving to a 14-day one, and still completed its science.",
+    "funFact": "Juno's three solar wings span about 20 m. They make 18 kW near Earth but only about 400 W at Jupiter.",
+    "stats": { "launchMassKg": 3625, "dryMassKg": 1500, "powerAtTargetW": 400, "powerSource": "Solar (≈60 m²)", "costM": 1100, "costYear": 2011, "instruments": 9, "launchVehicle": "Atlas V 551", "primaryMissionYears": 2 },
+    "sources": ["nssdca-nmc", "jpl-juno-presskit", "jpl-news"], "confidence": "verified", "notes": "NSSDCA Master Catalog 2011-040A: Atlas V 551, Earth flyby 9 Oct 2013, orbit insertion 5 July 2016 into a 53.5-day orbit, 150 kg titanium vault, arrays give 18 kW at Earth and 400 W initially at Jupiter, mass 1,500 kg. JPL press kit: 3,625 kg at launch, nine instruments, about $1.1 billion. JPL release 'NASA's Juno to Remain in Current Orbit at Jupiter' (Feb 2017) for the valve decision. The array area in powerSource is approximate."
   },
   {
     "id": "hist-lunar-prospector", "name": "Lunar Prospector", "launchYear": 1998, "destinationId": "moon",
     "summary": "A small, low-cost spin-stabilised orbiter that mapped the Moon's composition, gravity and magnetic fields from a low polar orbit.",
-    "outcome": "Found evidence of hydrogen concentrated at the lunar poles, consistent with water ice; ended in July 1999.",
-    "funFact": "Its last act was a deliberate crash into a permanently shadowed crater to look for a puff of water vapour.",
-    "stats": { "launchMassKg": 296, "dryMassKg": 126, "powerAtTargetW": 202, "powerSource": "Body-mounted solar cells", "costM": 63, "costYear": 1998, "instruments": 6, "launchVehicle": "Athena II", "primaryMissionYears": 1, "actualOperationsYears": 1.5 },
-    "sources": ["nssdca-nmc"], "confidence": "approx"
+    "outcome": "Its neutron spectrometer found extra hydrogen at both lunar poles, a sign of water ice in permanently shadowed craters. The mission ended on 31 July 1999.",
+    "funFact": "Its last act was a deliberate crash into a permanently shadowed crater near the south pole, hoping to kick up water vapour. No plume was seen.",
+    "stats": { "launchMassKg": 296, "dryMassKg": 159, "powerAtTargetW": 202, "powerSource": "Body-mounted solar cells", "costM": 63, "costYear": 1998, "instruments": 6, "launchVehicle": "Athena 2", "primaryMissionYears": 1, "actualOperationsYears": 1.6 },
+    "sources": ["nssdca-nmc", "nasa-science-missions"], "confidence": "verified", "notes": "NSSDCA Master Catalog 1998-001A: 296.4 kg fully fuelled with 137.7 kg of hydrazine (dry 158.7 kg), nominal power 202 W, six experiments, Athena 2, 100 km polar mapping orbit with a 118-minute period, total cost $62.8 million, launched 7 Jan 1998, ended 31 July 1999. Hydrogen result: NSSDCA 'Lunar Prospector Science Results'."
   }
 ]

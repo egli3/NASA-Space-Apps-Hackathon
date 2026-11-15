@@ -14,12 +14,12 @@
     "hasAtmosphere": false,
     "orbits": [
       { "id": "moon-polar-50", "name": "Low polar mapping orbit (50 km)", "blurb": "Skims the surface for the sharpest data, but lumpy lunar gravity means frequent station-keeping burns.", "periapsisAltKm": 50, "apoapsisAltKm": 50, "inclinationDeg": 90, "maintenanceDvMsPerYear": 120, "scienceModifiers": { "gamma_neutron": 1.0, "laser_altimetry": 1.0, "thermal_ir": 1.0, "vis_ir_spectroscopy": 1.0 }, "sources": ["nssdca-nmc"], "confidence": "approx" },
-      { "id": "moon-polar-100", "name": "Polar orbit (100 km)", "blurb": "The classic choice: good resolution, modest station-keeping.", "periapsisAltKm": 100, "apoapsisAltKm": 100, "inclinationDeg": 90, "maintenanceDvMsPerYear": 40, "scienceModifiers": { "gamma_neutron": 0.8, "laser_altimetry": 0.9, "thermal_ir": 0.9, "vis_ir_spectroscopy": 0.9 }, "sources": ["nssdca-nmc"], "confidence": "approx" },
+      { "id": "moon-polar-100", "name": "Polar orbit (100 km)", "blurb": "The classic choice: good resolution, modest station-keeping.", "periapsisAltKm": 100, "apoapsisAltKm": 100, "inclinationDeg": 90, "maintenanceDvMsPerYear": 40, "scienceModifiers": { "gamma_neutron": 0.8, "laser_altimetry": 0.9, "thermal_ir": 0.9, "vis_ir_spectroscopy": 0.9 }, "sources": ["nssdca-nmc"], "confidence": "approx", "notes": "Lunar Prospector's mapping orbit (NSSDCA 1998-001A): near-circular, 100 km, 90° inclination, 118-minute period, re-circularised about once a month. Science modifiers and maintenance Δv are game values." },
       { "id": "moon-frozen", "name": "Frozen elliptical orbit (30 × 200 km)", "blurb": "A naturally stable orbit — almost no fuel to maintain, but you only fly low over the south pole.", "periapsisAltKm": 30, "apoapsisAltKm": 200, "inclinationDeg": 90, "maintenanceDvMsPerYear": 10, "scienceModifiers": { "gamma_neutron": 0.75, "laser_altimetry": 0.8, "thermal_ir": 0.85, "vis_ir_spectroscopy": 0.85 }, "sources": ["nssdca-nmc"], "confidence": "approx" }
     ],
     "sources": ["jpl-phys-par", "nssdca-factsheet"],
-    "confidence": "approx",
-    "notes": "GM & radius from JPL physical parameters; radiation is an engineering estimate."
+    "confidence": "verified",
+    "notes": "Verified: GM (JPL SSD), volumetric mean radius 1,737.4 km and the Earth distances (NSSDCA Moon Fact Sheet: semimajor axis 384,400 km, mean perigee 363,300 km, mean apogee 405,500 km). Game-scale estimate, not from a NASA table: radiationKradPerYear."
   },
   {
     "id": "mars",
@@ -28,7 +28,7 @@
     "muKm3s2": 42828.37,
     "radiusKm": 3389.5,
     "solarDistanceAU": 1.524,
-    "earthDistanceAU": { "min": 0.37, "mean": 1.52, "max": 2.68 },
+    "earthDistanceAU": { "min": 0.365, "mean": 1.7, "max": 2.683 },
     "elementsBodyId": "mars",
     "horizonsId": "499",
     "radiationKradPerYear": 2.0,
@@ -36,11 +36,12 @@
     "hasAtmosphere": true,
     "orbits": [
       { "id": "mars-low-circular", "name": "Low circular polar orbit (300 km)", "blurb": "Best for sharp images and radar. Braking straight into it takes a huge burn.", "periapsisAltKm": 300, "apoapsisAltKm": 300, "inclinationDeg": 93, "maintenanceDvMsPerYear": 10, "scienceModifiers": { "imaging_hires": 1.0, "imaging_context": 1.0, "radar_sounding": 1.0, "vis_ir_spectroscopy": 1.0, "gamma_neutron": 1.0, "mass_spectrometry": 0.3, "particles_fields": 0.7, "uv_spectroscopy": 0.8 }, "sources": ["nssdca-nmc"], "confidence": "approx" },
-      { "id": "mars-low-aerobrake", "name": "Low circular orbit via aerobraking", "blurb": "Capture into a loose orbit, then dip into the atmosphere for ~6 months to shrink it. Saves over 1 km/s of fuel — if the solar panels survive.", "periapsisAltKm": 300, "apoapsisAltKm": 300, "inclinationDeg": 93, "maintenanceDvMsPerYear": 10, "aerobraking": { "captureApoapsisAltKm": 45000, "aerobrakingDays": 180, "riskEventId": "ev-aerobraking-panel" }, "scienceModifiers": { "imaging_hires": 1.0, "imaging_context": 1.0, "radar_sounding": 1.0, "vis_ir_spectroscopy": 1.0, "gamma_neutron": 1.0, "mass_spectrometry": 0.3, "particles_fields": 0.7, "uv_spectroscopy": 0.8 }, "sources": ["nssdca-nmc"], "confidence": "approx" },
+      { "id": "mars-low-aerobrake", "name": "Low circular orbit via aerobraking", "blurb": "Capture into a loose orbit, then dip into the atmosphere for ~6 months to shrink it. Saves over 1 km/s of fuel — if the solar panels survive.", "periapsisAltKm": 300, "apoapsisAltKm": 300, "inclinationDeg": 93, "maintenanceDvMsPerYear": 10, "aerobraking": { "captureApoapsisAltKm": 35000, "aerobrakingDays": 180, "riskEventId": "ev-aerobraking-panel" }, "scienceModifiers": { "imaging_hires": 1.0, "imaging_context": 1.0, "radar_sounding": 1.0, "vis_ir_spectroscopy": 1.0, "gamma_neutron": 1.0, "mass_spectrometry": 0.3, "particles_fields": 0.7, "uv_spectroscopy": 0.8 }, "sources": ["nssdca-nmc"], "confidence": "approx", "notes": "Capture orbit and duration follow Mars Reconnaissance Orbiter (NSSDCA 2005-029A): a 400 × 35,000 km capture orbit, then about six months of aerobraking. Science modifiers and maintenance Δv are game values." },
       { "id": "mars-elliptical-dip", "name": "Elliptical 'deep dip' orbit (150 × 6,200 km)", "blurb": "Swoops through the upper atmosphere to taste escaping gas. Cheaper to reach, worse for photos.", "periapsisAltKm": 150, "apoapsisAltKm": 6200, "inclinationDeg": 75, "maintenanceDvMsPerYear": 15, "scienceModifiers": { "mass_spectrometry": 1.0, "particles_fields": 1.0, "uv_spectroscopy": 1.0, "magnetometry": 1.0, "imaging_context": 0.7, "imaging_hires": 0.4, "radar_sounding": 0.5, "vis_ir_spectroscopy": 0.6, "gamma_neutron": 0.5 }, "sources": ["nssdca-nmc"], "confidence": "approx" }
     ],
     "sources": ["jpl-phys-par", "nssdca-factsheet"],
-    "confidence": "approx"
+    "confidence": "verified",
+    "notes": "Verified: GM 42,828 km³/s² and volumetric mean radius 3,389.5 km (NSSDCA Mars Fact Sheet, JPL SSD); Earth distance min 54.6 and max 401.4 million km (NSSDCA). The mean Earth distance, 1.70 AU, is the time average over 2026-2041 computed from the JPL approximate elements (it is not the 1.52 AU orbit radius). Game-scale estimate: radiationKradPerYear."
   },
   {
     "id": "jupiter",
@@ -49,18 +50,18 @@
     "muKm3s2": 126686534,
     "radiusKm": 69911,
     "solarDistanceAU": 5.203,
-    "earthDistanceAU": { "min": 3.95, "mean": 5.2, "max": 6.45 },
+    "earthDistanceAU": { "min": 3.934, "mean": 5.26, "max": 6.474 },
     "elementsBodyId": "jupiter",
     "horizonsId": "599",
     "radiationKradPerYear": 300,
     "solarArrayExtraDegradationPerYear": 0.03,
     "hasAtmosphere": true,
     "orbits": [
-      { "id": "jupiter-polar-53d", "name": "Polar orbit, 53-day period", "blurb": "Dives under the radiation belts at closest approach, then swings far out to recover. Science happens in brief, intense perijove passes.", "periapsisAltKm": 4200, "apoapsisAltKm": 8042000, "inclinationDeg": 90, "maintenanceDvMsPerYear": 15, "radiationMultiplier": 1.0, "dutyCycleMultiplier": 0.1, "scienceModifiers": { "microwave_radiometry": 1.0, "magnetometry": 1.0, "particles_fields": 1.0, "uv_spectroscopy": 1.0, "gravity_science": 1.0, "imaging_context": 0.7 }, "eclipseFractionOverride": 0.0, "sources": ["nssdca-nmc"], "confidence": "approx", "notes": "Juno's actual orbit after its 2016 insertion (perijove ~4,200 km)." },
-      { "id": "jupiter-polar-14d", "name": "Polar orbit, 14-day period", "blurb": "Nearly 4× more close passes per year — and nearly 4× the radiation. Needs a bigger braking burn.", "periapsisAltKm": 4200, "apoapsisAltKm": 3204000, "inclinationDeg": 90, "maintenanceDvMsPerYear": 25, "radiationMultiplier": 2.5, "dutyCycleMultiplier": 0.38, "scienceModifiers": { "microwave_radiometry": 1.0, "magnetometry": 1.0, "particles_fields": 1.0, "uv_spectroscopy": 1.0, "gravity_science": 1.0, "imaging_context": 0.7 }, "eclipseFractionOverride": 0.0, "sources": ["nssdca-nmc"], "confidence": "approx", "notes": "Juno's originally planned science orbit (cancelled after the 2016 engine-valve issue)." }
+      { "id": "jupiter-polar-53d", "name": "Polar orbit, 53-day period", "blurb": "Dives under the radiation belts at closest approach, then swings far out to recover. Science happens in brief, intense perijove passes.", "periapsisAltKm": 4200, "apoapsisAltKm": 8042000, "inclinationDeg": 90, "maintenanceDvMsPerYear": 15, "radiationMultiplier": 1.0, "dutyCycleMultiplier": 0.1, "scienceModifiers": { "microwave_radiometry": 1.0, "magnetometry": 1.0, "particles_fields": 1.0, "uv_spectroscopy": 1.0, "gravity_science": 1.0, "imaging_context": 0.7 }, "eclipseFractionOverride": 0.0, "sources": ["nssdca-nmc"], "confidence": "approx", "notes": "Juno's actual orbit after its 5 July 2016 insertion: 53.5-day period, perijove about 4,200 km above the cloud tops (NSSDCA 2011-040A). Radiation and duty-cycle multipliers are game values." },
+      { "id": "jupiter-polar-14d", "name": "Polar orbit, 14-day period", "blurb": "Nearly 4× more close passes per year — and nearly 4× the radiation. Needs a bigger braking burn.", "periapsisAltKm": 4200, "apoapsisAltKm": 3204000, "inclinationDeg": 90, "maintenanceDvMsPerYear": 25, "radiationMultiplier": 2.5, "dutyCycleMultiplier": 0.38, "scienceModifiers": { "microwave_radiometry": 1.0, "magnetometry": 1.0, "particles_fields": 1.0, "uv_spectroscopy": 1.0, "gravity_science": 1.0, "imaging_context": 0.7 }, "eclipseFractionOverride": 0.0, "sources": ["nssdca-nmc"], "confidence": "approx", "notes": "Juno's originally planned 14-day science orbit, never flown: the period-reduction burn was cancelled after the October 2016 valve problem (JPL, Feb 2017). Apoapsis chosen to give a 14-day period. Radiation and duty-cycle multipliers are game values." }
     ],
     "sources": ["jpl-phys-par", "nssdca-factsheet"],
-    "confidence": "approx",
-    "notes": "Radiation is a game-scale estimate behind standard shielding in a Juno-like orbit; Track B to refine."
+    "confidence": "verified",
+    "notes": "Verified: GM 126,687,000 km³/s² and volumetric mean radius 69,911 km (NSSDCA Jupiter Fact Sheet, JPL SSD); Earth distance min 588.5 and max 968.5 million km (NSSDCA). Mean Earth distance 5.26 AU is the time average over 2026-2038 from the JPL approximate elements. Game-scale estimates, not from a NASA table: radiationKradPerYear (dose behind standard shielding in a Juno-like polar orbit, chosen so that a spacecraft needs a vault, as Juno did) and solarArrayExtraDegradationPerYear."
   }
 ]
