@@ -1,20 +1,82 @@
 @import 'tailwindcss';
 
-/* Design tokens — Track C owns. Three moods: blueprint (design), mission control (flight), report (debrief). */
-@theme {
-  --color-space-950: #05070d;
-  --color-space-900: #0a0f1c;
-  --color-space-800: #121a2e;
-  --color-blueprint: #0b2a4a;
-  --color-grid: #1d4f7a;
-  --color-ink: #e6edf7;
-  --color-dim: #8ba0bd;
-  --color-go: #34d399;
-  --color-caution: #fbbf24;
-  --color-nogo: #f87171;
-  --color-accent: #60a5fa;
+/*
+ * Design tokens. Owner: Track C.
+ *
+ * MARGIN is drawn as a set of engineering sheets. Three moods share one set of semantic tokens:
+ *   blueprint (design, launch, review)  cyanotype navy, chalk strokes, drafting grid
+ *   control   (flight)                  near-black console, phosphor green and amber
+ *   report    (debrief)                 paper, with the blueprint navy as the ink
+ * Components only ever use the semantic names below, so a screen changes mood by setting data-mood on <html>.
+ */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-rule: var(--rule);
+  --color-ink: var(--ink);
+  --color-dim: var(--dim);
+  --color-go: var(--go);
+  --color-caution: var(--caution);
+  --color-nogo: var(--nogo);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root,
+[data-mood='blueprint'] {
+  --bg: #0b2a4a;
+  --panel: #092340;
+  --raised: #113659;
+  --line: #1d4f7a;
+  --rule: #4a86bb;
+  --ink: #eaf2fb;
+  --dim: #a3c0dc;
+  --go: #72e8b0;
+  --caution: #ffc857;
+  --nogo: #ff8a7d;
+  --accent: #eaf2fb;
+  --on-accent: #0b2a4a;
+  --grid-minor: rgb(125 175 225 / 0.07);
+  --grid-major: rgb(125 175 225 / 0.13);
+}
+
+[data-mood='control'] {
+  --bg: #05080a;
+  --panel: #090f11;
+  --raised: #0f191b;
+  --line: #1a2b29;
+  --rule: #33524b;
+  --ink: #d9f5e7;
+  --dim: #7f9c90;
+  --go: #4dea9b;
+  --caution: #ffb547;
+  --nogo: #ff7566;
+  --accent: #ffb547;
+  --on-accent: #1c1200;
+  --grid-minor: rgb(77 234 155 / 0.035);
+  --grid-major: rgb(77 234 155 / 0.06);
+}
+
+[data-mood='report'] {
+  --bg: #e9ece6;
+  --panel: #f4f6f1;
+  --raised: #fcfdfb;
+  --line: #cdd3cd;
+  --rule: #0b2a4a;
+  --ink: #0b2a4a;
+  --dim: #53667b;
+  --go: #0d7a4c;
+  --caution: #946000;
+  --nogo: #b42a1f;
+  --accent: #0b2a4a;
+  --on-accent: #f4f6f1;
+  --grid-minor: transparent;
+  --grid-major: transparent;
 }
 
 html,
@@ -24,7 +86,100 @@ body,
 }
 
 body {
-  background: var(--color-space-950);
-  color: var(--color-ink);
-  font-family: var(--font-display);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.7s ease,
+    color 0.5s ease;
+}
+
+::selection {
+  background: var(--caution);
+  color: #0b2a4a;
+}
+
+:focus-visible {
+  outline: 2px solid var(--caution);
+  outline-offset: 2px;
+}
+
+/* Drafting grid: 24 px minor squares, a heavier line every fifth. */
+.sheet-grid {
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px), linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-minor) 1px, transparent 1px), linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    120px 120px,
+    24px 24px,
+    24px 24px;
+  background-position: -1px -1px;
+}
+
+/* Section hatching, the drafting convention for "material that is there but not used": our margin. Uses currentColor. */
+.hatch {
+  background-image: repeating-linear-gradient(135deg, currentColor 0 1.5px, transparent 1.5px 7px);
+}
+.hatch-dense {
+  background-image: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 5px);
+}
+
+/* Numbers are always tabular so they don't jitter while the design changes. */
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'zero' 0;
+  word-spacing: -0.3em; /* a mono space before a unit ("613 kg") reads as a gap; tighten it */
+}
+
+/* Range slider drawn like a drafting scale: hairline track, block thumb. */
+.slider {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 2px;
+  background: linear-gradient(90deg, var(--ink) var(--fill, 50%), var(--line) var(--fill, 50%));
+}
+.slider::-moz-range-track {
+  height: 2px;
+  background: linear-gradient(90deg, var(--ink) var(--fill, 50%), var(--line) var(--fill, 50%));
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 20px;
+  margin-top: -9px;
+  background: var(--ink);
+  border: 0;
+  border-radius: 1px;
+}
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 20px;
+  background: var(--ink);
+  border: 0;
+  border-radius: 1px;
+}
+
+.scroll-quiet {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- MARGIN mark: a solid bar for what you use, hatching for the margin left over. Not a NASA insignia. -->
+  <rect width="64" height="64" rx="8" fill="#0b2a4a"/>
+  <rect x="9" y="22" width="46" height="20" fill="none" stroke="#eaf2fb" stroke-width="2.5"/>
+  <rect x="9" y="22" width="27" height="20" fill="#eaf2fb"/>
+  <g stroke="#ffc857" stroke-width="2.5" stroke-linecap="square">
+    <path d="M40 40l6-16M47 40l6-16"/>
+  </g>
+</svg>
