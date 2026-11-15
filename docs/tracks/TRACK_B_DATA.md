@@ -16,11 +16,13 @@ the NASA-data / other-data / SI sections of `README.md`.
 - 2 real DONKI flare records (seed). `data.test.ts` checks schemas and references.
 - Most numbers are `confidence: "approx"`. **Your first job is to verify the Mars path.**
 
-## Status (updated Sun 01:40 EST)
+## Status
 - **M1 done:** launch-vehicle curves (item 1), Mars trajectories (2), Mars destination and DSN gains (3), DONKI snapshot (4).
   Falcon 9 is listed by NASA LSP only up to C3 10, so it cannot fly the late-2030 Mars window (C3 10.2). System noise temperatures stay representative (see `constants.json` notes).
 - **M2 done:** 14 event cards (5), Jupiter trajectories and Juno stats (6), Horizons validation data (7).
-- **Next (M3):** items 8-12. Still `approx`: all parts and instruments, the two Moon trajectories, the orbit records inside destinations. Launch-vehicle `costM` and `reliability` are still game-scale estimates.
+- **M3:** audited instrument and part heritage, documented modeled fields, checked the Lunar Prospector comparison and lunar transfer analogues, and added 13 sourced glossary entries. Six credited WebPs cover the three destinations and science calls. Added regression tests against the raw Ames and LSP snapshots and the image manifest.
+- **M4–M5:** the balance harness reports 17 passes and five existing misses. The MAVEN-like design reaches 64.4% escape and 19.3% total science. The balanced Mars reference reaches 36.0% science. The Juno-like design has 52.8% power margin, and direct flight on Falcon Heavy is feasible without cuts. The seven-slide demo and submission copy are in [SUBMISSION.md](../SUBMISSION.md). Public link testing and form submission are team actions after integration.
+- **UI contract:** `catalog.glossary` is optional. Scenario and destination `imageUrl` values are relative to the Vite base URL. Credit records are in `public/img/credits.json`.
 - New scripts: `fetch-lsp.ts` and `fetch-trajbrowser.ts` re-create `data/raw/lsp/performance-query.json` and `data/raw/trajbrowser/windows.json`.
 
 ## Tasks

@@ -7,6 +7,7 @@ import type {
   Constants,
   Destination,
   EventCard,
+  GlossaryEntry,
   HistoricalMission,
   Instrument,
   LaunchVehicle,
@@ -38,6 +39,7 @@ export interface Catalog {
   history: HistoricalMission[];
   reviewRules: ReviewRule[];
   planetaryElements: PlanetaryElements[];
+  glossary?: GlossaryEntry[];
 }
 
 export type Severity = 'green' | 'yellow' | 'red';

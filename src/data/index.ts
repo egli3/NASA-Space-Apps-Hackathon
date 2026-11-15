@@ -7,6 +7,7 @@ import {
   Constants,
   Destination,
   EventCard,
+  GlossaryEntry,
   HistoricalMission,
   Instrument,
   LaunchVehicle,
@@ -35,6 +36,7 @@ import spaceWeatherJson from './space-weather.json';
 import historyJson from './history.json';
 import reviewRulesJson from './review-rules.json';
 import planetaryElementsJson from './planetary-elements.json';
+import glossaryJson from './glossary.json';
 
 function parse<T extends z.ZodType>(name: string, schema: T, data: unknown): z.infer<T> {
   const result = schema.safeParse(data);
@@ -61,6 +63,7 @@ export function loadCatalog(): Catalog {
     history: parse('history.json', z.array(HistoricalMission), historyJson),
     reviewRules: parse('review-rules.json', z.array(ReviewRule), reviewRulesJson),
     planetaryElements: parse('planetary-elements.json', z.array(PlanetaryElements), planetaryElementsJson.bodies),
+    glossary: parse('glossary.json', z.array(GlossaryEntry), glossaryJson),
   };
 }
 

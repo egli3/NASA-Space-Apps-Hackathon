@@ -32,10 +32,10 @@ npm run check    # typecheck + tests + production build
 
 ## NASA data & resources
 Generated from `src/data/sources.json` (`npm run sources:md`):
-JPL SSD Approximate Positions of the Planets · JPL Horizons · JPL Small-Body Database · JPL Planetary Physical Parameters ·
+JPL SSD Approximate Positions of the Planets · JPL Horizons · JPL Planetary Physical Parameters ·
 NSSDCA Planetary Fact Sheets · NSSDCA Master Catalog · NASA Ames Trajectory Browser · NASA LSP Launch Vehicle Performance Website ·
 NASA Small Spacecraft Technology State-of-the-Art Report · DSN Telecommunications Link Design Handbook (810-005) · NASA CCMC DONKI ·
-NASA Lessons Learned Information System · NASA Systems Engineering Handbook · NASA Radioisotope Power Systems · NASA Image and Video Library.
+NASA Lessons Learned Information System · NASA Systems Engineering Handbook · NASA Radioisotope Power Systems · NASA Photojournal and Scientific Visualization Studio.
 
 All data is baked into static JSON at build time; the game makes no runtime API calls. Each record carries `sources` and a
 `confidence` flag: `verified` (transcribed from source), `approx` (engineering estimate), or `game` (tuned for gameplay, disclosed in the Credits screen).
@@ -46,8 +46,8 @@ React, Vite, Tailwind CSS, Zustand, zod, Motion, Vitest (all MIT) · Space Grote
 
 ## SI disclosure
 Super Intelligence (SI) tools were used in this project, as the Space Apps rules require us to disclose:
-- **Code & docs:** portions of the source code, tests and documentation were generated with Claude (Anthropic) via Claude Code, then reviewed and edited by the team.
+- **Code & docs:** portions of the source code, tests and documentation were generated with Claude Code (Anthropic) and Codex (OpenAI).
 - **Data:** SI helped draft initial approximate values; these are flagged `confidence: "approx"` until verified against the cited NASA source.
-- **Images, video, audio:** none are SI-generated. Any future SI-generated media will carry a visible watermark and metadata.
+- **Images, video, audio:** the destination and scenario images are credited NASA mission photography and mosaics. See [image credits](public/img/credits.json). No image, video, or audio was generatively synthesized for this submission package.
 
 The same disclosure appears in the in-game Credits screen, the `index.html` metadata and `package.json`.

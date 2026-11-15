@@ -31,6 +31,14 @@ export const Source = z.object({
 });
 export type Source = z.infer<typeof Source>;
 
+export const GlossaryEntry = z.object({
+  term: z.string().min(1),
+  short: z.string().min(1),
+  long: z.string().min(1),
+  sourceId: z.string().min(1),
+});
+export type GlossaryEntry = z.infer<typeof GlossaryEntry>;
+
 const provenance = {
   sources: z.array(z.string()).default([]), // ids into sources.json
   confidence: Confidence.default('approx'),
@@ -293,6 +301,7 @@ export const Scenario = z.object({
   instrumentIds: z.array(z.string()).min(1), // the instrument shelf offered in this scenario
   eventIds: z.array(z.string()).default([]), // event deck
   historicalMissionId: z.string(), // "You vs. History" comparison
+  imageUrl: z.string().optional(), // relative to the Vite base URL
   priority: z.enum(['P0', 'P1', 'P2']), // build order — see docs/MASTER_PLAN.md
   ...provenance,
 });

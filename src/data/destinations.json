@@ -1,6 +1,7 @@
 [
   {
     "id": "moon",
+    "imageUrl": "img/moon.webp",
     "name": "The Moon",
     "kind": "moon",
     "muKm3s2": 4902.8,
@@ -23,6 +24,7 @@
   },
   {
     "id": "mars",
+    "imageUrl": "img/mars.webp",
     "name": "Mars",
     "kind": "planet",
     "muKm3s2": 42828.37,
@@ -45,6 +47,7 @@
   },
   {
     "id": "jupiter",
+    "imageUrl": "img/jupiter.webp",
     "name": "Jupiter",
     "kind": "planet",
     "muKm3s2": 126686534,

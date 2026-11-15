@@ -1,9 +1,10 @@
 [
   {
     "id": "mars-climate",
+    "imageUrl": "img/mars-climate.webp",
     "title": "Red Planet Detective",
     "tagline": "Where did Mars's water — and its air — go?",
-    "briefing": "Mars was once warm and wet. Today it is a frozen desert with an atmosphere 1% as thick as Earth's. You have been selected to lead a Medium-class orbiter that will find out where the water hid and how the air escaped to space. Your budget is capped, and the launch window will not wait. Choose wisely: you cannot carry every instrument.",
+    "briefing": "Ancient rivers left their traces on Mars. Your job is to find where the water went and measure the atmosphere still escaping into space. A low orbit brings buried ice into focus, but a high, stretched orbit lets your instruments sample the upper atmosphere. You have $800 million and one launch window. Which measurements are worth the trade?",
     "destinationId": "mars",
     "missionClassId": "medium",
     "difficulty": 2,
@@ -27,9 +28,10 @@
   },
   {
     "id": "jupiter-interior",
+    "imageUrl": "img/jupiter-interior.webp",
     "title": "Giant's Heart",
     "tagline": "What lies beneath Jupiter's clouds?",
-    "briefing": "Jupiter holds the recipe of the early solar system. You lead a Large-class orbiter that must survive the most intense radiation around any planet, at five times Earth's distance from the Sun. Sunlight there is 27 times weaker, and every bit of data crawls home across 800 million kilometres. Measure the water deep in the atmosphere, weigh the core and map the magnetic field before the radiation wins.",
+    "briefing": "Jupiter formed early, and its deep atmosphere may preserve clues about how the planets grew. Send an orbiter to measure water, map the magnetic field and weigh the interior. At Jupiter, sunlight is roughly one twenty-seventh as strong as at Earth, and trapped radiation threatens your electronics. Choose a route that leaves room for the power and shielding your science needs.",
     "destinationId": "jupiter",
     "missionClassId": "large",
     "difficulty": 3,
@@ -53,9 +55,10 @@
   },
   {
     "id": "moon-ice",
+    "imageUrl": "img/moon-ice.webp",
     "title": "Lunar Ice Prospector",
     "tagline": "Is there water in the Moon's eternal shadows?",
-    "briefing": "Craters near the lunar poles have not seen sunlight for billions of years. They may hold water ice — drinking water, air and rocket fuel for future explorers. You lead a Small-class mission: a tiny budget, a rideshare-sized spacecraft, one year to map the poles. This is the place to learn the ropes.",
+    "briefing": "Sunlight never reaches the floor of some craters near the Moon’s poles. Lunar Prospector found extra hydrogen there, evidence that ice could be present. Your mission is to check where cold traps and hydrogen-rich areas overlap. You have a rideshare slot and a year to map the poles. A lower orbit sees finer detail and costs more propellant to maintain.",
     "destinationId": "moon",
     "missionClassId": "small",
     "difficulty": 1,

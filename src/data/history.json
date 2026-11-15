@@ -19,8 +19,8 @@
     "id": "hist-lunar-prospector", "name": "Lunar Prospector", "launchYear": 1998, "destinationId": "moon",
     "summary": "A small, low-cost spin-stabilised orbiter that mapped the Moon's composition, gravity and magnetic fields from a low polar orbit.",
     "outcome": "Its neutron spectrometer found extra hydrogen at both lunar poles, a sign of water ice in permanently shadowed craters. The mission ended on 31 July 1999.",
-    "funFact": "Its last act was a deliberate crash into a permanently shadowed crater near the south pole, hoping to kick up water vapour. No plume was seen.",
+    "funFact": "The team deliberately steered the spacecraft into shadowed Shoemaker crater to look for water vapor. Earth-based telescopes found no spectral signature of water vapor in the resulting dust cloud.",
     "stats": { "launchMassKg": 296, "dryMassKg": 159, "powerAtTargetW": 202, "powerSource": "Body-mounted solar cells", "costM": 63, "costYear": 1998, "instruments": 6, "launchVehicle": "Athena 2", "primaryMissionYears": 1, "actualOperationsYears": 1.6 },
-    "sources": ["nssdca-nmc", "nasa-science-missions"], "confidence": "verified", "notes": "NSSDCA Master Catalog 1998-001A: 296.4 kg fully fuelled with 137.7 kg of hydrazine (dry 158.7 kg), nominal power 202 W, six experiments, Athena 2, 100 km polar mapping orbit with a 118-minute period, total cost $62.8 million, launched 7 Jan 1998, ended 31 July 1999. Hydrogen result: NSSDCA 'Lunar Prospector Science Results'."
+    "sources": ["nssdca-nmc", "nasa-lunar-prospector"], "confidence": "verified", "notes": "NSSDCA Master Catalog 1998-001A: 296.4 kg fully fuelled with 137.7 kg of hydrazine (dry 158.7 kg), nominal power 202 W, six experiments, Athena 2, 100 km polar mapping orbit with a 118-minute period, total cost $62.8 million, launched 7 Jan 1998, ended 31 July 1999. Hydrogen result: NSSDCA 'Lunar Prospector Science Results'."
   }
 ]

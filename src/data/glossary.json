@@ -1,0 +1,80 @@
+[
+  {
+    "term": "C3",
+    "short": "The launch energy a rocket must give your spacecraft.",
+    "long": "C3 is twice the spacecraft's specific orbital energy relative to Earth. On an escape trajectory it equals the square of the excess speed after escaping Earth. A rocket can usually carry less mass as C3 rises.",
+    "sourceId": "nasa-lsp-perf"
+  },
+  {
+    "term": "Δv",
+    "short": "The total change in velocity your spacecraft can spend on maneuvers.",
+    "long": "You spend delta-v to correct the flight path, brake into orbit, or maintain that orbit. The rocket equation ties that budget to engine efficiency and the fraction of your spacecraft's mass carried as propellant.",
+    "sourceId": "nasa-trajbrowser"
+  },
+  {
+    "term": "Isp",
+    "short": "Specific impulse, a measure of how efficiently an engine uses propellant.",
+    "long": "Specific impulse is thrust divided by the propellant weight flow at standard Earth gravity, and is measured in seconds. For the same delta-v and mass, higher Isp generally means less propellant. Thrust determines how quickly the engine can perform the burn.",
+    "sourceId": "nasa-sst-soa"
+  },
+  {
+    "term": "TRL",
+    "short": "Technology Readiness Level, a scale from 1 to 9.",
+    "long": "A low TRL can mean an idea has only been tested in a lab. TRL 9 means a system has been proven in its intended mission environment. MARGIN uses TRL to model how much mass and cost may grow during development.",
+    "sourceId": "nasa-se-handbook"
+  },
+  {
+    "term": "Margin",
+    "short": "The capacity you have left after accounting for what the mission needs.",
+    "long": "If your spacecraft can generate 240 watts and needs 200, the spare 40 watts can absorb degradation, a colder environment or a higher load. Negative margin means your design falls short of the modeled requirement.",
+    "sourceId": "nasa-se-handbook"
+  },
+  {
+    "term": "Eclipse",
+    "short": "The part of an orbit spent in a planet or moon's shadow.",
+    "long": "When the target blocks sunlight, solar panels stop supplying power. Batteries must carry the load until the spacecraft returns to sunlight.",
+    "sourceId": "nasa-sst-soa"
+  },
+  {
+    "term": "DSN",
+    "short": "NASA's Deep Space Network, the antennas that talk to faraway spacecraft.",
+    "long": "Three sites roughly 120 degrees apart in longitude let the network track spacecraft as Earth rotates. A larger dish can hear weaker signals, but antenna time is shared across missions.",
+    "sourceId": "nasa-dsn-810-005"
+  },
+  {
+    "term": "Ka-band",
+    "short": "A higher radio-frequency band that can help send more science data home.",
+    "long": "At the same dish diameter, Ka-band produces a narrower beam than X-band. That can improve the link if the spacecraft points accurately and conditions at the receiving station are favorable.",
+    "sourceId": "nasa-dsn-810-005"
+  },
+  {
+    "term": "RTG",
+    "short": "A generator that makes electricity from the heat of radioactive decay.",
+    "long": "A radioisotope thermoelectric generator supplies power in darkness and far from the Sun. Its electrical output gradually declines, and its mass and limited power still constrain the spacecraft.",
+    "sourceId": "nasa-rps"
+  },
+  {
+    "term": "Aerobraking",
+    "short": "Repeated dips into a planet's upper atmosphere to shrink an orbit.",
+    "long": "Drag removes a little orbital energy on each pass. It saves propellant but takes time, and the flight team must manage changes in atmospheric density and heating.",
+    "sourceId": "jpl-mro-mission"
+  },
+  {
+    "term": "Gravity assist",
+    "short": "A close flyby that changes your trajectory around the Sun.",
+    "long": "The moving planet bends your path. Depending on the geometry, the spacecraft can gain or lose speed relative to the Sun. Juno used an Earth flyby on its way to Jupiter.",
+    "sourceId": "jpl-juno-presskit"
+  },
+  {
+    "term": "Perijove",
+    "short": "The point in a Jupiter orbit closest to the planet.",
+    "long": "Juno collects much of its science around its close passes, including measurements of Jupiter's gravity and microwave emissions. Shortening the orbit gives more close passes in the same time.",
+    "sourceId": "jpl-juno-presskit"
+  },
+  {
+    "term": "krad",
+    "short": "One thousand rad, a unit for absorbed radiation dose.",
+    "long": "Electronics accumulate dose while the spacecraft flies. MARGIN compares the modeled dose after shielding with the electronics' tolerance to estimate radiation margin.",
+    "sourceId": "nasa-sst-avionics"
+  }
+]

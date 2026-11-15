@@ -1,0 +1,38 @@
+[
+  {
+    "file": "mars.webp",
+    "title": "Valles Marineris Hemisphere (PIA00003)",
+    "credit": "NASA/JPL/USGS",
+    "url": "https://science.nasa.gov/photojournal/valles-marineris-hemisphere/"
+  },
+  {
+    "file": "mars-climate.webp",
+    "title": "Valles Marineris Hemisphere (PIA00003)",
+    "credit": "NASA/JPL/USGS",
+    "url": "https://science.nasa.gov/photojournal/valles-marineris-hemisphere/"
+  },
+  {
+    "file": "jupiter.webp",
+    "title": "Cassini Jupiter Portrait (PIA04866)",
+    "credit": "NASA/JPL/Space Science Institute",
+    "url": "https://science.nasa.gov/photojournal/cassini-jupiter-portrait/"
+  },
+  {
+    "file": "jupiter-interior.webp",
+    "title": "Cassini Jupiter Portrait (PIA04866)",
+    "credit": "NASA/JPL/Space Science Institute",
+    "url": "https://science.nasa.gov/photojournal/cassini-jupiter-portrait/"
+  },
+  {
+    "file": "moon.webp",
+    "title": "Moon Mosaic (SVS 5001)",
+    "credit": "NASA Scientific Visualization Studio",
+    "url": "https://svs.gsfc.nasa.gov/5001/"
+  },
+  {
+    "file": "moon-ice.webp",
+    "title": "Moon Mosaic (SVS 5001)",
+    "credit": "NASA Scientific Visualization Studio",
+    "url": "https://svs.gsfc.nasa.gov/5001/"
+  }
+]
