@@ -89,9 +89,9 @@ Scenarios (build order):
 Assign people to tracks at kickoff: put the strongest TypeScript/maths person on A, the most careful researcher
 and writer on B, and the person with the best eye for UI on C. Write the names here:
 
-- Track A: `__________`
-- Track B: `__________`
-- Track C: `__________`
+- Track A: `egli3`
+- Track B: `gridiii`
+- Track C: `AKubat0`
 
 ## 6. Timeline (EST, UTC−5). Milestones are integration points: everyone merges, plays the deployed build, re-plans.
 
