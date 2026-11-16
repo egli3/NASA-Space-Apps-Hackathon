@@ -11,6 +11,7 @@ export type MonteCarloResult = NonNullable<Debrief['monteCarlo']> & {
   /** Science % of every run, ascending (for a histogram). */
   sciencePcts: number[];
   lostPct: number;
+  survivorScienceP50?: number;
 };
 
 /** Linear-interpolated percentile of an ascending array. */
@@ -35,13 +36,18 @@ export function monteCarlo(catalog: Catalog, design: MissionDesign, runs: number
   const n = Math.max(1, Math.round(runs));
   let success = 0, lost = 0;
   const sciencePcts: number[] = [];
+  const survivors: number[] = [];
   for (const seed of monteCarloSeeds(baseSeed, n)) {
     const res = runHeadless(catalog, design, seed, decisions);
     if (res.outcome === 'lost') lost++;
-    else if (res.outcome !== 'partial') success++;
+    else {
+      survivors.push(res.sciencePct);
+      if (res.outcome !== 'partial') success++;
+    }
     sciencePcts.push(res.sciencePct);
   }
   sciencePcts.sort((a, b) => a - b);
+  survivors.sort((a, b) => a - b);
   return {
     runs: n,
     successRatePct: (success / n) * 100,
@@ -50,5 +56,7 @@ export function monteCarlo(catalog: Catalog, design: MissionDesign, runs: number
     scienceP50: percentile(sciencePcts, 0.5),
     scienceP90: percentile(sciencePcts, 0.9),
     sciencePcts,
+    // The range of the flights that were not lost: what a player can expect if the spacecraft survives.
+    ...(survivors.length ? { survivorScienceP10: percentile(survivors, 0.1), survivorScienceP50: percentile(survivors, 0.5), survivorScienceP90: percentile(survivors, 0.9) } : {}),
   };
 }

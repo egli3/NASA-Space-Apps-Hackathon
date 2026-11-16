@@ -184,6 +184,47 @@ describe('monte carlo', () => {
     expect(runReview(catalog, juno, { monteCarloRuns: 30 }).predictedSuccessPct).toBe(r.predictedSuccessPct);
     expect(runReview(catalog, defaultDesign(catalog, 'jupiter-interior'), { monteCarloRuns: 30 }).predictedSuccessPct).toBeUndefined();
   });
+
+  it('reports the science range of the flights that survive, so lost flights do not read as "0% science"', () => {
+    const r = runReview(catalog, juno, { monteCarloRuns: 50 });
+    expect(r.predictedSurvivalPct).toBeLessThan(100); // some flights are lost…
+    expect(r.predictedSciencePct!.p10).toBe(0); // …which drags the all-flights range down to 0%
+    expect(r.predictedSurvivorSciencePct!.p10).toBeGreaterThan(50); // the survivors' range is the useful one
+    expect(r.predictedSurvivorSciencePct!.p10).toBeLessThanOrEqual(r.predictedSurvivorSciencePct!.p90);
+    const mc = monteCarlo(catalog, juno, 50, 1);
+    expect(mc.survivorScienceP10).toBeGreaterThan(mc.scienceP10);
+  });
+});
+
+describe('hindsight explanations name what actually changed in the flight', () => {
+  it('more testing that keeps an instrument alive longer says so, instead of quoting survival odds', () => {
+    // Guided Jupiter demo flight: the Ka-band radio science package fails in the real flight and later with rigorous testing.
+    const result = runHeadless(catalog, juno, 2030);
+    const { explored } = buildHindsight(catalog, juno, 2030, {}, result);
+    const rigorous = explored.find((x) => x.dimension === 'Testing & assurance' && x.toLabel === 'rigorous testing')!;
+    expect(rigorous.deltaSciencePct).toBeGreaterThan(0);
+    expect(rigorous.explanation).toMatch(/kept the Ka-band radio science package working \d[\d,]* days longer/);
+    expect(rigorous.explanation).not.toContain('odds of surviving');
+  });
+
+  it('a failure is never credited as "avoided" just because the replay ended before it happened', () => {
+    const d = ref('juno-no-vault');
+    const alts = alternatives(catalog, d);
+    let checked = 0;
+    for (const seed of [3, 11, 77]) {
+      const result = runHeadless(catalog, d, seed);
+      for (const x of buildHindsight(catalog, d, seed, {}, result).explored.filter((e) => e.feasible)) {
+        const m = /kept the (.+?) working(?: and| \(|,)/.exec(x.explanation);
+        if (!m) continue;
+        const alt = alts.find((a) => a.dimension === x.dimension && a.toLabel === x.toLabel && a.fromLabel === x.fromLabel)!;
+        const replay = runHeadless(catalog, alt.design, seed);
+        const failedOn = result.log.find((l) => l.kind === 'anomaly' && l.text.startsWith(m[1]))!.day;
+        expect(replay.daysFlown, x.explanation).toBeGreaterThan(failedOn); // the replay was still flying when it failed for real
+        checked++;
+      }
+    }
+    expect(checked).toBeGreaterThan(0);
+  });
 });
 
 describe('buildDebrief', () => {
@@ -199,7 +240,7 @@ describe('buildDebrief', () => {
     expect(d.monteCarlo!.runs).toBe(20);
     expect(d.comparison.mission.id).toBe('hist-mro');
     const labels = d.comparison.rows.map((r) => r.label);
-    for (const l of ['Launch mass', 'Dry mass', 'Power at target, before ageing', 'Cost', 'Instruments', 'Launch vehicle', 'Outcome', 'Fun fact']) expect(labels).toContain(l);
+    for (const l of ['Launch mass', 'Dry mass', 'Power at target, before ageing', 'Cost', 'Instruments', 'Launch vehicle']) expect(labels).toContain(l);
     expect(d.comparison.rows.find((r) => r.label === 'Cost')!.note).toContain('For scale only');
     expect(buildDebrief(catalog, mro, seed, {}, result).monteCarlo).toBeUndefined();
   });
@@ -210,7 +251,6 @@ describe('buildDebrief', () => {
     const result = runHeadless(catalog, ref('juno-no-vault'), seed);
     const d = buildDebrief(catalog, ref('juno-no-vault'), seed, {}, result);
     expect(d.headline).toMatch(/^Mission lost on day \d+/);
-    expect(d.comparison.rows.find((r) => r.label === 'Outcome')!.yours).toContain('Lost on day');
     expect(d.explored!.some((x) => x.deltaSciencePct > 0)).toBe(true);
   });
 

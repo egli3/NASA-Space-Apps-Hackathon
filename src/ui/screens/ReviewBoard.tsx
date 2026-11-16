@@ -174,10 +174,11 @@ export function ReviewBoard() {
                       </div>
                     )}
                   </dl>
-                  {prediction.predictedSciencePct && (
+                  {(prediction.predictedSurvivorSciencePct ?? prediction.predictedSciencePct) && (
                     <p className="mt-3 text-sm text-dim">
-                      Counting any extended mission, science return usually lands between <span className="num text-ink">{num(prediction.predictedSciencePct.p10)}%</span> and{' '}
-                      <span className="num text-ink">{num(prediction.predictedSciencePct.p90)}%</span>.
+                      {prediction.predictedSurvivorSciencePct ? 'When the spacecraft survives, science' : 'Science'} return usually lands between{' '}
+                      <span className="num text-ink">{num((prediction.predictedSurvivorSciencePct ?? prediction.predictedSciencePct)!.p10)}%</span> and{' '}
+                      <span className="num text-ink">{num((prediction.predictedSurvivorSciencePct ?? prediction.predictedSciencePct)!.p90)}%</span>, counting any extended mission.
                     </p>
                   )}
                 </>

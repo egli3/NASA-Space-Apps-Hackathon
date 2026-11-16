@@ -44,12 +44,6 @@ export function buildDebrief(
     },
     { label: 'Instruments', yours: String(design.instrumentIds.length), theirs: String(mission.stats.instruments ?? '—') },
     { label: 'Launch vehicle', yours: catalog.launchVehicles.find((l) => l.id === design.launchVehicleId)?.name ?? '', theirs: mission.stats.launchVehicle ?? '—' },
-    {
-      label: 'Outcome',
-      yours: result.outcome === 'lost' ? `Lost on day ${result.daysFlown}: ${result.lossCause}` : `${OUTCOME_TEXT[result.outcome]} (${sci}% science)`,
-      theirs: mission.outcome,
-    },
-    { label: 'Fun fact', yours: '', theirs: mission.funFact },
   ];
 
   const { hindsight, bestDecision, explored, replays } = buildHindsight(catalog, design, seed, decisions, result);

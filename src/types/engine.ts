@@ -152,6 +152,8 @@ export interface ReviewResult {
   predictedSuccessPct?: number; // P1: Monte Carlo of N headless runs
   predictedSciencePct?: { p10: number; p50: number; p90: number };
   predictedSurvivalPct?: number; // share of those runs in which the spacecraft was not lost (whatever the science)
+  /** Science range of the runs that were not lost (lost runs drag p10 of predictedSciencePct to 0%). */
+  predictedSurvivorSciencePct?: { p10: number; p50: number; p90: number };
 }
 
 /** Pre-launch "reality check": parts come in heavier / costlier than estimated (seeded by TRL). */
@@ -282,7 +284,7 @@ export interface Debrief {
   hindsight: HindsightItem[]; // sorted, biggest improvement first (top 3 shown)
   bestDecision?: HindsightItem; // the choice whose alternatives all would have scored worse
   comparison: { mission: HistoricalMission; rows: ComparisonRow[] };
-  monteCarlo?: { runs: number; successRatePct: number; scienceP10: number; scienceP50: number; scienceP90: number; sciencePcts?: number[]; lostPct?: number };
+  monteCarlo?: { runs: number; successRatePct: number; scienceP10: number; scienceP50: number; scienceP90: number; sciencePcts?: number[]; lostPct?: number; survivorScienceP10?: number; survivorScienceP90?: number };
   /** Every alternative Hindsight looked at, best first (infeasible ones last) — for a "what if" explorer. */
   explored?: HindsightItem[];
   replays?: number; // how many alternate missions were flown to build `hindsight`

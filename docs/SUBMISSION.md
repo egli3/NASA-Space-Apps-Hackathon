@@ -20,7 +20,7 @@ MARGIN — The Space Mission Design Game
 |---|---|
 | 0–4 s | Open **Giant’s Heart**. Ask whether the spacecraft can reach Jupiter and return science. |
 | 4–12 s | On **Launch**, compare direct with the Earth gravity assist. On Vulcan VC4, the Juno-like reference design has −60% mass margin on the direct route and +61% on the assist. |
-| 12–20 s | Compare the same assisted design with and without its titanium vault. The simulation estimates 76% versus 6% success across 50 runs. |
+| 12–20 s | Compare the same assisted design with and without its titanium vault. The simulation estimates 78% versus 6% success across 50 runs. |
 | 20–27 s | Fly the mission and show the real debrief. Open **Hindsight** and **You and the real thing** using the result on screen. |
 | 27–30 s | Show the play URL and Team Torpid credit. |
 
@@ -42,7 +42,7 @@ To reproduce the same hardware in **Giant’s Heart** from scratch, follow these
 | Review and flight | Build the craft, roll out to the launch pad, then select **Launch** and **100×**. Respond to each incident and resume flight. |
 | Debrief | Scroll to **Hindsight** to compare single changes and **You and the real thing** to compare with Juno. |
 
-In a repeatable engine run (seed **2030**), following the default event choices returned **80.0%** of baseline science and **three stars**. Six incidents required decisions, including the valve fault. Hindsight found that the 14-day orbit would have returned **7.1 percentage points** more science in that replay. The guided demo uses seed 2030. New missions start with a fresh seed, and changing an in-flight choice can change either outcome.
+In a repeatable engine run (seed **2030**), following the default event choices returned **85.8%** of baseline science and **three stars**. Six incidents required decisions, including the valve fault. Hindsight found that the 14-day orbit would have returned **7.1 percentage points** more science in that replay. The guided demo uses seed 2030. New missions start with a fresh seed, and changing an in-flight choice can change either outcome.
 
 The [showcase tests](../src/data/judge-flight.test.ts) step through review, build, flight decisions and debrief for the Jupiter, Mars and Moon reference designs. From a local checkout, run `npm test -- src/data/judge-flight.test.ts` to verify them.
 
@@ -62,7 +62,7 @@ Fourteen decision cards link to mission histories or reports, including Juno’s
 |---|---|
 | Launch energy and cruise time | Archived NASA Ames trajectory rows. The Earth assist adds 576 modeled cruise days and reduces launch C3 from 77.5 to 26.5 km²/s². |
 | Payload capacity | Interpolation of NASA Launch Services Program rows for Vulcan VC4. The same rocket offers approximately 978 kg direct or 5,158 kg with the assist. |
-| Success and science percentages | Game simulation results, including modeled risks, mission thresholds, and event effects. The vault comparison counts 38 of 50 and 3 of 50 successful runs in the reference review. |
+| Success and science percentages | Game simulation results, including modeled risks, mission thresholds, and event effects. The vault comparison counts 39 of 50 and 3 of 50 successful runs in the reference review. |
 | Mars escape science | MAVEN demonstrated ultraviolet observations of escaping hydrogen. The game now supports remote UV or direct atmospheric sampling. Its data-volume thresholds and science yields are game parameters. |
 | Mars balanced reference | A five-instrument payload covers all five objectives and projects 88% science at $749M against the $800M cap. It earned three stars at seed 2026. |
 

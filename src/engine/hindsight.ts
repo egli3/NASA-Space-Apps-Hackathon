@@ -176,12 +176,53 @@ function sentence(catalog: Catalog, alt: Alternative, base: BudgetReport, b: Bud
     : alt.kind === 'instrumentRemove' ? `Leaving the ${alt.fromLabel} behind`
     : alt.kind === 'redundancy' ? cap(alt.toLabel)
     : `${cap(alt.toLabel)} instead of ${alt.fromLabel}`;
-  const how = mechanism(catalog, alt, base, b, destName);
+  // What actually broke differently. Same dice, so a failure that is in one flight and not the other was caused by the
+  // changed decision, and it is usually the real reason for the difference (e.g. more testing kept an instrument alive).
+  const avoided = failuresOnlyIn(actual, replay);
+  const added = failuresOnlyIn(replay, actual);
+  const later = failedLaterIn(replay, actual);
+  const kept = avoided.length ? `kept the ${listOf(avoided)} working`
+    : later ? `kept the ${later.name} working ${num(later.days)} days longer` : '';
+  const generic = alt.kind === 'assurance' || alt.kind === 'redundancy';
+  let how = mechanism(catalog, alt, base, b, destName);
+  if (kept && (generic || !how)) how = kept; // the odds changed, but what mattered in this flight is what did not break
+  else if (kept) how = `${how} and ${kept}`;
   const fate = actual.outcome === 'lost' && replay.outcome !== 'lost' ? ' and the mission would have survived'
-    : actual.outcome !== 'lost' && replay.outcome === 'lost' ? ` but the mission would have been lost (${replay.lossCause})` : '';
+    : actual.outcome !== 'lost' && replay.outcome === 'lost' ? ` but the mission would have been lost (${replay.lossCause})`
+    : added.length ? `, but the ${listOf(added)} would have failed instead` : '';
   const money = Math.abs(dCost) >= 1 ? `, $${num(Math.abs(dCost))}M ${dCost > 0 ? 'more' : 'less'}` : '';
   return `${lead} would have ${how ?? (dSci >= 0 ? 'returned more science' : 'returned less science')}${fate} (${pts(dSci)}${money}).`;
 }
+
+/** Hardware that failed or degraded during a flight → the day it first happened (from the anomaly log lines). */
+function brokenOnDay(r: MissionResult): Map<string, number> {
+  const days = new Map<string, number>();
+  for (const l of r.log) {
+    if (l.kind !== 'anomaly' || l.text.includes('backup engaged')) continue;
+    const m = /^(.+?) (?:has failed|failed|degraded)\b/.exec(l.text);
+    if (m && !m[1].startsWith('Mission lost') && !days.has(m[1])) days.set(m[1], l.day);
+  }
+  return days;
+}
+
+/** Hardware that failed or degraded in flight `a` but not in flight `b`, although `b` was still flying on that day. */
+function failuresOnlyIn(a: MissionResult, b: MissionResult): string[] {
+  const inB = brokenOnDay(b);
+  return [...brokenOnDay(a)].filter(([n, day]) => !inB.has(n) && b.daysFlown > day).map(([n]) => n);
+}
+
+/** The hardware that failed in both flights but lasted longest in `later` (at least 30 days longer), if any. */
+function failedLaterIn(later: MissionResult, earlier: MissionResult): { name: string; days: number } | undefined {
+  const a = brokenOnDay(later), b = brokenOnDay(earlier);
+  let best: { name: string; days: number } | undefined;
+  for (const [name, day] of a) {
+    const gain = day - (b.get(name) ?? day);
+    if (gain >= 30 && (!best || gain > best.days)) best = { name, days: gain };
+  }
+  return best;
+}
+
+const listOf = (names: string[]) => (names.length <= 2 ? names.join(' and the ') : `${names.slice(0, -1).join(', the ')} and the ${names[names.length - 1]}`);
 
 export interface HindsightReport {
   /** Top improvements, biggest first, at most one per decision, at most 3. */

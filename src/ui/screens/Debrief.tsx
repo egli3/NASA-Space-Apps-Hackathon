@@ -159,7 +159,7 @@ function LuckChart({ mc, yours }: { mc: NonNullable<DebriefData['monteCarlo']>; 
       <div
         className="flex h-32 items-end gap-1 border-b border-rule"
         role="img"
-        aria-label={`Science return over ${mc.runs} flights: usually between ${num(mc.scienceP10)} and ${num(mc.scienceP90)} percent, typically ${num(mc.scienceP50)}. Your flight returned ${num(yours)} percent.`}
+        aria-label={`Science return over ${mc.runs} flights: usually between ${num(mc.survivorScienceP10 ?? mc.scienceP10)} and ${num(mc.survivorScienceP90 ?? mc.scienceP90)} percent when the spacecraft survives, typically ${num(mc.scienceP50)}. Your flight returned ${num(yours)} percent.`}
       >
         {bins.map((n, i) => (
           <div key={i} className="flex h-full flex-1 flex-col justify-end">
@@ -181,8 +181,17 @@ function LuckChart({ mc, yours }: { mc: NonNullable<DebriefData['monteCarlo']>; 
         <span>100%</span>
       </div>
       <p className="mt-2 text-sm text-dim">
-        Science returned in each flight. The amber column holds the flight you just flew. Most land between <span className="num text-ink">{num(mc.scienceP10)}%</span> and{' '}
-        <span className="num text-ink">{num(mc.scienceP90)}%</span>.
+        Science returned in each flight. The amber column holds the flight you just flew.{' '}
+        {mc.survivorScienceP10 !== undefined && mc.survivorScienceP90 !== undefined ? (
+          <>
+            Flights that survive usually land between <span className="num text-ink">{num(mc.survivorScienceP10)}%</span> and{' '}
+            <span className="num text-ink">{num(mc.survivorScienceP90)}%</span>.
+          </>
+        ) : (
+          <>
+            Most land between <span className="num text-ink">{num(mc.scienceP10)}%</span> and <span className="num text-ink">{num(mc.scienceP90)}%</span>.
+          </>
+        )}
       </p>
     </div>
   );
@@ -399,7 +408,8 @@ export function Debrief() {
                 <LuckChart mc={mc} yours={result.sciencePct} />
               ) : (
                 <p className="text-dim">
-                  Science return usually lands between <span className="num text-ink">{num(mc.scienceP10)}%</span> and <span className="num text-ink">{num(mc.scienceP90)}%</span>.
+                  {mc.survivorScienceP10 !== undefined ? 'When the spacecraft survives, science' : 'Science'} return usually lands between{' '}
+                  <span className="num text-ink">{num(mc.survivorScienceP10 ?? mc.scienceP10)}%</span> and <span className="num text-ink">{num(mc.survivorScienceP90 ?? mc.scienceP90)}%</span>.
                 </p>
               )}
             </div>

@@ -38,6 +38,8 @@ export function runReview(catalog: Catalog, design: MissionDesign, opts?: { mont
     result.predictedSuccessPct = mc.successRatePct;
     result.predictedSurvivalPct = 100 - mc.lostPct;
     result.predictedSciencePct = { p10: mc.scienceP10, p50: mc.scienceP50, p90: mc.scienceP90 };
+    if (mc.survivorScienceP10 !== undefined && mc.survivorScienceP90 !== undefined)
+      result.predictedSurvivorSciencePct = { p10: mc.survivorScienceP10, p50: mc.survivorScienceP50 ?? mc.survivorScienceP10, p90: mc.survivorScienceP90 };
   }
   return result;
 }
