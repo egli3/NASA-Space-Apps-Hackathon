@@ -2,8 +2,9 @@
   {
     "id": "lv-rideshare-lunar", "name": "Lunar rideshare slot", "provider": "Shared launch (ESPA-Grande class port)", "blurb": "Hitch a ride with a bigger payload heading to the Moon. Cheap — but strict mass limits and you go when they go.",
     "costM": 12, "reliability": 0.95, "fairingDiameterM": 1.0,
-    "performance": [ { "c3Km2s2": -3.0, "massKg": 400 }, { "c3Km2s2": -0.4, "massKg": 300 } ],
-    "classes": ["small"], "sources": ["game-balance"], "confidence": "game"
+    "performance": [ { "c3Km2s2": -3.0, "massKg": 440 }, { "c3Km2s2": -0.4, "massKg": 320 } ],
+    "classes": ["small"], "sources": ["game-balance"], "confidence": "game",
+    "notes": "Game values, not a NASA curve: real rideshare limits depend on the adapter and the primary payload. Set so the starter spacecraft fits comfortably and a three-instrument design fits with a thin margin."
   },
   {
     "id": "lv-falcon9", "name": "Falcon 9 (booster recovered)", "provider": "SpaceX", "blurb": "The workhorse. Affordable, reliable, but limited for high-energy deep-space trips.",

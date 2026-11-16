@@ -4,13 +4,14 @@
     "name": "Small",
     "blurb": "A lean, fast mission. Tight budget, tiny mass — every kilogram is a fight.",
     "inspiredBy": "NASA small planetary missions such as SIMPLEx (e.g. Lunar Trailblazer) and Lunar Prospector",
-    "costCapM": 175,
+    "costCapM": 195,
     "minReservePct": 25,
     "rtgAllowed": false,
     "sources": [
       "game-balance"
     ],
-    "confidence": "game"
+    "confidence": "game",
+    "notes": "Game value. Raised from $175M so that a three-instrument lunar orbiter (the three-star route in Lunar Ice Prospector) fits under the cap."
   },
   {
     "id": "medium",

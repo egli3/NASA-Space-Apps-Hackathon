@@ -68,8 +68,8 @@
     "objectives": [
       { "id": "moon-hydrogen", "name": "Map polar hydrogen", "blurb": "Hydrogen in the soil is the fingerprint of buried ice.", "weight": 40, "combine": "any", "measurements": [ { "type": "gamma_neutron", "minQuality": 0.6, "requiredGb": 30 } ], "thresholdPct": 50 },
       { "id": "moon-coldtraps", "name": "Take the temperature of cold traps", "blurb": "Is it cold enough in the shadows for ice to survive?", "weight": 25, "combine": "any", "measurements": [ { "type": "thermal_ir", "minQuality": 0.6, "requiredGb": 60 } ], "thresholdPct": 30 },
-      { "id": "moon-topo", "name": "Map polar topography", "blurb": "3-D maps to find where shadows are permanent.", "weight": 20, "combine": "any", "measurements": [ { "type": "laser_altimetry", "minQuality": 0.6, "requiredGb": 80 } ], "thresholdPct": 30 },
-      { "id": "moon-surface-ice", "name": "Spot surface frost", "blurb": "Look for the spectral signature of exposed ice.", "weight": 15, "combine": "any", "measurements": [ { "type": "vis_ir_spectroscopy", "minQuality": 0.6, "requiredGb": 500 } ], "thresholdPct": 20 }
+      { "id": "moon-topo", "name": "Map polar topography", "blurb": "3-D maps to find where shadows are permanent.", "weight": 20, "combine": "any", "measurements": [ { "type": "laser_altimetry", "minQuality": 0.6, "requiredGb": 80 } ], "thresholdPct": 0 },
+      { "id": "moon-surface-ice", "name": "Spot surface frost", "blurb": "Look for the spectral signature of exposed ice.", "weight": 15, "combine": "any", "measurements": [ { "type": "vis_ir_spectroscopy", "minQuality": 0.6, "requiredGb": 500 } ], "thresholdPct": 0 }
     ],
     "trajectoryIds": ["moon-direct-2028", "moon-low-energy-2028"],
     "launchVehicleIds": ["lv-rideshare-lunar", "lv-falcon9"],
@@ -78,6 +78,7 @@
     "historicalMissionId": "hist-lunar-prospector",
     "priority": "P1",
     "sources": ["game-balance"],
-    "confidence": "game"
+    "confidence": "game",
+    "notes": "Tutorial balance (game values): the minimum mission is the question in the title, hydrogen plus cold-trap temperatures, which the starter spacecraft answers. Topography and surface frost are stretch goals with no minimum; adding the laser altimeter is the route to three stars."
   }
 ]

@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { catalog } from '../../data';
 import { MONTE_CARLO_RUNS, useGame } from '../../store/game';
 import type { Debrief as DebriefData, HindsightItem, LogEntry, MissionResult, Outcome } from '../../types/engine';
+import { PctRange } from '../common/PctRange';
 import { Button } from '../common/Button';
 import { date, duration, money, num, pct, signed } from '../common/format';
 import { Wordmark } from '../common/Sheet';
@@ -184,12 +185,11 @@ function LuckChart({ mc, yours }: { mc: NonNullable<DebriefData['monteCarlo']>; 
         Science returned in each flight. The amber column holds the flight you just flew.{' '}
         {mc.survivorScienceP10 !== undefined && mc.survivorScienceP90 !== undefined ? (
           <>
-            Flights that survive usually land between <span className="num text-ink">{num(mc.survivorScienceP10)}%</span> and{' '}
-            <span className="num text-ink">{num(mc.survivorScienceP90)}%</span>.
+            Flights that survive usually land <PctRange lo={mc.survivorScienceP10} hi={mc.survivorScienceP90} />.
           </>
         ) : (
           <>
-            Most land between <span className="num text-ink">{num(mc.scienceP10)}%</span> and <span className="num text-ink">{num(mc.scienceP90)}%</span>.
+            Most land <PctRange lo={mc.scienceP10} hi={mc.scienceP90} />.
           </>
         )}
       </p>
@@ -408,8 +408,8 @@ export function Debrief() {
                 <LuckChart mc={mc} yours={result.sciencePct} />
               ) : (
                 <p className="text-dim">
-                  {mc.survivorScienceP10 !== undefined ? 'When the spacecraft survives, science' : 'Science'} return usually lands between{' '}
-                  <span className="num text-ink">{num(mc.survivorScienceP10 ?? mc.scienceP10)}%</span> and <span className="num text-ink">{num(mc.survivorScienceP90 ?? mc.scienceP90)}%</span>.
+                  {mc.survivorScienceP10 !== undefined ? 'When the spacecraft survives, science' : 'Science'} return usually lands{' '}
+                  <PctRange lo={mc.survivorScienceP10 ?? mc.scienceP10} hi={mc.survivorScienceP90 ?? mc.scienceP90} />.
                 </p>
               )}
             </div>

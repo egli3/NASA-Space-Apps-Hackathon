@@ -273,7 +273,8 @@ Rows: launch mass, dry mass, power at target, cost (theirs in then-year $), inst
 | **Juno-like** Jupiter (60 m² TJ solar, vault, 2.5 m Ka, ΔV-EGA, Vulcan) | Feasible; power margin 10–40%; science ≥ 75%; reliability ≥ 70%. |
 | **Direct-to-Jupiter** with Juno-like spacecraft | Infeasible on Vulcan (teaches gravity assists); feasible on Falcon Heavy, but it costs more than ΔV-EGA on Vulcan (a bigger rocket buys back the 19 months). The verified Falcon Heavy curve lifts the ~1.6 t Juno-like to C3 77.5 with margin, so "only with cuts" was dropped. |
 | **No vault at Jupiter** | Radiation margin red; Monte Carlo success < 40%. |
-| **Lunar Prospector-like** Moon (GRNS + thermal IR, 3 m² Si, rideshare) | Feasible, cost under cap, science 45–65%. |
+| **Lunar Prospector-like** Moon (GRNS + thermal IR, 3 m² Si, rideshare) | Feasible, cost under cap, science 45–65%; Monte Carlo success ≥ 80% (the tutorial is winnable as it starts). |
+| **Lunar three-star** Moon (adds the laser altimeter, 500 Wh battery, 20% reserve) | Science ≥ 75% and cleared by the review board, so ★★★ is possible. Tuned through game values only: topography and surface frost have no minimum (stretch goals), the Small-class cap is $195M, and the rideshare carries 440 kg at C3 −3. |
 | Single-string inner-planet design, standard assurance | Reliability 80–90%. Adding full redundancy → ≥ 93%. |
 
 ## 8. Education layer

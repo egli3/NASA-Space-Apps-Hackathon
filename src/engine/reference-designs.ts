@@ -133,6 +133,23 @@ export function referenceDesigns(catalog: Catalog): ReferenceDesign[] {
       { target: 'Feasible', actual: (b) => (b.feasible ? 'feasible' : b.blockers[0]), pass: (b) => b.feasible },
       { target: 'Cost under the cap', actual: (b) => `$${b.cost.totalM.toFixed(0)}M of $${b.cost.capM}M`, pass: underCap },
       { target: 'Science 45–65%', actual: (b) => pct(b.science.expectedPct), pass: (b) => b.science.expectedPct >= 45 && b.science.expectedPct <= 65 },
+      {
+        target: 'Monte Carlo success ≥ 80% (the tutorial is winnable as it starts)',
+        actual: (_b, r) => (r.predictedSuccessPct === undefined ? 'not run' : `${pct(r.predictedSuccessPct)} of universes`),
+        pass: (_b, r) => (r.predictedSuccessPct === undefined ? undefined : r.predictedSuccessPct >= 80),
+      },
+    ],
+  });
+  // The tutorial's three-star route: add the laser altimeter, a bigger battery for the eclipses, and trim the reserve.
+  out.push({
+    id: 'lunar-three-star', label: 'Lunar three-star (adds laser altimeter)',
+    design: make('moon-ice', { transmitter: 'tx-sspa-5', battery: 'bat-500' }, {
+      missionName: 'Three-star Moon', instrumentIds: ['ins-grns', 'ins-thermal', 'ins-lola'], solarArrayAreaM2: 2, reservePct: 20, assurance: 'lean',
+      orbitId: 'moon-polar-50', trajectoryId: 'moon-direct-2028', launchVehicleId: 'lv-rideshare-lunar',
+    }),
+    checks: [
+      { target: 'Science ≥ 75% (★★★ possible)', actual: (b) => pct(b.science.expectedPct), pass: (b) => b.science.expectedPct >= 75 },
+      { target: 'Cleared by the review board', actual: (_b, r) => (r.go ? 'cleared' : r.findings.filter((f) => f.severity === 'red').map((f) => f.title).join(', ')), pass: (_b, r) => r.go },
     ],
   });
 

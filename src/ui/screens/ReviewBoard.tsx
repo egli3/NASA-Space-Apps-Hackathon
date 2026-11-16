@@ -6,6 +6,7 @@ import { MONTE_CARLO_RUNS, useGame, type DesignTab, type Screen } from '../../st
 import type { ReviewFinding, ReviewResult, Severity } from '../../types/engine';
 import { Button } from '../common/Button';
 import { num, pct } from '../common/format';
+import { PctRange } from '../common/PctRange';
 import { Popover } from '../common/Popover';
 import { ActionBar, Sheet } from '../common/Sheet';
 import { SourceLinks } from '../common/SourceLink';
@@ -176,9 +177,8 @@ export function ReviewBoard() {
                   </dl>
                   {(prediction.predictedSurvivorSciencePct ?? prediction.predictedSciencePct) && (
                     <p className="mt-3 text-sm text-dim">
-                      {prediction.predictedSurvivorSciencePct ? 'When the spacecraft survives, science' : 'Science'} return usually lands between{' '}
-                      <span className="num text-ink">{num((prediction.predictedSurvivorSciencePct ?? prediction.predictedSciencePct)!.p10)}%</span> and{' '}
-                      <span className="num text-ink">{num((prediction.predictedSurvivorSciencePct ?? prediction.predictedSciencePct)!.p90)}%</span>, counting any extended mission.
+                      {prediction.predictedSurvivorSciencePct ? 'When the spacecraft survives, science' : 'Science'} return usually lands{' '}
+                      <PctRange lo={(prediction.predictedSurvivorSciencePct ?? prediction.predictedSciencePct)!.p10} hi={(prediction.predictedSurvivorSciencePct ?? prediction.predictedSciencePct)!.p90} />, counting any extended mission.
                     </p>
                   )}
                 </>
