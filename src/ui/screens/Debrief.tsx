@@ -220,6 +220,16 @@ export function Debrief() {
 
   const cap = catalog.missionClasses.find((c) => c.id === scenario.missionClassId)!.costCapM;
   const survived = result.outcome !== 'lost';
+  // A rocket that fails on launch day is the launcher's odds, not the player's design: say so and offer the re-flight up top.
+  const lostAtLaunch = !survived && result.daysFlown === 0;
+  const launcher = catalog.launchVehicles.find((l) => l.id === design.launchVehicleId);
+  const lossLine = lostAtLaunch
+    ? `${result.lossCause ?? 'The rocket failed during launch'}. ${
+        launcher ? `This rocket succeeds ${pct(launcher.reliability * 100)} of the time, and you drew the rest.` : 'Every rocket fails some of the time.'
+      } No spacecraft design survives that, and yours is still on the drawing board: fly it again.`
+    : result.sciencePct < 0.5
+      ? `${result.lossCause ?? 'The spacecraft was lost'}. It was lost before it could return any science.`
+      : `${result.lossCause ?? 'The spacecraft was lost'}. It had returned ${pct(result.sciencePct)} of the baseline science by then, and that science still counts.`;
   const stars = [
     { earned: result.sciencePct >= 75, label: 'Baseline science', detail: `${pct(result.sciencePct)} returned, 75% needed` },
     { earned: result.underBudget, label: 'Under the cost cap', detail: `${money(result.totalCostM)} of ${money(cap)}` },
@@ -252,9 +262,14 @@ export function Debrief() {
             <h1 className={`mt-2 text-[clamp(2.25rem,7vw,5.5rem)] leading-[0.95] font-bold ${OUTCOME_TONE[result.outcome]}`}>{OUTCOME_WORD[result.outcome]}</h1>
             <p className="mt-5 max-w-[52ch] text-xl">
               {result.outcome === 'lost'
-                ? `${result.lossCause ?? 'The spacecraft was lost'}. It had returned ${pct(result.sciencePct)} of the baseline science by then, and that science still counts.`
+                ? lossLine
                 : `Your spacecraft returned ${pct(result.sciencePct)} of the science the team asked for, at a final cost of ${money(result.totalCostM)}.`}
             </p>
+            {lostAtLaunch && (
+              <Button variant="primary" size="lg" className="mt-6" onClick={retry}>
+                Try again with this design
+              </Button>
+            )}
           </div>
           <ul className="self-end">
             {stars.map((s, i) => (

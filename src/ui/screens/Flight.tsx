@@ -213,7 +213,8 @@ export function Flight() {
           </dl>
           {!started && (
             <div className="absolute inset-x-3 bottom-3 text-center sm:inset-x-0 sm:bottom-8">
-              <p className="mx-auto max-w-md bg-panel/80 px-2 py-1 text-sm sm:bg-transparent sm:text-lg">
+              {/* opaque enough to read over the map: in June the Earth label sits right under this line */}
+              <p className="mx-auto max-w-md bg-panel/90 px-3 py-2 text-sm sm:text-lg">
                 {design.missionName} is on the pad at day zero. Once it leaves, you cannot change the design. You can only decide.
               </p>
             </div>
